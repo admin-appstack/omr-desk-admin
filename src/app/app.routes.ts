@@ -4,11 +4,11 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { DashboardLayoutComponent } from './dashboard/dashboard-layout.component';
 import { DashboardHomeComponent } from './dashboard/dashboard-home.component';
-import { OmrScanningComponent } from './dashboard/modules/omr-scanning.component';
-import { QuestionBankComponent } from './dashboard/modules/question-bank.component';
-import { TestBuilderComponent } from './dashboard/modules/test-builder.component';
-import { ResultAnalyticsComponent } from './dashboard/modules/result-analytics.component';
-import { InstituteWebsiteComponent } from './dashboard/modules/institute-website.component';
+import { OmrScanningComponent } from './dashboard/modules/omr-scanning/omr-scanning.component';
+import { QuestionBankComponent } from './dashboard/modules/question-bank/question-bank.component';
+import { TestBuilderComponent } from './dashboard/modules/test-builder/test-builder.component';
+import { ResultAnalyticsComponent } from './dashboard/modules/result-analytics/result-analytics.component';
+import { InstituteWebsiteComponent } from './dashboard/modules/institute-website/institute-website.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
