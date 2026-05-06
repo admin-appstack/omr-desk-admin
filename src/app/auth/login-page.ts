@@ -26,6 +26,14 @@ import { AuthService, SocialProvider } from './auth.service';
     <div class="auth-page-container">
       <!-- Left Side: Welcome Panel -->
       <div class="welcome-panel">
+        <div class="floating-bubbles">
+          <div class="bubble" style="width: 80px; height: 80px; left: 10%; animation-delay: 0s;"></div>
+          <div class="bubble" style="width: 40px; height: 40px; left: 30%; animation-delay: -5s;"></div>
+          <div class="bubble" style="width: 120px; height: 120px; left: 70%; animation-delay: -10s;"></div>
+          <div class="bubble" style="width: 60px; height: 60px; left: 50%; animation-delay: -15s;"></div>
+          <div class="bubble" style="width: 90px; height: 90px; left: 90%; animation-delay: -2s;"></div>
+        </div>
+
         <div class="welcome-content">
           <p class="text-xl font-medium opacity-90 mb-8">Welcome to</p>
           <div class="brand-logo-container">
