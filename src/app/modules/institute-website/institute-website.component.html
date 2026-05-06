@@ -22,16 +22,30 @@
         </div>
         <div class="hero-divider"></div>
         <div class="hero-stat">
-          <div class="live-indicator">
-            <span class="live-dot"></span> Live
+          <div class="live-toggle-wrap" (click)="toggleLive()">
+            <div class="live-switch" [class.live]="isLive">
+              <div class="live-switch-knob">
+                <mat-icon>{{ isLive ? 'wifi_tethering' : 'wifi_tethering_off' }}</mat-icon>
+              </div>
+            </div>
+            <div class="live-switch-labels">
+              <span class="live-switch-state" [class.live]="isLive">
+                <span class="live-dot" *ngIf="isLive"></span>
+                {{ isLive ? 'Live' : 'Offline' }}
+              </span>
+            </div>
           </div>
-          <span class="stat-lbl">Status</span>
+          <span class="stat-lbl">Website Status</span>
         </div>
       </div>
     </div>
 
     <div class="hero-actions">
-      <button mat-stroked-button class="btn-outline-white">
+      <div class="status-pill" [class.live]="isLive" [class.offline]="!isLive">
+        <span class="pill-dot"></span>
+        {{ isLive ? 'Website is Live' : 'Website is Offline' }}
+      </div>
+      <button mat-stroked-button class="btn-outline-white" [disabled]="!isLive">
         <mat-icon>open_in_new</mat-icon> Visit Site
       </button>
       <button mat-raised-button class="btn-save">

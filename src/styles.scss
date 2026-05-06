@@ -37,3 +37,28 @@ select {
   font: inherit;
 }
 
+/* ─── Snackbar Theme Overrides ───────────────────────────────────────────── */
+.snack-live .mdc-snackbar__surface {
+  background: #052e16 !important;
+  border: 1px solid #16a34a !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.25) !important;
+  color: #86efac !important;
+  font-weight: 600 !important;
+}
+
+.snack-offline .mdc-snackbar__surface {
+  background: #450a0a !important;
+  border: 1px solid #dc2626 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.25) !important;
+  color: #fca5a5 !important;
+  font-weight: 600 !important;
+}
+
+.snack-live .mat-mdc-snack-bar-action,
+.snack-offline .mat-mdc-snack-bar-action {
+  color: rgba(255,255,255,0.5) !important;
+  font-weight: 700 !important;
+}
+
