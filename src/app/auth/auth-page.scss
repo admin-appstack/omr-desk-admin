@@ -11,7 +11,11 @@
   background: white;
 
   @media (max-width: 900px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    overflow-y: auto;
+    position: relative;
+    height: auto;
+    min-height: 100vh;
   }
 }
 
@@ -51,6 +55,13 @@
     );
     pointer-events: none;
   }
+
+  @media (max-width: 900px) {
+    padding: 4rem 1.5rem;
+    flex: none;
+    width: 100%;
+    min-height: 450px;
+  }
 }
 
 .welcome-content {
@@ -62,6 +73,10 @@
   flex-direction: column;
   align-items: center;
   animation: fade-in-up 1s ease-out;
+
+  @media (max-width: 900px) {
+    max-width: 100%;
+  }
 }
 
 .brand-logo-container {
@@ -220,28 +235,48 @@
 /* Right Panel: Form */
 .form-panel {
   flex: 6;
-  background: white;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 4rem;
+  position: relative;
 
   @media (max-width: 900px) {
-    padding: 3rem 2rem;
+    padding: 2rem 1.5rem;
+    flex: none;
+    width: 100%;
   }
 }
 
 .form-container {
-  max-width: 440px;
   width: 100%;
+  max-width: 480px;
+  background: white;
+  padding: 3.5rem;
+  border-radius: 28px;
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.04),
+    0 20px 40px -10px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  animation: fade-in-right 0.8s ease-out;
+
+  @media (max-width: 900px) {
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
 }
 
 .form-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1f2937;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #0f172a;
   margin-bottom: 2.5rem;
   text-align: center;
+  letter-spacing: -1px;
 }
 
 /* Form Styling overrides */
@@ -249,21 +284,56 @@
   .mat-mdc-form-field {
     width: 100%;
     margin-bottom: 0.5rem;
+
+    .mdc-text-field--outlined {
+      --mdc-outlined-text-field-container-shape: 14px;
+      background-color: #fcfdfe;
+      transition: all 0.3s ease;
+
+      &:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+      &:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+      &:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+        border-color: #e2e8f0;
+      }
+
+      &:hover:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+      &:hover:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+      &:hover:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+        border-color: #cbd5e1;
+      }
+    }
+
+    &.mat-focused .mdc-text-field--outlined {
+      background-color: white;
+      box-shadow: 0 0 0 4px rgba(var(--color-primary), 0.05);
+    }
   }
   
   .mat-mdc-raised-button.mat-primary {
     background-color: rgb(var(--color-primary)) !important;
     color: white !important;
-    padding: 1.5rem !important;
-    font-size: 1rem !important;
+    padding: 1.6rem !important;
+    font-size: 1.1rem !important;
     font-weight: 700 !important;
-    border-radius: 12px !important;
-    margin-top: 1rem;
+    border-radius: 14px !important;
+    margin-top: 1.5rem;
     width: 100%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 12px rgba(var(--color-primary), 0.2) !important;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(var(--color-primary), 0.3) !important;
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
   }
 
   .mat-mdc-button.mat-unthemed {
-    --mdc-text-button-label-text-color: rgb(26, 27, 75);
+    --mdc-text-button-label-text-color: #475569;
+    font-weight: 600;
   }
 }
 
