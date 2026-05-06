@@ -208,19 +208,24 @@ import { MatTabsModule } from '@angular/material/tabs';
       </div>
     </div>
   `,
-  styles: [`
-    .dialog-container { padding: 1.5rem; }
-    .dialog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-    .dialog-header h2 { margin: 0; font-weight: 800; }
+  styles: [`    .dialog-container { display: flex; flex-direction: column; height: 100%; padding: 1.5rem 2rem; box-sizing: border-box; }
+    .dialog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .dialog-header h2 { margin: 0; font-weight: 800; font-size: 1.5rem; }
     
-    .dialog-content { display: grid; grid-template-cols: 1fr; gap: 2.5rem; }
+    .dialog-content { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 1.5rem; overflow: hidden; }
+    
+    .preview-main { flex: 1; display: flex; flex-direction: column; min-height: 0; }
     
     .browser-frame {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid #e2e8f0;
-      box-shadow: 0 20px 50px -15px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       background: white;
+      min-height: 0;
     }
 
     .browser-header {
@@ -230,6 +235,7 @@ import { MatTabsModule } from '@angular/material/tabs';
       align-items: center;
       gap: 1.5rem;
       border-bottom: 1px solid #e2e8f0;
+      flex-shrink: 0;
     }
 
     .dots { display: flex; gap: 6px; }
@@ -244,7 +250,8 @@ import { MatTabsModule } from '@angular/material/tabs';
       border: 1px solid #e2e8f0;
     }
 
-    .preview-img-wrapper { height: 450px; overflow-y: auto; background: white; }
+    .preview-img-wrapper { flex: 1; overflow-y: auto; background: white; }
+
     
     .mock-website {
       font-family: 'Inter', sans-serif;
@@ -322,7 +329,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 
       .screen-courses {
         padding: 1rem 2rem 4rem;
-        .m-course-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .m-course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         .m-course { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; transition: all 0.3s ease; cursor: pointer; display: flex; flex-direction: column; }
         .m-course:hover { transform: translateY(-8px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); }
         .m-course-img { height: 140px; background-size: cover; background-position: center; position: relative; }
@@ -719,7 +726,10 @@ export class InstituteWebsiteComponent {
 
   openPreview(tpl: any): void {
     const dialogRef = this.dialog.open(TemplatePreviewDialog, {
-      width: '900px',
+      width: '80vw',
+      height: '90vh',
+      maxWidth: '100vw',
+      panelClass: 'full-screen-dialog',
       data: tpl
     });
 
