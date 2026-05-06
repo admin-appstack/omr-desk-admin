@@ -52,18 +52,6 @@ import { AuthService } from './auth.service';
             <span>DESIGNER: ANTIGRAVITY</span>
           </div>
         </div>
-
-        <!-- Decorative Multi-layered Wave/Cloud -->
-        <div class="wave-transition">
-          <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
-            <!-- Background Layers -->
-            <path class="layer-4" d="M100 0 C 40 50 40 150 100 200 C 40 250 40 350 100 400 C 40 450 40 550 100 600 C 40 650 40 750 100 800 C 40 850 40 950 100 1000 L 100 1000 L 100 0 Z" />
-            <path class="layer-3" d="M100 0 C 60 50 60 150 100 200 C 60 250 60 350 100 400 C 60 450 60 550 100 600 C 60 650 60 750 100 800 C 60 850 60 950 100 1000 L 100 1000 L 100 0 Z" />
-            <path class="layer-2" d="M100 0 C 80 50 80 150 100 200 C 80 250 80 350 100 400 C 80 450 80 550 100 600 C 80 650 80 750 100 800 C 80 850 80 950 100 1000 L 100 1000 L 100 0 Z" />
-            <!-- Main Front Layer -->
-            <path class="layer-1" d="M100 0 C 90 50 90 150 100 200 C 90 250 90 350 100 400 C 90 450 90 550 100 600 C 90 650 90 750 100 800 C 90 850 90 950 100 1000 L 100 1000 L 100 0 Z" />
-          </svg>
-        </div>
       </div>
 
       <!-- Right Side: Form Panel -->

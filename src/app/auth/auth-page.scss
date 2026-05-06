@@ -18,7 +18,9 @@
 /* Left Panel: Welcome */
 .welcome-panel {
   flex: 4;
-  background: linear-gradient(180deg, #133e87 0%, #1e40af 100%);
+  background: linear-gradient(180deg, #133e87, #1e40af, #133e87);
+  background-size: 100% 200%;
+  animation: gradient-shift 10s ease infinite;
   position: relative;
   display: flex;
   align-items: center;
@@ -38,6 +40,7 @@
   width: 100%;
   z-index: 2;
   text-align: center;
+  animation: fade-in-up 1s ease-out;
 }
 
 .brand-logo-container {
@@ -56,9 +59,10 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  margin-bottom: 1.5rem;
+  margin: 0 auto 2rem;
   overflow: hidden;
   padding: 0.5rem;
+  animation: pulse 3s ease-in-out infinite;
 
   img {
     width: 100%;
@@ -116,42 +120,31 @@
 .wave-transition {
   position: absolute;
   top: 0;
-  right: -80px; 
+  right: -100px; 
   height: 100%;
-  width: 180px;
+  width: 200px;
   z-index: 1;
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
 
-  svg {
-    height: 100%;
-    width: 100%;
-    
-    path {
-      animation: float-wave 8s ease-in-out infinite;
-      transform-origin: center;
+  .cloud-image-layer {
+    position: absolute;
+    top: -10%;
+    left: -100px;
+    height: 120%;
+    width: 400px;
+    background-image: url('/cloud-transition.webp');
+    background-size: 400px auto;
+    background-repeat: repeat;
+    transform: rotate(90deg);
+    animation: float-wave 15s ease-in-out infinite;
 
-      &.layer-1 { 
-        fill: rgba(255, 255, 255, 1); 
-        animation-duration: 10s;
-      }
-      &.layer-2 { 
-        fill: rgba(255, 255, 255, 0.4); 
-        animation-duration: 12s;
-        animation-delay: -2s;
-      }
-      &.layer-3 { 
-        fill: rgba(255, 255, 255, 0.2); 
-        animation-duration: 15s;
-        animation-delay: -5s;
-      }
-      &.layer-4 { 
-        fill: rgba(255, 255, 255, 0.1); 
-        animation-duration: 20s;
-        animation-delay: -10s;
-      }
-    }
+    &.layer-1 { z-index: 6; opacity: 1; animation-duration: 12s; }
+    &.layer-2 { z-index: 5; opacity: 0.7; animation-duration: 18s; animation-delay: -3s; filter: blur(2px) brightness(1.1); left: -140px; }
+    &.layer-3 { z-index: 4; opacity: 0.5; animation-duration: 22s; animation-delay: -7s; filter: blur(4px) brightness(1.2); left: -180px; }
+    &.layer-4 { z-index: 3; opacity: 0.3; animation-duration: 28s; animation-delay: -12s; filter: blur(6px) brightness(1.3); left: -220px; }
   }
-
   @media (max-width: 900px) {
     display: none;
   }
@@ -250,6 +243,12 @@
     border-radius: 10px !important;
     font-weight: 600 !important;
     width: 100%;
+    transition: all 0.3s ease !important;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
   }
 }
 
