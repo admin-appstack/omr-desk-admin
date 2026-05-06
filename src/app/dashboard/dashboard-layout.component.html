@@ -1,0 +1,74 @@
+<mat-sidenav-container class="dashboard-container">
+  <!-- Sidebar -->
+  <mat-sidenav 
+    mode="side" 
+    opened 
+    class="sidebar"
+    [class.collapsed]="isSidebarCollapsed()"
+  >
+    <div class="sidebar-header">
+      <div class="logo-wrapper">
+        <img src="ORMDesk_Logo.png" alt="Logo" class="logo-img" />
+        <span class="logo-text" *ngIf="!isSidebarCollapsed()">OMRDesk</span>
+      </div>
+    </div>
+
+    <mat-nav-list class="nav-list">
+      <a 
+        mat-list-item 
+        *ngFor="let item of navItems" 
+        [routerLink]="item.route" 
+        routerLinkActive="active-link"
+        [matTooltip]="isSidebarCollapsed() ? item.label : ''"
+        matTooltipPosition="right"
+      >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle *ngIf="!isSidebarCollapsed()">{{ item.label }}</span>
+      </a>
+    </mat-nav-list>
+
+    <div class="sidebar-footer">
+      <button mat-icon-button (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed() ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content class="content-area">
+    <mat-toolbar class="top-bar">
+      <div class="toolbar-left">
+        <span class="page-title">Dashboard</span>
+      </div>
+      
+      <div class="toolbar-right">
+        <button mat-icon-button class="icon-btn">
+          <mat-icon>notifications</mat-icon>
+        </button>
+        <div class="user-profile">
+          <div class="user-info">
+            <span class="user-name">{{ user?.name || 'Administrator' }}</span>
+            <span class="user-role">Institute Admin</span>
+          </div>
+          <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="avatar-btn">
+            <div class="avatar-circle">
+              {{ (user?.name || 'A').charAt(0) }}
+            </div>
+          </button>
+          
+          <!-- Profile Menu Placeholder -->
+          <mat-menu #profileMenu="matMenu">
+            <button mat-menu-item (click)="signOut()">
+              <mat-icon>logout</mat-icon>
+              <span>Sign Out</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </mat-toolbar>
+
+    <main class="main-viewport">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

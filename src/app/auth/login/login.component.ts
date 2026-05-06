@@ -51,8 +51,12 @@ export class LoginComponent {
     this.loading.set(true);
 
     this.authService.login(this.form.value as { email: string; password: string })
-      .then(() => this.router.navigate(['/dashboard']))
-      .catch((err) => this.error.set(err.message))
+      .then(() => {
+        this.router.navigate(['/dashboard/home']);
+      })
+      .catch((err) => {
+        this.error.set(err.message);
+      })
       .finally(() => this.loading.set(false));
   }
 
@@ -61,7 +65,7 @@ export class LoginComponent {
     this.loading.set(true);
 
     this.authService.loginWithProvider(provider)
-      .then(() => this.router.navigate(['/dashboard']))
+      .then(() => this.router.navigate(['/dashboard/home']))
       .finally(() => this.loading.set(false));
   }
 }
