@@ -2,15 +2,15 @@ import { Routes } from '@angular/router';
 import { ForgotPasswordPage } from './auth/forgot-password-page';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { DashboardLayoutComponent } from './dashboard/dashboard-layout.component';
-import { DashboardHomeComponent } from './dashboard/dashboard-home.component';
-import { OmrScanningComponent } from './dashboard/modules/omr-scanning/omr-scanning.component';
-import { QuestionBankComponent } from './dashboard/modules/question-bank/question-bank.component';
-import { TestBuilderComponent } from './dashboard/modules/test-builder/test-builder.component';
-import { ResultAnalyticsComponent } from './dashboard/modules/result-analytics/result-analytics.component';
-import { InstituteWebsiteComponent } from './dashboard/modules/institute-website/institute-website.component';
-import { PaymentsComponent } from './dashboard/modules/payments/payments.component';
-import { SettingsComponent } from './dashboard/modules/settings/settings.component';
+import { DashboardLayoutComponent } from './modules/dashboard/dashboard-layout.component';
+import { DashboardHomeComponent } from './modules/dashboard/dashboard-home.component';
+import { OmrScanningComponent } from './modules/omr-scanning/omr-scanning.component';
+import { QuestionBankComponent } from './modules/question-bank/question-bank.component';
+import { TestBuilderComponent } from './modules/test-builder/test-builder.component';
+import { ResultAnalyticsComponent } from './modules/result-analytics/result-analytics.component';
+import { InstituteWebsiteComponent } from './modules/institute-website/institute-website.component';
+import { PaymentsComponent } from './modules/payments/payments.component';
+import { SettingsComponent } from './modules/settings/settings.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
