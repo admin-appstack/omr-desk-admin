@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from './auth.service';
 
@@ -18,39 +19,76 @@ import { AuthService } from './auth.service';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   template: `
-    <div class="flex items-center justify-center min-h-screen bg-gradient-to-b from-indigo-100 to-slate-100 px-4">
-      <mat-card class="w-full max-w-md shadow-2xl">
-        <mat-card-header class="mb-4">
-          <mat-card-title class="text-3xl font-bold text-slate-900">Register</mat-card-title>
-          <mat-card-subtitle class="text-slate-600 mt-2">
-            Create your administrator account for the OMR dashboard.
-          </mat-card-subtitle>
-        </mat-card-header>
+    <div class="auth-page-container">
+      <!-- Left Side: Welcome Panel -->
+      <div class="welcome-panel">
+        <div class="welcome-content">
+          <p class="text-xl font-medium opacity-90 mb-8">Welcome to</p>
+          <div class="brand-logo-container">
+            <div class="logo-circle">
+              <img src="ORMDesk_Logo.png" alt="OMRDesk Logo" />
+            </div>
+            <h1 class="brand-name">OMRDesk</h1>
+          </div>
+          
+          <p class="welcome-text">
+            Join hundreds of institutes using OMRDesk to automate their test management lifecycle.
+          </p>
 
-        <mat-card-content>
+          <div class="panel-footer">
+            <span>CREATOR: APPSTACK</span>
+            <span class="separator-dot">|</span>
+            <span>DESIGNER: ANTIGRAVITY</span>
+          </div>
+        </div>
+
+        <!-- Decorative Multi-layered Wave/Cloud -->
+        <div class="wave-transition">
+          <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
+            <!-- Background Layers -->
+            <path class="layer-4" d="M100 0 C 40 50 40 150 100 200 C 40 250 40 350 100 400 C 40 450 40 550 100 600 C 40 650 40 750 100 800 C 40 850 40 950 100 1000 L 100 1000 L 100 0 Z" />
+            <path class="layer-3" d="M100 0 C 60 50 60 150 100 200 C 60 250 60 350 100 400 C 60 450 60 550 100 600 C 60 650 60 750 100 800 C 60 850 60 950 100 1000 L 100 1000 L 100 0 Z" />
+            <path class="layer-2" d="M100 0 C 80 50 80 150 100 200 C 80 250 80 350 100 400 C 80 450 80 550 100 600 C 80 650 80 750 100 800 C 80 850 80 950 100 1000 L 100 1000 L 100 0 Z" />
+            <!-- Main Front Layer -->
+            <path class="layer-1" d="M100 0 C 90 50 90 150 100 200 C 90 250 90 350 100 400 C 90 450 90 550 100 600 C 90 650 90 750 100 800 C 90 850 90 950 100 1000 L 100 1000 L 100 0 Z" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Right Side: Form Panel -->
+      <div class="form-panel">
+        <div class="form-container">
+          <h3 class="form-title">Create account</h3>
+          
           <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
-            <mat-form-field appearance="outline" class="w-full">
-              <mat-label>Name</mat-label>
-              <input matInput type="text" formControlName="name" placeholder="Your full name" />
+            <mat-form-field appearance="outline">
+              <mat-label>Full Name</mat-label>
+              <input matInput type="text" formControlName="name" placeholder="John Doe" />
+              <mat-icon matSuffix *ngIf="form.get('name')?.valid">person</mat-icon>
               <mat-error *ngIf="form.get('name')?.hasError('minlength')">
                 Name must be at least 2 characters.
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="w-full">
-              <mat-label>Email</mat-label>
+            <mat-form-field appearance="outline">
+              <mat-label>Email Address</mat-label>
               <input matInput type="email" formControlName="email" placeholder="you@example.com" />
+              <mat-icon matSuffix *ngIf="form.get('email')?.valid">alternate_email</mat-icon>
               <mat-error *ngIf="form.get('email')?.hasError('email')">
                 Please enter a valid email.
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="w-full">
+            <mat-form-field appearance="outline">
               <mat-label>Password</mat-label>
-              <input matInput type="password" formControlName="password" placeholder="••••••••" />
+              <input matInput [type]="showPassword() ? 'text' : 'password'" formControlName="password" placeholder="••••••••" />
+              <button mat-icon-button matSuffix (click)="togglePassword()" type="button">
+                <mat-icon>{{ showPassword() ? 'visibility' : 'visibility_off' }}</mat-icon>
+              </button>
               <mat-error *ngIf="form.get('password')?.hasError('minlength')">
                 Password must be at least 6 characters.
               </mat-error>
@@ -61,32 +99,33 @@ import { AuthService } from './auth.service';
               color="primary"
               type="submit"
               [disabled]="form.invalid || loading()"
-              class="w-full"
             >
               {{ loading() ? 'Creating account...' : 'Create account' }}
             </button>
 
-            <div *ngIf="error()" class="bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded">
+            <div *ngIf="error()" class="error-message">
               {{ error() }}
             </div>
           </form>
-        </mat-card-content>
 
-        <mat-card-footer class="mt-6 pt-6 border-t border-slate-200">
-          <a routerLink="/login" class="text-blue-600 hover:underline text-sm font-medium">
-            Already have an account?
-          </a>
-        </mat-card-footer>
-      </mat-card>
+          <div class="divider-box">
+            <div class="line"></div>
+            <span>Policy</span>
+            <div class="line"></div>
+          </div>
+          
+          <p class="text-xs text-slate-500 text-center mb-6">
+            By signing up, you agree to our <a href="#" class="text-indigo-600 font-semibold">Terms & Conditions</a>.
+          </p>
+
+          <div class="auth-footer">
+            <a routerLink="/login">Already have an account?</a>
+          </div>
+        </div>
+      </div>
     </div>
   `,
-  styles: [`
-    ::ng-deep {
-      .mat-mdc-card {
-        border-radius: 1.5rem;
-      }
-    }
-  `]
+  styleUrl: './auth-page.scss'
 })
 export class RegisterPage {
   form = new FormGroup({
@@ -97,8 +136,13 @@ export class RegisterPage {
 
   error = signal('');
   loading = signal(false);
+  showPassword = signal(false);
 
   constructor(private readonly authService: AuthService, private readonly router: Router) {}
+
+  togglePassword(): void {
+    this.showPassword.update(v => !v);
+  }
 
   onSubmit(): void {
     if (this.form.invalid) {

@@ -7,18 +7,20 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          50: '#eef2ff',
-          100: '#e0e7ff',
-          500: '#2563eb',
-          600: '#1d4ed8',
+          50: '#f0f4ff',
+          500: '#1a1b4b',
+          600: '#2d3282',
           700: '#1e40af',
-          900: '#1d4ed8',
+          900: '#1a1b4b',
         },
+        accent: {
+          500: '#f47621',
+          600: '#e85b24',
+        }
       },
     },
   },
   corePlugins: {
-    preflight: false,
+    preflight: true,
   },
-}
 }

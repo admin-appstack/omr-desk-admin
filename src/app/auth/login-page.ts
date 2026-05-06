@@ -23,28 +23,64 @@ import { AuthService, SocialProvider } from './auth.service';
     MatIconModule
   ],
   template: `
-    <div class="flex items-center justify-center min-h-screen bg-gradient-to-b from-indigo-100 to-slate-100 px-4">
-      <mat-card class="w-full max-w-md shadow-2xl">
-        <mat-card-header class="mb-4">
-          <mat-card-title class="text-3xl font-bold text-slate-900">Login</mat-card-title>
-          <mat-card-subtitle class="text-slate-600 mt-2">
-            Access your admin account with email or a social provider.
-          </mat-card-subtitle>
-        </mat-card-header>
+    <div class="auth-page-container">
+      <!-- Left Side: Welcome Panel -->
+      <div class="welcome-panel">
+        <div class="welcome-content">
+          <p class="text-xl font-medium opacity-90 mb-8">Welcome to</p>
+          <div class="brand-logo-container">
+            <div class="logo-circle">
+              <img src="ORMDesk_Logo.png" alt="OMRDesk Logo" />
+            </div>
+            <h1 class="brand-name">OMRDesk</h1>
+          </div>
+          
+          <p class="welcome-text">
+            A complete test management solution that helps institutes save time, 
+            improve accuracy & deliver better results.
+          </p>
 
-        <mat-card-content>
+          <div class="panel-footer">
+            <span>CREATOR: APPSTACK</span>
+            <span class="separator-dot">|</span>
+            <span>DESIGNER: ANTIGRAVITY</span>
+          </div>
+        </div>
+
+        <!-- Decorative Multi-layered Wave/Cloud -->
+        <div class="wave-transition">
+          <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
+            <!-- Background Layers -->
+            <path class="layer-4" d="M100 0 C 40 50 40 150 100 200 C 40 250 40 350 100 400 C 40 450 40 550 100 600 C 40 650 40 750 100 800 C 40 850 40 950 100 1000 L 100 1000 L 100 0 Z" />
+            <path class="layer-3" d="M100 0 C 60 50 60 150 100 200 C 60 250 60 350 100 400 C 60 450 60 550 100 600 C 60 650 60 750 100 800 C 60 850 60 950 100 1000 L 100 1000 L 100 0 Z" />
+            <path class="layer-2" d="M100 0 C 80 50 80 150 100 200 C 80 250 80 350 100 400 C 80 450 80 550 100 600 C 80 650 80 750 100 800 C 80 850 80 950 100 1000 L 100 1000 L 100 0 Z" />
+            <!-- Main Front Layer -->
+            <path class="layer-1" d="M100 0 C 90 50 90 150 100 200 C 90 250 90 350 100 400 C 90 450 90 550 100 600 C 90 650 90 750 100 800 C 90 850 90 950 100 1000 L 100 1000 L 100 0 Z" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Right Side: Form Panel -->
+      <div class="form-panel">
+        <div class="form-container">
+          <h3 class="form-title">Login to account</h3>
+          
           <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
-            <mat-form-field appearance="outline" class="w-full">
-              <mat-label>Email</mat-label>
+            <mat-form-field appearance="outline">
+              <mat-label>Email Address</mat-label>
               <input matInput type="email" formControlName="email" placeholder="you@example.com" />
+              <mat-icon matSuffix class="text-green-500" *ngIf="form.get('email')?.valid">check_circle</mat-icon>
               <mat-error *ngIf="form.get('email')?.hasError('email')">
                 Please enter a valid email.
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="w-full">
+            <mat-form-field appearance="outline">
               <mat-label>Password</mat-label>
-              <input matInput type="password" formControlName="password" placeholder="••••••••" />
+              <input matInput [type]="showPassword() ? 'text' : 'password'" formControlName="password" placeholder="••••••••" />
+              <button mat-icon-button matSuffix (click)="togglePassword()" type="button">
+                <mat-icon>{{ showPassword() ? 'visibility' : 'visibility_off' }}</mat-icon>
+              </button>
               <mat-error *ngIf="form.get('password')?.hasError('minlength')">
                 Password must be at least 6 characters.
               </mat-error>
@@ -55,71 +91,42 @@ import { AuthService, SocialProvider } from './auth.service';
               color="primary"
               type="submit"
               [disabled]="form.invalid || loading()"
-              class="w-full"
             >
               {{ loading() ? 'Signing in...' : 'Sign in' }}
             </button>
 
-            <div *ngIf="error()" class="bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded">
+            <div *ngIf="error()" class="error-message">
               {{ error() }}
             </div>
           </form>
 
-          <div class="my-6 flex items-center gap-3">
-            <div class="flex-1 h-px bg-slate-300"></div>
-            <span class="text-slate-600 text-sm">Or continue with</span>
-            <div class="flex-1 h-px bg-slate-300"></div>
+          <div class="divider-box">
+            <div class="line"></div>
+            <span>Or continue with</span>
+            <div class="line"></div>
           </div>
 
-          <div class="grid grid-cols-3 gap-3">
-            <button
-              mat-stroked-button
-              (click)="loginWith('google')"
-              [disabled]="loading()"
-              class="text-indigo-900"
-            >
+          <div class="social-grid">
+            <button mat-stroked-button (click)="loginWith('google')" [disabled]="loading()">
               Google
             </button>
-            <button
-              mat-stroked-button
-              (click)="loginWith('facebook')"
-              [disabled]="loading()"
-              class="text-blue-700"
-            >
+            <button mat-stroked-button (click)="loginWith('facebook')" [disabled]="loading()">
               Facebook
             </button>
-            <button
-              mat-stroked-button
-              (click)="loginWith('instagram')"
-              [disabled]="loading()"
-              class="text-fuchsia-600"
-            >
+            <button mat-stroked-button (click)="loginWith('instagram')" [disabled]="loading()">
               Instagram
             </button>
           </div>
-        </mat-card-content>
 
-        <mat-card-footer class="mt-6 pt-6 border-t border-slate-200 flex justify-between">
-          <a routerLink="/register" class="text-blue-600 hover:underline text-sm font-medium">
-            Create account
-          </a>
-          <a routerLink="/forgot-password" class="text-blue-600 hover:underline text-sm font-medium">
-            Forgot password?
-          </a>
-        </mat-card-footer>
-      </mat-card>
+          <div class="auth-footer">
+            <a routerLink="/register">Create account</a>
+            <a routerLink="/forgot-password">Forgot password?</a>
+          </div>
+        </div>
+      </div>
     </div>
   `,
-  styles: [`
-    ::ng-deep {
-      .mat-mdc-card {
-        border-radius: 1.5rem;
-      }
-      .mat-mdc-form-field {
-        width: 100%;
-      }
-    }
-  `]
+  styleUrl: './auth-page.scss'
 })
 export class LoginPage {
   form = new FormGroup({
@@ -129,8 +136,13 @@ export class LoginPage {
 
   error = signal('');
   loading = signal(false);
+  showPassword = signal(false);
 
   constructor(private readonly authService: AuthService, private readonly router: Router) {}
+
+  togglePassword(): void {
+    this.showPassword.update(v => !v);
+  }
 
   onSubmit(): void {
     if (this.form.invalid) {
