@@ -42,3 +42,6 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+/generate_pdf.py
+/generate_project_detail_pdf.py
+/generate_pdf.py

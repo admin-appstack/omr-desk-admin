@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
@@ -22,16 +23,17 @@ import { AuthService } from '../../auth/auth.service';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDividerModule
   ],
   templateUrl: './dashboard-layout.component.html',
   styleUrl: './dashboard-layout.component.scss'
 })
 export class DashboardLayoutComponent {
   isSidebarCollapsed = signal(false);
-  
+
   navItems = [
-    { icon: 'dashboard', label: 'Overview', route: '/dashboard/home' },
+    { icon: 'dashboard', label: 'Dashboard', route: '/dashboard/home' },
     { icon: 'language', label: 'Institute Website', route: '/dashboard/website' },
     { icon: 'library_books', label: 'Question Bank', route: '/dashboard/questions' },
     { icon: 'assignment', label: 'Test Builder', route: '/dashboard/tests' },
@@ -41,7 +43,7 @@ export class DashboardLayoutComponent {
     { icon: 'settings', label: 'Settings', route: '/dashboard/settings' },
   ];
 
-  constructor(private readonly authService: AuthService, private readonly router: Router) {}
+  constructor(private readonly authService: AuthService, private readonly router: Router) { }
 
   get user() {
     return this.authService.currentUser;

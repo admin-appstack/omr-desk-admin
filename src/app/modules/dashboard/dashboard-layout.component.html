@@ -1,4 +1,5 @@
 <mat-sidenav-container class="dashboard-container">
+
   <!-- Sidebar -->
   <mat-sidenav 
     mode="side" 
@@ -6,12 +7,15 @@
     class="sidebar"
     [class.collapsed]="isSidebarCollapsed()"
   >
+    <!-- Logo -->
     <div class="sidebar-header">
       <div class="logo-wrapper">
-        <img src="ORMDesk_Logo.png" alt="Logo" class="logo-img" />
+        <img src="ORMDesk_Logo.png" alt="OMRDesk Logo" class="logo-img" />
       </div>
     </div>
 
+    <!-- Navigation -->
+    <div class="nav-section-label" *ngIf="!isSidebarCollapsed()">MAIN MENU</div>
     <mat-nav-list class="nav-list">
       <a 
         mat-list-item 
@@ -26,8 +30,9 @@
       </a>
     </mat-nav-list>
 
+    <!-- Footer -->
     <div class="sidebar-footer">
-      <button mat-icon-button (click)="toggleSidebar()">
+      <button mat-icon-button (click)="toggleSidebar()" class="collapse-btn">
         <mat-icon>{{ isSidebarCollapsed() ? 'chevron_right' : 'chevron_left' }}</mat-icon>
       </button>
     </div>
@@ -35,15 +40,36 @@
 
   <!-- Main Content -->
   <mat-sidenav-content class="content-area">
+
+    <!-- Top Bar -->
     <mat-toolbar class="top-bar">
       <div class="toolbar-left">
         <span class="page-title">Dashboard</span>
       </div>
       
       <div class="toolbar-right">
-        <button mat-icon-button class="icon-btn">
-          <mat-icon>notifications</mat-icon>
+        <!-- Search -->
+        <div class="search-wrap" *ngIf="!isSidebarCollapsed()">
+          <mat-icon>search</mat-icon>
+          <input type="text" placeholder="Search anything..." />
+        </div>
+
+        <!-- Notification -->
+        <button mat-icon-button class="toolbar-icon-btn" matTooltip="Notifications">
+          <div class="notif-wrapper">
+            <mat-icon>notifications</mat-icon>
+            <span class="badge">3</span>
+          </div>
         </button>
+
+        <!-- Help -->
+        <button mat-icon-button class="toolbar-icon-btn" matTooltip="Help">
+          <mat-icon>help_outline</mat-icon>
+        </button>
+
+        <div class="divider-v"></div>
+
+        <!-- User Profile -->
         <div class="user-profile">
           <div class="user-info">
             <span class="user-name">{{ user?.name || 'Administrator' }}</span>
@@ -55,9 +81,17 @@
             </div>
           </button>
           
-          <!-- Profile Menu Placeholder -->
-          <mat-menu #profileMenu="matMenu">
-            <button mat-menu-item (click)="signOut()">
+          <mat-menu #profileMenu="matMenu" class="profile-menu">
+            <button mat-menu-item>
+              <mat-icon>manage_accounts</mat-icon>
+              <span>My Profile</span>
+            </button>
+            <button mat-menu-item [routerLink]="['/dashboard/settings']">
+              <mat-icon>settings</mat-icon>
+              <span>Settings</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="signOut()" class="sign-out-item">
               <mat-icon>logout</mat-icon>
               <span>Sign Out</span>
             </button>
@@ -69,5 +103,6 @@
     <main class="main-viewport">
       <router-outlet></router-outlet>
     </main>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
