@@ -9,6 +9,8 @@ import { QuestionBankComponent } from './dashboard/modules/question-bank/questio
 import { TestBuilderComponent } from './dashboard/modules/test-builder/test-builder.component';
 import { ResultAnalyticsComponent } from './dashboard/modules/result-analytics/result-analytics.component';
 import { InstituteWebsiteComponent } from './dashboard/modules/institute-website/institute-website.component';
+import { PaymentsComponent } from './dashboard/modules/payments/payments.component';
+import { SettingsComponent } from './dashboard/modules/settings/settings.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -26,8 +28,8 @@ export const routes: Routes = [
       { path: 'tests', component: TestBuilderComponent },
       { path: 'results', component: ResultAnalyticsComponent },
       { path: 'website', component: InstituteWebsiteComponent },
-      { path: 'payments', component: DashboardHomeComponent }, // Placeholder
-      { path: 'settings', component: DashboardHomeComponent }, // Placeholder
+      { path: 'payments', component: PaymentsComponent },
+      { path: 'settings', component: SettingsComponent },
     ]
   },
   { path: '**', redirectTo: 'login' }

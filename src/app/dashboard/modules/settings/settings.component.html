@@ -1,0 +1,91 @@
+<div class="module-container">
+  <div class="module-header">
+    <div>
+      <h1>Settings</h1>
+      <p>Configure your account preferences and institute-wide defaults.</p>
+    </div>
+    <button mat-raised-button color="primary">
+      <mat-icon>save</mat-icon>
+      Save Changes
+    </button>
+  </div>
+
+  <mat-tab-group class="settings-tabs">
+    <mat-tab label="Account Profile">
+      <div class="tab-content">
+        <div class="profile-layout">
+          <div class="avatar-section">
+            <div class="large-avatar">{{profile.name.charAt(0)}}</div>
+            <button mat-stroked-button color="primary">Change Photo</button>
+          </div>
+          <div class="form-section">
+            <div class="grid-form">
+              <mat-form-field appearance="outline">
+                <mat-label>Full Name</mat-label>
+                <input matInput [(ngModel)]="profile.name">
+                <mat-icon matSuffix>person</mat-icon>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Email Address</mat-label>
+                <input matInput [(ngModel)]="profile.email">
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input matInput [(ngModel)]="profile.phone">
+                <mat-icon matSuffix>phone</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Notifications">
+      <div class="tab-content">
+        <div class="settings-list">
+          <div class="settings-item">
+            <div class="item-info">
+              <h4>Email Alerts</h4>
+              <p>Receive weekly performance reports via email.</p>
+            </div>
+            <mat-slide-toggle [(ngModel)]="notifications.emailAlerts"></mat-slide-toggle>
+          </div>
+          <div class="settings-item">
+            <div class="item-info">
+              <h4>SMS Alerts</h4>
+              <p>Notify students via SMS when results are published.</p>
+            </div>
+            <mat-slide-toggle [(ngModel)]="notifications.smsAlerts"></mat-slide-toggle>
+          </div>
+          <div class="settings-item">
+            <div class="item-info">
+              <h4>Auto-Publish Results</h4>
+              <p>Automatically publish results to website after OMR scan completion.</p>
+            </div>
+            <mat-slide-toggle [(ngModel)]="notifications.autoPublish"></mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Security">
+      <div class="tab-content">
+        <mat-card class="security-card">
+          <h3>Change Password</h3>
+          <div class="grid-form">
+            <mat-form-field appearance="outline">
+              <mat-label>Current Password</mat-label>
+              <input matInput type="password">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>New Password</mat-label>
+              <input matInput type="password">
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="warn">Update Password</button>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

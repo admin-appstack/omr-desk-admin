@@ -1,0 +1,60 @@
+.module-container { display: flex; flex-direction: column; gap: 2rem; }
+.module-header { display: flex; justify-content: space-between; align-items: center; }
+.module-header h1 { margin: 0; font-size: 2rem; font-weight: 800; color: #133e87; }
+.header-actions { display: flex; gap: 1rem; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.stat-card {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-radius: 16px;
+  box-shadow: none;
+  border: 1px solid #f1f5f9;
+
+  .stat-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    mat-icon { font-size: 28px; width: 28px; height: 28px; }
+    
+    &.revenue { background: #dbeafe; color: #1e40af; }
+    &.credits { background: #fef9c3; color: #a16207; }
+    &.plans { background: #dcfce7; color: #15803d; }
+  }
+
+  .stat-info {
+    .label { font-size: 0.8rem; color: #64748b; font-weight: 600; text-transform: uppercase; }
+    .value { margin: 0.25rem 0 0; font-weight: 800; color: #1e293b; }
+  }
+}
+
+.transactions-card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: none;
+  border: 1px solid #f1f5f9;
+  
+  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; h3 { margin: 0; font-weight: 700; } }
+}
+
+.full-width-table { width: 100%; }
+
+.status-badge { 
+  padding: 4px 12px; 
+  border-radius: 999px; 
+  font-size: 0.75rem; 
+  font-weight: 700; 
+  text-transform: uppercase; 
+}
+.status-badge.completed { background: #dcfce7; color: #15803d; }
+.status-badge.pending { background: #ffedd5; color: #9a3412; }
