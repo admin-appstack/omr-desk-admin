@@ -1,0 +1,138 @@
+.auth-card {
+  width: min(100%, 520px);
+  margin: 3rem auto;
+  padding: 2rem;
+  border-radius: 24px;
+  background: white;
+  box-shadow: 0 30px 75px rgba(15, 23, 42, 0.08);
+}
+
+.auth-card h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2rem, 2.3vw, 2.4rem);
+}
+
+.auth-card p {
+  margin: 0 0 1.5rem;
+  color: #475569;
+  line-height: 1.65;
+}
+
+.auth-card label {
+  display: block;
+  margin-bottom: 1rem;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.auth-card input {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.auth-card button {
+  width: 100%;
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 1rem 1.15rem;
+  border-radius: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.65rem;
+  transition: background-color 0.2s ease;
+}
+
+.auth-card button:hover {
+  background: #1d4ed8;
+}
+
+.auth-card button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1.75rem 0 1rem;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.social-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.provider {
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  background: white;
+  color: #0f172a;
+  padding: 0.85rem 0.9rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.provider:hover {
+  background: #f8fafc;
+}
+
+.provider.google { 
+  color: #422d79; 
+}
+
+.provider.facebook { 
+  color: #1d4ed8; 
+}
+
+.provider.instagram { 
+  color: #d946ef; 
+}
+
+.auth-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  font-size: 0.95rem;
+}
+
+.auth-links a {
+  color: #2563eb;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: #dc2626;
+  margin-top: 1rem;
+}
+
+.success {
+  color: #16a34a;
+  margin-top: 1rem;
+}
