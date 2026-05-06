@@ -27,10 +27,13 @@
   position: relative;
   display: flex;
   align-items: center;
+  display: flex;
+  align-items: center;
   justify-content: center;
   padding: 4rem;
   color: white;
   overflow: hidden;
+  position: relative;
 
   &::before {
     content: '';
@@ -51,10 +54,13 @@
 }
 
 .welcome-content {
-  max-width: 400px;
+  max-width: 500px;
   width: 100%;
   z-index: 2;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   animation: fade-in-up 1s ease-out;
 }
 
@@ -93,39 +99,53 @@
   }
 }
 
-.brand-name {
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  margin: 0;
+.welcome-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
-.welcome-subtitle {
-  font-size: 1.25rem;
-  opacity: 0.9;
-  margin-top: 0.5rem;
+.welcome-label {
+  font-size: 2.25rem;
   font-weight: 500;
+  opacity: 0.95;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.5px;
 }
 
 .welcome-text {
   font-size: 1.125rem;
-  opacity: 0.8;
-  line-height: 1.6;
-  margin: 2rem 0 3rem;
+  opacity: 0.9;
+  line-height: 1.7;
+  margin: 2rem auto 4rem;
+  max-width: 500px;
+
+  strong {
+    color: white;
+    font-weight: 600;
+  }
 }
 
 .panel-footer {
   position: absolute;
   bottom: 2rem;
-  left: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
+  align-items: center;
   gap: 1rem;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 1px;
   opacity: 0.6;
   z-index: 2;
-  
+  white-space: nowrap;
+
   .separator-dot {
     opacity: 0.3;
   }
