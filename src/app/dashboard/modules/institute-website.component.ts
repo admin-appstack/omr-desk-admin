@@ -129,28 +129,20 @@ import { MatTabsModule } from '@angular/material/tabs';
                     <p>Choose the best program for your career goals</p>
                   </div>
                   <div class="m-course-grid">
-                    <div class="m-course">
-                      <div class="m-course-img" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=200')"></div>
-                      <div class="m-course-info">
-                        <h4>IIT-JEE Advanced</h4>
-                        <p>Comprehensive 2-year classroom program.</p>
-                        <div class="m-btn-small">View Details</div>
+                    <div class="m-course" *ngFor="let c of mockCourses">
+                      <div class="m-course-img" [style.background-image]="'url(' + c.img + ')'">
+                        <div class="m-badge">{{c.level}}</div>
                       </div>
-                    </div>
-                    <div class="m-course">
-                      <div class="m-course-img" style="background-image: url('https://images.unsplash.com/photo-1532187875605-1ef6c237dd1d?auto=format&fit=crop&w=200')"></div>
                       <div class="m-course-info">
-                        <h4>NEET Medical</h4>
-                        <p>Intensive medical entrance preparation.</p>
-                        <div class="m-btn-small">View Details</div>
-                      </div>
-                    </div>
-                    <div class="m-course">
-                      <div class="m-course-img" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=200')"></div>
-                      <div class="m-course-info">
-                        <h4>Foundation (9th-10th)</h4>
-                        <p>Building strong concepts for future exams.</p>
-                        <div class="m-btn-small">View Details</div>
+                        <h4>{{c.name}}</h4>
+                        <div class="m-course-meta">
+                          <span><mat-icon>schedule</mat-icon> {{c.duration}}</span>
+                        </div>
+                        <p>{{c.desc}}</p>
+                        <div class="m-course-footer">
+                          <span class="m-btn-small">View Syllabus</span>
+                          <button class="m-enroll-btn">Enroll</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -328,14 +320,18 @@ import { MatTabsModule } from '@angular/material/tabs';
 
       .mock-section-header { padding: 4rem 2rem 1rem; text-align: center; h2 { font-weight: 800; margin: 0; font-size: 2rem; } p { color: #64748b; margin-top: 0.75rem; font-size: 1.1rem; } }
 
-      .mock-courses {
+      .screen-courses {
         padding: 1rem 2rem 4rem;
-        .m-course-grid { display: grid; grid-template-cols: repeat(3, 1fr); gap: 1.5rem; }
-        .m-course { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; transition: transform 0.2s; cursor: pointer; }
-        .m-course:hover { transform: translateY(-4px); }
-        .m-course-img { height: 120px; background-size: cover; background-position: center; }
-        .m-course-info { padding: 1.25rem; h4 { margin: 0 0 0.5rem; font-weight: 700; } p { font-size: 0.8rem; color: #64748b; margin-bottom: 1rem; } }
-        .m-btn-small { font-size: 0.75rem; font-weight: 700; color: var(--primary); }
+        .m-course-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .m-course { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; transition: all 0.3s ease; cursor: pointer; display: flex; flex-direction: column; }
+        .m-course:hover { transform: translateY(-8px); box-shadow: 0 12px 25px -5px rgba(0,0,0,0.1); }
+        .m-course-img { height: 140px; background-size: cover; background-position: center; position: relative; }
+        .m-badge { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.6); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; backdrop-filter: blur(4px); }
+        .m-course-info { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; h4 { margin: 0 0 0.5rem; font-weight: 800; font-size: 1rem; color: #1e293b; } p { font-size: 0.8rem; color: #64748b; margin-bottom: 1.5rem; line-height: 1.5; flex: 1; } }
+        .m-course-meta { display: flex; gap: 1rem; margin-bottom: 1rem; span { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: #94a3b8; font-weight: 600; mat-icon { font-size: 16px; width: 16px; height: 16px; } } }
+        .m-course-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 1rem; }
+        .m-btn-small { font-size: 0.75rem; font-weight: 700; color: var(--primary); cursor: pointer; }
+        .m-enroll-btn { padding: 0.4rem 1rem; background: var(--primary); color: white; border: none; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
       }
 
       .screen-results {
@@ -400,6 +396,15 @@ import { MatTabsModule } from '@angular/material/tabs';
 })
 export class TemplatePreviewDialog {
   activeScreen = signal('home');
+
+  mockCourses = [
+    { name: 'IIT-JEE Advanced', desc: 'Comprehensive 2-year classroom program for Class 11-12.', duration: '2 Years', level: 'Advanced', img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=300' },
+    { name: 'NEET Medical', desc: 'Intensive medical entrance preparation for future doctors.', duration: '1 Year', level: 'Professional', img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=300' },
+    { name: 'Foundation Program', desc: 'Building strong concepts for Class 9th & 10th students.', duration: '2 Years', level: 'Basic', img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=300' },
+    { name: 'JEE Main Crash Course', desc: 'Fast-track revision and mock tests for JEE Main.', duration: '3 Months', level: 'Fast-track', img: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=300' },
+    { name: 'Olympiad Special', desc: 'Advanced problem solving for Math and Science Olympiads.', duration: '1 Year', level: 'Elite', img: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=300' },
+    { name: 'NTSE Batch', desc: 'Targeted preparation for National Talent Search Exam.', duration: '6 Months', level: 'Competitive', img: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=300' },
+  ];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 
