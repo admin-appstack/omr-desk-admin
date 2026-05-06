@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTabsModule } from '@angular/material/tabs';
+import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -13,7 +13,7 @@ import { PageManagementComponent } from './components/page-management/page-manag
   standalone: true,
   imports: [
     CommonModule,
-    MatTabsModule,
+    RouterModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
@@ -26,6 +26,7 @@ import { PageManagementComponent } from './components/page-management/page-manag
 })
 export class InstituteWebsiteComponent {
   selectedTemplate = signal(1);
+  activeStep = 0;
 
   constructor(private dialog: MatDialog) {}
 

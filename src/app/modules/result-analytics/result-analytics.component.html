@@ -1,61 +1,145 @@
 <div class="module-container">
-  <div class="module-header">
-    <div>
-      <h1>Result & Analytics</h1>
-      <p>Analyze test performance, generate rank lists, and publish results.</p>
+
+  <!-- Header Hero -->
+  <div class="module-hero orange">
+    <div class="hero-content">
+      <div class="hero-icon"><mat-icon>analytics</mat-icon></div>
+      <div>
+        <h1>Result &amp; Analytics</h1>
+        <p>Analyze test performance, generate rank lists, and publish results.</p>
+      </div>
     </div>
-    <button mat-raised-button color="accent">
-      <mat-icon>publish</mat-icon>
-      Publish Results
-    </button>
+    <div class="hero-actions">
+      <button mat-raised-button class="hero-btn-outline">
+        <mat-icon>bar_chart</mat-icon> Reports
+      </button>
+      <button mat-raised-button class="hero-btn">
+        <mat-icon>publish</mat-icon> Publish Results
+      </button>
+    </div>
   </div>
 
-  <div class="analytics-overview">
-    <mat-card class="chart-placeholder">
-      <h3>Average Score Trend</h3>
-      <div class="dummy-chart">
-        <div class="bar" style="height: 40%"></div>
-        <div class="bar" style="height: 60%"></div>
-        <div class="bar" style="height: 55%"></div>
-        <div class="bar" style="height: 80%"></div>
-        <div class="bar" style="height: 70%"></div>
+  <!-- Summary Stats -->
+  <div class="analytics-stats">
+    <div class="a-stat-card" *ngFor="let s of summaryStats">
+      <div class="a-stat-icon" [style.background]="s.bg">
+        <mat-icon [style.color]="s.color">{{s.icon}}</mat-icon>
+      </div>
+      <div class="a-stat-body">
+        <h3>{{s.value}}</h3>
+        <span>{{s.label}}</span>
+      </div>
+      <div class="a-stat-trend" *ngIf="s.trend">
+        <mat-icon class="trend-icon up">trending_up</mat-icon>
+        <span class="trend-val">{{s.trend}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Two-column layout: chart + top performers -->
+  <div class="analytics-grid">
+
+    <!-- Score Chart -->
+    <mat-card class="chart-card">
+      <div class="card-header-row">
+        <div>
+          <h3 class="card-title">Average Score Trend</h3>
+          <span class="card-subtitle">Performance across last 5 exams</span>
+        </div>
+        <div class="chart-legend">
+          <span class="legend-dot blue"></span> Score %
+        </div>
+      </div>
+      <div class="bar-chart">
+        <div class="bar-wrap" *ngFor="let b of chartBars">
+          <div class="bar-track">
+            <div class="bar-fill" [style.height]="b.value + '%'" [style.background]="b.color">
+              <span class="bar-val">{{b.value}}%</span>
+            </div>
+          </div>
+          <span class="bar-label">{{b.label}}</span>
+        </div>
       </div>
     </mat-card>
+
+    <!-- Top Performers -->
+    <mat-card class="performers-card">
+      <div class="card-header-row">
+        <h3 class="card-title">Top Performers</h3>
+        <span class="trophy-icon"><mat-icon>emoji_events</mat-icon></span>
+      </div>
+      <div class="performer-list">
+        <div class="performer-item" *ngFor="let p of topPerformers; let i = index">
+          <div class="rank-badge" [class]="'rank-' + (i + 1)">{{i + 1}}</div>
+          <div class="performer-avatar">{{p.name.charAt(0)}}</div>
+          <div class="performer-info">
+            <span class="performer-name">{{p.name}}</span>
+            <span class="performer-exam">{{p.exam}}</span>
+          </div>
+          <div class="performer-score">{{p.score}}%</div>
+        </div>
+      </div>
+    </mat-card>
+
   </div>
 
-  <mat-card class="recent-results-card">
-    <h3>Published Results</h3>
+  <!-- Published Results Table -->
+  <mat-card class="results-card">
+    <div class="card-header-row">
+      <div>
+        <h3 class="card-title">Published Results</h3>
+        <span class="card-subtitle">All officially released exam results</span>
+      </div>
+      <div class="header-actions">
+        <button mat-stroked-button class="filter-btn">
+          <mat-icon>filter_list</mat-icon> Filter
+        </button>
+        <button mat-raised-button color="primary" class="view-all-btn">View All</button>
+      </div>
+    </div>
     <table mat-table [dataSource]="results" class="full-width-table">
       <ng-container matColumnDef="examName">
-        <th mat-header-cell *matHeaderCellDef>Exam Name</th>
-        <td mat-cell *matCellDef="let row">{{row.examName}}</td>
+        <th mat-header-cell *matHeaderCellDef>Exam</th>
+        <td mat-cell *matCellDef="let row">
+          <div class="exam-cell">
+            <div class="exam-dot"></div>
+            <span class="exam-name">{{row.examName}}</span>
+          </div>
+        </td>
       </ng-container>
-
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef>Date</th>
-        <td mat-cell *matCellDef="let row">{{row.date}}</td>
+        <td mat-cell *matCellDef="let row"><span class="date-chip">{{row.date}}</span></td>
       </ng-container>
-
       <ng-container matColumnDef="students">
         <th mat-header-cell *matHeaderCellDef>Students</th>
-        <td mat-cell *matCellDef="let row">{{row.students}}</td>
+        <td mat-cell *matCellDef="let row"><strong>{{row.students}}</strong></td>
       </ng-container>
-
       <ng-container matColumnDef="avgScore">
         <th mat-header-cell *matHeaderCellDef>Avg. Score</th>
-        <td mat-cell *matCellDef="let row">{{row.avgScore}}%</td>
+        <td mat-cell *matCellDef="let row">
+          <div class="score-bar-wrap">
+            <div class="score-bar-track">
+              <div class="score-bar-fill" [style.width]="row.avgScore + '%'" [class]="row.avgScore >= 70 ? 'high' : row.avgScore >= 50 ? 'mid' : 'low'"></div>
+            </div>
+            <span class="score-pct">{{row.avgScore}}%</span>
+          </div>
+        </td>
       </ng-container>
-
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let row">
-          <button mat-button color="primary">View Rank List</button>
-          <button mat-icon-button><mat-icon>download</mat-icon></button>
+          <button mat-stroked-button color="primary" class="action-btn">
+            <mat-icon>format_list_numbered</mat-icon> Rank List
+          </button>
+          <button mat-icon-button matTooltip="Download Report" class="icon-action">
+            <mat-icon>download</mat-icon>
+          </button>
         </td>
       </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </mat-card>
+
 </div>

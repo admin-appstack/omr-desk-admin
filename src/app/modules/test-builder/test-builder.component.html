@@ -1,54 +1,72 @@
 <div class="module-container">
-  <div class="module-header">
-    <div>
-      <h1>Test Builder</h1>
-      <p>Configure exam parameters, marking schemes, and generate OMR/Online tests.</p>
+  <div class="module-hero purple">
+    <div class="hero-content">
+      <div class="hero-icon"><mat-icon>assignment</mat-icon></div>
+      <div>
+        <h1>Test Builder</h1>
+        <p>Configure exam parameters, marking schemes, and generate OMR/Online tests.</p>
+      </div>
     </div>
-    <div class="header-actions">
-      <button mat-stroked-button color="primary">
-        <mat-icon>file_download</mat-icon>
-        Template Gallery
+    <div class="hero-actions">
+      <button mat-stroked-button class="hero-btn-outline">
+        <mat-icon>file_download</mat-icon> Templates
       </button>
-      <button mat-raised-button color="primary">
-        <mat-icon>add</mat-icon>
-        Create New Test
+      <button mat-raised-button class="hero-btn">
+        <mat-icon>add</mat-icon> Create New Test
       </button>
     </div>
   </div>
 
-  <mat-tab-group class="test-tabs">
-    <mat-tab label="Recent Tests">
-      <div class="tab-content">
-        <div class="test-grid">
-          <mat-card *ngFor="let test of tests" class="test-card">
-            <div class="test-card-header">
-              <span class="test-type" [class]="test.type.toLowerCase()">{{test.type}}</span>
-              <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
-            </div>
-            <h3 class="test-name">{{test.name}}</h3>
-            <div class="test-meta">
-              <div class="meta-item">
-                <mat-icon>schedule</mat-icon>
-                <span>{{test.duration}} mins</span>
-              </div>
-              <div class="meta-item">
-                <mat-icon>question_answer</mat-icon>
-                <span>{{test.questions}} Qs</span>
-              </div>
-            </div>
-            <div class="test-card-footer">
-              <button mat-button color="primary">Edit Configuration</button>
-              <button mat-icon-button color="accent" title="Generate OMR"><mat-icon>description</mat-icon></button>
-            </div>
-          </mat-card>
+  <!-- Stats Strip -->
+  <div class="stats-strip">
+    <div class="strip-stat" *ngFor="let s of testStats">
+      <mat-icon [style.color]="s.color">{{s.icon}}</mat-icon>
+      <div>
+        <span class="strip-value">{{s.value}}</span>
+        <span class="strip-label">{{s.label}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test Grid -->
+  <div class="test-grid">
+    <mat-card *ngFor="let test of tests" class="test-card">
+      <div class="test-type-badge" [class]="test.type.toLowerCase()">
+        <mat-icon>{{ test.type === 'OMR' ? 'qr_code_2' : 'computer' }}</mat-icon>
+        {{test.type}}
+      </div>
+      <h3 class="test-name">{{test.name}}</h3>
+      <div class="test-meta">
+        <div class="meta-item">
+          <mat-icon>schedule</mat-icon>
+          <span>{{test.duration}} mins</span>
+        </div>
+        <div class="meta-item">
+          <mat-icon>quiz</mat-icon>
+          <span>{{test.questions}} Questions</span>
+        </div>
+        <div class="meta-item">
+          <mat-icon>group</mat-icon>
+          <span>{{test.students}} Students</span>
         </div>
       </div>
-    </mat-tab>
-    <mat-tab label="Templates">
-      <div class="tab-content empty">
-         <mat-icon>auto_awesome</mat-icon>
-         <p>Select a template to quickly bootstrap your exam configuration.</p>
+      <div class="test-footer">
+        <button mat-button color="primary" class="edit-btn">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+        <button mat-icon-button color="accent" matTooltip="Generate OMR Sheet">
+          <mat-icon>description</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="More options">
+          <mat-icon>more_vert</mat-icon>
+        </button>
       </div>
-    </mat-tab>
-  </mat-tab-group>
+    </mat-card>
+
+    <!-- Add New Card -->
+    <div class="add-test-card" (click)="createTest()">
+      <mat-icon>add_circle_outline</mat-icon>
+      <span>Create New Test</span>
+    </div>
+  </div>
 </div>

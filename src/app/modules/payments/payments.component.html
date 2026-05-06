@@ -1,80 +1,138 @@
 <div class="module-container">
-  <div class="module-header">
-    <div>
-      <h1>Payments & Billing</h1>
-      <p>Manage your subscriptions, view transaction history, and download invoices.</p>
+
+  <!-- Header Hero -->
+  <div class="module-hero green">
+    <div class="hero-content">
+      <div class="hero-icon"><mat-icon>account_balance_wallet</mat-icon></div>
+      <div>
+        <h1>Payments &amp; Billing</h1>
+        <p>Manage subscriptions, view transaction history, and download invoices.</p>
+      </div>
     </div>
-    <div class="header-actions">
-      <button mat-stroked-button color="primary">
-        <mat-icon>receipt_long</mat-icon>
-        Billing Portal
+    <div class="hero-actions">
+      <button mat-raised-button class="hero-btn-outline">
+        <mat-icon>receipt_long</mat-icon> Billing Portal
       </button>
-      <button mat-raised-button color="primary">
-        <mat-icon>add</mat-icon>
-        Add Credits
+      <button mat-raised-button class="hero-btn">
+        <mat-icon>add_card</mat-icon> Add Credits
       </button>
     </div>
   </div>
 
-  <div class="stats-grid">
-    <mat-card class="stat-card">
-      <div class="stat-icon revenue"><mat-icon>account_balance_wallet</mat-icon></div>
-      <div class="stat-info">
-        <span class="label">Total Revenue</span>
-        <h2 class="value">₹84,200</h2>
+  <!-- Summary Stats -->
+  <div class="pay-stats">
+    <div class="pay-stat-card" *ngFor="let s of statCards">
+      <div class="pay-stat-icon" [class]="s.theme">
+        <mat-icon>{{s.icon}}</mat-icon>
       </div>
-    </mat-card>
-    <mat-card class="stat-card">
-      <div class="stat-icon credits"><mat-icon>toll</mat-icon></div>
-      <div class="stat-info">
-        <span class="label">Available Credits</span>
-        <h2 class="value">4,500</h2>
+      <div class="pay-stat-body">
+        <span class="pay-stat-label">{{s.label}}</span>
+        <h2 class="pay-stat-value">{{s.value}}</h2>
       </div>
-    </mat-card>
-    <mat-card class="stat-card">
-      <div class="stat-icon plans"><mat-icon>star</mat-icon></div>
-      <div class="stat-info">
-        <span class="label">Active Plan</span>
-        <h2 class="value">Enterprise Plus</h2>
-      </div>
-    </mat-card>
+      <div class="pay-stat-tag" [class]="s.tagClass">{{s.tag}}</div>
+    </div>
   </div>
 
+  <!-- Two-column: Active Plan + Quick Actions -->
+  <div class="pay-grid">
+
+    <!-- Active Plan Card -->
+    <mat-card class="plan-card">
+      <div class="plan-header">
+        <div class="plan-badge">
+          <mat-icon>star</mat-icon> ENTERPRISE PLUS
+        </div>
+        <span class="plan-renew">Renews Jul 15, 2024</span>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feature" *ngFor="let f of planFeatures">
+          <mat-icon class="check-icon">check_circle</mat-icon>
+          <span>{{f}}</span>
+        </div>
+      </div>
+      <div class="plan-footer">
+        <button mat-stroked-button class="upgrade-btn">
+          <mat-icon>rocket_launch</mat-icon> Upgrade Plan
+        </button>
+        <button mat-stroked-button class="cancel-btn">Cancel Subscription</button>
+      </div>
+    </mat-card>
+
+    <!-- Quick Actions -->
+    <mat-card class="quick-card">
+      <h3 class="card-title">Quick Actions</h3>
+      <div class="quick-actions">
+        <button class="quick-action-btn" *ngFor="let a of quickActions">
+          <div class="qa-icon" [style.background]="a.bg">
+            <mat-icon [style.color]="a.color">{{a.icon}}</mat-icon>
+          </div>
+          <span>{{a.label}}</span>
+          <mat-icon class="qa-arrow">chevron_right</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+
+  </div>
+
+  <!-- Transactions Table -->
   <mat-card class="transactions-card">
-    <div class="card-header">
-      <h3>Recent Transactions</h3>
-      <button mat-button color="primary">View All</button>
+    <div class="card-header-row">
+      <div>
+        <h3 class="card-title">Recent Transactions</h3>
+        <span class="card-subtitle">All payment activity for your account</span>
+      </div>
+      <div class="header-actions">
+        <button mat-stroked-button class="export-btn">
+          <mat-icon>download</mat-icon> Export
+        </button>
+        <button mat-raised-button color="primary" class="view-all-btn">View All</button>
+      </div>
     </div>
     <table mat-table [dataSource]="transactions" class="full-width-table">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Transaction ID</th>
-        <td mat-cell *matCellDef="let row">{{row.id}}</td>
+        <td mat-cell *matCellDef="let row"><span class="txn-id">{{row.id}}</span></td>
       </ng-container>
-
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef>Date</th>
-        <td mat-cell *matCellDef="let row">{{row.date}}</td>
+        <td mat-cell *matCellDef="let row"><span class="date-chip">{{row.date}}</span></td>
       </ng-container>
-
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let row"><strong>{{row.description}}</strong></td>
+      </ng-container>
       <ng-container matColumnDef="amount">
         <th mat-header-cell *matHeaderCellDef>Amount</th>
-        <td mat-cell *matCellDef="let row">₹{{row.amount | number}}</td>
+        <td mat-cell *matCellDef="let row">
+          <span class="amount-val">₹{{row.amount | number}}</span>
+        </td>
       </ng-container>
-
       <ng-container matColumnDef="method">
         <th mat-header-cell *matHeaderCellDef>Method</th>
-        <td mat-cell *matCellDef="let row">{{row.method}}</td>
+        <td mat-cell *matCellDef="let row">
+          <div class="method-chip">
+            <mat-icon class="method-icon">{{row.methodIcon}}</mat-icon>
+            {{row.method}}
+          </div>
+        </td>
       </ng-container>
-
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>Status</th>
         <td mat-cell *matCellDef="let row">
           <span class="status-badge" [class]="row.status.toLowerCase()">{{row.status}}</span>
         </td>
       </ng-container>
-
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button matTooltip="Download Invoice" class="dl-btn">
+            <mat-icon>receipt</mat-icon>
+          </button>
+        </td>
+      </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </mat-card>
+
 </div>

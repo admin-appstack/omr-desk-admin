@@ -1,21 +1,62 @@
-<div class="template-grid">
-  <div 
-    *ngFor="let tpl of templates" 
-    class="template-card" 
-    [class.selected]="selectedId === tpl.id"
-    (click)="selectTemplate(tpl.id)"
-  >
-    <div class="preview-trigger" (click)="$event.stopPropagation(); openPreview(tpl)" title="Detailed Preview">
-      <mat-icon>zoom_in</mat-icon>
-    </div>
-    <div class="template-preview">
-      <img [src]="tpl.image" [alt]="tpl.name" />
-      <div class="selection-overlay">
-        <mat-icon>check_circle</mat-icon>
+<div class="template-section">
+
+  <div class="section-lead">
+    <h2>Select a Template</h2>
+    <p>Choose a design that best represents your institute's brand. You can customize colors and content after selection.</p>
+  </div>
+
+  <div class="template-grid">
+    <div 
+      *ngFor="let tpl of templates" 
+      class="template-card" 
+      [class.selected]="selectedId === tpl.id"
+      (click)="selectTemplate(tpl.id)"
+    >
+      <!-- Selected Badge -->
+      <div class="selected-badge" *ngIf="selectedId === tpl.id">
+        <mat-icon>check</mat-icon> Active
       </div>
-    </div>
-    <div class="template-info">
-      <h3>{{tpl.name}}</h3>
+
+      <!-- Color accent bar -->
+      <div class="template-color-bar" [style.background]="tpl.primaryColor"></div>
+
+      <!-- Preview image -->
+      <div class="template-preview">
+        <img [src]="tpl.image" [alt]="tpl.name" />
+        <div class="preview-overlay">
+          <button mat-stroked-button class="preview-btn" (click)="$event.stopPropagation(); openPreview(tpl)">
+            <mat-icon>zoom_in</mat-icon> Full Preview
+          </button>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="template-info">
+        <div class="template-header">
+          <h3>{{tpl.name}}</h3>
+          <div class="template-tags">
+            <span *ngFor="let tag of tpl.tags" class="tag">{{tag}}</span>
+          </div>
+        </div>
+        <p class="template-desc">{{tpl.description}}</p>
+
+        <div class="template-features">
+          <div *ngFor="let f of tpl.features" class="feature-item">
+            <mat-icon>check_circle</mat-icon>
+            <span>{{f}}</span>
+          </div>
+        </div>
+
+        <button 
+          mat-raised-button 
+          class="use-template-btn"
+          [style.background]="selectedId === tpl.id ? tpl.primaryColor : ''"
+          (click)="$event.stopPropagation(); selectTemplate(tpl.id)"
+        >
+          <mat-icon>{{ selectedId === tpl.id ? 'check_circle' : 'web' }}</mat-icon>
+          {{ selectedId === tpl.id ? 'Currently Active' : 'Use This Template' }}
+        </button>
+      </div>
     </div>
   </div>
 </div>

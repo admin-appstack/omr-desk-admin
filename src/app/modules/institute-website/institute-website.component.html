@@ -1,33 +1,94 @@
 <div class="cms-container">
-  <div class="cms-header">
-    <div class="header-info">
+
+  <!-- Hero Header -->
+  <div class="cms-hero">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <mat-icon>language</mat-icon>
+        Website CMS
+      </div>
       <h1>Institute Website Builder</h1>
-      <p>Configure your public portal, select templates, and manage content.</p>
+      <p>Design, configure, and publish your institute's public portal — no coding required.</p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-num">3</span>
+          <span class="stat-lbl">Templates</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-num">6</span>
+          <span class="stat-lbl">Pages</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <div class="live-indicator">
+            <span class="live-dot"></span> Live
+          </div>
+          <span class="stat-lbl">Status</span>
+        </div>
+      </div>
     </div>
-    <div class="header-actions">
-      <button mat-stroked-button color="primary">
-        <mat-icon>visibility</mat-icon> Live Preview
+
+    <div class="hero-actions">
+      <button mat-stroked-button class="btn-outline-white">
+        <mat-icon>open_in_new</mat-icon> Visit Site
       </button>
-      <button mat-raised-button color="primary">
-        <mat-icon>save</mat-icon> Save Changes
+      <button mat-raised-button class="btn-save">
+        <mat-icon>save</mat-icon> Save &amp; Publish
       </button>
     </div>
   </div>
 
-  <mat-tab-group class="cms-tabs">
-    <mat-tab label="1. Choose Template">
-      <app-template-grid 
-        [selectedId]="selectedTemplate()" 
-        (selected)="onTemplateSelected($event)">
-      </app-template-grid>
-    </mat-tab>
+  <!-- Step Progress -->
+  <div class="step-tabs">
+    <div class="step" [class.active]="activeStep === 0" (click)="activeStep = 0">
+      <div class="step-num">1</div>
+      <div class="step-info">
+        <span class="step-title">Choose Template</span>
+        <span class="step-sub">Design &amp; layout</span>
+      </div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step" [class.active]="activeStep === 1" (click)="activeStep = 1">
+      <div class="step-num">2</div>
+      <div class="step-info">
+        <span class="step-title">Basic Information</span>
+        <span class="step-sub">Branding &amp; domain</span>
+      </div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step" [class.active]="activeStep === 2" (click)="activeStep = 2">
+      <div class="step-num">3</div>
+      <div class="step-info">
+        <span class="step-title">Page Content</span>
+        <span class="step-sub">Manage pages</span>
+      </div>
+    </div>
+  </div>
 
-    <mat-tab label="2. Basic Information">
-      <app-website-settings></app-website-settings>
-    </mat-tab>
+  <!-- Step Body -->
+  <div class="step-body">
+    <app-template-grid 
+      *ngIf="activeStep === 0"
+      [selectedId]="selectedTemplate()" 
+      (selected)="onTemplateSelected($event)">
+    </app-template-grid>
+    <app-website-settings *ngIf="activeStep === 1"></app-website-settings>
+    <app-page-management *ngIf="activeStep === 2"></app-page-management>
+  </div>
 
-    <mat-tab label="3. Page Content">
-      <app-page-management></app-page-management>
-    </mat-tab>
-  </mat-tab-group>
+  <!-- Navigation -->
+  <div class="step-navigation">
+    <button mat-stroked-button color="primary" [disabled]="activeStep === 0" (click)="activeStep = activeStep - 1">
+      <mat-icon>arrow_back</mat-icon> Previous
+    </button>
+    <button mat-raised-button color="primary" *ngIf="activeStep < 2" (click)="activeStep = activeStep + 1">
+      Next Step <mat-icon>arrow_forward</mat-icon>
+    </button>
+    <button mat-raised-button class="btn-publish" *ngIf="activeStep === 2">
+      <mat-icon>rocket_launch</mat-icon> Publish Website
+    </button>
+  </div>
+
 </div>

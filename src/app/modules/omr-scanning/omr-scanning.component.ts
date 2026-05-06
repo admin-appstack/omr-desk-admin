@@ -15,6 +15,12 @@ import { MatTableModule } from '@angular/material/table';
 })
 export class OmrScanningComponent {
   displayedColumns = ['batchId', 'testName', 'count', 'status'];
+
+  activeBatches = [
+    { name: 'Batch_2024_05_06.zip', progress: 75, status: 'Processing...' },
+    { name: 'NEET_Mock_3.pdf', progress: 40, status: 'Uploading...' },
+  ];
+
   history = [
     { batchId: 'BATCH-001', testName: 'JEE Mains Practice', count: 120, status: 'Completed' },
     { batchId: 'BATCH-002', testName: 'Monthly NEET Test', count: 85, status: 'Completed' },
