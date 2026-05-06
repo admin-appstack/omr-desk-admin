@@ -1,0 +1,28 @@
+.form-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+.settings-card {
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: none;
+  border: 1px solid #f1f5f9;
+
+  h3 {
+    margin: 0 0 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    font-size: 1.1rem;
+  }
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+
+  mat-form-field { width: 100%; }
+}

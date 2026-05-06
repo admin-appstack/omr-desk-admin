@@ -1,0 +1,20 @@
+.module-container { display: flex; flex-direction: column; gap: 2rem; }
+.module-header { display: flex; justify-content: space-between; align-items: center; }
+.module-header h1 { margin: 0; font-size: 2rem; font-weight: 800; color: #133e87; }
+
+.chart-placeholder { padding: 1.5rem; background: white; border-radius: 16px; box-shadow: none; border: 1px solid #f1f5f9; }
+.dummy-chart { 
+  height: 200px; 
+  display: flex; 
+  align-items: flex-end; 
+  gap: 1.5rem; 
+  padding: 1rem 2rem; 
+  border-bottom: 2px solid #e2e8f0;
+  margin-top: 1rem;
+}
+.bar { flex: 1; background: #133e87; border-radius: 4px 4px 0 0; opacity: 0.8; transition: opacity 0.2s; }
+.bar:hover { opacity: 1; }
+
+.recent-results-card { padding: 1.5rem; border-radius: 16px; box-shadow: none; border: 1px solid #f1f5f9; }
+.full-width-table { width: 100%; }
+h3 { margin-bottom: 1.5rem; font-weight: 700; color: #1e293b; }

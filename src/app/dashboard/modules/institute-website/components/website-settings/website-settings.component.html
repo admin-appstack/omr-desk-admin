@@ -1,0 +1,47 @@
+<div class="form-view">
+  <mat-card class="settings-card">
+    <h3>Branding & Domain</h3>
+    <div class="grid-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Institute Name</mat-label>
+        <input matInput [(ngModel)]="websiteConfig.name" placeholder="Enter institute name">
+        <mat-icon matSuffix>business</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tagline</mat-label>
+        <input matInput [(ngModel)]="websiteConfig.tagline" placeholder="Excellence in Education">
+        <mat-icon matSuffix>edit</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Subdomain</mat-label>
+        <input matInput [(ngModel)]="websiteConfig.subdomain">
+        <span matSuffix>.omrdesk.com</span>
+        <mat-icon matSuffix>language</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Primary Theme Color</mat-label>
+        <input matInput type="color" [(ngModel)]="websiteConfig.primaryColor">
+        <mat-icon matSuffix>palette</mat-icon>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="settings-card">
+    <h3>Contact Information</h3>
+    <div class="grid-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Support Email</mat-label>
+        <input matInput placeholder="support@institute.com">
+        <mat-icon matSuffix>email</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input matInput placeholder="+91 00000 00000">
+        <mat-icon matSuffix>phone</mat-icon>
+      </mat-form-field>
+    </div>
+  </mat-card>
+</div>

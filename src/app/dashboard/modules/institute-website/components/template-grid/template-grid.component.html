@@ -1,0 +1,21 @@
+<div class="template-grid">
+  <div 
+    *ngFor="let tpl of templates" 
+    class="template-card" 
+    [class.selected]="selectedId === tpl.id"
+    (click)="selectTemplate(tpl.id)"
+  >
+    <div class="preview-trigger" (click)="$event.stopPropagation(); openPreview(tpl)" title="Detailed Preview">
+      <mat-icon>zoom_in</mat-icon>
+    </div>
+    <div class="template-preview">
+      <img [src]="tpl.image" [alt]="tpl.name" />
+      <div class="selection-overlay">
+        <mat-icon>check_circle</mat-icon>
+      </div>
+    </div>
+    <div class="template-info">
+      <h3>{{tpl.name}}</h3>
+    </div>
+  </div>
+</div>

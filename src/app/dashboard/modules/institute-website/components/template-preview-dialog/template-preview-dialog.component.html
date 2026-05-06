@@ -1,0 +1,189 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <h2>{{data.name}} - Full Preview</h2>
+    <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+  </div>
+  <div class="dialog-content">
+    <div class="preview-main">
+      <!-- Browser Frame Mockup -->
+      <div class="browser-frame">
+        <div class="browser-header">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="address-bar">https://{{data.name.toLowerCase().replace(' ', '-')}}.omrdesk.com</div>
+        </div>
+        <div class="preview-img-wrapper mock-website" [style.--primary]="data.primaryColor">
+          <!-- Mock Website Header -->
+          <div class="mock-header">
+            <div class="mock-logo" (click)="setScreen('home')">
+              <mat-icon>business</mat-icon>
+              <span>{{data.name}}</span>
+            </div>
+            <div class="mock-nav">
+              <span [class.active]="activeScreen() === 'home'" (click)="setScreen('home')">Home</span>
+              <span [class.active]="activeScreen() === 'courses'" (click)="setScreen('courses')">Courses</span>
+              <span [class.active]="activeScreen() === 'results'" (click)="setScreen('results')">Results</span>
+              <span [class.active]="activeScreen() === 'contact'" (click)="setScreen('contact')">Contact</span>
+            </div>
+          </div>
+
+          <!-- Main Content Area -->
+          <div class="mock-content">
+            <!-- Home Screen -->
+            <div *ngIf="activeScreen() === 'home'" class="screen-home">
+              <div class="mock-hero">
+                <h1>Empowering Your <br /><span>Future Success</span></h1>
+                <p>Expert coaching for IIT-JEE, NEET, and Foundation courses with personalized OMR-based analytics.</p>
+                <div class="hero-btns">
+                  <div class="btn-mock primary">Join Batch 2024</div>
+                  <div class="btn-mock" (click)="setScreen('courses')">View Courses</div>
+                </div>
+              </div>
+              <div class="mock-stats">
+                <div class="m-stat"><h3>15+</h3><p>Years Excellence</p></div>
+                <div class="m-stat"><h3>2500+</h3><p>Selections</p></div>
+                <div class="m-stat"><h3>50+</h3><p>Top Centers</p></div>
+              </div>
+              <div class="mock-about-brief">
+                <h2>Premier Coaching Institute</h2>
+                <p>We combine traditional teaching excellence with cutting-edge technology to ensure every student reaches their full potential. Our integrated platform manages everything from OMR scanning to online result publication.</p>
+              </div>
+
+              <div class="mock-features-grid">
+                <div class="m-feat">
+                  <mat-icon>psychology</mat-icon>
+                  <h4>AI Analysis</h4>
+                  <p>Detailed performance breakdown using AI.</p>
+                </div>
+                <div class="m-feat">
+                  <mat-icon>speed</mat-icon>
+                  <h4>Instant Results</h4>
+                  <p>Get your OMR results within minutes.</p>
+                </div>
+                <div class="m-feat">
+                  <mat-icon>trending_up</mat-icon>
+                  <h4>Rank Ticker</h4>
+                  <p>Live state-wide and center-wide ranking.</p>
+                </div>
+                <div class="m-feat">
+                  <mat-icon>devices</mat-icon>
+                  <h4>Hybrid Learning</h4>
+                  <p>Access tests from any device, anywhere.</p>
+                </div>
+              </div>
+
+              <div class="mock-testimonials">
+                <h2>What Our Students Say</h2>
+                <div class="t-grid">
+                  <div class="t-card">
+                    <p>"The OMR analysis helped me identify my weak topics in Physics. The instant results are amazing!"</p>
+                    <div class="t-user">
+                      <div class="t-avatar">AA</div>
+                      <div class="t-info"><strong>Ankit Aryan</strong><span>AIR 45, JEE 2023</span></div>
+                    </div>
+                  </div>
+                  <div class="t-card">
+                    <p>"Easy to use portal. I can check my rank and detailed scorecard right from my phone."</p>
+                    <div class="t-user">
+                      <div class="t-avatar">SR</div>
+                      <div class="t-info"><strong>Sneha Reddy</strong><span>AIR 112, NEET 2023</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mock-news">
+                <div class="n-header">
+                  <span>Latest Updates</span>
+                  <div class="n-line"></div>
+                </div>
+                <ul class="n-list">
+                  <li><mat-icon>chevron_right</mat-icon> Registration open for Scholarship Test 2024</li>
+                  <li><mat-icon>chevron_right</mat-icon> New Batch starting for JEE Advanced from June 15th</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Courses Screen -->
+            <div *ngIf="activeScreen() === 'courses'" class="screen-courses">
+              <div class="mock-section-header">
+                <h2>Explore Our Courses</h2>
+                <p>Choose the best program for your career goals</p>
+              </div>
+              <div class="m-course-grid">
+                <div class="m-course" *ngFor="let c of mockCourses">
+                  <div class="m-course-img" [style.background-image]="'url(' + c.img + ')'">
+                    <div class="m-badge">{{c.level}}</div>
+                  </div>
+                  <div class="m-course-info">
+                    <h4>{{c.name}}</h4>
+                    <div class="m-course-meta">
+                      <span><mat-icon>schedule</mat-icon> {{c.duration}}</span>
+                    </div>
+                    <p>{{c.desc}}</p>
+                    <div class="m-course-footer">
+                      <span class="m-btn-small">View Syllabus</span>
+                      <button class="m-enroll-btn">Enroll</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div *ngIf="activeScreen() === 'results'" class="screen-results">
+              <div class="results-portal-card">
+                <div class="portal-header">
+                  <mat-icon>emoji_events</mat-icon>
+                  <h2>Online Result Portal</h2>
+                  <p>Enter your details to view your scorecard</p>
+                </div>
+                <div class="mock-form">
+                  <div class="m-field">
+                    <label>Test Code</label>
+                    <input type="text" placeholder="e.g. JEE-MAIN-402" readonly />
+                  </div>
+                  <div class="m-field">
+                    <label>Roll Number</label>
+                    <input type="text" placeholder="Enter your roll no." readonly />
+                  </div>
+                  <div class="m-field">
+                    <label>Date of Birth</label>
+                    <input type="date" readonly />
+                  </div>
+                  <button class="m-submit-btn">Show Result</button>
+                </div>
+                <div class="portal-footer">
+                  <p>Need help? Contact your center administrator.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Screen -->
+            <div *ngIf="activeScreen() === 'contact'" class="screen-contact">
+              <div class="mock-section-header">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our support team</p>
+              </div>
+              <div class="contact-mock-grid">
+                <div class="c-item"><mat-icon>mail</mat-icon> support@omrdesk.com</div>
+                <div class="c-item"><mat-icon>phone</mat-icon> +91 98765 43210</div>
+                <div class="c-item"><mat-icon>location_on</mat-icon> Education Hub, New Delhi</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mock Website Footer -->
+          <div class="mock-footer">
+            <div class="f-logo"><mat-icon>business</mat-icon> {{data.name}}</div>
+            <div class="f-links">Privacy Policy | Terms of Service</div>
+            <p>© 2024 {{data.name}}. Powered by OMRDesk.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dialog-actions">
+    <button mat-stroked-button mat-dialog-close>Close</button>
+    <button mat-raised-button color="primary" (click)="selectTemplate()">Use This Template</button>
+  </div>
+</div>

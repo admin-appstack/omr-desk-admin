@@ -1,0 +1,20 @@
+<div class="page-grid">
+  <mat-card *ngFor="let page of pages" class="page-card">
+    <div class="page-icon">
+      <mat-icon>{{page.icon}}</mat-icon>
+    </div>
+    <div class="page-info">
+      <h4>{{page.name}}</h4>
+      <p>Last updated: 2 days ago</p>
+    </div>
+    <div class="page-actions">
+      <button mat-icon-button color="primary" title="Edit Content"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button title="Settings"><mat-icon>settings</mat-icon></button>
+    </div>
+  </mat-card>
+
+  <mat-card class="add-page-card">
+    <mat-icon>add_circle_outline</mat-icon>
+    <span>Add New Page</span>
+  </mat-card>
+</div>

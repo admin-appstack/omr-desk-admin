@@ -1,0 +1,33 @@
+<div class="cms-container">
+  <div class="cms-header">
+    <div class="header-info">
+      <h1>Institute Website Builder</h1>
+      <p>Configure your public portal, select templates, and manage content.</p>
+    </div>
+    <div class="header-actions">
+      <button mat-stroked-button color="primary">
+        <mat-icon>visibility</mat-icon> Live Preview
+      </button>
+      <button mat-raised-button color="primary">
+        <mat-icon>save</mat-icon> Save Changes
+      </button>
+    </div>
+  </div>
+
+  <mat-tab-group class="cms-tabs">
+    <mat-tab label="1. Choose Template">
+      <app-template-grid 
+        [selectedId]="selectedTemplate()" 
+        (selected)="onTemplateSelected($event)">
+      </app-template-grid>
+    </mat-tab>
+
+    <mat-tab label="2. Basic Information">
+      <app-website-settings></app-website-settings>
+    </mat-tab>
+
+    <mat-tab label="3. Page Content">
+      <app-page-management></app-page-management>
+    </mat-tab>
+  </mat-tab-group>
+</div>
