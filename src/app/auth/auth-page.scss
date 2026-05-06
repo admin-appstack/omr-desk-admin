@@ -89,7 +89,7 @@
     font-size: 60px;
     width: 60px;
     height: 60px;
-    color: rgb(26, 27, 75);
+    color: rgb(var(--color-primary));
   }
 }
 
@@ -232,7 +232,7 @@
   }
   
   .mat-mdc-raised-button.mat-primary {
-    background-color: rgb(26, 27, 75) !important;
+    background-color: rgb(var(--color-primary)) !important;
     color: white !important;
     padding: 1.5rem !important;
     font-size: 1rem !important;
