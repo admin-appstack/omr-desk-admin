@@ -32,50 +32,179 @@ import { MatTabsModule } from '@angular/material/tabs';
             <div class="preview-img-wrapper mock-website" [style.--primary]="data.primaryColor">
               <!-- Mock Website Header -->
               <div class="mock-header">
-                <div class="mock-logo">
+                <div class="mock-logo" (click)="setScreen('home')">
                   <mat-icon>business</mat-icon>
                   <span>{{data.name}}</span>
                 </div>
                 <div class="mock-nav">
-                  <span>Home</span><span>Courses</span><span>Results</span><span>Contact</span>
+                  <span [class.active]="activeScreen() === 'home'" (click)="setScreen('home')">Home</span>
+                  <span [class.active]="activeScreen() === 'courses'" (click)="setScreen('courses')">Courses</span>
+                  <span [class.active]="activeScreen() === 'results'" (click)="setScreen('results')">Results</span>
+                  <span [class.active]="activeScreen() === 'contact'" (click)="setScreen('contact')">Contact</span>
                 </div>
               </div>
 
-              <!-- Mock Hero Section -->
-              <div class="mock-hero">
-                <h1>Leading Institute for <br/><span>Competitive Exams</span></h1>
-                <p>Prepare for JEE, NEET and other competitive exams with India's most advanced OMR based testing platform.</p>
-                <div class="hero-btns">
-                  <div class="btn-mock primary">Enroll Now</div>
-                  <div class="btn-mock">Learn More</div>
+              <!-- Main Content Area -->
+              <div class="mock-content">
+                
+                <!-- Home Screen -->
+                <div *ngIf="activeScreen() === 'home'" class="screen-home">
+                  <div class="mock-hero">
+                    <h1>Empowering Your <br/><span>Future Success</span></h1>
+                    <p>Expert coaching for IIT-JEE, NEET, and Foundation courses with personalized OMR-based analytics.</p>
+                    <div class="hero-btns">
+                      <div class="btn-mock primary">Join Batch 2024</div>
+                      <div class="btn-mock" (click)="setScreen('courses')">View Courses</div>
+                    </div>
+                  </div>
+                  <div class="mock-stats">
+                    <div class="m-stat"><h3>15+</h3><p>Years Excellence</p></div>
+                    <div class="m-stat"><h3>2500+</h3><p>Selections</p></div>
+                    <div class="m-stat"><h3>50+</h3><p>Top Centers</p></div>
+                  </div>
+                  <div class="mock-about-brief">
+                    <h2>Premier Coaching Institute</h2>
+                    <p>We combine traditional teaching excellence with cutting-edge technology to ensure every student reaches their full potential. Our integrated platform manages everything from OMR scanning to online result publication.</p>
+                  </div>
+
+                  <div class="mock-features-grid">
+                    <div class="m-feat">
+                      <mat-icon>psychology</mat-icon>
+                      <h4>AI Analysis</h4>
+                      <p>Detailed performance breakdown using AI.</p>
+                    </div>
+                    <div class="m-feat">
+                      <mat-icon>speed</mat-icon>
+                      <h4>Instant Results</h4>
+                      <p>Get your OMR results within minutes.</p>
+                    </div>
+                    <div class="m-feat">
+                      <mat-icon>trending_up</mat-icon>
+                      <h4>Rank Ticker</h4>
+                      <p>Live state-wide and center-wide ranking.</p>
+                    </div>
+                    <div class="m-feat">
+                      <mat-icon>devices</mat-icon>
+                      <h4>Hybrid Learning</h4>
+                      <p>Access tests from any device, anywhere.</p>
+                    </div>
+                  </div>
+
+                  <div class="mock-testimonials">
+                    <h2>What Our Students Say</h2>
+                    <div class="t-grid">
+                      <div class="t-card">
+                        <p>"The OMR analysis helped me identify my weak topics in Physics. The instant results are amazing!"</p>
+                        <div class="t-user">
+                          <div class="t-avatar">AA</div>
+                          <div class="t-info"><strong>Ankit Aryan</strong><span>AIR 45, JEE 2023</span></div>
+                        </div>
+                      </div>
+                      <div class="t-card">
+                        <p>"Easy to use portal. I can check my rank and detailed scorecard right from my phone."</p>
+                        <div class="t-user">
+                          <div class="t-avatar">SR</div>
+                          <div class="t-info"><strong>Sneha Reddy</strong><span>AIR 112, NEET 2023</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mock-news">
+                    <div class="n-header">
+                      <span>Latest Updates</span>
+                      <div class="n-line"></div>
+                    </div>
+                    <ul class="n-list">
+                      <li><mat-icon>chevron_right</mat-icon> Registration open for Scholarship Test 2024</li>
+                      <li><mat-icon>chevron_right</mat-icon> New Batch starting for JEE Advanced from June 15th</li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Mock Stats -->
-              <div class="mock-stats">
-                <div class="m-stat"><h3>10K+</h3><p>Students</p></div>
-                <div class="m-stat"><h3>500+</h3><p>Tests</p></div>
-                <div class="m-stat"><h3>98%</h3><p>Success</p></div>
-              </div>
-
-              <!-- Mock Courses -->
-              <div class="mock-courses">
-                <h2>Our Popular Courses</h2>
-                <div class="m-course-grid">
-                  <div class="m-course" *ngFor="let c of [1,2,3]">
-                    <div class="m-course-img"></div>
-                    <div class="m-course-info">
-                      <div class="m-line"></div>
-                      <div class="m-line short"></div>
+                <!-- Courses Screen -->
+                <div *ngIf="activeScreen() === 'courses'" class="screen-courses">
+                  <div class="mock-section-header">
+                    <h2>Explore Our Courses</h2>
+                    <p>Choose the best program for your career goals</p>
+                  </div>
+                  <div class="m-course-grid">
+                    <div class="m-course">
+                      <div class="m-course-img" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=200')"></div>
+                      <div class="m-course-info">
+                        <h4>IIT-JEE Advanced</h4>
+                        <p>Comprehensive 2-year classroom program.</p>
+                        <div class="m-btn-small">View Details</div>
+                      </div>
+                    </div>
+                    <div class="m-course">
+                      <div class="m-course-img" style="background-image: url('https://images.unsplash.com/photo-1532187875605-1ef6c237dd1d?auto=format&fit=crop&w=200')"></div>
+                      <div class="m-course-info">
+                        <h4>NEET Medical</h4>
+                        <p>Intensive medical entrance preparation.</p>
+                        <div class="m-btn-small">View Details</div>
+                      </div>
+                    </div>
+                    <div class="m-course">
+                      <div class="m-course-img" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=200')"></div>
+                      <div class="m-course-info">
+                        <h4>Foundation (9th-10th)</h4>
+                        <p>Building strong concepts for future exams.</p>
+                        <div class="m-btn-small">View Details</div>
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <!-- Results Screen -->
+                <div *ngIf="activeScreen() === 'results'" class="screen-results">
+                  <div class="results-portal-card">
+                    <div class="portal-header">
+                      <mat-icon>emoji_events</mat-icon>
+                      <h2>Online Result Portal</h2>
+                      <p>Enter your details to view your scorecard</p>
+                    </div>
+                    <div class="mock-form">
+                      <div class="m-field">
+                        <label>Test Code</label>
+                        <input type="text" placeholder="e.g. JEE-MAIN-402" readonly />
+                      </div>
+                      <div class="m-field">
+                        <label>Roll Number</label>
+                        <input type="text" placeholder="Enter your roll no." readonly />
+                      </div>
+                      <div class="m-field">
+                        <label>Date of Birth</label>
+                        <input type="date" readonly />
+                      </div>
+                      <button class="m-submit-btn">Show Result</button>
+                    </div>
+                    <div class="portal-footer">
+                      <p>Need help? Contact your center administrator.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Contact Screen -->
+                <div *ngIf="activeScreen() === 'contact'" class="screen-contact">
+                  <div class="mock-section-header">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with our support team</p>
+                  </div>
+                  <div class="contact-mock-grid">
+                    <div class="c-item"><mat-icon>mail</mat-icon> support@omrdesk.com</div>
+                    <div class="c-item"><mat-icon>phone</mat-icon> +91 98765 43210</div>
+                    <div class="c-item"><mat-icon>location_on</mat-icon> Education Hub, New Delhi</div>
+                  </div>
+                </div>
+
               </div>
 
-              <!-- Mock Footer -->
+              <!-- Mock Website Footer -->
               <div class="mock-footer">
                 <div class="f-logo"><mat-icon>business</mat-icon> {{data.name}}</div>
-                <p>© 2024. All rights reserved.</p>
+                <div class="f-links">Privacy Policy | Terms of Service</div>
+                <p>© 2024 {{data.name}}. Powered by OMRDesk.</p>
               </div>
             </div>
           </div>
@@ -138,8 +267,14 @@ import { MatTabsModule } from '@angular/material/tabs';
         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         position: sticky; top: 0; z-index: 10;
         
-        .mock-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; color: var(--primary); mat-icon { font-size: 24px; } }
-        .mock-nav { display: flex; gap: 1.5rem; font-size: 0.8rem; font-weight: 600; color: #475569; }
+        .mock-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; color: var(--primary); mat-icon { font-size: 24px; } cursor: pointer; }
+        .mock-nav { 
+          display: flex; gap: 1.5rem; font-size: 0.8rem; font-weight: 600; color: #475569; 
+          span { cursor: pointer; transition: color 0.2s; position: relative; padding: 4px 0; }
+          span:hover { color: var(--primary); }
+          span.active { color: var(--primary); }
+          span.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--primary); }
+        }
       }
 
       .mock-hero {
@@ -168,25 +303,74 @@ import { MatTabsModule } from '@angular/material/tabs';
         p { font-size: 0.75rem; margin: 0.25rem 0 0; opacity: 0.8; }
       }
 
+      .mock-about-brief { padding: 4rem 2rem; text-align: center; background: white; h2 { font-weight: 800; margin-bottom: 1.5rem; } p { max-width: 750px; margin: 0 auto; color: #475569; line-height: 1.8; font-size: 1rem; } }
+
+      .mock-features-grid {
+        display: grid; grid-template-cols: repeat(4, 1fr); gap: 1.5rem; padding: 2rem; background: #f8fafc;
+        .m-feat { text-align: center; padding: 1.5rem; background: white; border-radius: 16px; border: 1px solid #e2e8f0; mat-icon { color: var(--primary); margin-bottom: 0.5rem; } h4 { margin: 0 0 0.5rem; font-weight: 700; } p { font-size: 0.75rem; color: #64748b; margin: 0; } }
+      }
+
+      .mock-testimonials {
+        padding: 4rem 2rem; background: white; text-align: center;
+        h2 { font-weight: 800; margin-bottom: 3rem; }
+        .t-grid { display: grid; grid-template-cols: 1fr 1fr; gap: 2rem; }
+        .t-card { text-align: left; padding: 2rem; background: #f1f5f9; border-radius: 20px; position: relative; p { font-style: italic; color: #334155; margin-bottom: 1.5rem; line-height: 1.6; } }
+        .t-user { display: flex; align-items: center; gap: 1rem; }
+        .t-avatar { width: 40px; height: 40px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; }
+        .t-info { display: flex; flex-direction: column; strong { font-size: 0.9rem; } span { font-size: 0.75rem; color: #64748b; } }
+      }
+
+      .mock-news {
+        padding: 2rem; background: #f8fafc; border-top: 1px solid #e2e8f0;
+        .n-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; span { background: var(--primary); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; } .n-line { flex: 1; height: 1px; background: #e2e8f0; } }
+        .n-list { list-style: none; padding: 0; margin: 0; li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #475569; margin-bottom: 0.5rem; mat-icon { font-size: 18px; width: 18px; height: 18px; color: var(--primary); } } }
+      }
+
+      .mock-section-header { padding: 4rem 2rem 1rem; text-align: center; h2 { font-weight: 800; margin: 0; font-size: 2rem; } p { color: #64748b; margin-top: 0.75rem; font-size: 1.1rem; } }
+
       .mock-courses {
-        padding: 3rem 2rem;
-        h2 { text-align: center; margin-bottom: 2rem; font-weight: 800; }
-        
+        padding: 1rem 2rem 4rem;
         .m-course-grid { display: grid; grid-template-cols: repeat(3, 1fr); gap: 1.5rem; }
-        .m-course { background: #f8fafc; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; }
-        .m-course-img { height: 100px; background: #cbd5e1; }
-        .m-course-info { padding: 1rem; }
-        .m-line { height: 8px; background: #e2e8f0; border-radius: 4px; margin-bottom: 0.5rem; }
-        .m-line.short { width: 60%; }
+        .m-course { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; transition: transform 0.2s; cursor: pointer; }
+        .m-course:hover { transform: translateY(-4px); }
+        .m-course-img { height: 120px; background-size: cover; background-position: center; }
+        .m-course-info { padding: 1.25rem; h4 { margin: 0 0 0.5rem; font-weight: 700; } p { font-size: 0.8rem; color: #64748b; margin-bottom: 1rem; } }
+        .m-btn-small { font-size: 0.75rem; font-weight: 700; color: var(--primary); }
+      }
+
+      .screen-results {
+        padding: 4rem 2rem;
+        background: #f1f5f9;
+        display: flex; justify-content: center;
+      }
+      .results-portal-card {
+        background: white; padding: 2.5rem; border-radius: 20px; width: 100%; max-width: 400px;
+        box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        text-align: center;
+        
+        .portal-header { margin-bottom: 2rem; mat-icon { font-size: 40px; width: 40px; height: 40px; color: #d97706; margin-bottom: 0.5rem; } h2 { margin: 0; font-weight: 800; } p { font-size: 0.85rem; color: #64748b; } }
+      }
+      .mock-form {
+        text-align: left;
+        .m-field { margin-bottom: 1.25rem; label { display: block; font-size: 0.75rem; font-weight: 700; color: #475569; margin-bottom: 0.4rem; text-transform: uppercase; } input { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; font-size: 0.9rem; } }
+        .m-submit-btn { width: 100%; padding: 0.8rem; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 0.5rem; }
+      }
+      .portal-footer { margin-top: 2rem; font-size: 0.75rem; color: #94a3b8; }
+
+      .screen-contact {
+        padding-bottom: 4rem;
+        .contact-mock-grid { display: grid; grid-template-cols: repeat(3, 1fr); gap: 2rem; padding: 0 2rem; text-align: center; }
+        .c-item { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; font-weight: 600; color: #475569; font-size: 0.85rem; mat-icon { color: var(--primary); } }
       }
 
       .mock-footer {
-        padding: 2rem;
+        padding: 3rem 2rem;
         background: #1e293b;
         color: white;
         text-align: center;
-        .f-logo { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-weight: 700; margin-bottom: 0.5rem; mat-icon { font-size: 20px; } }
-        p { font-size: 0.7rem; opacity: 0.6; margin: 0; }
+        .f-logo { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-weight: 700; margin-bottom: 1rem; mat-icon { font-size: 20px; } }
+        .f-links { font-size: 0.75rem; opacity: 0.5; margin-bottom: 1rem; }
+        p { font-size: 0.7rem; opacity: 0.4; margin: 0; }
       }
     }
     
@@ -215,7 +399,13 @@ import { MatTabsModule } from '@angular/material/tabs';
   `]
 })
 export class TemplatePreviewDialog {
+  activeScreen = signal('home');
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  setScreen(screen: string): void {
+    this.activeScreen.set(screen);
+  }
 }
 
 @Component({
