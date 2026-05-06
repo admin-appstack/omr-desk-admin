@@ -48,8 +48,8 @@
 }
 
 .logo-circle {
-  width: 120px;
-  height: 120px;
+  width: 210px;
+  height: 210px;
   background: white;
   border-radius: 50%;
   display: flex;
@@ -58,7 +58,7 @@
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
   margin-bottom: 1.5rem;
   overflow: hidden;
-  padding: 1rem;
+  padding: 0.5rem;
 
   img {
     width: 100%;
@@ -173,7 +173,8 @@
   }
   
   .mat-mdc-raised-button.mat-primary {
-    --mdc-filled-button-container-color: rgb(26, 27, 75);
+    background-color: rgb(26, 27, 75) !important;
+    color: white !important;
     padding: 1.5rem !important;
     font-size: 1rem !important;
     font-weight: 700 !important;

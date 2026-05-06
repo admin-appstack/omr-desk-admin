@@ -32,7 +32,6 @@ import { AuthService, SocialProvider } from './auth.service';
             <div class="logo-circle">
               <img src="ORMDesk_Logo.png" alt="OMRDesk Logo" />
             </div>
-            <h1 class="brand-name">OMRDesk</h1>
           </div>
           
           <p class="welcome-text">
