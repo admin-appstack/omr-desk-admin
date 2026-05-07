@@ -86,7 +86,8 @@
     <app-template-grid 
       *ngIf="activeStep === 0"
       [selectedId]="selectedTemplate()" 
-      (selected)="onTemplateSelected($event)">
+      (selected)="onTemplateSelected($event)"
+      (settingsRequested)="activeStep = 1">
     </app-template-grid>
     <app-website-settings *ngIf="activeStep === 1"></app-website-settings>
     <app-page-management *ngIf="activeStep === 2"></app-page-management>

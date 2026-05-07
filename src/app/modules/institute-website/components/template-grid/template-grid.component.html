@@ -12,9 +12,38 @@
       [class.selected]="selectedId === tpl.id"
       (click)="selectTemplate(tpl.id)"
     >
-      <!-- Selected Badge -->
-      <div class="selected-badge" *ngIf="selectedId === tpl.id">
-        <mat-icon>check</mat-icon> Active
+      <!-- Selected Badge & Settings -->
+      <div class="card-top-actions" *ngIf="selectedId === tpl.id">
+        <div class="selected-badge">
+          <mat-icon>check</mat-icon> Active
+        </div>
+        <button mat-icon-button [matMenuTriggerFor]="tplMenu" (click)="$event.stopPropagation()" class="settings-trigger">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #tplMenu="matMenu" xPosition="before" class="template-settings-menu">
+          <div class="menu-header">Template Settings</div>
+          <button mat-menu-item (click)="openSettings('appearance', tpl.name)">
+            <mat-icon>palette</mat-icon>
+            <span>Theme & Colors</span>
+          </button>
+          <button mat-menu-item (click)="openSettings('appearance', tpl.name)">
+            <mat-icon>text_format</mat-icon>
+            <span>Typography</span>
+          </button>
+          <button mat-menu-item (click)="openSettings('branding', tpl.name)">
+            <mat-icon>business</mat-icon>
+            <span>Institute Branding</span>
+          </button>
+          <button mat-menu-item (click)="openSettings('general', tpl.name)">
+            <mat-icon>settings</mat-icon>
+            <span>General Settings</span>
+          </button>
+          <div class="menu-divider"></div>
+          <button mat-menu-item (click)="openPreview(tpl)">
+            <mat-icon>visibility</mat-icon>
+            <span>Full Preview</span>
+          </button>
+        </mat-menu>
       </div>
 
       <!-- Color accent bar -->

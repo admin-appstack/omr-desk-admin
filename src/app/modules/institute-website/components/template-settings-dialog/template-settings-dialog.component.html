@@ -1,0 +1,154 @@
+<div class="settings-dialog">
+  <div class="dialog-header">
+    <div class="header-left">
+      <div class="tpl-badge">{{data.templateName}}</div>
+      <h2>Template Settings</h2>
+    </div>
+    <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+  </div>
+
+  <mat-tab-group [(selectedIndex)]="activeTab">
+    <!-- BRANDING -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>business</mat-icon>
+        <span>Branding</span>
+      </ng-template>
+      <div class="tab-content">
+        <div class="form-section">
+          <label>Institute Identity</label>
+          <div class="input-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Institute Name</mat-label>
+              <input matInput [(ngModel)]="config.name">
+              <mat-icon matSuffix>business</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Tagline</mat-label>
+              <input matInput [(ngModel)]="config.tagline">
+              <mat-icon matSuffix>auto_awesome</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- APPEARANCE -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>palette</mat-icon>
+        <span>Appearance</span>
+      </ng-template>
+      <div class="tab-content">
+        <div class="form-section">
+          <label class="section-label">Quick Presets</label>
+          <div class="preset-row">
+            <div *ngFor="let p of themePresets" class="preset-card" (click)="applyPreset(p)">
+              <div class="p-strip" [style.background]="p.p"></div>
+              <div class="s-strip" [style.background]="p.s"></div>
+              <div class="a-strip" [style.background]="p.a"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-control-grid">
+          <div class="color-control-item">
+            <label>Primary Color</label>
+            <div class="input-with-swatch">
+              <div class="swatch" [style.background]="config.primaryColor">
+                <input type="color" [(ngModel)]="config.primaryColor">
+              </div>
+              <input type="text" [(ngModel)]="config.primaryColor" class="hex-text">
+            </div>
+            <span class="help-text">Main brand color for buttons and links</span>
+          </div>
+
+          <div class="color-control-item">
+            <label>Secondary Color</label>
+            <div class="input-with-swatch">
+              <div class="swatch" [style.background]="config.secondaryColor">
+                <input type="color" [(ngModel)]="config.secondaryColor">
+              </div>
+              <input type="text" [(ngModel)]="config.secondaryColor" class="hex-text">
+            </div>
+            <span class="help-text">Used for gradients and accents</span>
+          </div>
+
+          <div class="color-control-item">
+            <label>Accent Color</label>
+            <div class="input-with-swatch">
+              <div class="swatch" [style.background]="config.accentColor">
+                <input type="color" [(ngModel)]="config.accentColor">
+              </div>
+              <input type="text" [(ngModel)]="config.accentColor" class="hex-text">
+            </div>
+            <span class="help-text">Highlights and call-to-actions</span>
+          </div>
+
+          <div class="color-control-item">
+            <label>Background Color</label>
+            <div class="input-with-swatch">
+              <div class="swatch" [style.background]="config.backgroundColor">
+                <input type="color" [(ngModel)]="config.backgroundColor">
+              </div>
+              <input type="text" [(ngModel)]="config.backgroundColor" class="hex-text">
+            </div>
+            <span class="help-text">Page background color</span>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <label>Typography</label>
+          <div class="font-selector">
+            <mat-button-toggle-group [(ngModel)]="config.fontFamily" aria-label="Font Family">
+              <mat-button-toggle *ngFor="let f of fontFamilies" [value]="f.value">
+                {{f.name}}
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- GENERAL / DOMAIN -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>language</mat-icon>
+        <span>Domain & Support</span>
+      </ng-template>
+      <div class="tab-content">
+        <div class="form-section">
+          <label>Website URL</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Subdomain</mat-label>
+            <input matInput [(ngModel)]="config.subdomain">
+            <span matSuffix>.omrdesk.com</span>
+            <mat-icon matSuffix>link</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="form-section">
+          <label>Contact Info</label>
+          <div class="input-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Support Email</mat-label>
+              <input matInput [(ngModel)]="config.supportEmail">
+              <mat-icon matSuffix>mail</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Phone</mat-label>
+              <input matInput [(ngModel)]="config.phone">
+              <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div class="dialog-actions">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()" class="save-btn">
+      <mat-icon>check</mat-icon> Apply Settings
+    </button>
+  </div>
+</div>

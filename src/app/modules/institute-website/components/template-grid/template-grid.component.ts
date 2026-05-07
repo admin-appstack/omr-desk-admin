@@ -3,18 +3,35 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 import { TemplatePreviewDialog } from '../template-preview-dialog/template-preview-dialog.component';
+import { TemplateSettingsDialog } from '../template-settings-dialog/template-settings-dialog.component';
 
 @Component({
   selector: 'app-template-grid',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, MatMenuModule],
   templateUrl: './template-grid.component.html',
   styleUrls: ['./template-grid.component.scss']
 })
 export class TemplateGridComponent {
   @Input() selectedId: number = 1;
   @Output() selected = new EventEmitter<number>();
+  @Output() settingsRequested = new EventEmitter<void>();
+
+  // Mock website config (should ideally come from a service)
+  websiteConfig = {
+    name: 'Modern Academy',
+    tagline: 'Excellence in Education',
+    subdomain: 'modern-academy',
+    primaryColor: '#133e87',
+    secondaryColor: '#1e3a8a',
+    accentColor: '#3b82f6',
+    backgroundColor: '#ffffff',
+    fontFamily: "'Inter', sans-serif",
+    supportEmail: 'support@modern.com',
+    phone: '+91 98765 43210'
+  };
 
   templates = [
     { 
@@ -64,6 +81,25 @@ export class TemplateGridComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         this.selectTemplate(tpl.id);
+      }
+    });
+  }
+
+  openSettings(type: 'appearance' | 'branding' | 'general', templateName: string): void {
+    const dialogRef = this.dialog.open(TemplateSettingsDialog, {
+      width: '600px',
+      data: {
+        type,
+        templateName,
+        config: this.websiteConfig
+      },
+      panelClass: 'settings-dialog-container'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.websiteConfig = { ...this.websiteConfig, ...result };
+        console.log('Updated Config:', this.websiteConfig);
       }
     });
   }
