@@ -1,0 +1,86 @@
+<div class="branding-view">
+  <mat-card class="settings-card">
+    <div class="card-header">
+      <mat-icon>palette</mat-icon>
+      <h3>Theme Color Palette</h3>
+    </div>
+    <p class="card-subtitle">Choose from professionally curated presets or define your own brand colors.</p>
+    
+    <div class="section-label">Quick Presets</div>
+    <div class="preset-row">
+      <div *ngFor="let p of themePresets" class="preset-card" (click)="applyPreset(p)">
+        <div class="p-strip" [style.background]="p.p"></div>
+        <div class="s-strip" [style.background]="p.s"></div>
+        <div class="a-strip" [style.background]="p.a"></div>
+      </div>
+    </div>
+
+    <div class="color-control-grid">
+      <div class="color-control-item">
+        <label>Primary Color</label>
+        <div class="input-with-swatch">
+          <div class="swatch" [style.background]="config.primaryColor">
+            <input type="color" [(ngModel)]="config.primaryColor">
+          </div>
+          <input type="text" [(ngModel)]="config.primaryColor" class="hex-text">
+        </div>
+        <span class="help-text">Main brand color for buttons and links</span>
+      </div>
+
+      <div class="color-control-item">
+        <label>Secondary Color</label>
+        <div class="input-with-swatch">
+          <div class="swatch" [style.background]="config.secondaryColor">
+            <input type="color" [(ngModel)]="config.secondaryColor">
+          </div>
+          <input type="text" [(ngModel)]="config.secondaryColor" class="hex-text">
+        </div>
+        <span class="help-text">Used for gradients and accents</span>
+      </div>
+
+      <div class="color-control-item">
+        <label>Accent Color</label>
+        <div class="input-with-swatch">
+          <div class="swatch" [style.background]="config.accentColor">
+            <input type="color" [(ngModel)]="config.accentColor">
+          </div>
+          <input type="text" [(ngModel)]="config.accentColor" class="hex-text">
+        </div>
+        <span class="help-text">Highlights and call-to-actions</span>
+      </div>
+
+      <div class="color-control-item">
+        <label>Background Color</label>
+        <div class="input-with-swatch">
+          <div class="swatch" [style.background]="config.backgroundColor">
+            <input type="color" [(ngModel)]="config.backgroundColor">
+          </div>
+          <input type="text" [(ngModel)]="config.backgroundColor" class="hex-text">
+        </div>
+        <span class="help-text">Page background color</span>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="settings-card">
+    <div class="card-header">
+      <mat-icon>text_format</mat-icon>
+      <h3>Website Typography</h3>
+    </div>
+    <p class="card-subtitle">Select the font family that best matches your institute's brand personality.</p>
+
+    <div class="font-selector">
+      <mat-button-toggle-group [(ngModel)]="config.fontFamily" aria-label="Font Family">
+        <mat-button-toggle *ngFor="let f of fontFamilies" [value]="f.value">
+          <span [style.font-family]="f.value">{{f.name}}</span>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <div class="font-preview" [style.font-family]="config.fontFamily">
+      <div class="preview-label">Typography Preview</div>
+      <h1>The Quick Brown Fox Jumps Over The Lazy Dog</h1>
+      <p>Modern education is not just about learning facts, but about training the mind to think. Experience the future of learning with our premium platform.</p>
+    </div>
+  </mat-card>
+</div>

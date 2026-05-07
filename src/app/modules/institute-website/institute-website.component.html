@@ -79,6 +79,14 @@
         <span class="step-sub">Manage pages</span>
       </div>
     </div>
+    <div class="step-connector"></div>
+    <div class="step" [class.active]="activeStep === 3" (click)="activeStep = 3">
+      <div class="step-num">4</div>
+      <div class="step-info">
+        <span class="step-title">Branding</span>
+        <span class="step-sub">Colors &amp; Fonts</span>
+      </div>
+    </div>
   </div>
 
   <!-- Step Body -->
@@ -87,10 +95,11 @@
       *ngIf="activeStep === 0"
       [selectedId]="selectedTemplate()" 
       (selected)="onTemplateSelected($event)"
-      (settingsRequested)="activeStep = 1">
+      (settingsRequested)="activeStep = 3">
     </app-template-grid>
     <app-website-settings *ngIf="activeStep === 1"></app-website-settings>
     <app-page-management *ngIf="activeStep === 2"></app-page-management>
+    <app-branding-settings *ngIf="activeStep === 3"></app-branding-settings>
   </div>
 
   <!-- Navigation -->
@@ -98,10 +107,10 @@
     <button mat-stroked-button color="primary" [disabled]="activeStep === 0" (click)="activeStep = activeStep - 1">
       <mat-icon>arrow_back</mat-icon> Previous
     </button>
-    <button mat-raised-button color="primary" *ngIf="activeStep < 2" (click)="activeStep = activeStep + 1">
+    <button mat-raised-button color="primary" *ngIf="activeStep < 3" (click)="activeStep = activeStep + 1">
       Next Step <mat-icon>arrow_forward</mat-icon>
     </button>
-    <button mat-raised-button class="btn-publish" *ngIf="activeStep === 2">
+    <button mat-raised-button class="btn-publish" *ngIf="activeStep === 3">
       <mat-icon>rocket_launch</mat-icon> Publish Website
     </button>
   </div>

@@ -8,6 +8,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TemplateGridComponent } from './components/template-grid/template-grid.component';
 import { WebsiteSettingsComponent } from './components/website-settings/website-settings.component';
 import { PageManagementComponent } from './components/page-management/page-management.component';
+import { BrandingSettingsComponent } from './components/branding-settings/branding-settings.component';
 
 @Component({
   selector: 'app-institute-website',
@@ -21,7 +22,8 @@ import { PageManagementComponent } from './components/page-management/page-manag
     MatSnackBarModule,
     TemplateGridComponent,
     WebsiteSettingsComponent,
-    PageManagementComponent
+    PageManagementComponent,
+    BrandingSettingsComponent
   ],
   templateUrl: './institute-website.component.html',
   styleUrls: ['./institute-website.component.scss']
