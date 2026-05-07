@@ -1,19 +1,24 @@
 <div class="dialog-container">
-  <div class="dialog-header">
-    <div class="dialog-title-row">
-      <h2>{{data.name}}</h2>
-      <div class="template-tags-inline">
-        <span *ngFor="let tag of data.tags" class="tag-chip">{{tag}}</span>
-      </div>
-    </div>
-    <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
-  </div>
-
   <div class="dialog-content">
+    <!-- Floating Close Button -->
+    <button mat-icon-button mat-dialog-close class="floating-close-btn" aria-label="Close preview">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <!-- Floating Selection Button -->
+    <button mat-raised-button color="primary" class="floating-select-btn" (click)="selectTemplate()">
+      <mat-icon>check_circle</mat-icon> Use This Template
+    </button>
     <div class="preview-main">
-      <!-- Browser Frame Mockup -->
-      <div class="browser-frame">
-        <div class="browser-header">
+      <!-- Image-based Monitor Mockup -->
+      <div class="device-mockup">
+        <img src="/images/apple-monitor.png" 
+             alt="Apple Monitor" class="monitor-image">
+        
+        <div class="screen-overlay">
+          <!-- Browser Frame Mockup -->
+          <div class="browser-frame">
+            <div class="browser-header">
           <div class="dots"><span></span><span></span><span></span></div>
           <div class="address-bar">
             <mat-icon>lock</mat-icon>
@@ -499,14 +504,9 @@
           </footer>
         </div>
 
-      </div><!-- /browser-frame -->
-    </div>
-  </div>
-
-  <div class="dialog-actions">
-    <button mat-stroked-button mat-dialog-close>Close</button>
-    <button mat-raised-button color="primary" (click)="selectTemplate()">
-      <mat-icon>check_circle</mat-icon> Use This Template
-    </button>
+          </div><!-- /browser-frame -->
+        </div><!-- /screen-overlay -->
+      </div><!-- /device-mockup -->
+      
   </div>
 </div>

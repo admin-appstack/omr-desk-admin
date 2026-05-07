@@ -1,4 +1,4 @@
-import { Component, Inject, signal } from '@angular/core';
+import { Component, Inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +20,7 @@ export interface TemplatePreviewData {
   templateUrl: './template-preview-dialog.component.html',
   styleUrls: ['./template-preview-dialog.component.scss']
 })
-export class TemplatePreviewDialog {
+export class TemplatePreviewDialog implements OnInit, OnDestroy {
   activeScreen = signal('home');
 
   // ---------- Template 1: Modern Academy ----------
@@ -119,6 +119,12 @@ fetch('/api/results?roll=CS2024042')
     @Inject(MAT_DIALOG_DATA) public data: TemplatePreviewData,
     public dialogRef: MatDialogRef<TemplatePreviewDialog>
   ) {}
+
+  ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+  }
 
   setScreen(screen: string): void {
     this.activeScreen.set(screen);

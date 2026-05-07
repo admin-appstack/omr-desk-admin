@@ -68,10 +68,10 @@ export class TemplateGridComponent {
 
   openPreview(tpl: any): void {
     const dialogRef = this.dialog.open(TemplatePreviewDialog, {
-      width: '80vw',
-      height: '90vh',
+      width: '100vw',
+      height: '100vh',
       maxWidth: '100vw',
-      panelClass: 'full-screen-dialog',
+      panelClass: ['full-screen-dialog', 'no-padding-dialog'],
       data: tpl
     });
 
