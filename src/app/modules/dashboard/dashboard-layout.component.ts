@@ -34,7 +34,7 @@ export class DashboardLayoutComponent {
 
   mainNav = [
     { icon: 'dashboard',       label: 'Dashboard',         route: '/dashboard/home',      badge: null  },
-    { icon: 'language',        label: 'Institute Website',  route: '/dashboard/website',   badge: 'Live' },
+    { icon: 'language',        label: 'Institute Website',  route: '/dashboard/website',   badge: null },
     { icon: 'library_books',   label: 'Question Bank',      route: '/dashboard/questions', badge: null  },
     { icon: 'assignment',      label: 'Test Builder',       route: '/dashboard/tests',     badge: null  },
     { icon: 'qr_code_scanner', label: 'OMR Scanning',       route: '/dashboard/scanning',  badge: null  },
