@@ -32,16 +32,22 @@ import { AuthService } from '../../auth/auth.service';
 export class DashboardLayoutComponent {
   isSidebarCollapsed = signal(false);
 
-  navItems = [
-    { icon: 'dashboard', label: 'Dashboard', route: '/dashboard/home' },
-    { icon: 'language', label: 'Institute Website', route: '/dashboard/website' },
-    { icon: 'library_books', label: 'Question Bank', route: '/dashboard/questions' },
-    { icon: 'assignment', label: 'Test Builder', route: '/dashboard/tests' },
-    { icon: 'qr_code_scanner', label: 'OMR Scanning', route: '/dashboard/scanning' },
-    { icon: 'analytics', label: 'Result & Analytics', route: '/dashboard/results' },
-    { icon: 'payments', label: 'Payments', route: '/dashboard/payments' },
-    { icon: 'settings', label: 'Settings', route: '/dashboard/settings' },
+  mainNav = [
+    { icon: 'dashboard',       label: 'Dashboard',         route: '/dashboard/home',      badge: null  },
+    { icon: 'language',        label: 'Institute Website',  route: '/dashboard/website',   badge: 'Live' },
+    { icon: 'library_books',   label: 'Question Bank',      route: '/dashboard/questions', badge: null  },
+    { icon: 'assignment',      label: 'Test Builder',       route: '/dashboard/tests',     badge: null  },
+    { icon: 'qr_code_scanner', label: 'OMR Scanning',       route: '/dashboard/scanning',  badge: null  },
   ];
+
+  managementNav = [
+    { icon: 'analytics', label: 'Result & Analytics', route: '/dashboard/results',  badge: null },
+    { icon: 'payments',  label: 'Payments',           route: '/dashboard/payments', badge: null },
+    { icon: 'settings',  label: 'Settings',           route: '/dashboard/settings', badge: null },
+  ];
+
+  /** Keep old navItems for backward compat if needed */
+  get navItems() { return [...this.mainNav, ...this.managementNav]; }
 
   constructor(private readonly authService: AuthService, private readonly router: Router) { }
 
