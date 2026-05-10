@@ -1,15 +1,29 @@
 <div class="page-grid">
-  <mat-card *ngFor="let page of pages" class="page-card">
-    <div class="page-icon">
-      <mat-icon>{{page.icon}}</mat-icon>
+  <mat-card *ngFor="let page of pages" class="page-card" [class.unpublished]="!page.isPublished">
+    <div class="card-header">
+      <div class="page-icon" [ngClass]="{'active': page.isPublished}">
+        <mat-icon>{{page.icon}}</mat-icon>
+      </div>
+      <div class="page-status">
+        <mat-slide-toggle [(ngModel)]="page.isPublished" color="primary"></mat-slide-toggle>
+        <span class="status-label" [class.active]="page.isPublished">
+          {{ page.isPublished ? 'Published' : 'Draft' }}
+        </span>
+      </div>
     </div>
-    <div class="page-info">
+    
+    <div class="card-body">
       <h4>{{page.name}}</h4>
-      <p>Last updated: 2 days ago</p>
+      <p class="last-updated">Last updated: 2 days ago</p>
     </div>
-    <div class="page-actions">
-      <button mat-icon-button color="primary" title="Edit Content" (click)="openEditDialog(page)"><mat-icon>edit</mat-icon></button>
-      <button mat-icon-button title="Settings" (click)="openSettingsDialog(page)"><mat-icon>settings</mat-icon></button>
+
+    <div class="card-footer">
+      <button mat-stroked-button color="primary" (click)="openEditDialog(page)">
+        <mat-icon>edit</mat-icon> Edit Content
+      </button>
+      <button mat-icon-button title="Page Settings" (click)="openSettingsDialog(page)">
+        <mat-icon>settings</mat-icon>
+      </button>
     </div>
   </mat-card>
 
