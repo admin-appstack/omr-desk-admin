@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import { StudentDialog } from './components/student-dialog/student-dialog';
 
 @Component({
   selector: 'app-student-management',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTableModule, MatTooltipModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTableModule, MatTooltipModule, MatDialogModule, MatMenuModule, MatDividerModule],
   templateUrl: './student-management.html',
   styleUrl: './student-management.scss',
 })
@@ -30,4 +34,45 @@ export class StudentManagement {
     { id: 'STU-24004', name: 'Emma Watson', email: 'emma.w@example.com', avatar: 'EW', batch: 'Batch C - 2024', enrollmentDate: '2024-02-12', status: 'Active' },
     { id: 'STU-24005', name: 'James Brown', email: 'james.b@example.com', avatar: 'JB', batch: 'Batch A - 2023', enrollmentDate: '2023-08-20', status: 'Suspended' },
   ];
+
+  dataSource = new MatTableDataSource(this.students);
+  currentFilter = 'All';
+  searchQuery = '';
+
+  constructor(private dialog: MatDialog) {}
+
+  openStudentDialog(student?: any) {
+    this.dialog.open(StudentDialog, {
+      width: '600px',
+      disableClose: true,
+      panelClass: 'custom-dialog-container',
+      data: student
+    });
+  }
+
+  applySearch(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.searchQuery = filterValue;
+    this.updateDataSource();
+  }
+
+  applyFilter(status: string) {
+    this.currentFilter = status;
+    this.updateDataSource();
+  }
+
+  updateDataSource() {
+    let filtered = this.students;
+    if (this.currentFilter !== 'All') {
+      filtered = filtered.filter(student => student.status === this.currentFilter);
+    }
+    if (this.searchQuery) {
+      filtered = filtered.filter(student => 
+        student.name.toLowerCase().includes(this.searchQuery) ||
+        student.email.toLowerCase().includes(this.searchQuery) ||
+        student.batch.toLowerCase().includes(this.searchQuery)
+      );
+    }
+    this.dataSource.data = filtered;
+  }
 }
