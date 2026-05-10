@@ -117,6 +117,26 @@ export class EditPageDialog {
     }
   ];
   
+  // Recent Results Specific Data
+  resultsHeading = 'Our Hall of Fame';
+  resultsDescription = 'Celebrating the outstanding achievements of our students across various competitive exams.';
+  resultsList = [
+    { 
+      studentName: 'Rahul Kumar', 
+      examName: 'JEE Advanced 2023',
+      score: 'AIR 45', 
+      description: 'Outstanding performance in physics and mathematics.',
+      image: null 
+    }
+  ];
+
+  resultVideoUrl = 'https://www.youtube.com/watch?v=example';
+  
+  resultStatsList = [
+    { value: '150+', label: 'Total Selections in 2023' },
+    { value: '10', label: 'Top 100 All India Ranks' }
+  ];
+  
   // Generic Page Content (Fallback)
   pageContent = '';
 
@@ -126,7 +146,7 @@ export class EditPageDialog {
   ) {
     if (data) {
       this.pageName = data.name || '';
-      if (!['Home Page', 'About Us', 'Courses', 'Contact Us', 'Test Series'].includes(this.pageName)) {
+      if (!['Home Page', 'About Us', 'Courses', 'Contact Us', 'Test Series', 'Recent Results'].includes(this.pageName)) {
         this.pageContent = `<h1>Welcome to the ${this.pageName}</h1>\n<p>This is the placeholder content for this page. Replace it with actual content using the visual builder tools.</p>`;
       }
     }
@@ -190,6 +210,20 @@ export class EditPageDialog {
     });
   }
   removeTestSeries(index: number) { this.testSeriesList.splice(index, 1); }
+
+  addResult() {
+    this.resultsList.push({ 
+      studentName: '', 
+      examName: '',
+      score: '', 
+      description: '',
+      image: null 
+    });
+  }
+  removeResult(index: number) { this.resultsList.splice(index, 1); }
+
+  addResultStat() { this.resultStatsList.push({ value: '', label: '' }); }
+  removeResultStat(index: number) { this.resultStatsList.splice(index, 1); }
 
   close(): void { this.dialogRef.close(); }
   save(): void { this.dialogRef.close(true); }

@@ -633,8 +633,110 @@
       </div>
     </ng-container>
 
+    <!-- Recent Results Specific Form -->
+    <ng-container *ngIf="pageName === 'Recent Results'">
+      <div class="form-section">
+        <h3>Page Header</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Main Heading</mat-label>
+          <input matInput [(ngModel)]="resultsHeading">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description / Subtitle</mat-label>
+          <textarea matInput rows="2" [(ngModel)]="resultsDescription"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form-section">
+        <h3>Results Summary / Highlights</h3>
+        <div class="row-fields" style="align-items: center; margin-bottom: 0.5rem;" *ngFor="let stat of resultStatsList; let i = index">
+          <mat-form-field appearance="outline" style="flex: 1;">
+            <mat-label>Value (e.g. 150+)</mat-label>
+            <input matInput [(ngModel)]="stat.value">
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="flex: 2;">
+            <mat-label>Label (e.g. Total Selections)</mat-label>
+            <input matInput [(ngModel)]="stat.label">
+          </mat-form-field>
+          <button mat-icon-button color="warn" (click)="removeResultStat(i)" style="margin-top: -15px;"><mat-icon>delete</mat-icon></button>
+        </div>
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addResultStat()">
+          <mat-icon>add</mat-icon> Add Highlight Statistic
+        </button>
+      </div>
+
+      <div class="form-section">
+        <h3>Media & Downloads</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Topper Interview / Celebration Video (YouTube Link)</mat-label>
+          <input matInput [(ngModel)]="resultVideoUrl" placeholder="e.g. https://youtube.com/...">
+          <mat-icon matPrefix class="input-icon">smart_display</mat-icon>
+        </mat-form-field>
+        <div class="upload-field">
+          <div class="upload-info">
+            <mat-icon>picture_as_pdf</mat-icon>
+            <div>
+              <strong>Detailed Results Booklet</strong>
+              <span>PDF Document</span>
+            </div>
+          </div>
+          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Top Achievers / Results</h3>
+        <div class="repeater-card" *ngFor="let result of resultsList; let i = index">
+          <div class="repeater-header">
+            <h4>Achiever #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeResult(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          
+          <div class="row-fields">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Student Name</mat-label>
+              <input matInput [(ngModel)]="result.studentName" placeholder="e.g. Rahul Kumar">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Exam Name & Year</mat-label>
+              <input matInput [(ngModel)]="result.examName" placeholder="e.g. JEE Advanced 2023">
+            </mat-form-field>
+          </div>
+
+          <div class="row-fields">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Rank / Score / Percentile</mat-label>
+              <input matInput [(ngModel)]="result.score" placeholder="e.g. AIR 45 or 99.9%ile">
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Short Description (Optional)</mat-label>
+            <textarea matInput rows="2" [(ngModel)]="result.description" placeholder="A few words about their journey or subject scores..."></textarea>
+          </mat-form-field>
+
+          <div class="upload-field compact">
+            <div class="upload-info">
+              <mat-icon>emoji_events</mat-icon>
+              <div>
+                <strong>Student Photo</strong>
+                <span>Recommended size: 300x300px</span>
+              </div>
+            </div>
+            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+          </div>
+        </div>
+
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addResult()">
+          <mat-icon>add</mat-icon> Add Result
+        </button>
+      </div>
+    </ng-container>
+
     <!-- Generic Page Editor (Fallback) -->
-    <ng-container *ngIf="!['Home Page', 'About Us', 'Courses', 'Contact Us', 'Test Series'].includes(pageName)">
+    <ng-container *ngIf="!['Home Page', 'About Us', 'Courses', 'Contact Us', 'Test Series', 'Recent Results'].includes(pageName)">
       <div class="editor-toolbar">
         <button mat-icon-button><mat-icon>format_bold</mat-icon></button>
         <button mat-icon-button><mat-icon>format_italic</mat-icon></button>
