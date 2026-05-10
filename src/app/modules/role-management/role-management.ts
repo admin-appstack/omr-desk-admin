@@ -38,6 +38,7 @@ export class RoleManagement {
   openCreateRoleModal() {
     this.dialog.open(CreateRoleDialog, {
       width: '800px',
+      maxHeight: '90vh',
       disableClose: true,
       panelClass: 'custom-dialog-container'
     });

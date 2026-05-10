@@ -50,22 +50,24 @@
 
               <div class="module-actions">
                 <div class="crud-header">
-                  <span class="feat-name">Feature</span>
+                  <span class="feat-name"></span>
                   <div class="crud-labels">
-                    <span title="View">V</span>
-                    <span title="Create">C</span>
-                    <span title="Update">U</span>
-                    <span title="Delete">D</span>
+                    <span title="View">View</span>
+                    <span title="Update">Update</span>
+                    <span title="Create">Create</span>
+                    <span title="Delete">Delete</span>
+                    <span title="Download">Download</span>
                   </div>
                 </div>
                 
                 <div class="crud-row" *ngFor="let feat of mod.features">
                   <span class="feat-name">{{ feat.name }}</span>
                   <div class="crud-checkboxes">
-                    <mat-checkbox [(ngModel)]="feat.view" color="primary" matTooltip="View"></mat-checkbox>
-                    <mat-checkbox [(ngModel)]="feat.create" color="primary" matTooltip="Create"></mat-checkbox>
-                    <mat-checkbox [(ngModel)]="feat.update" color="primary" matTooltip="Update"></mat-checkbox>
-                    <mat-checkbox [(ngModel)]="feat.delete" color="primary" matTooltip="Delete"></mat-checkbox>
+                    <mat-checkbox [(ngModel)]="feat.view" [style.visibility]="feat.noView ? 'hidden' : 'visible'" color="primary" matTooltip="View"></mat-checkbox>
+                    <mat-checkbox [(ngModel)]="feat.update" [style.visibility]="feat.noUpdate ? 'hidden' : 'visible'" color="primary" matTooltip="Update"></mat-checkbox>
+                    <mat-checkbox [(ngModel)]="feat.create" [style.visibility]="feat.noCreate ? 'hidden' : 'visible'" color="primary" matTooltip="Create"></mat-checkbox>
+                    <mat-checkbox [(ngModel)]="feat.delete" [style.visibility]="feat.noDelete ? 'hidden' : 'visible'" color="primary" matTooltip="Delete"></mat-checkbox>
+                    <mat-checkbox [(ngModel)]="feat.download" [style.visibility]="feat.noDownload ? 'hidden' : 'visible'" color="primary" matTooltip="Download"></mat-checkbox>
                   </div>
                 </div>
               </div>
