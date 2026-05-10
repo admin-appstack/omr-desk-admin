@@ -5,15 +5,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { CreateRoleDialog } from './components/create-role-dialog/create-role-dialog';
 
 @Component({
   selector: 'app-role-management',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTableModule, MatTooltipModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTableModule, MatTooltipModule, MatDialogModule],
   templateUrl: './role-management.html',
   styleUrl: './role-management.scss',
 })
 export class RoleManagement {
+  constructor(private dialog: MatDialog) {}
+
   displayedColumns = ['id', 'roleName', 'usersCount', 'permissions', 'status', 'actions'];
 
   statCards = [
@@ -30,4 +34,12 @@ export class RoleManagement {
     { id: 'ROL-004', name: 'Viewer', description: 'Read-only access to specific analytics and reports.', users: 128, perms: '12 Permissions', status: 'Active' },
     { id: 'ROL-005', name: 'Guest', description: 'Limited temporary access.', users: 0, perms: '2 Permissions', status: 'Inactive' },
   ];
+
+  openCreateRoleModal() {
+    this.dialog.open(CreateRoleDialog, {
+      width: '800px',
+      disableClose: true,
+      panelClass: 'custom-dialog-container'
+    });
+  }
 }

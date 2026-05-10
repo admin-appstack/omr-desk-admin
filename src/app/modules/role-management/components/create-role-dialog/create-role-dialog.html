@@ -1,0 +1,87 @@
+<div class="dialog-container">
+  <div class="dialog-header purple">
+    <div class="header-content">
+      <mat-icon>add_moderator</mat-icon>
+      <h2>Create New Role</h2>
+    </div>
+    <button mat-icon-button (click)="close()" class="close-btn">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="dialog-body">
+    <mat-tab-group animationDuration="0ms" class="role-tabs">
+      
+      <!-- General Settings Tab -->
+      <mat-tab label="General Details">
+        <div class="tab-content">
+          <p class="tab-description">Define the basic information for this new role.</p>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Role Name</mat-label>
+            <input matInput placeholder="e.g. Content Editor" [(ngModel)]="roleName">
+            <mat-icon matPrefix class="input-icon">badge</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput rows="3" placeholder="Describe the responsibilities of this role..." [(ngModel)]="roleDescription"></textarea>
+          </mat-form-field>
+        </div>
+      </mat-tab>
+
+      <!-- Permissions Tab -->
+      <mat-tab label="Permissions">
+        <div class="tab-content permissions-tab">
+          <p class="tab-description">Select the access level and actions this role can perform across different modules.</p>
+
+          <div class="permissions-grid">
+            <div class="module-block" *ngFor="let mod of permissions">
+              
+              <div class="module-header">
+                <mat-checkbox 
+                  [checked]="isModuleAllSelected(mod)"
+                  [indeterminate]="isModuleIndeterminate(mod)"
+                  (change)="toggleModule(mod, $event.checked)"
+                  color="primary">
+                  <strong>{{ mod.module }}</strong>
+                </mat-checkbox>
+              </div>
+
+              <div class="module-actions">
+                <div class="crud-header">
+                  <span class="feat-name">Feature</span>
+                  <div class="crud-labels">
+                    <span title="View">V</span>
+                    <span title="Create">C</span>
+                    <span title="Update">U</span>
+                    <span title="Delete">D</span>
+                  </div>
+                </div>
+                
+                <div class="crud-row" *ngFor="let feat of mod.features">
+                  <span class="feat-name">{{ feat.name }}</span>
+                  <div class="crud-checkboxes">
+                    <mat-checkbox [(ngModel)]="feat.view" color="primary" matTooltip="View"></mat-checkbox>
+                    <mat-checkbox [(ngModel)]="feat.create" color="primary" matTooltip="Create"></mat-checkbox>
+                    <mat-checkbox [(ngModel)]="feat.update" color="primary" matTooltip="Update"></mat-checkbox>
+                    <mat-checkbox [(ngModel)]="feat.delete" color="primary" matTooltip="Delete"></mat-checkbox>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>
+
+  <div class="dialog-footer">
+    <button mat-button (click)="close()" class="cancel-btn">Cancel</button>
+    <button mat-raised-button (click)="save()" class="save-btn" [disabled]="!roleName.trim()">
+      <mat-icon>check_circle</mat-icon> Create Role
+    </button>
+  </div>
+</div>
