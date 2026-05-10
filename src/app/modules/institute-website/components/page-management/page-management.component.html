@@ -18,17 +18,19 @@
     </div>
 
     <div class="card-footer">
-      <button mat-stroked-button color="primary" (click)="openEditDialog(page)">
-        <mat-icon>edit</mat-icon> Edit Content
+      <button mat-flat-button class="edit-btn" (click)="openEditDialog(page)">
+        <mat-icon>edit_square</mat-icon> Edit Content
       </button>
-      <button mat-icon-button title="Page Settings" (click)="openSettingsDialog(page)">
+      <button mat-icon-button class="settings-btn" title="Page Settings" (click)="openSettingsDialog(page)">
         <mat-icon>settings</mat-icon>
       </button>
     </div>
   </mat-card>
 
   <mat-card class="add-page-card">
-    <mat-icon>add_circle_outline</mat-icon>
-    <span>Add New Page</span>
+    <div class="add-icon-wrapper">
+      <mat-icon>add</mat-icon>
+    </div>
+    <span>Create New Page</span>
   </mat-card>
 </div>
