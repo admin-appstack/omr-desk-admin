@@ -1,0 +1,63 @@
+.dialog-container { display: flex; flex-direction: column; height: 100%; background: #f8fafc; }
+.dialog-header {
+  padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; color: white;
+  &.purple { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); }
+  .header-content { display: flex; align-items: center; gap: 12px; mat-icon { font-size: 28px; width: 28px; height: 28px; } h2 { margin: 0; font-size: 1.4rem; font-weight: 800; } }
+  .close-btn { color: white; }
+}
+.dialog-body { padding: 2rem; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 1.5rem; background: white; }
+
+.form-section {
+  h3 { margin: 0 0 1rem 0; font-size: 0.95rem; color: #475569; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; }
+}
+.full-width { width: 100%; margin-bottom: 0.5rem; }
+.row-fields { display: flex; gap: 1rem; }
+.half-width { flex: 1; }
+
+.visibility-toggle { padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; }
+
+.upload-field {
+  display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px dashed #cbd5e1; border-radius: 8px; background: #f8fafc; margin-bottom: 1rem;
+  &.compact { padding: 0.5rem 1rem; margin-bottom: 0; background: white; }
+  .upload-info {
+    display: flex; align-items: center; gap: 12px;
+    mat-icon { color: #64748b; }
+    div { display: flex; flex-direction: column; strong { font-size: 0.9rem; color: #1e293b; } span { font-size: 0.8rem; color: #94a3b8; } }
+  }
+}
+
+.repeater-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #f8fafc;
+
+  .repeater-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    h4 { margin: 0; font-size: 0.95rem; color: #1e293b; font-weight: 600; }
+  }
+}
+
+.add-repeater-btn {
+  width: 100%;
+  border-style: dashed !important;
+  font-weight: 600 !important;
+  margin-top: 0.5rem;
+}
+
+.editor-toolbar {
+  display: flex; align-items: center; gap: 4px; padding: 8px; background: white; border: 1px solid #e2e8f0; border-radius: 8px 8px 0 0; border-bottom: none;
+  .divider { width: 1px; height: 24px; background: #e2e8f0; margin: 0 8px; }
+  button { color: #64748b; }
+}
+.editor-textarea {
+  flex: 1; min-height: 300px; padding: 1.5rem; border: 1px solid #e2e8f0; border-radius: 0 0 8px 8px; font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.6; color: #334155; resize: none; outline: none;
+  &:focus { border-color: #7c3aed; }
+}
+.dialog-footer { padding: 1.25rem 2rem; background: white; border-top: 1px solid #f1f5f9; display: flex; justify-content: flex-end; gap: 1rem; }
+.cancel-btn { color: #64748b !important; font-weight: 600 !important; }
+.save-btn { background: #7c3aed !important; color: white !important; font-weight: 700 !important; border-radius: 8px !important; padding: 0 1.5rem !important; mat-icon { vertical-align: middle; margin-right: 6px; } }

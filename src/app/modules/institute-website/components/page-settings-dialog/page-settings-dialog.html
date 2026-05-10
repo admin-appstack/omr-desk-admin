@@ -1,0 +1,52 @@
+<div class="dialog-container">
+  <div class="dialog-header dark-blue">
+    <div class="header-content">
+      <mat-icon>settings</mat-icon>
+      <h2>Page Settings: {{ pageName }}</h2>
+    </div>
+    <button mat-icon-button (click)="close()" class="close-btn"><mat-icon>close</mat-icon></button>
+  </div>
+  <div class="dialog-body">
+    
+    <div class="settings-section">
+      <h3>Basic Settings</h3>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Page Name</mat-label>
+        <input matInput [(ngModel)]="pageName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>URL Slug</mat-label>
+        <input matInput [(ngModel)]="pageSlug">
+      </mat-form-field>
+    </div>
+
+    <div class="settings-section">
+      <h3>Search Engine Optimization</h3>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>SEO Title</mat-label>
+        <input matInput [(ngModel)]="seoTitle">
+        <mat-hint align="end">{{seoTitle.length}} / 60</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Meta Description</mat-label>
+        <textarea matInput rows="3" [(ngModel)]="seoDesc"></textarea>
+        <mat-hint align="end">{{seoDesc.length}} / 160</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="settings-section">
+      <h3>Visibility</h3>
+      <div class="visibility-toggle">
+        <mat-slide-toggle [(ngModel)]="isPublished" color="primary">Publish this page</mat-slide-toggle>
+        <p class="toggle-hint">If disabled, this page will be hidden from visitors but accessible to admins.</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="dialog-footer">
+    <button mat-button (click)="close()" class="cancel-btn">Cancel</button>
+    <button mat-raised-button (click)="save()" class="save-btn">
+      <mat-icon>check</mat-icon> Save Settings
+    </button>
+  </div>
+</div>

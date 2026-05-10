@@ -8,8 +8,8 @@
       <p>Last updated: 2 days ago</p>
     </div>
     <div class="page-actions">
-      <button mat-icon-button color="primary" title="Edit Content"><mat-icon>edit</mat-icon></button>
-      <button mat-icon-button title="Settings"><mat-icon>settings</mat-icon></button>
+      <button mat-icon-button color="primary" title="Edit Content" (click)="openEditDialog(page)"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button title="Settings" (click)="openSettingsDialog(page)"><mat-icon>settings</mat-icon></button>
     </div>
   </mat-card>
 

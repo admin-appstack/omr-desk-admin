@@ -1,0 +1,16 @@
+.dialog-container { display: flex; flex-direction: column; height: 100%; background: #f8fafc; }
+.dialog-header {
+  padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; color: white;
+  &.dark-blue { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
+  .header-content { display: flex; align-items: center; gap: 12px; mat-icon { font-size: 28px; width: 28px; height: 28px; } h2 { margin: 0; font-size: 1.4rem; font-weight: 800; } }
+  .close-btn { color: white; }
+}
+.dialog-body { padding: 2rem; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 2rem; background: white; }
+.settings-section {
+  h3 { margin: 0 0 1rem 0; font-size: 1rem; color: #1e293b; font-weight: 700; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; }
+}
+.full-width { width: 100%; margin-bottom: 0.5rem; }
+.visibility-toggle { padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; .toggle-hint { margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #64748b; margin-left: 54px; } }
+.dialog-footer { padding: 1.25rem 2rem; background: white; border-top: 1px solid #f1f5f9; display: flex; justify-content: flex-end; gap: 1rem; }
+.cancel-btn { color: #64748b !important; font-weight: 600 !important; }
+.save-btn { background: #1e293b !important; color: white !important; font-weight: 700 !important; border-radius: 8px !important; padding: 0 1.5rem !important; mat-icon { vertical-align: middle; margin-right: 6px; } }

@@ -1,0 +1,538 @@
+<div class="dialog-container">
+  <div class="dialog-header purple">
+    <div class="header-content">
+      <mat-icon>edit_document</mat-icon>
+      <h2>Edit Content: {{ pageName }}</h2>
+    </div>
+    <button mat-icon-button (click)="close()" class="close-btn"><mat-icon>close</mat-icon></button>
+  </div>
+  <div class="dialog-body">
+    
+    <!-- Home Page Specific Form -->
+    <ng-container *ngIf="pageName === 'Home Page'">
+      
+      <div class="form-section">
+        <h3>Announcement Banner</h3>
+        <div class="visibility-toggle" style="margin-bottom: 1rem;">
+          <mat-slide-toggle [(ngModel)]="showAnnouncement" color="primary">Show Announcement Bar</mat-slide-toggle>
+        </div>
+        <mat-form-field appearance="outline" class="full-width" *ngIf="showAnnouncement">
+          <mat-label>Announcement Text</mat-label>
+          <input matInput [(ngModel)]="announcementText" placeholder="e.g. Admissions are open!">
+        </mat-form-field>
+      </div>
+
+      <div class="form-section">
+        <h3>Hero Section (Top of page)</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Main Headline</mat-label>
+          <input matInput [(ngModel)]="heroTitle" placeholder="e.g. Welcome to Our Institute">
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Sub-headline / Tagline</mat-label>
+          <textarea matInput rows="2" [(ngModel)]="heroSubtitle"></textarea>
+        </mat-form-field>
+
+        <div class="upload-field">
+          <div class="upload-info">
+            <mat-icon>image</mat-icon>
+            <div>
+              <strong>Hero Background Image</strong>
+              <span>Recommended size: 1920x1080px</span>
+            </div>
+          </div>
+          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>About Institute Paragraph</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Institute Description</mat-label>
+          <textarea matInput rows="4" [(ngModel)]="aboutParagraph" placeholder="Write a short paragraph about the institute..."></textarea>
+        </mat-form-field>
+        
+        <div class="upload-field">
+          <div class="upload-info">
+            <mat-icon>photo_camera</mat-icon>
+            <div>
+              <strong>About Us Photo</strong>
+              <span>Recommended size: 800x600px</span>
+            </div>
+          </div>
+          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Call to Action (Button)</h3>
+        <div class="row-fields">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Button Text</mat-label>
+            <input matInput [(ngModel)]="primaryButtonText">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Button Link</mat-label>
+            <input matInput [(ngModel)]="primaryButtonLink">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Key Statistics</h3>
+        <div class="row-fields" style="align-items: center; margin-bottom: 0.5rem;" *ngFor="let stat of statsList; let i = index">
+          <mat-form-field appearance="outline" style="flex: 1;">
+            <mat-label>Value (e.g. 500+)</mat-label>
+            <input matInput [(ngModel)]="stat.value">
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="flex: 2;">
+            <mat-label>Label (e.g. Successful Alumni)</mat-label>
+            <input matInput [(ngModel)]="stat.label">
+          </mat-form-field>
+          <button mat-icon-button color="warn" (click)="removeStat(i)" style="margin-top: -15px;"><mat-icon>delete</mat-icon></button>
+        </div>
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addStat()">
+          <mat-icon>add</mat-icon> Add Statistic
+        </button>
+      </div>
+
+      <div class="form-section">
+        <h3>Why Choose Us (Features)</h3>
+        <div class="repeater-card" *ngFor="let feature of featuresList; let i = index">
+          <div class="repeater-header">
+            <h4>Feature #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeFeature(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <div class="row-fields">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Feature Title</mat-label>
+              <input matInput [(ngModel)]="feature.title">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Material Icon Name</mat-label>
+              <input matInput [(ngModel)]="feature.icon" placeholder="e.g. school, star, verified">
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Short Description</mat-label>
+            <textarea matInput rows="2" [(ngModel)]="feature.description"></textarea>
+          </mat-form-field>
+        </div>
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addFeature()">
+          <mat-icon>add</mat-icon> Add Feature
+        </button>
+      </div>
+
+      <div class="form-section">
+        <h3>Campus Video Tour</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>YouTube / Vimeo Link</mat-label>
+          <input matInput [(ngModel)]="videoTourUrl" placeholder="e.g. https://youtube.com/...">
+          <mat-icon matPrefix class="input-icon">smart_display</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="form-section">
+        <h3>Student Testimonials</h3>
+        <div class="repeater-card" *ngFor="let testimonial of testimonialsList; let i = index">
+          <div class="repeater-header">
+            <h4>Testimonial #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeTestimonial(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <div class="row-fields">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Student Name</mat-label>
+              <input matInput [(ngModel)]="testimonial.studentName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Course / Batch</mat-label>
+              <input matInput [(ngModel)]="testimonial.course" placeholder="e.g. B.Tech 2023">
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Quote / Review</mat-label>
+            <textarea matInput rows="3" [(ngModel)]="testimonial.quote"></textarea>
+          </mat-form-field>
+          <div class="upload-field compact">
+            <div class="upload-info">
+              <mat-icon>face</mat-icon>
+              <div>
+                <strong>Student Photo</strong>
+                <span>Recommended size: 200x200px</span>
+              </div>
+            </div>
+            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+          </div>
+        </div>
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addTestimonial()">
+          <mat-icon>add</mat-icon> Add Testimonial
+        </button>
+      </div>
+
+      <div class="form-section">
+        <h3>Frequently Asked Questions (FAQ)</h3>
+        <div class="repeater-card" *ngFor="let faq of faqsList; let i = index">
+          <div class="repeater-header">
+            <h4>FAQ #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeFaq(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Question</mat-label>
+            <input matInput [(ngModel)]="faq.question">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Answer</mat-label>
+            <textarea matInput rows="2" [(ngModel)]="faq.answer"></textarea>
+          </mat-form-field>
+        </div>
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addFaq()">
+          <mat-icon>add</mat-icon> Add FAQ
+        </button>
+      </div>
+
+    </ng-container>
+
+    <!-- About Us Specific Form -->
+    <ng-container *ngIf="pageName === 'About Us'">
+      <div class="form-section">
+        <h3>Story & Branding</h3>
+        <div class="row-fields">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Main Heading</mat-label>
+            <input matInput [(ngModel)]="aboutHeading">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Year Established</mat-label>
+            <input matInput [(ngModel)]="establishedYear" placeholder="e.g. 1995">
+          </mat-form-field>
+        </div>
+        
+        <div class="upload-field">
+          <div class="upload-info">
+            <mat-icon>business</mat-icon>
+            <div>
+              <strong>Institution Photo / Campus</strong>
+              <span>Recommended size: 1200x800px</span>
+            </div>
+          </div>
+          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Mission, Vision & Values</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mission Statement</mat-label>
+          <textarea matInput rows="2" [(ngModel)]="aboutMission" placeholder="What is your primary goal?"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Vision Statement</mat-label>
+          <textarea matInput rows="2" [(ngModel)]="aboutVision" placeholder="Where do you see the institution in the future?"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Core Values</mat-label>
+          <input matInput [(ngModel)]="coreValues" placeholder="e.g. Integrity, Excellence, Innovation (comma separated)">
+        </mat-form-field>
+      </div>
+
+      <div class="form-section">
+        <h3>Leadership / Director's Desk</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Director/Principal's Name</mat-label>
+          <input matInput [(ngModel)]="principalName" placeholder="e.g. Dr. Jane Doe">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Director's Message</mat-label>
+          <textarea matInput rows="3" [(ngModel)]="principalMessage" placeholder="Write a short message from the head of the institute..."></textarea>
+        </mat-form-field>
+        <div class="upload-field">
+          <div class="upload-info">
+            <mat-icon>person</mat-icon>
+            <div>
+              <strong>Director's Photo</strong>
+              <span>Recommended size: 400x400px</span>
+            </div>
+          </div>
+          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Our Team / Faculty</h3>
+        
+        <div class="repeater-card" *ngFor="let member of teamList; let i = index">
+          <div class="repeater-header">
+            <h4>Member #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeTeamMember(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          
+          <div class="row-fields">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Name</mat-label>
+              <input matInput [(ngModel)]="member.name">
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Role / Designation</mat-label>
+              <input matInput [(ngModel)]="member.role" placeholder="e.g. Senior Lecturer">
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description / Bio</mat-label>
+            <textarea matInput rows="2" [(ngModel)]="member.description" placeholder="Write a short bio about this team member..."></textarea>
+          </mat-form-field>
+
+          <div class="upload-field compact">
+            <div class="upload-info">
+              <mat-icon>account_circle</mat-icon>
+              <div>
+                <strong>Profile Picture</strong>
+                <span>Recommended size: 400x400px</span>
+              </div>
+            </div>
+            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+          </div>
+        </div>
+
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addTeamMember()">
+          <mat-icon>add</mat-icon> Add Team Member
+        </button>
+      </div>
+
+      <div class="form-section">
+        <h3>Accreditations & Affiliations</h3>
+        <div class="repeater-card" *ngFor="let affiliation of affiliationsList; let i = index">
+          <div class="repeater-header">
+            <h4>Affiliation #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeAffiliation(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Organization Name</mat-label>
+            <input matInput [(ngModel)]="affiliation.name" placeholder="e.g. ISO 9001:2015 Certified">
+          </mat-form-field>
+          <div class="upload-field compact">
+            <div class="upload-info">
+              <mat-icon>verified</mat-icon>
+              <div>
+                <strong>Organization Logo</strong>
+                <span>Recommended size: 200x200px</span>
+              </div>
+            </div>
+            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+          </div>
+        </div>
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addAffiliation()">
+          <mat-icon>add</mat-icon> Add Affiliation
+        </button>
+      </div>
+
+      <div class="form-section">
+        <h3>History & Milestones</h3>
+        <div class="repeater-card" *ngFor="let milestone of milestonesList; let i = index">
+          <div class="repeater-header">
+            <h4>Milestone #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeMilestone(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <div class="row-fields">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Year</mat-label>
+              <input matInput [(ngModel)]="milestone.year" placeholder="e.g. 2010">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Milestone Title</mat-label>
+              <input matInput [(ngModel)]="milestone.title" placeholder="e.g. Campus Expansion">
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput rows="2" [(ngModel)]="milestone.description"></textarea>
+          </mat-form-field>
+        </div>
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addMilestone()">
+          <mat-icon>add</mat-icon> Add Milestone
+        </button>
+      </div>
+
+    </ng-container>
+
+    <!-- Courses Specific Form -->
+    <ng-container *ngIf="pageName === 'Courses'">
+      <div class="form-section">
+        <h3>Page Header</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Courses Page Heading</mat-label>
+          <input matInput [(ngModel)]="coursesHeading">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description / Subtitle</mat-label>
+          <textarea matInput rows="2" [(ngModel)]="coursesDescription"></textarea>
+        </mat-form-field>
+        <div class="upload-field">
+          <div class="upload-info">
+            <mat-icon>view_carousel</mat-icon>
+            <div>
+              <strong>Banner Image</strong>
+              <span>Recommended size: 1920x400px</span>
+            </div>
+          </div>
+          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Additional Page Information</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Admission / Enrollment Process</mat-label>
+          <textarea matInput rows="3" [(ngModel)]="admissionProcess" placeholder="Briefly explain how a student can enroll in these courses..."></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Learning Benefits</mat-label>
+          <textarea matInput rows="3" [(ngModel)]="learningBenefits" placeholder="Why should students choose your programs?"></textarea>
+        </mat-form-field>
+        <div class="upload-field">
+          <div class="upload-info">
+            <mat-icon>picture_as_pdf</mat-icon>
+            <div>
+              <strong>Institute Prospectus / Catalog</strong>
+              <span>PDF Document</span>
+            </div>
+          </div>
+          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Course List</h3>
+        
+        <div class="repeater-card" *ngFor="let course of coursesList; let i = index">
+          <div class="repeater-header">
+            <h4>Course #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeCourse(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Course Name</mat-label>
+            <input matInput [(ngModel)]="course.name">
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Course Description</mat-label>
+            <textarea matInput rows="2" [(ngModel)]="course.description"></textarea>
+          </mat-form-field>
+
+          <div class="row-fields">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Duration</mat-label>
+              <input matInput [(ngModel)]="course.duration" placeholder="e.g. 6 Months">
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Course Mode</mat-label>
+              <mat-select [(ngModel)]="course.mode">
+                <mat-option value="Offline">Offline (Campus)</mat-option>
+                <mat-option value="Online">Online</mat-option>
+                <mat-option value="Hybrid">Hybrid</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="row-fields">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Fees / Price</mat-label>
+              <input matInput [(ngModel)]="course.fees" placeholder="e.g. ₹5000 or Free">
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Eligibility</mat-label>
+              <input matInput [(ngModel)]="course.eligibility" placeholder="e.g. 10+2 Passed">
+            </mat-form-field>
+          </div>
+
+          <div class="upload-field compact">
+            <div class="upload-info">
+              <mat-icon>image</mat-icon>
+              <div>
+                <strong>Course Thumbnail</strong>
+                <span>Recommended size: 600x400px</span>
+              </div>
+            </div>
+            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+          </div>
+        </div>
+
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addCourse()">
+          <mat-icon>add</mat-icon> Add New Course
+        </button>
+      </div>
+    </ng-container>
+
+    <!-- Contact Us Specific Form -->
+    <ng-container *ngIf="pageName === 'Contact Us'">
+      <div class="form-section">
+        <h3>Contact Information</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Physical Address</mat-label>
+          <textarea matInput rows="3" [(ngModel)]="contactAddress" placeholder="e.g. 123 Education Street, Knowledge City..."></textarea>
+        </mat-form-field>
+        
+        <div class="row-fields">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Phone Number</mat-label>
+            <input matInput [(ngModel)]="contactPhone" placeholder="+1 (555) 000-0000">
+            <mat-icon matPrefix class="input-icon">phone</mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Email Address</mat-label>
+            <input matInput [(ngModel)]="contactEmail" placeholder="info@institute.edu">
+            <mat-icon matPrefix class="input-icon">email</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Google Maps Embed Link</mat-label>
+          <input matInput [(ngModel)]="contactMapLink" placeholder="https://maps.google.com/...">
+          <mat-icon matPrefix class="input-icon">map</mat-icon>
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+    <!-- Generic Page Editor (Fallback) -->
+    <ng-container *ngIf="pageName !== 'Home Page' && pageName !== 'About Us' && pageName !== 'Courses' && pageName !== 'Contact Us'">
+      <div class="editor-toolbar">
+        <button mat-icon-button><mat-icon>format_bold</mat-icon></button>
+        <button mat-icon-button><mat-icon>format_italic</mat-icon></button>
+        <button mat-icon-button><mat-icon>format_underlined</mat-icon></button>
+        <div class="divider"></div>
+        <button mat-icon-button><mat-icon>format_list_bulleted</mat-icon></button>
+        <button mat-icon-button><mat-icon>format_list_numbered</mat-icon></button>
+        <div class="divider"></div>
+        <button mat-icon-button><mat-icon>image</mat-icon></button>
+        <button mat-icon-button><mat-icon>link</mat-icon></button>
+      </div>
+      <textarea class="editor-textarea" [(ngModel)]="pageContent"></textarea>
+    </ng-container>
+
+  </div>
+  <div class="dialog-footer">
+    <button mat-button (click)="close()" class="cancel-btn">Discard</button>
+    <button mat-raised-button (click)="save()" class="save-btn">
+      <mat-icon>save</mat-icon> Save Draft
+    </button>
+  </div>
+</div>
