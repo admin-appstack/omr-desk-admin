@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
@@ -37,6 +37,10 @@ export class RoleManagement {
     { id: 'ROL-005', name: 'Guest', description: 'Limited temporary access.', users: 0, perms: '2 Permissions', status: 'Inactive' },
   ];
 
+  dataSource = new MatTableDataSource(this.roles);
+  currentFilter = 'All';
+  searchQuery = '';
+
   openCreateRoleModal() {
     this.dialog.open(CreateRoleDialog, {
       width: '800px',
@@ -54,5 +58,30 @@ export class RoleManagement {
       panelClass: 'custom-dialog-container',
       data: role
     });
+  }
+
+  applySearch(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.searchQuery = filterValue;
+    this.updateDataSource();
+  }
+
+  applyFilter(status: string) {
+    this.currentFilter = status;
+    this.updateDataSource();
+  }
+
+  updateDataSource() {
+    let filtered = this.roles;
+    if (this.currentFilter !== 'All') {
+      filtered = filtered.filter(role => role.status === this.currentFilter);
+    }
+    if (this.searchQuery) {
+      filtered = filtered.filter(role => 
+        role.name.toLowerCase().includes(this.searchQuery) ||
+        role.description.toLowerCase().includes(this.searchQuery)
+      );
+    }
+    this.dataSource.data = filtered;
   }
 }
