@@ -92,6 +92,16 @@ export class EditPageDialog {
   contactPhone = '';
   contactEmail = '';
   contactMapLink = '';
+  workingHours = 'Mon-Fri: 9:00 AM - 5:00 PM';
+  
+  socialFacebook = '';
+  socialTwitter = '';
+  socialInstagram = '';
+  socialLinkedIn = '';
+  socialYoutube = '';
+
+  enableContactForm = true;
+  contactFormEmail = '';
   
   // Generic Page Content (Fallback)
   pageContent = '';

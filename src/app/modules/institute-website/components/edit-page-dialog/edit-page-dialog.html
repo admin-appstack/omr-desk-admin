@@ -509,6 +509,58 @@
           <input matInput [(ngModel)]="contactMapLink" placeholder="https://maps.google.com/...">
           <mat-icon matPrefix class="input-icon">map</mat-icon>
         </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Working Hours / Timings</mat-label>
+          <input matInput [(ngModel)]="workingHours" placeholder="e.g. Mon-Fri: 9 AM - 5 PM">
+          <mat-icon matPrefix class="input-icon">schedule</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="form-section">
+        <h3>Social Media Links</h3>
+        <p style="font-size: 0.85rem; color: #64748b; margin-top: 0; margin-bottom: 1rem;">Leave blank to hide the respective social media icon on the website.</p>
+        
+        <div class="row-fields">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Facebook URL</mat-label>
+            <input matInput [(ngModel)]="socialFacebook" placeholder="https://facebook.com/...">
+            <mat-icon matPrefix class="input-icon">facebook</mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Instagram URL</mat-label>
+            <input matInput [(ngModel)]="socialInstagram" placeholder="https://instagram.com/...">
+          </mat-form-field>
+        </div>
+
+        <div class="row-fields">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Twitter / X URL</mat-label>
+            <input matInput [(ngModel)]="socialTwitter" placeholder="https://twitter.com/...">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>LinkedIn URL</mat-label>
+            <input matInput [(ngModel)]="socialLinkedIn" placeholder="https://linkedin.com/...">
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>YouTube Channel URL</mat-label>
+          <input matInput [(ngModel)]="socialYoutube" placeholder="https://youtube.com/...">
+          <mat-icon matPrefix class="input-icon">smart_display</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="form-section">
+        <h3>Contact Form Setup</h3>
+        <div class="visibility-toggle" style="margin-bottom: 1rem;">
+          <mat-slide-toggle [(ngModel)]="enableContactForm" color="primary">Enable "Send us a Message" Form</mat-slide-toggle>
+        </div>
+        <mat-form-field appearance="outline" class="full-width" *ngIf="enableContactForm">
+          <mat-label>Form Recipient Email</mat-label>
+          <input matInput [(ngModel)]="contactFormEmail" placeholder="Where should user messages be sent? (e.g. support@institute.com)">
+          <mat-icon matPrefix class="input-icon">mail</mat-icon>
+        </mat-form-field>
       </div>
     </ng-container>
 
