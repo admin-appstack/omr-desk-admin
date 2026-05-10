@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import { UserDialog } from './components/user-dialog/user-dialog';
 
 @Component({
   selector: 'app-user-management',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTableModule, MatTooltipModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTableModule, MatTooltipModule, MatDialogModule, MatMenuModule, MatDividerModule],
   templateUrl: './user-management.html',
   styleUrl: './user-management.scss',
 })
@@ -30,4 +34,45 @@ export class UserManagement {
     { id: 'USR-1004', name: 'David Brown', email: 'david.b@example.com', avatar: 'DB', role: 'Editor', lastActive: '5 mins ago', status: 'Active' },
     { id: 'USR-1005', name: 'Eve Davis', email: 'eve.d@example.com', avatar: 'ED', role: 'Admin', lastActive: '1 week ago', status: 'Suspended' },
   ];
+
+  dataSource = new MatTableDataSource(this.users);
+  currentFilter = 'All';
+  searchQuery = '';
+
+  constructor(private dialog: MatDialog) {}
+
+  openUserDialog(user?: any) {
+    this.dialog.open(UserDialog, {
+      width: '600px',
+      disableClose: true,
+      panelClass: 'custom-dialog-container',
+      data: user
+    });
+  }
+
+  applySearch(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.searchQuery = filterValue;
+    this.updateDataSource();
+  }
+
+  applyFilter(status: string) {
+    this.currentFilter = status;
+    this.updateDataSource();
+  }
+
+  updateDataSource() {
+    let filtered = this.users;
+    if (this.currentFilter !== 'All') {
+      filtered = filtered.filter(user => user.status === this.currentFilter);
+    }
+    if (this.searchQuery) {
+      filtered = filtered.filter(user => 
+        user.name.toLowerCase().includes(this.searchQuery) ||
+        user.email.toLowerCase().includes(this.searchQuery) ||
+        user.role.toLowerCase().includes(this.searchQuery)
+      );
+    }
+    this.dataSource.data = filtered;
+  }
 }
