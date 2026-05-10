@@ -564,8 +564,77 @@
       </div>
     </ng-container>
 
+    <!-- Test Series Specific Form -->
+    <ng-container *ngIf="pageName === 'Test Series'">
+      <div class="form-section">
+        <h3>Page Header</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Main Heading</mat-label>
+          <input matInput [(ngModel)]="testSeriesHeading">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description / Subtitle</mat-label>
+          <textarea matInput rows="2" [(ngModel)]="testSeriesDescription"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form-section">
+        <h3>Test Series Packages</h3>
+        <div class="repeater-card" *ngFor="let series of testSeriesList; let i = index">
+          <div class="repeater-header">
+            <h4>Package #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeTestSeries(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          
+          <div class="row-fields">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Test Series Name</mat-label>
+              <input matInput [(ngModel)]="series.name" placeholder="e.g. JEE Mains Mock Tests">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Category / Subject</mat-label>
+              <input matInput [(ngModel)]="series.category" placeholder="e.g. Engineering">
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput rows="2" [(ngModel)]="series.description" placeholder="Brief details about the tests..."></textarea>
+          </mat-form-field>
+
+          <div class="row-fields">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Number of Tests</mat-label>
+              <input matInput [(ngModel)]="series.numberOfTests" placeholder="e.g. 15 Full Tests">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Price / Fees</mat-label>
+              <input matInput [(ngModel)]="series.price" placeholder="e.g. ₹999 or Free">
+            </mat-form-field>
+          </div>
+
+          <div class="upload-field compact">
+            <div class="upload-info">
+              <mat-icon>image</mat-icon>
+              <div>
+                <strong>Thumbnail Image</strong>
+                <span>Recommended size: 600x400px</span>
+              </div>
+            </div>
+            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+          </div>
+        </div>
+
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addTestSeries()">
+          <mat-icon>add</mat-icon> Add Test Series
+        </button>
+      </div>
+    </ng-container>
+
     <!-- Generic Page Editor (Fallback) -->
-    <ng-container *ngIf="pageName !== 'Home Page' && pageName !== 'About Us' && pageName !== 'Courses' && pageName !== 'Contact Us'">
+    <ng-container *ngIf="!['Home Page', 'About Us', 'Courses', 'Contact Us', 'Test Series'].includes(pageName)">
       <div class="editor-toolbar">
         <button mat-icon-button><mat-icon>format_bold</mat-icon></button>
         <button mat-icon-button><mat-icon>format_italic</mat-icon></button>

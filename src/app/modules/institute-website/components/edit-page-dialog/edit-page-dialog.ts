@@ -103,6 +103,20 @@ export class EditPageDialog {
   enableContactForm = true;
   contactFormEmail = '';
   
+  // Test Series Specific Data
+  testSeriesHeading = 'Mock Exams & Practice Tests';
+  testSeriesDescription = 'Prepare for your exams with our comprehensive test series.';
+  testSeriesList = [
+    { 
+      name: 'JEE Mains Mock Test 2024', 
+      category: 'Engineering',
+      description: 'Full-length mock tests based on the latest NTA pattern.', 
+      numberOfTests: '15 Tests',
+      price: '₹999',
+      image: null 
+    }
+  ];
+  
   // Generic Page Content (Fallback)
   pageContent = '';
 
@@ -112,7 +126,7 @@ export class EditPageDialog {
   ) {
     if (data) {
       this.pageName = data.name || '';
-      if (!['Home Page', 'About Us', 'Courses', 'Contact Us'].includes(this.pageName)) {
+      if (!['Home Page', 'About Us', 'Courses', 'Contact Us', 'Test Series'].includes(this.pageName)) {
         this.pageContent = `<h1>Welcome to the ${this.pageName}</h1>\n<p>This is the placeholder content for this page. Replace it with actual content using the visual builder tools.</p>`;
       }
     }
@@ -164,6 +178,18 @@ export class EditPageDialog {
 
   addFaq() { this.faqsList.push({ question: '', answer: '' }); }
   removeFaq(index: number) { this.faqsList.splice(index, 1); }
+
+  addTestSeries() {
+    this.testSeriesList.push({ 
+      name: '', 
+      category: '',
+      description: '', 
+      numberOfTests: '',
+      price: '',
+      image: null 
+    });
+  }
+  removeTestSeries(index: number) { this.testSeriesList.splice(index, 1); }
 
   close(): void { this.dialogRef.close(); }
   save(): void { this.dialogRef.close(true); }
