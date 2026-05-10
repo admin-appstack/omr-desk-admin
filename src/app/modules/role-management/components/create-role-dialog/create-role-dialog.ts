@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -123,7 +124,15 @@ export class CreateRoleDialog {
     }
   ];
 
-  constructor(public dialogRef: MatDialogRef<CreateRoleDialog>) {}
+  constructor(
+    public dialogRef: MatDialogRef<CreateRoleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    if (data) {
+      this.roleName = data.name || '';
+      this.roleDescription = data.description || '';
+    }
+  }
 
   close(): void {
     this.dialogRef.close();

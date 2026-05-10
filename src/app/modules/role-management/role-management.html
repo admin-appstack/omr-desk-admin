@@ -84,12 +84,27 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row">
-          <button mat-icon-button matTooltip="Edit Permissions" class="action-btn">
+          <button mat-icon-button matTooltip="Edit Role" class="action-btn" (click)="editRole(row)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="More Options" class="action-btn">
+          <button mat-icon-button matTooltip="More Options" class="action-btn" [matMenuTriggerFor]="roleMenu">
             <mat-icon>more_vert</mat-icon>
           </button>
+          <mat-menu #roleMenu="matMenu" xPosition="before">
+            <button mat-menu-item>
+              <mat-icon>content_copy</mat-icon>
+              <span>Duplicate Role</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>block</mat-icon>
+              <span>Deactivate</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item class="danger-text">
+              <mat-icon color="warn">delete</mat-icon>
+              <span style="color: #ef4444;">Delete Role</span>
+            </button>
+          </mat-menu>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -6,12 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
 import { CreateRoleDialog } from './components/create-role-dialog/create-role-dialog';
 
 @Component({
   selector: 'app-role-management',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTableModule, MatTooltipModule, MatDialogModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTableModule, MatTooltipModule, MatDialogModule, MatMenuModule, MatDividerModule],
   templateUrl: './role-management.html',
   styleUrl: './role-management.scss',
 })
@@ -41,6 +43,16 @@ export class RoleManagement {
       maxHeight: '90vh',
       disableClose: true,
       panelClass: 'custom-dialog-container'
+    });
+  }
+
+  editRole(role: any) {
+    this.dialog.open(CreateRoleDialog, {
+      width: '800px',
+      maxHeight: '90vh',
+      disableClose: true,
+      panelClass: 'custom-dialog-container',
+      data: role
     });
   }
 }
