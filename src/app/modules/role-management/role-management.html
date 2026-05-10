@@ -1,0 +1,100 @@
+<div class="module-container">
+
+  <!-- Header Hero -->
+  <div class="module-hero purple">
+    <div class="hero-content">
+      <div class="hero-icon"><mat-icon>admin_panel_settings</mat-icon></div>
+      <div>
+        <h1>Role Management</h1>
+        <p>Define custom roles and manage system-wide permissions.</p>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <button mat-raised-button class="hero-btn-outline">
+        <mat-icon>security</mat-icon> Audit Logs
+      </button>
+      <button mat-raised-button class="hero-btn">
+        <mat-icon>add_moderator</mat-icon> Create Role
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary Stats -->
+  <div class="pay-stats">
+    <div class="pay-stat-card" *ngFor="let s of statCards">
+      <div class="pay-stat-icon" [class]="s.theme">
+        <mat-icon>{{s.icon}}</mat-icon>
+      </div>
+      <div class="pay-stat-body">
+        <span class="pay-stat-label">{{s.label}}</span>
+        <h2 class="pay-stat-value">{{s.value}}</h2>
+      </div>
+      <div class="pay-stat-tag" [class]="s.tagClass">{{s.tag}}</div>
+    </div>
+  </div>
+
+  <!-- Roles Table -->
+  <mat-card class="transactions-card">
+    <div class="card-header-row">
+      <div>
+        <h3 class="card-title">System Roles</h3>
+        <span class="card-subtitle">Manage default and custom roles across the platform</span>
+      </div>
+      <div class="header-actions">
+        <button mat-stroked-button class="export-btn">
+          <mat-icon>filter_list</mat-icon> Filter
+        </button>
+      </div>
+    </div>
+    <table mat-table [dataSource]="roles" class="full-width-table">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Role ID</th>
+        <td mat-cell *matCellDef="let row"><span class="txn-id">{{row.id}}</span></td>
+      </ng-container>
+      <ng-container matColumnDef="roleName">
+        <th mat-header-cell *matHeaderCellDef>Role Name</th>
+        <td mat-cell *matCellDef="let row">
+          <div class="role-info">
+            <strong>{{row.name}}</strong>
+            <span>{{row.description}}</span>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="usersCount">
+        <th mat-header-cell *matHeaderCellDef>Assigned Users</th>
+        <td mat-cell *matCellDef="let row">
+          <div class="users-count">
+            <mat-icon>people</mat-icon>
+            <span>{{row.users}} Users</span>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="permissions">
+        <th mat-header-cell *matHeaderCellDef>Permissions</th>
+        <td mat-cell *matCellDef="let row">
+          <span class="perm-chip">{{row.perms}}</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let row">
+          <span class="status-badge" [class]="row.status.toLowerCase()">{{row.status}}</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button matTooltip="Edit Permissions" class="action-btn">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="More Options" class="action-btn">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card>
+
+</div>

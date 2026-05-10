@@ -11,6 +11,9 @@ import { ResultAnalyticsComponent } from './modules/result-analytics/result-anal
 import { InstituteWebsiteComponent } from './modules/institute-website/institute-website.component';
 import { PaymentsComponent } from './modules/payments/payments.component';
 import { SettingsComponent } from './modules/settings/settings.component';
+import { UserManagement } from './modules/user-management/user-management';
+import { RoleManagement } from './modules/role-management/role-management';
+import { StudentManagement } from './modules/student-management/student-management';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -30,6 +33,9 @@ export const routes: Routes = [
       { path: 'website', component: InstituteWebsiteComponent },
       { path: 'payments', component: PaymentsComponent },
       { path: 'settings', component: SettingsComponent },
+      { path: 'users', component: UserManagement },
+      { path: 'roles', component: RoleManagement },
+      { path: 'students', component: StudentManagement },
     ]
   },
   { path: '**', redirectTo: 'login' }
