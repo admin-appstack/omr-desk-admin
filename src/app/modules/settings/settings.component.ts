@@ -36,6 +36,7 @@ export class SettingsComponent {
     email:     'admin@omrdesk.com',
     phone:     '+91 98765 43210',
     institute: 'OMRDesk Institute',
+    tagline:   'Excellence in Education',
   };
 
   notifItems = [

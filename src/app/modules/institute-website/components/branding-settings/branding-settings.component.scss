@@ -143,4 +143,56 @@
     h1 { font-size: 1.5rem; font-weight: 800; color: #1e293b; margin: 0 0 1rem; }
     p { font-size: 1rem; line-height: 1.6; color: #475569; margin: 0; }
   }
+
+  .dns-settings {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed #e2e8f0;
+
+    .help-text {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 1rem;
+    }
+
+    .dns-table {
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+
+      .dns-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 2fr;
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+        border-bottom: 1px solid #e2e8f0;
+
+        &:last-child { border-bottom: none; }
+
+        &.header {
+          background: #f1f5f9;
+          font-weight: 700;
+          color: #475569;
+        }
+
+        span {
+          display: flex;
+          align-items: center;
+        }
+
+        .type { color: #0f172a; font-weight: 600; }
+        .name { color: #0f172a; }
+        .value { color: #0f172a; font-family: 'JetBrains Mono', monospace; }
+      }
+    }
+  }
+
+  .grid-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+
+    mat-form-field { width: 100%; }
+  }
 }

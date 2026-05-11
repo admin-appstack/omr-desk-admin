@@ -4,16 +4,20 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-branding-settings',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule, MatIconModule, MatButtonToggleModule],
+  imports: [CommonModule, FormsModule, MatCardModule, MatIconModule, MatButtonToggleModule, MatFormFieldModule, MatInputModule],
   templateUrl: './branding-settings.component.html',
   styleUrls: ['./branding-settings.component.scss']
 })
 export class BrandingSettingsComponent {
   config = {
+    subdomain: 'modern-academy',
+    customDomain: '',
     primaryColor: '#6366f1',
     secondaryColor: '#a855f7',
     accentColor: '#ec4899',

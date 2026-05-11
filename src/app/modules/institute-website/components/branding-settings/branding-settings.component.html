@@ -1,6 +1,46 @@
 <div class="branding-view">
   <mat-card class="settings-card">
     <div class="card-header">
+      <mat-icon>language</mat-icon>
+      <h3>Domain Settings</h3>
+    </div>
+    <p class="card-subtitle">Configure your website's address. You can use a free subdomain or your own custom domain.</p>
+    
+    <div class="grid-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Subdomain</mat-label>
+        <input matInput [(ngModel)]="config.subdomain">
+        <span matSuffix>.omrdesk.com</span>
+        <mat-icon matSuffix>language</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Custom Domain</mat-label>
+        <input matInput [(ngModel)]="config.customDomain" placeholder="e.g. www.myinstitute.com">
+        <mat-icon matSuffix>link</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="dns-settings" *ngIf="config.customDomain">
+      <div class="section-label">DNS Configuration</div>
+      <p class="help-text">To use your custom domain, add the following CNAME record in your domain registrar's DNS settings:</p>
+      <div class="dns-table">
+        <div class="dns-row header">
+          <span>Type</span>
+          <span>Name</span>
+          <span>Value</span>
+        </div>
+        <div class="dns-row">
+          <span class="type">CNAME</span>
+          <span class="name">www</span>
+          <span class="value">custom.omrdesk.com</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="settings-card">
+    <div class="card-header">
       <mat-icon>palette</mat-icon>
       <h3>Theme Color Palette</h3>
     </div>
