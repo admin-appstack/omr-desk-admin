@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TemplateGridComponent } from './components/template-grid/template-grid.component';
-import { WebsiteSettingsComponent } from './components/website-settings/website-settings.component';
 import { PageManagementComponent } from './components/page-management/page-management.component';
 import { BrandingSettingsComponent } from './components/branding-settings/branding-settings.component';
 
@@ -21,7 +20,6 @@ import { BrandingSettingsComponent } from './components/branding-settings/brandi
     MatDialogModule,
     MatSnackBarModule,
     TemplateGridComponent,
-    WebsiteSettingsComponent,
     PageManagementComponent,
     BrandingSettingsComponent
   ],
