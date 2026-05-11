@@ -42,7 +42,7 @@ export class DashboardLayoutComponent {
 
   managementNav = [
     { icon: 'analytics', label: 'Result & Analytics', route: '/dashboard/results',  badge: null },
-    { icon: 'payments',  label: 'Payments',           route: '/dashboard/payments', badge: null },
+    { icon: 'card_membership', label: 'Subscription Management', route: '/dashboard/subscriptions', badge: null },
     { icon: 'people',    label: 'User Management',    route: '/dashboard/users',    badge: null },
     { icon: 'admin_panel_settings', label: 'Role Management', route: '/dashboard/roles', badge: null },
     { icon: 'school',    label: 'Student Management', route: '/dashboard/students', badge: null },

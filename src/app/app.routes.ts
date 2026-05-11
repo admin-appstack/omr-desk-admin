@@ -9,7 +9,7 @@ import { QuestionBankComponent } from './modules/question-bank/question-bank.com
 import { TestBuilderComponent } from './modules/test-builder/test-builder.component';
 import { ResultAnalyticsComponent } from './modules/result-analytics/result-analytics.component';
 import { InstituteWebsiteComponent } from './modules/institute-website/institute-website.component';
-import { PaymentsComponent } from './modules/payments/payments.component';
+import { SubscriptionManagementComponent } from './modules/subscription-management/subscription-management.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { UserManagement } from './modules/user-management/user-management';
 import { RoleManagement } from './modules/role-management/role-management';
@@ -31,7 +31,7 @@ export const routes: Routes = [
       { path: 'tests', component: TestBuilderComponent },
       { path: 'results', component: ResultAnalyticsComponent },
       { path: 'website', component: InstituteWebsiteComponent },
-      { path: 'payments', component: PaymentsComponent },
+      { path: 'subscriptions', component: SubscriptionManagementComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'users', component: UserManagement },
       { path: 'roles', component: RoleManagement },

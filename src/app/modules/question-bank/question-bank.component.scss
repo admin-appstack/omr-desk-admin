@@ -77,3 +77,90 @@
   &.medium { color: #d97706; }
   &.hard { color: #dc2626; }
 }
+
+.form-card {
+  padding: 2rem !important;
+  border-radius: 20px !important;
+  box-shadow: none !important;
+  border: 1px solid #f1f5f9 !important;
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.section-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.half-width {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.flex-grow {
+  flex: 1;
+}
+
+.options-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  mat-radio-button {
+    margin-top: -1.25rem; /* Align with input */
+  }
+}
+
+.actions-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  
+  button {
+    border-radius: 10px !important;
+    height: 46px !important;
+    padding: 0 1.5rem !important;
+    font-weight: 600 !important;
+  }
+}
+
+.submit-btn {
+  background: #059669 !important;
+  color: white !important;
+}

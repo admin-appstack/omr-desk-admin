@@ -1,0 +1,257 @@
+<div class="sub-page">
+
+  <!-- ─── Hero Banner ─────────────────────────────────────────────────────── -->
+  <div class="hero-banner">
+    <div class="hero-glow"></div>
+    <div class="hero-left">
+      <div class="hero-icon-wrap">
+        <mat-icon>card_membership</mat-icon>
+      </div>
+      <div>
+        <h1>Subscription Management</h1>
+        <p>Manage your plan, monitor usage limits, and view billing history.</p>
+      </div>
+    </div>
+    <div class="hero-right">
+      <button mat-stroked-button class="hero-btn-ghost">
+        <mat-icon>compare</mat-icon> Compare Plans
+      </button>
+      <button mat-raised-button class="hero-btn-primary">
+        <mat-icon>rocket_launch</mat-icon> Upgrade Plan
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── Quick Stats Row ──────────────────────────────────────────────────── -->
+  <div class="quick-stats-row">
+    <div class="quick-stat" *ngFor="let s of quickStats">
+      <div class="qs-icon" [style.background]="s.bg" [style.color]="s.color">
+        <mat-icon>{{ s.icon }}</mat-icon>
+      </div>
+      <div class="qs-body">
+        <span class="qs-label">{{ s.label }}</span>
+        <strong class="qs-value">{{ s.value }}</strong>
+        <span class="qs-sub">{{ s.sub }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Current Plan + Payment ──────────────────────────────────────────── -->
+  <div class="two-col-grid">
+
+    <!-- Current Plan Card -->
+    <div class="glass-card plan-card-active">
+      <div class="pca-header">
+        <div class="pca-title-block">
+          <span class="eyebrow">Your Active Plan</span>
+          <h2>{{ currentPlan.name }}</h2>
+          <div class="active-pill">
+            <span class="pulse-dot"></span> Active
+          </div>
+        </div>
+        <div class="pca-price-block">
+          <span class="price-main">{{ currentPlan.price }}</span>
+          <span class="price-sub">Billed {{ currentPlan.billingCycle }}</span>
+        </div>
+      </div>
+
+      <div class="usage-title">
+        <mat-icon>bar_chart</mat-icon> Resource Usage
+      </div>
+
+      <div class="usage-bars">
+        <div class="usage-row" *ngFor="let u of currentPlan.usage">
+          <div class="usage-meta">
+            <div class="usage-icon-label">
+              <mat-icon>{{ u.icon }}</mat-icon>
+              <span>{{ u.label }}</span>
+            </div>
+            <span class="usage-nums">{{ u.current | number }} / {{ u.limit | number }}</span>
+          </div>
+          <div class="prog-track">
+            <div class="prog-fill" [style.width.%]="u.percent" [style.background]="u.color"></div>
+          </div>
+          <span class="prog-pct" [style.color]="u.color">{{ u.percent }}%</span>
+        </div>
+      </div>
+
+      <div class="billing-row">
+        <mat-icon>schedule</mat-icon>
+        <span>Next billing: <strong>{{ currentPlan.nextBilling }}</strong></span>
+        <span class="days-left">{{ currentPlan.daysRemaining }} days left</span>
+      </div>
+
+      <div class="plan-actions">
+        <button mat-stroked-button class="btn-cancel-sub">Cancel Subscription</button>
+        <button mat-raised-button class="btn-upgrade">
+          <mat-icon>arrow_upward</mat-icon> Upgrade
+        </button>
+      </div>
+    </div>
+
+    <!-- Payment Method Card -->
+    <div class="glass-card payment-card">
+      <div class="pc-header">
+        <h3>Payment Details</h3>
+        <button mat-icon-button matTooltip="Edit payment method"><mat-icon>edit</mat-icon></button>
+      </div>
+
+      <div class="card-visual">
+        <div class="card-shine"></div>
+        <div class="card-top">
+          <mat-icon class="card-chip">credit_card</mat-icon>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg" alt="Visa" class="card-brand" />
+        </div>
+        <div class="card-number-display">•••• •••• •••• 4242</div>
+        <div class="card-bottom">
+          <div>
+            <span class="card-meta-label">Cardholder</span>
+            <span class="card-meta-val">Institute Admin</span>
+          </div>
+          <div>
+            <span class="card-meta-label">Expires</span>
+            <span class="card-meta-val">12 / 28</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="billing-address-box">
+        <div class="bab-header">
+          <mat-icon>location_on</mat-icon>
+          <span>Billing Address</span>
+        </div>
+        <p>123 Education Way, Academic District,<br>New Delhi, India 110001</p>
+      </div>
+
+      <button mat-stroked-button class="btn-change-payment">
+        <mat-icon>add_card</mat-icon> Change Payment Method
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ─── Plan Selection ───────────────────────────────────────────────────── -->
+  <div class="section-block">
+    <div class="section-title-row">
+      <div>
+        <h2 class="sec-title">Available Plans</h2>
+        <p class="sec-sub">Upgrade or downgrade at any time. Changes take effect at next billing cycle.</p>
+      </div>
+      <div class="billing-toggle">
+        <span>Monthly</span>
+        <div class="toggle-pill active"></div>
+        <span class="muted">Annual <span class="save-badge">Save 20%</span></span>
+      </div>
+    </div>
+
+    <div class="plans-grid">
+      <div class="plan-tile"
+        *ngFor="let plan of plans"
+        [class.tile-recommended]="plan.recommended"
+        [class.tile-current]="plan.current">
+
+        <!-- Top badge -->
+        <div class="tile-badge-row">
+          <span class="tile-badge recommended-badge" *ngIf="plan.recommended">⭐ Recommended</span>
+          <span class="tile-badge current-badge" *ngIf="plan.current">✓ Your Plan</span>
+        </div>
+
+        <!-- Plan icon & name -->
+        <div class="tile-header">
+          <div class="tile-icon" [style.background]="plan.color + '18'" [style.color]="plan.color">
+            <mat-icon>{{ plan.icon }}</mat-icon>
+          </div>
+          <div>
+            <h3 class="tile-name">{{ plan.name }}</h3>
+            <p class="tile-desc">{{ plan.description }}</p>
+          </div>
+        </div>
+
+        <!-- Price -->
+        <div class="tile-price">
+          <span class="price-currency">$</span>
+          <span class="price-num">{{ plan.price }}</span>
+          <span class="price-period">/{{ plan.period === 'forever' ? 'free' : 'mo' }}</span>
+        </div>
+
+        <mat-divider class="tile-divider"></mat-divider>
+
+        <!-- Features -->
+        <ul class="tile-features">
+          <li *ngFor="let f of plan.features" [class.unavailable]="!f.available">
+            <mat-icon>{{ f.available ? 'check_circle' : 'cancel' }}</mat-icon>
+            <span>{{ f.text }}</span>
+          </li>
+        </ul>
+
+        <!-- CTA -->
+        <button mat-raised-button class="tile-btn"
+          [class.tile-btn-primary]="plan.recommended"
+          [class.tile-btn-current]="plan.current"
+          [disabled]="plan.current">
+          {{ plan.current ? 'Current Plan' : 'Choose ' + plan.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Billing History ──────────────────────────────────────────────────── -->
+  <mat-card class="transactions-card">
+    <div class="card-header-row">
+      <div>
+        <h3 class="card-title">Billing History</h3>
+        <span class="card-subtitle">All your past invoices in one place</span>
+      </div>
+      <div class="header-actions">
+        <button mat-stroked-button class="export-btn">
+          <mat-icon>download</mat-icon> Export CSV
+        </button>
+      </div>
+    </div>
+
+    <table mat-table [dataSource]="transactions" class="full-width-table">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Invoice</th>
+        <td mat-cell *matCellDef="let row"><span class="txn-id">{{ row.id }}</span></td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let row"><span class="date-chip">{{ row.date }}</span></td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let row"><strong>{{ row.description }}</strong></td>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef>Amount</th>
+        <td mat-cell *matCellDef="let row"><span class="amount-val">{{ row.amount }}</span></td>
+      </ng-container>
+      <ng-container matColumnDef="method">
+        <th mat-header-cell *matHeaderCellDef>Payment Method</th>
+        <td mat-cell *matCellDef="let row">
+          <div class="method-chip">
+            <mat-icon class="method-icon">credit_card</mat-icon>
+            {{ row.method }}
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let row">
+          <span class="status-badge" [class]="row.status.toLowerCase()">{{ row.status }}</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button matTooltip="Download PDF" class="dl-btn">
+            <mat-icon>picture_as_pdf</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card>
+
+</div>

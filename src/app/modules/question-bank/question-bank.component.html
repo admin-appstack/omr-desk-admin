@@ -7,70 +7,127 @@
         <p>Create and organize your repository of MCQs and subjective questions.</p>
       </div>
     </div>
-    <button mat-raised-button class="hero-btn">
-      <mat-icon>add</mat-icon> Add Question
+    <button mat-raised-button class="hero-btn" (click)="toggleAddForm()">
+      <mat-icon>{{ showAddForm ? 'list' : 'add' }}</mat-icon> {{ showAddForm ? 'View Questions' : 'Add Question' }}
     </button>
   </div>
 
-  <mat-card class="filter-card">
-    <div class="search-bar">
-      <mat-icon>search</mat-icon>
-      <input type="text" placeholder="Search questions by text, tag or topic..." />
-    </div>
-    <div class="quick-tags">
-      <mat-chip-listbox>
-        <mat-chip-option selected>All Subjects</mat-chip-option>
-        <mat-chip-option>Physics</mat-chip-option>
-        <mat-chip-option>Chemistry</mat-chip-option>
-        <mat-chip-option>Mathematics</mat-chip-option>
-        <mat-chip-option>Biology</mat-chip-option>
-      </mat-chip-listbox>
-    </div>
-  </mat-card>
+  <div *ngIf="!showAddForm">
+    <mat-card class="filter-card">
+      <div class="search-bar">
+        <mat-icon>search</mat-icon>
+        <input type="text" placeholder="Search questions by text, tag or topic..." />
+      </div>
+      <div class="quick-tags">
+        <mat-chip-listbox>
+          <mat-chip-option selected>All Subjects</mat-chip-option>
+          <mat-chip-option>Physics</mat-chip-option>
+          <mat-chip-option>Chemistry</mat-chip-option>
+          <mat-chip-option>Mathematics</mat-chip-option>
+          <mat-chip-option>Biology</mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+    </mat-card>
 
-  <mat-card class="questions-list-card">
-    <div class="card-header-row">
-      <h3 class="card-title">All Questions <span class="count-badge">{{ questions.length }}</span></h3>
-      <button mat-stroked-button color="primary" class="view-all-btn">Export CSV</button>
-    </div>
-    <table mat-table [dataSource]="questions" class="full-width-table">
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let row"><span class="q-id">Q-{{row.id}}</span></td>
-      </ng-container>
+    <mat-card class="questions-list-card">
+      <div class="card-header-row">
+        <h3 class="card-title">All Questions <span class="count-badge">{{ questions.length }}</span></h3>
+        <button mat-stroked-button color="primary" class="view-all-btn">Export CSV</button>
+      </div>
+      <table mat-table [dataSource]="questions" class="full-width-table">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let row"><span class="q-id">Q-{{row.id}}</span></td>
+        </ng-container>
 
-      <ng-container matColumnDef="text">
-        <th mat-header-cell *matHeaderCellDef>Question</th>
-        <td mat-cell *matCellDef="let row" class="question-text-cell">{{row.text}}</td>
-      </ng-container>
+        <ng-container matColumnDef="text">
+          <th mat-header-cell *matHeaderCellDef>Question</th>
+          <td mat-cell *matCellDef="let row" class="question-text-cell">{{row.text}}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="subject">
-        <th mat-header-cell *matHeaderCellDef>Subject</th>
-        <td mat-cell *matCellDef="let row">
-          <span class="subject-tag">{{row.subject}}</span>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="subject">
+          <th mat-header-cell *matHeaderCellDef>Subject</th>
+          <td mat-cell *matCellDef="let row">
+            <span class="subject-tag">{{row.subject}}</span>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="difficulty">
-        <th mat-header-cell *matHeaderCellDef>Difficulty</th>
-        <td mat-cell *matCellDef="let row">
-          <span class="diff-level" [class]="row.difficulty.toLowerCase()">
-            <mat-icon>{{ row.difficulty === 'Easy' ? 'sentiment_satisfied' : row.difficulty === 'Medium' ? 'sentiment_neutral' : 'sentiment_very_dissatisfied' }}</mat-icon>
-            {{row.difficulty}}
-          </span>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="difficulty">
+          <th mat-header-cell *matHeaderCellDef>Difficulty</th>
+          <td mat-cell *matCellDef="let row">
+            <span class="diff-level" [class]="row.difficulty.toLowerCase()">
+              <mat-icon>{{ row.difficulty === 'Easy' ? 'sentiment_satisfied' : row.difficulty === 'Medium' ? 'sentiment_neutral' : 'sentiment_very_dissatisfied' }}</mat-icon>
+              {{row.difficulty}}
+            </span>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let row">
-          <button mat-icon-button color="primary" matTooltip="Edit"><mat-icon>edit</mat-icon></button>
-          <button mat-icon-button color="warn" matTooltip="Delete"><mat-icon>delete</mat-icon></button>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" matTooltip="Edit"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn" matTooltip="Delete"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </mat-card>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+  </div>
+
+  <div *ngIf="showAddForm">
+    <mat-card class="form-card">
+      <div class="card-header-row">
+        <h3 class="card-title">Add New Question</h3>
+      </div>
+
+      <div class="form-content">
+        <div class="form-group">
+          <label class="section-label">Question Type</label>
+          <mat-chip-listbox [(ngModel)]="questionType">
+            <mat-chip-option value="mcq" [selected]="questionType === 'mcq'">Multiple Choice (MCQ)</mat-chip-option>
+            <mat-chip-option value="subjective" [selected]="questionType === 'subjective'">Subjective</mat-chip-option>
+          </mat-chip-listbox>
+        </div>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Question Text</mat-label>
+          <textarea matInput [(ngModel)]="newQuestion.text" placeholder="Enter the question here..." rows="4"></textarea>
+        </mat-form-field>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Subject</mat-label>
+            <mat-select [(ngModel)]="newQuestion.subject">
+              <mat-option *ngFor="let sub of subjects" [value]="sub">{{sub}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="half-width">
+            <label class="section-label">Difficulty</label>
+            <mat-chip-listbox [(ngModel)]="newQuestion.difficulty">
+              <mat-chip-option *ngFor="let diff of difficulties" [value]="diff" [selected]="diff === newQuestion.difficulty">{{diff}}</mat-chip-option>
+            </mat-chip-listbox>
+          </div>
+        </div>
+
+        <div *ngIf="questionType === 'mcq'" class="options-section">
+          <label class="section-label">Options</label>
+          <div class="option-row" *ngFor="let opt of newQuestion.options; let i = index">
+            <mat-radio-button [value]="i" [checked]="newQuestion.correctAnswer === i" (change)="newQuestion.correctAnswer = i"></mat-radio-button>
+            <mat-form-field appearance="outline" class="flex-grow">
+              <mat-label>Option {{ ['A', 'B', 'C', 'D'][i] }}</mat-label>
+              <input matInput [(ngModel)]="newQuestion.options[i]" placeholder="Enter option text" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="actions-row">
+          <button mat-stroked-button (click)="toggleAddForm()">Cancel</button>
+          <button mat-raised-button color="primary" class="submit-btn" (click)="saveQuestion()">Save Question</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
 </div>
