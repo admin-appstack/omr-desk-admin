@@ -14,6 +14,7 @@ import { SettingsComponent } from './modules/settings/settings.component';
 import { UserManagement } from './modules/user-management/user-management';
 import { RoleManagement } from './modules/role-management/role-management';
 import { StudentManagement } from './modules/student-management/student-management';
+import { ExamsComponent } from './modules/exams/exams.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -26,6 +27,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: '/dashboard/home', pathMatch: 'full' },
       { path: 'home', component: DashboardHomeComponent },
+      { path: 'exams', component: ExamsComponent },
       { path: 'scanning', component: OmrScanningComponent },
       { path: 'questions', component: QuestionBankComponent },
       { path: 'tests', component: TestBuilderComponent },
