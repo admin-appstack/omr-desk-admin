@@ -53,54 +53,108 @@
   <!-- Main Grid -->
   <div class="dashboard-main-grid">
 
-    <!-- Quick Actions -->
-    <section class="quick-actions-section">
-      <div class="section-header">
-        <h3 class="section-title">Quick Actions</h3>
-      </div>
-      <div class="actions-grid">
-        <a class="action-tile" [routerLink]="['/dashboard/tests']">
-          <div class="action-icon-wrap blue">
-            <mat-icon>add_circle_outline</mat-icon>
+    <div class="left-column">
+      <!-- Quick Actions -->
+      <section class="quick-actions-section">
+        <div class="section-header">
+          <h3 class="section-title">Quick Actions</h3>
+        </div>
+        <div class="actions-grid">
+          <a class="action-tile" [routerLink]="['/dashboard/tests']">
+            <div class="action-icon-wrap blue">
+              <mat-icon>add_circle_outline</mat-icon>
+            </div>
+            <div class="action-content">
+              <span class="action-label">Create New Test</span>
+              <span class="action-desc">Setup a new online or OMR based exam</span>
+            </div>
+            <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
+          </a>
+          <a class="action-tile" [routerLink]="['/dashboard/scanning']">
+            <div class="action-icon-wrap orange">
+              <mat-icon>camera_alt</mat-icon>
+            </div>
+            <div class="action-content">
+              <span class="action-label">Scan OMR Sheets</span>
+              <span class="action-desc">Upload images or use camera to scan</span>
+            </div>
+            <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
+          </a>
+          <a class="action-tile" [routerLink]="['/dashboard/results']">
+            <div class="action-icon-wrap green">
+              <mat-icon>analytics</mat-icon>
+            </div>
+            <div class="action-content">
+              <span class="action-label">Generate Results</span>
+              <span class="action-desc">Calculate ranks and publish analytics</span>
+            </div>
+            <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
+          </a>
+          <a class="action-tile" [routerLink]="['/dashboard/website']">
+            <div class="action-icon-wrap purple">
+              <mat-icon>web</mat-icon>
+            </div>
+            <div class="action-content">
+              <span class="action-label">Website Builder</span>
+              <span class="action-desc">Manage your institute public portal</span>
+            </div>
+            <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
+          </a>
+        </div>
+      </section>
+
+      <!-- Result Analytics Overview -->
+      <section class="analytics-section">
+
+
+
+        <!-- Chart Area -->
+        <div class="analytics-card chart-card">
+          <h4>Performance Trend</h4>
+          <div class="chart-container">
+            <div class="chart-bar-wrap" *ngFor="let bar of chartBars">
+              <div class="chart-bar" [style.height.px]="bar.value * 1.5" [style.background]="bar.color">
+                <span class="bar-value">{{bar.value}}%</span>
+              </div>
+              <span class="bar-label">{{bar.label}}</span>
+            </div>
           </div>
-          <div class="action-content">
-            <span class="action-label">Create New Test</span>
-            <span class="action-desc">Setup a new online or OMR based exam</span>
+        </div>
+
+        <!-- Two Column Grid for Performers and Results -->
+        <div class="analytics-grid">
+          <!-- Top Performers -->
+          <div class="analytics-card list-card">
+            <h4>Top Performers</h4>
+            <div class="list-items">
+              <div class="list-item" *ngFor="let p of topPerformers">
+                <div class="item-avatar">{{p.name.substring(0, 2)}}</div>
+                <div class="item-info">
+                  <span class="item-title">{{p.name}}</span>
+                  <span class="item-sub">{{p.exam}}</span>
+                </div>
+                <div class="item-value score-text">{{p.score}}%</div>
+              </div>
+            </div>
           </div>
-          <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
-        </a>
-        <a class="action-tile" [routerLink]="['/dashboard/scanning']">
-          <div class="action-icon-wrap orange">
-            <mat-icon>camera_alt</mat-icon>
+
+          <!-- Recent Results -->
+          <div class="analytics-card list-card">
+            <h4>Recent Results</h4>
+            <div class="list-items">
+              <div class="list-item" *ngFor="let r of results">
+                <div class="item-icon"><mat-icon>assignment</mat-icon></div>
+                <div class="item-info">
+                  <span class="item-title">{{r.examName}}</span>
+                  <span class="item-sub">{{r.date}} • {{r.students}} students</span>
+                </div>
+                <div class="item-value">{{r.avgScore}}% avg</div>
+              </div>
+            </div>
           </div>
-          <div class="action-content">
-            <span class="action-label">Scan OMR Sheets</span>
-            <span class="action-desc">Upload images or use camera to scan</span>
-          </div>
-          <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
-        </a>
-        <a class="action-tile" [routerLink]="['/dashboard/results']">
-          <div class="action-icon-wrap green">
-            <mat-icon>analytics</mat-icon>
-          </div>
-          <div class="action-content">
-            <span class="action-label">Generate Results</span>
-            <span class="action-desc">Calculate ranks and publish analytics</span>
-          </div>
-          <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
-        </a>
-        <a class="action-tile" [routerLink]="['/dashboard/website']">
-          <div class="action-icon-wrap purple">
-            <mat-icon>web</mat-icon>
-          </div>
-          <div class="action-content">
-            <span class="action-label">Website Builder</span>
-            <span class="action-desc">Manage your institute public portal</span>
-          </div>
-          <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
-        </a>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
 
     <!-- Right Column -->
     <div class="right-column">
@@ -128,6 +182,8 @@
           </div>
         </div>
       </section>
+
+
 
     </div>
   </div>

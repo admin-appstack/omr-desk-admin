@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -14,6 +15,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-exams',
@@ -21,6 +24,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterLink,
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
@@ -33,13 +37,17 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTableModule,
     MatCardModule,
     MatDividerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatTabsModule
   ],
   templateUrl: './exams.component.html',
   styleUrls: ['./exams.component.scss']
 })
 export class ExamsComponent implements OnInit {
   isCreatingExam = false;
+  isViewingDetails = false;
+  selectedExam: any = null;
+
   basicDetailsForm!: FormGroup;
   subjectDetailsForm!: FormGroup;
   sectionDetailsForm!: FormGroup;
@@ -48,10 +56,27 @@ export class ExamsComponent implements OnInit {
   questionTypes = ['4 option', '5 option', 'Numerical', 'Subjective'];
   marksOptions = [1, 2, 3, 4, 5];
 
-  constructor(private fb: FormBuilder) {}
+  exams = signal<any[]>([]);
+  displayedColumns: string[] = ['id', 'name', 'className', 'date', 'mode', 'status', 'actions'];
+
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.initForms();
+    this.fetchExams();
+  }
+
+  fetchExams() {
+    console.log('Fetching exams from http://localhost:3000/exams...');
+    this.http.get<any[]>('http://localhost:3000/exams').subscribe({
+      next: (data) => {
+        console.log('Fetched exams data:', data);
+        this.exams.set(data);
+      },
+      error: (error) => {
+        console.error('Error fetching exams:', error);
+      }
+    });
   }
 
   initForms() {
@@ -154,18 +179,51 @@ export class ExamsComponent implements OnInit {
 
   startCreateExam() {
     this.isCreatingExam = true;
+    this.isViewingDetails = false;
     this.initForms(); // Reset forms when starting fresh
   }
 
   cancelCreate() {
     this.isCreatingExam = false;
+    this.fetchExams(); // Refresh list when cancelling
+  }
+
+  viewDetails(exam: any) {
+    this.selectedExam = exam;
+    this.isViewingDetails = true;
+    this.isCreatingExam = false;
+  }
+
+  closeDetails() {
+    this.isViewingDetails = false;
+    this.selectedExam = null;
   }
 
   submit() {
-    console.log('Final Exam Data:', {
-      basic: this.basicDetailsForm.value,
-      subjects: this.subjectDetailsForm.value,
-      sections: this.sectionDetailsForm.value
+    const examData = {
+      name: this.basicDetailsForm.value.examName,
+      className: this.basicDetailsForm.value.className,
+      date: this.basicDetailsForm.value.examDate,
+      mode: this.basicDetailsForm.value.examMode,
+      rollNoDigits: this.subjectDetailsForm.value.rollNoDigits,
+      examSets: this.subjectDetailsForm.value.examSets,
+      structure: {
+        subjects: this.subjectDetailsForm.value.subjects,
+        sections: this.sectionDetailsForm.value.subjectSections
+      }
+    };
+
+    console.log('Submitting Exam Data to http://localhost:3000/exams...', examData);
+
+    this.http.post('http://localhost:3000/exams', examData).subscribe({
+      next: (response) => {
+        console.log('Exam created successfully:', response);
+        this.isCreatingExam = false;
+        this.fetchExams(); // Refresh list after creation
+      },
+      error: (error) => {
+        console.error('Error creating exam:', error);
+      }
     });
   }
 }

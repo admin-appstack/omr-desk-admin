@@ -16,6 +16,7 @@ export const routes: Routes = [
       { path: '', redirectTo: '/dashboard/home', pathMatch: 'full' },
       { path: 'home', loadComponent: () => import('./modules/dashboard/dashboard-home.component').then(m => m.DashboardHomeComponent) },
       { path: 'exams', loadComponent: () => import('./modules/exams/exams.component').then(m => m.ExamsComponent) },
+      { path: 'exams/:id/settings', loadComponent: () => import('./modules/exams/components/exam-settings/exam-settings').then(m => m.ExamSettings) },
       { path: 'classes', loadComponent: () => import('./modules/classes/classes').then(m => m.ClassesComponent) },
       { path: 'scanning', loadComponent: () => import('./modules/omr-scanning/omr-scanning.component').then(m => m.OmrScanningComponent) },
       { path: 'questions', loadComponent: () => import('./modules/question-bank/question-bank.component').then(m => m.QuestionBankComponent) },

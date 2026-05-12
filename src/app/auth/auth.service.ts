@@ -1,5 +1,7 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 export type SocialProvider = 'google' | 'facebook' | 'instagram';
 
@@ -27,41 +29,40 @@ export class AuthService {
   private readonly _isAuthenticated = signal(this.hasToken());
   readonly isAuthenticated = computed(() => this._isAuthenticated());
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly http: HttpClient
+  ) {}
 
-  login(credentials: LoginCredentials): Promise<void> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (!credentials.email || !credentials.password) {
-          reject(new Error('Email and password are required.'));
-          return;
-        }
+  async login(credentials: LoginCredentials): Promise<void> {
+    if (!credentials.email || !credentials.password) {
+      throw new Error('Email and password are required.');
+    }
 
-        this.saveSession({
-          name: 'OMR User',
-          email: credentials.email,
-          provider: 'password'
-        });
-        resolve();
-      }, 700);
+    const response = await firstValueFrom(
+      this.http.post<{ user: any, token: string }>('http://localhost:3000/auth/login', credentials)
+    );
+
+    this.saveSession({
+      name: response.user.name,
+      email: response.user.email,
+      provider: 'password'
     });
   }
 
-  register(payload: RegisterPayload): Promise<void> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (!payload.name || !payload.email || !payload.password) {
-          reject(new Error('All fields are required.'));
-          return;
-        }
+  async register(payload: RegisterPayload): Promise<void> {
+    if (!payload.name || !payload.email || !payload.password) {
+      throw new Error('All fields are required.');
+    }
 
-        this.saveSession({
-          name: payload.name,
-          email: payload.email,
-          provider: 'password'
-        });
-        resolve();
-      }, 900);
+    const response = await firstValueFrom(
+      this.http.post<{ user: any, token: string }>('http://localhost:3000/auth/register', payload)
+    );
+
+    this.saveSession({
+      name: response.user.name,
+      email: response.user.email,
+      provider: 'password'
     });
   }
 
