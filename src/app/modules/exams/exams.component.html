@@ -1,298 +1,333 @@
 <div class="exams-container">
-  <div class="header-row">
-    <div class="breadcrumb">
-      <span>Exams</span>
-      <mat-icon>chevron_right</mat-icon>
-      <span class="active">Create exam</span>
+  
+  <!-- Main Header Banner -->
+  <div class="page-header-banner" *ngIf="!isCreatingExam">
+    <div class="banner-content">
+      <div class="icon-box">
+        <mat-icon>assignment_turned_in</mat-icon>
+      </div>
+      <div class="text-content">
+        <h1>Exams</h1>
+        <p>Create, manage and schedule your exams with ease.</p>
+      </div>
+    </div>
+    <button mat-flat-button class="banner-create-btn" (click)="startCreateExam()">
+      <mat-icon>add</mat-icon> Create exam
+    </button>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!isCreatingExam">
+    <div class="empty-content">
+      <div class="illustration">
+        <img src="/images/not-found.svg" alt="No exams">
+      </div>
+      <h2>Exams not available</h2>
+      <p>No exams found, create new exam.</p>
+      <button mat-flat-button color="primary" class="big-create-btn" (click)="startCreateExam()">
+        + Create exam
+      </button>
     </div>
   </div>
 
-  <mat-stepper linear #stepper class="custom-stepper">
-    <!-- Step 1: Basic Details -->
-    <mat-step [stepControl]="basicDetailsForm">
-      <ng-template matStepLabel>Basic Details</ng-template>
-      <form [formGroup]="basicDetailsForm" class="step-content">
-        <div class="form-grid">
-          <mat-form-field appearance="outline">
-            <mat-label>Class Name</mat-label>
-            <mat-select formControlName="className">
-              <mat-option *ngFor="let c of classes" [value]="c">{{c}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+  <!-- Create Exam Stepper (Existing logic) -->
+  <div class="create-workflow" *ngIf="isCreatingExam">
+    <div class="header-row">
+      <div class="breadcrumb">
+        <span class="link" (click)="cancelCreate()">Exams</span>
+        <mat-icon>chevron_right</mat-icon>
+        <span class="active">Create exam</span>
+      </div>
+    </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Exam Name</mat-label>
-            <input matInput formControlName="examName" placeholder="Enter exam name">
-          </mat-form-field>
+    <mat-stepper linear #stepper class="custom-stepper">
+      <!-- Step 1: Basic Details -->
+      <mat-step [stepControl]="basicDetailsForm">
+        <ng-template matStepLabel>Basic Details</ng-template>
+        <form [formGroup]="basicDetailsForm" class="step-content">
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Class Name</mat-label>
+              <mat-select formControlName="className">
+                <mat-option *ngFor="let c of classes" [value]="c">{{c}}</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Choose Exam Date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="examDate">
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
+            <mat-form-field appearance="outline">
+              <mat-label>Exam Name</mat-label>
+              <input matInput formControlName="examName" placeholder="Enter exam name">
+            </mat-form-field>
 
-        <div class="mode-selection">
-          <label class="section-label">Exam Mode*</label>
-          <div class="checkbox-group">
-            <mat-checkbox formControlName="examMode" value="Offline" [checked]="basicDetailsForm.get('examMode')?.value === 'Offline'" (change)="basicDetailsForm.patchValue({examMode: 'Offline'})">Offline</mat-checkbox>
-            <mat-checkbox value="Online" [checked]="basicDetailsForm.get('examMode')?.value === 'Online'" (change)="basicDetailsForm.patchValue({examMode: 'Online'})">Online</mat-checkbox>
+            <mat-form-field appearance="outline">
+              <mat-label>Choose Exam Date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="examDate">
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
           </div>
-        </div>
 
-        <div class="step-actions">
-          <button mat-flat-button color="primary" matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <!-- Step 2: Subject Details -->
-    <mat-step [stepControl]="subjectDetailsForm">
-      <ng-template matStepLabel>Subject Details</ng-template>
-      <form [formGroup]="subjectDetailsForm" class="step-content">
-        <div class="stats-row">
-          <div class="stat-item">
-            <label>ROLL NO. DIGITS</label>
-            <div class="counter-input">
-              <button mat-icon-button (click)="subjectDetailsForm.patchValue({rollNoDigits: subjectDetailsForm.get('rollNoDigits')?.value - 1})">-</button>
-              <input type="number" formControlName="rollNoDigits">
-              <button mat-icon-button (click)="subjectDetailsForm.patchValue({rollNoDigits: subjectDetailsForm.get('rollNoDigits')?.value + 1})">+</button>
+          <div class="mode-selection">
+            <label class="section-label">Exam Mode*</label>
+            <div class="checkbox-group">
+              <mat-checkbox formControlName="examMode" value="Offline" [checked]="basicDetailsForm.get('examMode')?.value === 'Offline'" (change)="basicDetailsForm.patchValue({examMode: 'Offline'})">Offline</mat-checkbox>
+              <mat-checkbox value="Online" [checked]="basicDetailsForm.get('examMode')?.value === 'Online'" (change)="basicDetailsForm.patchValue({examMode: 'Online'})">Online</mat-checkbox>
             </div>
           </div>
 
-          <div class="stat-item">
-            <label>EXAM SETS</label>
-            <div class="counter-input">
-              <button mat-icon-button (click)="subjectDetailsForm.patchValue({examSets: subjectDetailsForm.get('examSets')?.value - 1})">-</button>
-              <input type="number" formControlName="examSets">
-              <button mat-icon-button (click)="subjectDetailsForm.patchValue({examSets: subjectDetailsForm.get('examSets')?.value + 1})">+</button>
+          <div class="step-actions">
+            <button mat-stroked-button (click)="cancelCreate()">Cancel</button>
+            <button mat-flat-button color="primary" matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <!-- Step 2: Subject Details -->
+      <mat-step [stepControl]="subjectDetailsForm">
+        <ng-template matStepLabel>Subject Details</ng-template>
+        <form [formGroup]="subjectDetailsForm" class="step-content">
+          <div class="stats-row">
+            <div class="stat-item">
+              <label>ROLL NO. DIGITS</label>
+              <div class="counter-input">
+                <button mat-icon-button (click)="subjectDetailsForm.patchValue({rollNoDigits: subjectDetailsForm.get('rollNoDigits')?.value - 1})">-</button>
+                <input type="number" formControlName="rollNoDigits">
+                <button mat-icon-button (click)="subjectDetailsForm.patchValue({rollNoDigits: subjectDetailsForm.get('rollNoDigits')?.value + 1})">+</button>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <label>EXAM SETS</label>
+              <div class="counter-input">
+                <button mat-icon-button (click)="subjectDetailsForm.patchValue({examSets: subjectDetailsForm.get('examSets')?.value - 1})">-</button>
+                <input type="number" formControlName="examSets">
+                <button mat-icon-button (click)="subjectDetailsForm.patchValue({examSets: subjectDetailsForm.get('examSets')?.value + 1})">+</button>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <label>SUBJECTS</label>
+              <div class="counter-input">
+                <button mat-icon-button (click)="subjectDetailsForm.patchValue({subjectsCount: subjectDetailsForm.get('subjectsCount')?.value - 1}); onSubjectsCountChange()">-</button>
+                <input type="number" formControlName="subjectsCount" (change)="onSubjectsCountChange()">
+                <button mat-icon-button (click)="subjectDetailsForm.patchValue({subjectsCount: subjectDetailsForm.get('subjectsCount')?.value + 1}); onSubjectsCountChange()">">+</button>
+              </div>
             </div>
           </div>
 
-          <div class="stat-item">
-            <label>SUBJECTS</label>
-            <div class="counter-input">
-              <button mat-icon-button (click)="subjectDetailsForm.patchValue({subjectsCount: subjectDetailsForm.get('subjectsCount')?.value - 1}); onSubjectsCountChange()">-</button>
-              <input type="number" formControlName="subjectsCount" (change)="onSubjectsCountChange()">
-              <button mat-icon-button (click)="subjectDetailsForm.patchValue({subjectsCount: subjectDetailsForm.get('subjectsCount')?.value + 1}); onSubjectsCountChange()">">+</button>
-            </div>
+          <div class="subjects-table-container">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>SR NO</th>
+                  <th>SUBJECT</th>
+                  <th>SECTIONS</th>
+                </tr>
+              </thead>
+              <tbody formArrayName="subjects">
+                <tr *ngFor="let s of subjects.controls; let i = index" [formGroupName]="i">
+                  <td>{{i + 1}}</td>
+                  <td>
+                    <mat-form-field appearance="outline" class="full-width">
+                      <input matInput formControlName="name" placeholder="Subject Name">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-select formControlName="sectionsCount">
+                        <mat-option *ngFor="let n of [1,2,3,4,5]" [value]="n">{{n}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
 
-        <div class="subjects-table-container">
-          <table class="custom-table">
-            <thead>
-              <tr>
-                <th>SR NO</th>
-                <th>SUBJECT</th>
-                <th>SECTIONS</th>
-              </tr>
-            </thead>
-            <tbody formArrayName="subjects">
-              <tr *ngFor="let s of subjects.controls; let i = index" [formGroupName]="i">
-                <td>{{i + 1}}</td>
-                <td>
-                  <mat-form-field appearance="outline" class="full-width">
-                    <input matInput formControlName="name" placeholder="Subject Name">
-                  </mat-form-field>
-                </td>
-                <td>
-                  <mat-form-field appearance="outline" class="full-width">
-                    <mat-select formControlName="sectionsCount">
-                      <mat-option *ngFor="let n of [1,2,3,4,5]" [value]="n">{{n}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+          <div class="step-actions">
+            <button mat-stroked-button matStepperPrevious>Previous</button>
+            <button mat-flat-button color="primary" matStepperNext (click)="generateSections()">Next</button>
+          </div>
+        </form>
+      </mat-step>
 
-        <div class="step-actions">
-          <button mat-stroked-button matStepperPrevious>Previous</button>
-          <button mat-flat-button color="primary" matStepperNext (click)="generateSections()">Next</button>
-        </div>
-      </form>
-    </mat-step>
+      <!-- Step 3: Section Details -->
+      <mat-step [stepControl]="sectionDetailsForm">
+        <ng-template matStepLabel>Section Details</ng-template>
+        <form [formGroup]="sectionDetailsForm" class="step-content">
+          <div class="sections-list" formArrayName="subjectSections">
+            <div *ngFor="let subj of subjectSections.controls; let i = index" [formGroupName]="i" class="subject-section-group">
+              <h3 class="subject-title">{{subj.get('subjectName')?.value}}</h3>
+              
+              <div formArrayName="sections" class="sections-grid">
+                <div *ngFor="let sec of getSections(i); let j = index" [formGroupName]="j" class="section-card">
+                  <div class="form-row">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Section name</mat-label>
+                      <input matInput formControlName="sectionName">
+                    </mat-form-field>
 
-    <!-- Step 3: Section Details -->
-    <mat-step [stepControl]="sectionDetailsForm">
-      <ng-template matStepLabel>Section Details</ng-template>
-      <form [formGroup]="sectionDetailsForm" class="step-content">
-        <div class="sections-list" formArrayName="subjectSections">
-          <div *ngFor="let subj of subjectSections.controls; let i = index" [formGroupName]="i" class="subject-section-group">
-            <h3 class="subject-title">{{subj.get('subjectName')?.value}}</h3>
-            
-            <div formArrayName="sections" class="sections-grid">
-              <div *ngFor="let sec of getSections(i); let j = index" [formGroupName]="j" class="section-card">
-                <div class="form-row">
-                  <mat-form-field appearance="outline">
-                    <mat-label>Section name</mat-label>
-                    <input matInput formControlName="sectionName">
-                  </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Number of Questions</mat-label>
+                      <mat-select formControlName="numQuestions">
+                        <mat-option *ngFor="let n of [1,5,10,20,30,50]" [value]="n">{{n}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
 
-                  <mat-form-field appearance="outline">
-                    <mat-label>Number of Questions</mat-label>
-                    <mat-select formControlName="numQuestions">
-                      <mat-option *ngFor="let n of [1,5,10,20,30,50]" [value]="n">{{n}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Question Type</mat-label>
+                      <mat-select formControlName="questionType">
+                        <mat-option *ngFor="let type of questionTypes" [value]="type">{{type}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
 
-                  <mat-form-field appearance="outline">
-                    <mat-label>Question Type</mat-label>
-                    <mat-select formControlName="questionType">
-                      <mat-option *ngFor="let type of questionTypes" [value]="type">{{type}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
+                  <div class="form-row">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Marks for correct</mat-label>
+                      <mat-select formControlName="marksCorrect">
+                        <mat-option *ngFor="let m of marksOptions" [value]="m">{{m}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
 
-                <div class="form-row">
-                  <mat-form-field appearance="outline">
-                    <mat-label>Marks for correct</mat-label>
-                    <mat-select formControlName="marksCorrect">
-                      <mat-option *ngFor="let m of marksOptions" [value]="m">{{m}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Marks for incorrect</mat-label>
+                      <mat-select formControlName="marksIncorrect">
+                        <mat-option *ngFor="let m of [0, -0.25, -0.5, -1]" [value]="m">{{m}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
 
-                  <mat-form-field appearance="outline">
-                    <mat-label>Marks for incorrect</mat-label>
-                    <mat-select formControlName="marksIncorrect">
-                      <mat-option *ngFor="let m of [0, -0.25, -0.5, -1]" [value]="m">{{m}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-
-                <div class="checkbox-row">
-                  <mat-checkbox formControlName="allowPartialMarks">Allow partial marks</mat-checkbox>
-                  <mat-icon class="info-icon" matTooltip="Partial marks for multiple correct answers">help_outline</mat-icon>
-                  
-                  <mat-checkbox formControlName="allowOptionalAttempts">Allow optional attempts</mat-checkbox>
-                  <mat-icon class="info-icon" matTooltip="Students can skip questions">help_outline</mat-icon>
+                  <div class="checkbox-row">
+                    <mat-checkbox formControlName="allowPartialMarks">Allow partial marks</mat-checkbox>
+                    <mat-icon class="info-icon" matTooltip="Partial marks for multiple correct answers">help_outline</mat-icon>
+                    
+                    <mat-checkbox formControlName="allowOptionalAttempts">Allow optional attempts</mat-checkbox>
+                    <mat-icon class="info-icon" matTooltip="Students can skip questions">help_outline</mat-icon>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="step-actions">
-          <button mat-stroked-button matStepperPrevious>Previous</button>
-          <button mat-flat-button color="primary" matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
+          <div class="step-actions">
+            <button mat-stroked-button matStepperPrevious>Previous</button>
+            <button mat-flat-button color="primary" matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
 
-    <!-- Step 4: Preview -->
-    <mat-step>
-      <ng-template matStepLabel>Preview</ng-template>
-      <div class="preview-layout">
-        <div class="sheet-container">
-          <div class="sheet-paper">
-            <h2 class="sheet-title">Sheet Preview</h2>
-            
-            <!-- OMR Header -->
-            <div class="omr-header-box">
-              <div class="header-field"><span>NAME :</span></div>
-              <div class="header-field"><span>EXAM :</span></div>
-              <div class="header-field"><span>DATE :</span></div>
-            </div>
+      <!-- Step 4: Preview -->
+      <mat-step>
+        <ng-template matStepLabel>Preview</ng-template>
+        <div class="preview-layout">
+          <div class="sheet-container">
+            <div class="sheet-paper">
+              <h2 class="sheet-title">Sheet Preview</h2>
+              
+              <!-- OMR Header -->
+              <div class="omr-header-box">
+                <div class="header-field"><span>NAME :</span></div>
+                <div class="header-field"><span>EXAM :</span></div>
+                <div class="header-field"><span>DATE :</span></div>
+              </div>
 
-            <div class="omr-body">
-              <div class="omr-column left">
-                <!-- Roll No Section -->
-                <div class="omr-section roll-no-section">
-                  <span class="section-label">Roll No</span>
-                  <div class="roll-boxes">
-                    <div class="roll-box" *ngFor="let d of getRange(basicDetailsForm.get('rollNoDigits')?.value || 5)"></div>
+              <div class="omr-body">
+                <div class="omr-column left">
+                  <!-- Roll No Section -->
+                  <div class="omr-section roll-no-section">
+                    <span class="section-label">Roll No</span>
+                    <div class="roll-boxes">
+                      <div class="roll-box" *ngFor="let d of getRange(basicDetailsForm.get('rollNoDigits')?.value || 5)"></div>
+                    </div>
+                    <div class="roll-bubbles">
+                      <div class="bubble-row" *ngFor="let row of [0,1,2,3,4,5,6,7,8,9]">
+                        <span class="row-label">{{row}}</span>
+                        <div class="bubbles">
+                          <span class="bubble" *ngFor="let d of getRange(basicDetailsForm.get('rollNoDigits')?.value || 5)"></span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="roll-bubbles">
-                    <div class="bubble-row" *ngFor="let row of [0,1,2,3,4,5,6,7,8,9]">
-                      <span class="row-label">{{row}}</span>
-                      <div class="bubbles">
-                        <span class="bubble" *ngFor="let d of getRange(basicDetailsForm.get('rollNoDigits')?.value || 5)"></span>
+
+                  <!-- Questions Section (Example) -->
+                  <div class="subject-omr" *ngFor="let subj of subjectSections.controls; let i = index">
+                    <h4 class="subj-name">{{subj.get('subjectName')?.value}}</h4>
+                    <div class="section-omr" *ngFor="let sec of getSections(i); let j = index">
+                      <span class="sec-name">{{sec.get('sectionName')?.value}}</span>
+                      <div class="question-row" *ngFor="let q of getRange(sec.get('numQuestions')?.value || 5); let qIdx = index">
+                        <span class="q-num">{{qIdx + 1}}</span>
+                        <div class="bubbles-container">
+                          <div class="letters-row">
+                            <span class="bubble-letter" *ngFor="let char of getBubbleLabels(sec.get('questionType')?.value)">{{char}}</span>
+                          </div>
+                          <div class="bubbles-row">
+                             <span class="bubble" *ngFor="let char of getBubbleLabels(sec.get('questionType')?.value)"></span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Questions Section (Example) -->
-                <div class="subject-omr" *ngFor="let subj of subjectSections.controls; let i = index">
-                  <h4 class="subj-name">{{subj.get('subjectName')?.value}}</h4>
-                  <div class="section-omr" *ngFor="let sec of getSections(i); let j = index">
-                    <span class="sec-name">{{sec.get('sectionName')?.value}}</span>
-                    <div class="question-row" *ngFor="let q of getRange(sec.get('numQuestions')?.value || 5); let qIdx = index">
-                      <span class="q-num">{{qIdx + 1}}</span>
-                      <div class="bubbles-container">
-                        <div class="letters-row">
-                          <span class="bubble-letter" *ngFor="let char of getBubbleLabels(sec.get('questionType')?.value)">{{char}}</span>
-                        </div>
-                        <div class="bubbles-row">
-                           <span class="bubble" *ngFor="let char of getBubbleLabels(sec.get('questionType')?.value)"></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="omr-column right">
+                  <!-- Additional questions would go here in a real implementation -->
+                  <div class="placeholder-text">Additional questions will overflow to this column...</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="zoom-controls">
+              <button mat-icon-button><mat-icon>zoom_in</mat-icon></button>
+              <button mat-icon-button><mat-icon>zoom_out</mat-icon></button>
+            </div>
+          </div>
+
+          <div class="preview-sidebar">
+            <mat-card class="sidebar-card">
+              <div class="sidebar-section">
+                <label>Set Headers</label>
+                <div class="select-with-edit">
+                  <mat-form-field appearance="outline">
+                    <mat-select value="Default">
+                      <mat-option value="Default">Default</mat-option>
+                      <mat-option value="Compact">Compact</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <button mat-icon-button><mat-icon>edit</mat-icon></button>
                 </div>
               </div>
 
-              <div class="omr-column right">
-                <!-- Additional questions would go here in a real implementation -->
-                <div class="placeholder-text">Additional questions will overflow to this column...</div>
+              <div class="sidebar-section">
+                <label>Set Labels</label>
+                <div class="select-with-edit">
+                  <mat-form-field appearance="outline">
+                    <mat-select value="Default">
+                      <mat-option value="Default">Default</mat-option>
+                      <mat-option value="Numeric">Numeric</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <button mat-icon-button><mat-icon>edit</mat-icon></button>
+                </div>
               </div>
-            </div>
-          </div>
-          
-          <div class="zoom-controls">
-            <button mat-icon-button><mat-icon>zoom_in</mat-icon></button>
-            <button mat-icon-button><mat-icon>zoom_out</mat-icon></button>
+
+              <button mat-button class="sidebar-action-btn">
+                <span>Add answer key</span>
+                <mat-icon>chevron_right</mat-icon>
+              </button>
+
+              <button mat-button class="sidebar-action-btn">
+                <span>Edit OMR</span>
+                <mat-icon>chevron_right</mat-icon>
+              </button>
+            </mat-card>
           </div>
         </div>
 
-        <div class="preview-sidebar">
-          <mat-card class="sidebar-card">
-            <div class="sidebar-section">
-              <label>Set Headers</label>
-              <div class="select-with-edit">
-                <mat-form-field appearance="outline">
-                  <mat-select value="Default">
-                    <mat-option value="Default">Default</mat-option>
-                    <mat-option value="Compact">Compact</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <button mat-icon-button><mat-icon>edit</mat-icon></button>
-              </div>
-            </div>
-
-            <div class="sidebar-section">
-              <label>Set Labels</label>
-              <div class="select-with-edit">
-                <mat-form-field appearance="outline">
-                  <mat-select value="Default">
-                    <mat-option value="Default">Default</mat-option>
-                    <mat-option value="Numeric">Numeric</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <button mat-icon-button><mat-icon>edit</mat-icon></button>
-              </div>
-            </div>
-
-            <button mat-button class="sidebar-action-btn">
-              <span>Add answer key</span>
-              <mat-icon>chevron_right</mat-icon>
-            </button>
-
-            <button mat-button class="sidebar-action-btn">
-              <span>Edit OMR</span>
-              <mat-icon>chevron_right</mat-icon>
-            </button>
-          </mat-card>
+        <div class="step-actions">
+          <button mat-stroked-button matStepperPrevious>Previous</button>
+          <button mat-flat-button color="primary" (click)="submit()">Create Exam</button>
         </div>
-      </div>
-
-      <div class="step-actions">
-        <button mat-stroked-button matStepperPrevious>Previous</button>
-        <button mat-flat-button color="primary" (click)="submit()">Create Exam</button>
-      </div>
-    </mat-step>
-  </mat-stepper>
+      </mat-step>
+    </mat-stepper>
+  </div>
 </div>

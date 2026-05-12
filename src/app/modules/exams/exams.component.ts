@@ -39,6 +39,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrls: ['./exams.component.scss']
 })
 export class ExamsComponent implements OnInit {
+  isCreatingExam = false;
   basicDetailsForm!: FormGroup;
   subjectDetailsForm!: FormGroup;
   sectionDetailsForm!: FormGroup;
@@ -149,6 +150,15 @@ export class ExamsComponent implements OnInit {
     if (type === '4 option') return ['A', 'B', 'C', 'D'];
     if (type === '5 option') return ['A', 'B', 'C', 'D', 'E'];
     return ['A', 'B', 'C', 'D', 'E'];
+  }
+
+  startCreateExam() {
+    this.isCreatingExam = true;
+    this.initForms(); // Reset forms when starting fresh
+  }
+
+  cancelCreate() {
+    this.isCreatingExam = false;
   }
 
   submit() {
