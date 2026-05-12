@@ -124,14 +124,28 @@
               <mat-icon>class</mat-icon>
               <span>Change Batch</span>
             </button>
-            <button mat-menu-item *ngIf="row.status !== 'Suspended'">
-              <mat-icon>block</mat-icon>
-              <span>Suspend Student</span>
+            <button mat-menu-item [matMenuTriggerFor]="statusSubMenu">
+              <mat-icon>swap_horiz</mat-icon>
+              <span>Change Status</span>
             </button>
-            <button mat-menu-item *ngIf="row.status === 'Suspended'">
-              <mat-icon>check_circle</mat-icon>
-              <span>Activate Student</span>
-            </button>
+            <mat-menu #statusSubMenu="matMenu">
+              <button mat-menu-item *ngIf="row.status !== 'Active'" (click)="updateStatus(row, 'Active')">
+                <mat-icon>check_circle</mat-icon>
+                <span>Make Active</span>
+              </button>
+              <button mat-menu-item *ngIf="row.status !== 'Pending'" (click)="updateStatus(row, 'Pending')">
+                <mat-icon>hourglass_empty</mat-icon>
+                <span>Make Pending</span>
+              </button>
+              <button mat-menu-item *ngIf="row.status !== 'Suspended'" (click)="updateStatus(row, 'Suspended')">
+                <mat-icon>block</mat-icon>
+                <span>Suspend</span>
+              </button>
+              <button mat-menu-item *ngIf="row.status !== 'Alumni'" (click)="updateStatus(row, 'Alumni')">
+                <mat-icon>school</mat-icon>
+                <span>Mark as Alumni</span>
+              </button>
+            </mat-menu>
             <mat-divider></mat-divider>
             <button mat-menu-item class="danger-text">
               <mat-icon color="warn">delete</mat-icon>

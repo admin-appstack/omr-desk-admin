@@ -75,4 +75,9 @@ export class StudentManagement {
     }
     this.dataSource.data = filtered;
   }
+
+  updateStatus(student: any, status: string) {
+    student.status = status;
+    this.updateDataSource();
+  }
 }
