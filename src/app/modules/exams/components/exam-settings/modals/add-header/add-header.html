@@ -1,0 +1,88 @@
+<div class="modal-overlay" (click)="close.emit()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    
+    <!-- Purple Header -->
+    <div class="modal-header purple-header">
+      <div class="title-with-icon">
+        <mat-icon class="header-icon">border_all</mat-icon>
+        <h3>Add header</h3>
+      </div>
+      <button class="close-circle-btn" (click)="close.emit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+      
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Header Name *</mat-label>
+        <input matInput value="Skylight Academy">
+      </mat-form-field>
+
+      <div class="toggle-row">
+        <span>Title</span>
+        <mat-slide-toggle [checked]="isTitleEnabled()" (change)="isTitleEnabled.set($event.checked)"></mat-slide-toggle>
+      </div>
+
+      @if (isTitleEnabled()) {
+        <mat-form-field appearance="outline" class="full-width" style="margin-top: 0.5rem;">
+          <mat-label>Title *</mat-label>
+          <input matInput value="Title">
+        </mat-form-field>
+      }
+
+      <div class="counter-row">
+        <span>Labels</span>
+        <div class="counter-control">
+          <button class="counter-btn" (click)="decrementLabels()">-</button>
+          <span class="counter-val">{{ labelCount() }}</span>
+          <button class="counter-btn plus" (click)="incrementLabels()">+</button>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>SR NO</th>
+            <th>Label</th>
+            <th>Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of labelsList(); track item.srNo) {
+            <tr>
+              <td>{{ item.srNo }}</td>
+              <td>
+                <mat-form-field appearance="outline" class="table-field" subscriptSizing="dynamic">
+                  <input matInput [value]="item.label">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="outline" class="table-field" subscriptSizing="dynamic">
+                  <mat-select [value]="item.size">
+                    <mat-option value="Medium">Medium</mat-option>
+                    <mat-option value="Small">Small</mat-option>
+                    <mat-option value="Large">Large</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer styled-footer">
+      <button class="cancel-btn" (click)="close.emit()">Cancel</button>
+      <button class="save-btn" (click)="close.emit()">
+        <mat-icon>check_circle</mat-icon>
+        Save Changes
+      </button>
+    </div>
+
+  </div>
+</div>

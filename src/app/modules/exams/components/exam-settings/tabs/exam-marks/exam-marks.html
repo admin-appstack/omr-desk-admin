@@ -1,0 +1,35 @@
+<div class="exam-marks-content">
+  @for (subject of subjects; track subject.name) {
+    <div class="subject-group">
+      <h2 class="subject-title">{{ subject.name }}</h2>
+      <div class="cards-list">
+        @for (section of subject.sections; track section.id) {
+          <div class="data-card">
+            <div class="left-info">
+              <span class="sr-no">{{ section.id }}</span>
+              <span class="name">{{ section.name }}</span>
+            </div>
+            <div class="right-actions">
+              <div class="status-item positive">
+                <mat-icon>check_circle</mat-icon>
+                <span>{{ section.correct }}</span>
+              </div>
+              <div class="status-item negative">
+                <mat-icon>cancel</mat-icon>
+                <span>{{ section.incorrect }}</span>
+              </div>
+              <button mat-icon-button class="action-btn" (click)="openSectionModal(section)">
+                <mat-icon>settings</mat-icon>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
+
+<!-- Section Settings Modal -->
+@if (showSectionModal()) {
+  <app-section-settings-modal [section]="selectedSection()" (close)="closeSectionModal()"></app-section-settings-modal>
+}

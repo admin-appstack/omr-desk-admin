@@ -1,0 +1,79 @@
+.settings-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+
+  .box-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.inline-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  .form-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label { font-size: 0.85rem; font-weight: 600; color: #64748b; }
+    .custom-input {
+      height: 42px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      padding: 0 1rem;
+      font-weight: 500;
+      color: #334155;
+      width: 100%;
+      box-sizing: border-box;
+      &:focus { border-color: #2563eb; outline: none; }
+    }
+  }
+
+  .add-btn {
+    height: 42px;
+    padding: 0 1.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+}
+
+.data-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  .list-item {
+    background: #f8fafc;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .item-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .icon { color: #64748b; }
+      .item-title { font-weight: 700; color: #0f172a; }
+      .item-subtitle { color: #64748b; font-size: 0.85rem; }
+    }
+
+    .delete-btn {
+      color: #94a3b8;
+      &:hover { color: #ef4444; }
+    }
+  }
+}

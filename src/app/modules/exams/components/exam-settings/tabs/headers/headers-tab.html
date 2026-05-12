@@ -1,0 +1,27 @@
+<div class="split-layout">
+  <!-- Main Content -->
+  <div class="main-content-area">
+    <div class="settings-box">
+      <h2 class="box-title">Set Headers</h2>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Select header</label>
+          <select class="custom-select" (change)="onHeaderChange($event)">
+            <option>Add new</option>
+            @for (header of headers(); track header) {
+              <option [selected]="header === 'Skylight Academy'">{{ header }}</option>
+            }
+          </select>
+        </div>
+        <button mat-icon-button class="edit-btn">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Header Modal -->
+@if (showAddHeaderModal()) {
+  <app-add-header-modal (close)="closeAddHeaderModal()"></app-add-header-modal>
+}

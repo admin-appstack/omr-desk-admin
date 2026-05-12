@@ -1,0 +1,78 @@
+/* Exam Marks Content */
+.exam-marks-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .subject-group {
+    .subject-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 1rem;
+    }
+
+    .cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+
+  .data-card {
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: all 0.2s;
+
+    &:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+
+    .left-info {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+
+      .sr-no {
+        color: #94a3b8;
+        font-weight: 600;
+        width: 24px;
+      }
+
+      .name {
+        color: #334155;
+        font-weight: 600;
+      }
+    }
+
+    .right-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      .status-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+
+        mat-icon { font-size: 20px; width: 20px; height: 20px; }
+
+        &.positive { color: #10b981; }
+        &.negative { color: #ef4444; }
+      }
+
+      .action-btn {
+        color: #94a3b8;
+        &:hover { color: #0f172a; }
+      }
+    }
+  }
+}

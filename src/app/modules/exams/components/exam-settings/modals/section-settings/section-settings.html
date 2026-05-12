@@ -1,0 +1,83 @@
+<div class="modal-overlay" (click)="close.emit()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    
+    <!-- Purple Header -->
+    <div class="modal-header purple-header">
+      <div class="title-with-icon">
+        <mat-icon class="header-icon">settings</mat-icon>
+        <h3>{{ section()?.name }} Settings</h3>
+      </div>
+      <button class="close-circle-btn" (click)="close.emit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+
+      <!-- Input with Icon -->
+      <div class="form-group-with-icon">
+        <mat-icon class="input-icon">edit</mat-icon>
+        <div class="input-wrapper">
+          <label>Section Name</label>
+          <input type="text" [value]="section()?.name" class="custom-input">
+        </div>
+      </div>
+
+      <div class="form-group-with-icon">
+        <mat-icon class="input-icon">list</mat-icon>
+        <div class="input-wrapper">
+          <label>Question Type</label>
+          <select class="custom-select">
+            <option [selected]="section()?.qType === '5 option'">5 option</option>
+            <option [selected]="section()?.qType === '4 option'">4 option</option>
+            <option>Numerical</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group-with-icon">
+          <mat-icon class="input-icon">grade</mat-icon>
+          <div class="input-wrapper">
+            <label>Marks for correct</label>
+            <input type="number" [value]="section()?.correct" class="custom-input">
+          </div>
+        </div>
+        <div class="form-group-with-icon">
+          <mat-icon class="input-icon">error_outline</mat-icon>
+          <div class="input-wrapper">
+            <label>Marks for incorrect</label>
+            <input type="number" [value]="section()?.incorrect" class="custom-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Toggles -->
+      <div class="toggle-row">
+        <span>Allow partial marks</span>
+        <div class="toggle-switch">
+          <input type="checkbox" id="toggle-partial">
+          <label for="toggle-partial"></label>
+        </div>
+      </div>
+      <div class="toggle-row">
+        <span>Allow optional attempts</span>
+        <div class="toggle-switch">
+          <input type="checkbox" id="toggle-optional">
+          <label for="toggle-optional"></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer styled-footer">
+      <button class="cancel-btn" (click)="close.emit()">Cancel</button>
+      <button class="save-btn" (click)="close.emit()">
+        <mat-icon>check_circle</mat-icon>
+        Save Changes
+      </button>
+    </div>
+
+  </div>
+</div>

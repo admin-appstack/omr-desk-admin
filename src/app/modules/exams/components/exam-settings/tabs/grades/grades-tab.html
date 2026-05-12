@@ -1,0 +1,52 @@
+<div class="settings-box">
+  <h2 class="box-title">Set Grades</h2>
+  
+  <!-- Add Grade Form -->
+  <div class="inline-form">
+    <div class="form-field">
+      <label>Grade *</label>
+      <input type="text" class="custom-input">
+    </div>
+    <div class="form-field">
+      <label>Marks >= *</label>
+      <input type="text" class="custom-input">
+    </div>
+    <div class="form-field">
+      <label>Marks < *</label>
+      <input type="text" class="custom-input">
+    </div>
+    <button mat-flat-button color="primary" class="add-btn">
+      + Add
+    </button>
+  </div>
+
+  <!-- Grades List -->
+  <div class="data-list">
+    <!-- Grade A -->
+    <div class="list-item">
+      <div class="item-info">
+        <mat-icon class="icon">star_border</mat-icon>
+        <div>
+          <div class="item-title">A</div>
+          <div class="item-subtitle">(95.0 - 100.0)</div>
+        </div>
+      </div>
+      <button mat-icon-button class="delete-btn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <!-- Grade B -->
+    <div class="list-item">
+      <div class="item-info">
+        <mat-icon class="icon">star_border</mat-icon>
+        <div>
+          <div class="item-title">B</div>
+          <div class="item-subtitle">(80.0 - 95.0)</div>
+        </div>
+      </div>
+      <button mat-icon-button class="delete-btn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
