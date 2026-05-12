@@ -45,6 +45,10 @@
       <mat-step [stepControl]="basicDetailsForm">
         <ng-template matStepLabel>Basic Details</ng-template>
         <form [formGroup]="basicDetailsForm" class="step-content">
+          <div class="step-title-row">
+            <h3><mat-icon>info</mat-icon> Exam Identification</h3>
+          </div>
+
           <div class="form-grid">
             <mat-form-field appearance="outline">
               <mat-label>Class Name</mat-label>
@@ -75,8 +79,12 @@
           </div>
 
           <div class="step-actions">
-            <button mat-stroked-button (click)="cancelCreate()">Cancel</button>
-            <button mat-flat-button color="primary" matStepperNext>Next</button>
+            <button mat-stroked-button (click)="cancelCreate()">
+              <mat-icon>close</mat-icon> Cancel
+            </button>
+            <button mat-flat-button color="primary" matStepperNext>
+              Next <mat-icon>chevron_right</mat-icon>
+            </button>
           </div>
         </form>
       </mat-step>
@@ -85,31 +93,47 @@
       <mat-step [stepControl]="subjectDetailsForm">
         <ng-template matStepLabel>Subject Details</ng-template>
         <form [formGroup]="subjectDetailsForm" class="step-content">
+          <div class="step-title-row">
+            <h3><mat-icon>menu_book</mat-icon> Exam Structure</h3>
+          </div>
+
           <div class="stats-row">
             <div class="stat-item">
               <label>ROLL NO. DIGITS</label>
               <div class="counter-input">
-                <button mat-icon-button (click)="subjectDetailsForm.patchValue({rollNoDigits: subjectDetailsForm.get('rollNoDigits')?.value - 1})">-</button>
+                <button type="button" mat-icon-button (click)="subjectDetailsForm.patchValue({rollNoDigits: subjectDetailsForm.get('rollNoDigits')?.value - 1})">
+                  <mat-icon>remove</mat-icon>
+                </button>
                 <input type="number" formControlName="rollNoDigits">
-                <button mat-icon-button (click)="subjectDetailsForm.patchValue({rollNoDigits: subjectDetailsForm.get('rollNoDigits')?.value + 1})">+</button>
+                <button type="button" mat-icon-button (click)="subjectDetailsForm.patchValue({rollNoDigits: (subjectDetailsForm.get('rollNoDigits')?.value || 0) + 1})">
+                  <mat-icon>add</mat-icon>
+                </button>
               </div>
             </div>
 
             <div class="stat-item">
               <label>EXAM SETS</label>
               <div class="counter-input">
-                <button mat-icon-button (click)="subjectDetailsForm.patchValue({examSets: subjectDetailsForm.get('examSets')?.value - 1})">-</button>
+                <button type="button" mat-icon-button (click)="subjectDetailsForm.patchValue({examSets: subjectDetailsForm.get('examSets')?.value - 1})">
+                  <mat-icon>remove</mat-icon>
+                </button>
                 <input type="number" formControlName="examSets">
-                <button mat-icon-button (click)="subjectDetailsForm.patchValue({examSets: subjectDetailsForm.get('examSets')?.value + 1})">+</button>
+                <button type="button" mat-icon-button (click)="subjectDetailsForm.patchValue({examSets: (subjectDetailsForm.get('examSets')?.value || 0) + 1})">
+                  <mat-icon>add</mat-icon>
+                </button>
               </div>
             </div>
 
             <div class="stat-item">
               <label>SUBJECTS</label>
               <div class="counter-input">
-                <button mat-icon-button (click)="subjectDetailsForm.patchValue({subjectsCount: subjectDetailsForm.get('subjectsCount')?.value - 1}); onSubjectsCountChange()">-</button>
+                <button type="button" mat-icon-button (click)="subjectDetailsForm.patchValue({subjectsCount: subjectDetailsForm.get('subjectsCount')?.value - 1}); onSubjectsCountChange()">
+                  <mat-icon>remove</mat-icon>
+                </button>
                 <input type="number" formControlName="subjectsCount" (change)="onSubjectsCountChange()">
-                <button mat-icon-button (click)="subjectDetailsForm.patchValue({subjectsCount: subjectDetailsForm.get('subjectsCount')?.value + 1}); onSubjectsCountChange()">">+</button>
+                <button type="button" mat-icon-button (click)="subjectDetailsForm.patchValue({subjectsCount: (subjectDetailsForm.get('subjectsCount')?.value || 0) + 1}); onSubjectsCountChange()">
+                  <mat-icon>add</mat-icon>
+                </button>
               </div>
             </div>
           </div>
@@ -144,8 +168,12 @@
           </div>
 
           <div class="step-actions">
-            <button mat-stroked-button matStepperPrevious>Previous</button>
-            <button mat-flat-button color="primary" matStepperNext (click)="generateSections()">Next</button>
+            <button mat-stroked-button matStepperPrevious>
+              <mat-icon>chevron_left</mat-icon> Previous
+            </button>
+            <button mat-flat-button color="primary" matStepperNext (click)="generateSections()">
+              Next <mat-icon>chevron_right</mat-icon>
+            </button>
           </div>
         </form>
       </mat-step>
@@ -154,12 +182,18 @@
       <mat-step [stepControl]="sectionDetailsForm">
         <ng-template matStepLabel>Section Details</ng-template>
         <form [formGroup]="sectionDetailsForm" class="step-content">
+          <div class="step-title-row">
+            <h3><mat-icon>settings_suggest</mat-icon> Section Configuration</h3>
+          </div>
+
           <div class="sections-list" formArrayName="subjectSections">
             <div *ngFor="let subj of subjectSections.controls; let i = index" [formGroupName]="i" class="subject-section-group">
               <h3 class="subject-title">{{subj.get('subjectName')?.value}}</h3>
               
               <div formArrayName="sections" class="sections-grid">
                 <div *ngFor="let sec of getSections(i); let j = index" [formGroupName]="j" class="section-card">
+                  <div class="section-badge">Section {{j + 1}}</div>
+                  
                   <div class="form-row">
                     <mat-form-field appearance="outline">
                       <mat-label>Section name</mat-label>
@@ -210,8 +244,12 @@
           </div>
 
           <div class="step-actions">
-            <button mat-stroked-button matStepperPrevious>Previous</button>
-            <button mat-flat-button color="primary" matStepperNext>Next</button>
+            <button mat-stroked-button matStepperPrevious>
+              <mat-icon>chevron_left</mat-icon> Previous
+            </button>
+            <button mat-flat-button color="primary" matStepperNext>
+              Next <mat-icon>chevron_right</mat-icon>
+            </button>
           </div>
         </form>
       </mat-step>
@@ -219,113 +257,123 @@
       <!-- Step 4: Preview -->
       <mat-step>
         <ng-template matStepLabel>Preview</ng-template>
-        <div class="preview-layout">
-          <div class="sheet-container">
-            <div class="sheet-paper">
-              <h2 class="sheet-title">Sheet Preview</h2>
+        <div class="step-content">
+          <div class="step-title-row">
+            <h3><mat-icon>visibility</mat-icon> OMR Sheet Preview</h3>
+          </div>
+          
+          <div class="preview-layout">
+            <div class="sheet-container">
+              <div class="sheet-paper">
+                <h2 class="sheet-title">Sheet Preview</h2>
+                
+                <!-- OMR Header -->
+                <div class="omr-header-box">
+                  <div class="header-field"><span>NAME :</span></div>
+                  <div class="header-field"><span>EXAM :</span></div>
+                  <div class="header-field"><span>DATE :</span></div>
+                </div>
+
+                <div class="omr-body">
+                  <div class="omr-column left">
+                    <!-- Roll No Section -->
+                    <div class="omr-section roll-no-section">
+                      <span class="section-label">Roll No</span>
+                      <div class="roll-boxes">
+                        <div class="roll-box" *ngFor="let d of getRange(subjectDetailsForm.get('rollNoDigits')?.value || 5)"></div>
+                      </div>
+                      <div class="roll-bubbles">
+                        <div class="bubble-row" *ngFor="let row of [0,1,2,3,4,5,6,7,8,9]">
+                          <span class="row-label">{{row}}</span>
+                          <div class="bubbles">
+                            <span class="bubble" *ngFor="let d of getRange(subjectDetailsForm.get('rollNoDigits')?.value || 5)"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Questions Section -->
+                    <div class="subject-omr" *ngFor="let subj of subjectSections.controls; let i = index">
+                      <h4 class="subj-name">{{subj.get('subjectName')?.value}}</h4>
+                      <div class="section-omr" *ngFor="let sec of getSections(i); let j = index">
+                        <span class="sec-name">{{sec.get('sectionName')?.value}}</span>
+                        <div class="question-row" *ngFor="let q of getRange(sec.get('numQuestions')?.value || 5); let qIdx = index">
+                          <span class="q-num">{{qIdx + 1}}</span>
+                          <div class="bubbles-container">
+                            <div class="letters-row">
+                              <span class="bubble-letter" *ngFor="let char of getBubbleLabels(sec.get('questionType')?.value)">{{char}}</span>
+                            </div>
+                            <div class="bubbles-row">
+                               <span class="bubble" *ngFor="let char of getBubbleLabels(sec.get('questionType')?.value)"></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="omr-column right">
+                    <div class="placeholder-text">Additional questions will overflow here...</div>
+                  </div>
+                </div>
+              </div>
               
-              <!-- OMR Header -->
-              <div class="omr-header-box">
-                <div class="header-field"><span>NAME :</span></div>
-                <div class="header-field"><span>EXAM :</span></div>
-                <div class="header-field"><span>DATE :</span></div>
+              <div class="zoom-controls">
+                <button mat-icon-button><mat-icon>zoom_in</mat-icon></button>
+                <button mat-icon-button><mat-icon>zoom_out</mat-icon></button>
+                <button mat-icon-button><mat-icon>print</mat-icon></button>
               </div>
+            </div>
 
-              <div class="omr-body">
-                <div class="omr-column left">
-                  <!-- Roll No Section -->
-                  <div class="omr-section roll-no-section">
-                    <span class="section-label">Roll No</span>
-                    <div class="roll-boxes">
-                      <div class="roll-box" *ngFor="let d of getRange(basicDetailsForm.get('rollNoDigits')?.value || 5)"></div>
-                    </div>
-                    <div class="roll-bubbles">
-                      <div class="bubble-row" *ngFor="let row of [0,1,2,3,4,5,6,7,8,9]">
-                        <span class="row-label">{{row}}</span>
-                        <div class="bubbles">
-                          <span class="bubble" *ngFor="let d of getRange(basicDetailsForm.get('rollNoDigits')?.value || 5)"></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Questions Section (Example) -->
-                  <div class="subject-omr" *ngFor="let subj of subjectSections.controls; let i = index">
-                    <h4 class="subj-name">{{subj.get('subjectName')?.value}}</h4>
-                    <div class="section-omr" *ngFor="let sec of getSections(i); let j = index">
-                      <span class="sec-name">{{sec.get('sectionName')?.value}}</span>
-                      <div class="question-row" *ngFor="let q of getRange(sec.get('numQuestions')?.value || 5); let qIdx = index">
-                        <span class="q-num">{{qIdx + 1}}</span>
-                        <div class="bubbles-container">
-                          <div class="letters-row">
-                            <span class="bubble-letter" *ngFor="let char of getBubbleLabels(sec.get('questionType')?.value)">{{char}}</span>
-                          </div>
-                          <div class="bubbles-row">
-                             <span class="bubble" *ngFor="let char of getBubbleLabels(sec.get('questionType')?.value)"></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+            <div class="preview-sidebar">
+              <mat-card class="sidebar-card">
+                <div class="sidebar-section">
+                  <label>Set Headers</label>
+                  <div class="select-with-edit">
+                    <mat-form-field appearance="outline">
+                      <mat-select value="Default">
+                        <mat-option value="Default">Default</mat-option>
+                        <mat-option value="Compact">Compact</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <button mat-icon-button><mat-icon>edit</mat-icon></button>
                   </div>
                 </div>
 
-                <div class="omr-column right">
-                  <!-- Additional questions would go here in a real implementation -->
-                  <div class="placeholder-text">Additional questions will overflow to this column...</div>
+                <div class="sidebar-section">
+                  <label>Set Labels</label>
+                  <div class="select-with-edit">
+                    <mat-form-field appearance="outline">
+                      <mat-select value="Default">
+                        <mat-option value="Default">Default</mat-option>
+                        <mat-option value="Numeric">Numeric</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <button mat-icon-button><mat-icon>edit</mat-icon></button>
+                  </div>
                 </div>
-              </div>
-            </div>
-            
-            <div class="zoom-controls">
-              <button mat-icon-button><mat-icon>zoom_in</mat-icon></button>
-              <button mat-icon-button><mat-icon>zoom_out</mat-icon></button>
+
+                <button mat-button class="sidebar-action-btn">
+                  <span>Add answer key</span>
+                  <mat-icon>key</mat-icon>
+                </button>
+
+                <button mat-button class="sidebar-action-btn">
+                  <span>Edit OMR Layout</span>
+                  <mat-icon>architecture</mat-icon>
+                </button>
+              </mat-card>
             </div>
           </div>
 
-          <div class="preview-sidebar">
-            <mat-card class="sidebar-card">
-              <div class="sidebar-section">
-                <label>Set Headers</label>
-                <div class="select-with-edit">
-                  <mat-form-field appearance="outline">
-                    <mat-select value="Default">
-                      <mat-option value="Default">Default</mat-option>
-                      <mat-option value="Compact">Compact</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <button mat-icon-button><mat-icon>edit</mat-icon></button>
-                </div>
-              </div>
-
-              <div class="sidebar-section">
-                <label>Set Labels</label>
-                <div class="select-with-edit">
-                  <mat-form-field appearance="outline">
-                    <mat-select value="Default">
-                      <mat-option value="Default">Default</mat-option>
-                      <mat-option value="Numeric">Numeric</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <button mat-icon-button><mat-icon>edit</mat-icon></button>
-                </div>
-              </div>
-
-              <button mat-button class="sidebar-action-btn">
-                <span>Add answer key</span>
-                <mat-icon>chevron_right</mat-icon>
-              </button>
-
-              <button mat-button class="sidebar-action-btn">
-                <span>Edit OMR</span>
-                <mat-icon>chevron_right</mat-icon>
-              </button>
-            </mat-card>
+          <div class="step-actions">
+            <button mat-stroked-button matStepperPrevious>
+              <mat-icon>chevron_left</mat-icon> Previous
+            </button>
+            <button mat-flat-button color="primary" (click)="submit()">
+              <mat-icon>check_circle</mat-icon> Create Exam
+            </button>
           </div>
-        </div>
-
-        <div class="step-actions">
-          <button mat-stroked-button matStepperPrevious>Previous</button>
-          <button mat-flat-button color="primary" (click)="submit()">Create Exam</button>
         </div>
       </mat-step>
     </mat-stepper>
