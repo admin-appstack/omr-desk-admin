@@ -27,13 +27,27 @@ $font: 'Inter', sans-serif;
   overflow: hidden;
   box-shadow: 0 24px 48px -12px rgba(10, 79, 124, 0.35);
 
-  .hero-glow {
+  &::before {
+    content: '';
     position: absolute;
-    width: 400px; height: 400px;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.08);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%);
-    top: -100px; right: 100px;
-    pointer-events: none;
+    z-index: 0;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 280px; height: 280px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .hero-glow {
+    display: none;
   }
 
   .hero-left {

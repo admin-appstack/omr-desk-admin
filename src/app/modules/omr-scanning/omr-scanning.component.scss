@@ -10,6 +10,25 @@
   color: white;
   position: relative;
   overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+    z-index: 0;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 280px; height: 280px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    z-index: 0;
+  }
 }
 
 .module-hero.blue {

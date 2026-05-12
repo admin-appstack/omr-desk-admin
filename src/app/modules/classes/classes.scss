@@ -8,58 +8,84 @@
   .page-header-banner {
     flex-shrink: 0;
     background: linear-gradient(135deg, #1e293b 0%, #334155 100%); // Different color for distinction
-    border-radius: 16px;
-    padding: 2rem;
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 30%;
+      width: 280px; height: 280px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      z-index: 0;
+    }
 
     .banner-content {
+      position: relative;
+      z-index: 1;
       display: flex;
       align-items: center;
       gap: 1.5rem;
 
       .icon-box {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 1rem;
-        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.15);
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
         
         mat-icon {
-          font-size: 32px;
-          width: 32px;
-          height: 32px;
+          font-size: 28px;
+          width: 28px;
+          height: 28px;
+          color: white;
         }
       }
 
       .text-content {
         h1 {
           margin: 0;
-          font-size: 1.75rem;
-          font-weight: 800;
-          letter-spacing: -0.02em;
+          font-size: 1.6rem;
+          font-weight: 900;
+          color: white;
         }
         p {
           margin: 0.25rem 0 0;
-          font-size: 1rem;
-          opacity: 0.9;
-          font-weight: 500;
+          font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.7);
         }
       }
     }
 
     .banner-create-btn {
+      position: relative;
+      z-index: 1;
       background: white;
       color: #1e293b;
-      height: 48px;
-      padding: 0 1.75rem;
-      border-radius: 10px;
+      height: 46px;
+      padding: 0 1.5rem;
+      border-radius: 12px;
       font-weight: 700;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
       transition: all 0.2s;
 
       &:hover {
