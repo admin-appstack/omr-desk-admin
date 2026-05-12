@@ -77,76 +77,17 @@
             <div class="form-row">
               <div class="form-field">
                 <label>Select header</label>
-                <select class="custom-select">
-                  <option>None</option>
+                <select class="custom-select" (change)="onHeaderChange($event)">
+                  <option>Add new</option>
+                  @for (header of headers(); track header) {
+                    <option [selected]="header === 'Skylight Academy'">{{ header }}</option>
+                  }
                 </select>
               </div>
               <button mat-icon-button class="edit-btn">
                 <mat-icon>edit</mat-icon>
               </button>
             </div>
-          </div>
-        </div>
-
-        <!-- Sidebar (Add Header) -->
-        <div class="sidebar-panel">
-          <div class="sidebar-header">
-            <h3>Add header</h3>
-            <button mat-icon-button class="close-btn">
-              <mat-icon>close</mat-icon>
-            </button>
-          </div>
-          <div class="sidebar-body">
-            <div class="form-group">
-              <label>Header Name *</label>
-              <input type="text" value="Skylight Academy" class="custom-input">
-            </div>
-            <div class="toggle-row">
-              <span>Title</span>
-              <div class="toggle-switch">
-                <input type="checkbox" id="toggle-title" checked>
-                <label for="toggle-title"></label>
-              </div>
-            </div>
-            <div class="counter-row">
-              <span>Labels</span>
-              <div class="counter-control">
-                <button class="counter-btn">-</button>
-                <span class="counter-val">2</span>
-                <button class="counter-btn plus">+</button>
-              </div>
-            </div>
-
-            <!-- Table -->
-            <table class="custom-table">
-              <thead>
-                <tr>
-                  <th>SR NO</th>
-                  <th>Label</th>
-                  <th>Size</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td><input type="text" value="NAME" class="table-input"></td>
-                  <td>
-                    <select class="table-select">
-                      <option>Medium</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td><input type="text" value="Email" class="table-input"></td>
-                  <td>
-                    <select class="table-select">
-                      <option>Small</option>
-                    </select>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
@@ -363,6 +304,98 @@
           <div class="modal-footer styled-footer">
             <button class="cancel-btn" (click)="closeSectionModal()">Cancel</button>
             <button class="save-btn" (click)="closeSectionModal()">
+              <mat-icon>check_circle</mat-icon>
+              Save Changes
+            </button>
+          </div>
+
+        </div>
+      </div>
+    }
+
+    <!-- Add Header Modal -->
+    @if (showAddHeaderModal()) {
+      <div class="modal-overlay" (click)="closeAddHeaderModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          
+          <!-- Purple Header -->
+          <div class="modal-header purple-header">
+            <div class="title-with-icon">
+              <mat-icon class="header-icon">border_all</mat-icon>
+              <h3>Add header</h3>
+            </div>
+            <button class="close-circle-btn" (click)="closeAddHeaderModal()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Header Name *</mat-label>
+              <input matInput value="Skylight Academy">
+            </mat-form-field>
+
+            <div class="toggle-row">
+              <span>Title</span>
+              <mat-slide-toggle [checked]="isTitleEnabled()" (change)="isTitleEnabled.set($event.checked)"></mat-slide-toggle>
+            </div>
+
+            @if (isTitleEnabled()) {
+              <mat-form-field appearance="outline" class="full-width" style="margin-top: 0.5rem;">
+                <mat-label>Title *</mat-label>
+                <input matInput value="Title">
+              </mat-form-field>
+            }
+
+            <div class="counter-row">
+              <span>Labels</span>
+              <div class="counter-control">
+                <button class="counter-btn" (click)="decrementLabels()">-</button>
+                <span class="counter-val">{{ labelCount() }}</span>
+                <button class="counter-btn plus" (click)="incrementLabels()">+</button>
+              </div>
+            </div>
+
+            <!-- Table -->
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>SR NO</th>
+                  <th>Label</th>
+                  <th>Size</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (item of labelsList(); track item.srNo) {
+                  <tr>
+                    <td>{{ item.srNo }}</td>
+                    <td>
+                      <mat-form-field appearance="outline" class="table-field" subscriptSizing="dynamic">
+                        <input matInput [value]="item.label">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field appearance="outline" class="table-field" subscriptSizing="dynamic">
+                        <mat-select [value]="item.size">
+                          <mat-option value="Medium">Medium</mat-option>
+                          <mat-option value="Small">Small</mat-option>
+                          <mat-option value="Large">Large</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer styled-footer">
+            <button class="cancel-btn" (click)="closeAddHeaderModal()">Cancel</button>
+            <button class="save-btn" (click)="closeAddHeaderModal()">
               <mat-icon>check_circle</mat-icon>
               Save Changes
             </button>
