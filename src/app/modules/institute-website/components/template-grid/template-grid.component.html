@@ -17,18 +17,9 @@
         <mat-icon>check</mat-icon> Active
       </div>
 
-      <!-- Color accent bar -->
-      <div class="template-color-bar" [style.background]="tpl.primaryColor"></div>
 
-      <!-- Preview image -->
-      <div class="template-preview">
-        <img [src]="tpl.image" [alt]="tpl.name" />
-        <div class="preview-overlay">
-          <button mat-stroked-button class="preview-btn" (click)="$event.stopPropagation(); openPreview(tpl)">
-            <mat-icon>zoom_in</mat-icon> Full Preview
-          </button>
-        </div>
-      </div>
+
+
 
       <!-- Info -->
       <div class="template-info">
@@ -38,24 +29,47 @@
             <span *ngFor="let tag of tpl.tags" class="tag">{{tag}}</span>
           </div>
         </div>
-        <p class="template-desc">{{tpl.description}}</p>
-
-        <div class="template-features">
-          <div *ngFor="let f of tpl.features" class="feature-item">
-            <mat-icon>check_circle</mat-icon>
-            <span>{{f}}</span>
+        <div class="template-skeleton website-mock">
+          <!-- Mini Website Header -->
+          <div class="mock-header">
+            <div class="mock-logo"></div>
+            <div class="mock-nav">
+              <div class="mock-nav-item"></div>
+              <div class="mock-nav-item"></div>
+              <div class="mock-nav-item"></div>
+            </div>
+          </div>
+          <!-- Mini Website Hero -->
+          <div class="mock-hero">
+            <div class="mock-hero-title"></div>
+            <div class="mock-hero-text"></div>
+          </div>
+          <!-- Mini Website Grid -->
+          <div class="mock-grid">
+            <div class="mock-card"></div>
+            <div class="mock-card"></div>
+            <div class="mock-card"></div>
           </div>
         </div>
 
-        <button 
-          mat-raised-button 
-          class="use-template-btn"
-          [style.background]="selectedId === tpl.id ? tpl.primaryColor : ''"
-          (click)="$event.stopPropagation(); selectTemplate(tpl.id)"
-        >
-          <mat-icon>{{ selectedId === tpl.id ? 'check_circle' : 'web' }}</mat-icon>
-          {{ selectedId === tpl.id ? 'Currently Active' : 'Use This Template' }}
-        </button>
+        <div class="card-actions">
+          <button 
+            mat-stroked-button 
+            class="preview-btn"
+            (click)="$event.stopPropagation(); openPreview(tpl)"
+          >
+            <mat-icon>visibility</mat-icon> Preview
+          </button>
+          <button 
+            mat-raised-button 
+            class="use-template-btn"
+            [style.background]="selectedId === tpl.id ? tpl.primaryColor : ''"
+            (click)="$event.stopPropagation(); selectTemplate(tpl.id)"
+          >
+            <mat-icon>{{ selectedId === tpl.id ? 'check_circle' : 'web' }}</mat-icon>
+            {{ selectedId === tpl.id ? 'Active' : 'Use Template' }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
