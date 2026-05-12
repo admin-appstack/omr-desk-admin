@@ -1,0 +1,84 @@
+<div class="classes-container">
+  
+  <!-- Main Header Banner -->
+  <div class="page-header-banner" *ngIf="!isCreatingClass">
+    <div class="banner-content">
+      <div class="icon-box">
+        <mat-icon>class</mat-icon>
+      </div>
+      <div class="text-content">
+        <h1>Classes</h1>
+        <p>Organize students and track their progress by class.</p>
+      </div>
+    </div>
+    <button mat-flat-button class="banner-create-btn" (click)="startCreateClass()">
+      <mat-icon>add</mat-icon> Create Class
+    </button>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!isCreatingClass && classesList.length === 0">
+    <div class="empty-content">
+      <div class="illustration">
+        <img src="/images/not-found.svg" alt="No classes">
+      </div>
+      <h2>No classes found</h2>
+      <p>Start by creating your first class to organize students.</p>
+      <button mat-flat-button color="primary" class="big-create-btn" (click)="startCreateClass()">
+        + Create Class
+      </button>
+    </div>
+  </div>
+
+  <div class="create-workflow" *ngIf="isCreatingClass">
+    <div class="header-row">
+      <div class="breadcrumb">
+        <span class="link" (click)="cancelCreate()">Classes</span>
+        <mat-icon>chevron_right</mat-icon>
+        <span class="active">Create Class</span>
+      </div>
+    </div>
+
+    <form [formGroup]="classForm" class="step-content">
+      <div class="step-title-row">
+        <h3><mat-icon>add_circle</mat-icon> Class Details</h3>
+      </div>
+      
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Class Name</mat-label>
+          <input matInput formControlName="className" placeholder="e.g. 10th Standard">
+          <mat-icon matSuffix>badge</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Section</mat-label>
+          <input matInput formControlName="section" placeholder="e.g. A, B or C">
+          <mat-icon matSuffix>layers</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Stream / Category</mat-label>
+          <mat-select formControlName="stream">
+            <mat-option *ngFor="let s of streams" [value]="s">{{s}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width-field">
+        <mat-label>Description (Optional)</mat-label>
+        <textarea matInput formControlName="description" rows="3" placeholder="Add any specific details about this class..."></textarea>
+      </mat-form-field>
+
+      <div class="step-actions">
+        <button type="button" mat-stroked-button (click)="cancelCreate()">
+          <mat-icon>close</mat-icon> Cancel
+        </button>
+        <button type="submit" mat-flat-button color="primary" [disabled]="classForm.invalid" (click)="cancelCreate()">
+          <mat-icon>check_circle</mat-icon> Save Class
+        </button>
+      </div>
+    </form>
+  </div>
+
+</div>

@@ -34,6 +34,7 @@ export class DashboardLayoutComponent {
 
   mainNav = [
     { icon: 'assignment_turned_in', label: 'Exams', route: '/dashboard/exams', badge: null },
+    { icon: 'class', label: 'Classes', route: '/dashboard/classes', badge: null },
     { icon: 'dashboard',       label: 'Dashboard',         route: '/dashboard/home',      badge: null  },
     { icon: 'language',        label: 'Institute Website',  route: '/dashboard/website',   badge: null },
     { icon: 'library_books',   label: 'Question Bank',      route: '/dashboard/questions', badge: null  },

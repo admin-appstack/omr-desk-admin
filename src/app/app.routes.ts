@@ -15,6 +15,7 @@ import { UserManagement } from './modules/user-management/user-management';
 import { RoleManagement } from './modules/role-management/role-management';
 import { StudentManagement } from './modules/student-management/student-management';
 import { ExamsComponent } from './modules/exams/exams.component';
+import { ClassesComponent } from './modules/classes/classes';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -28,6 +29,7 @@ export const routes: Routes = [
       { path: '', redirectTo: '/dashboard/home', pathMatch: 'full' },
       { path: 'home', component: DashboardHomeComponent },
       { path: 'exams', component: ExamsComponent },
+      { path: 'classes', component: ClassesComponent },
       { path: 'scanning', component: OmrScanningComponent },
       { path: 'questions', component: QuestionBankComponent },
       { path: 'tests', component: TestBuilderComponent },
