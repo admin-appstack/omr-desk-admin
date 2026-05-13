@@ -1,7 +1,7 @@
 <div class="exams-container">
   
   <!-- Main Header Banner -->
-  <div class="page-header-banner" *ngIf="!isCreatingExam && !isViewingDetails">
+  <div class="page-header-banner" *ngIf="!isCreatingExam() && !isViewingDetails()">
     <div class="banner-content">
       <div class="icon-box">
         <mat-icon>assignment_turned_in</mat-icon>
@@ -17,7 +17,7 @@
   </div>
 
   <!-- Empty State -->
-  <div class="empty-state" *ngIf="!isCreatingExam && !isViewingDetails && exams().length === 0">
+  <div class="empty-state" *ngIf="!isCreatingExam() && !isViewingDetails() && exams().length === 0">
     <div class="empty-content">
       <div class="illustration">
         <img src="/images/not-found.svg" alt="No exams">
@@ -31,7 +31,7 @@
   </div>
 
   <!-- Exams List View -->
-  <div class="exams-list-container" *ngIf="!isCreatingExam && !isViewingDetails && exams().length > 0" style="padding: 20px;">
+  <div class="exams-list-container" *ngIf="!isCreatingExam() && !isViewingDetails() && exams().length > 0" style="padding: 20px;">
     <table mat-table [dataSource]="exams()" class="mat-elevation-z1" style="width: 100%; border-radius: 8px;">
 
       <!-- ID Column -->
@@ -77,8 +77,11 @@
           <button mat-icon-button color="primary" matTooltip="View Details" (click)="viewDetails(exam)">
             <mat-icon>visibility</mat-icon>
           </button>
-          <button mat-icon-button color="accent" matTooltip="Edit">
+          <button mat-icon-button color="accent" matTooltip="Edit" (click)="editExam(exam)">
             <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" matTooltip="Delete" (click)="deleteExam(exam)">
+            <mat-icon>delete</mat-icon>
           </button>
         </td>
       </ng-container>
@@ -89,7 +92,7 @@
   </div>
 
   <!-- Exam Details View -->
-  <div class="exam-details-container" *ngIf="isViewingDetails && selectedExam" style="padding: 20px;">
+  <div class="exam-details-container" *ngIf="isViewingDetails() && selectedExam" style="padding: 20px;">
     <!-- Breadcrumb -->
     <div class="breadcrumb" style="margin-bottom: 20px; display: flex; align-items: center; gap: 5px;">
       <span class="link" (click)="closeDetails()" style="cursor: pointer; color: #1a73e8; font-weight: 500;">Exams</span>
@@ -172,12 +175,12 @@
   </div>
 
   <!-- Create Exam Stepper (Existing logic) -->
-  <div class="create-workflow" *ngIf="isCreatingExam">
+  <div class="create-workflow" *ngIf="isCreatingExam()">
     <div class="header-row">
       <div class="breadcrumb">
         <span class="link" (click)="cancelCreate()">Exams</span>
         <mat-icon>chevron_right</mat-icon>
-        <span class="active">Create exam</span>
+        <span class="active">{{ isEditing() ? 'Edit Exam' : 'Create exam' }}</span>
       </div>
     </div>
 
@@ -193,7 +196,8 @@
           <div class="form-grid">
             <mat-form-field appearance="outline">
               <mat-label>Class Name</mat-label>
-              <mat-select formControlName="className">
+              <mat-select formControlName="className" (selectionChange)="onClassChange($event)">
+                <mat-option value="ADD_NEW" style="color: #6366f1; font-weight: 600;">+ Add New</mat-option>
                 <mat-option *ngFor="let c of classes" [value]="c">{{c}}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -512,11 +516,21 @@
               <mat-icon>chevron_left</mat-icon> Previous
             </button>
             <button mat-flat-button color="primary" (click)="submit()">
-              <mat-icon>check_circle</mat-icon> Create Exam
+              <mat-icon>check_circle</mat-icon> {{ isEditing() ? 'Save Changes' : 'Create Exam' }}
             </button>
           </div>
         </div>
       </mat-step>
     </mat-stepper>
   </div>
+
+  <!-- Confirmation Modal -->
+  @if (showDeleteModal()) {
+    <app-confirmation-modal
+      [title]="'Delete Exam'"
+      [message]="'Are you sure you want to delete ' + examToDelete()?.name + '?'"
+      (confirm)="onConfirmDelete()"
+      (cancel)="onCancelDelete()">
+    </app-confirmation-modal>
+  }
 </div>

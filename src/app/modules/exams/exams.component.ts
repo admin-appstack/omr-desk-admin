@@ -1,7 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import { ConfirmationModalComponent } from '../../common/modals/confirmation-modal/confirmation-modal';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -25,6 +26,7 @@ import { HttpClient } from '@angular/common/http';
     CommonModule,
     ReactiveFormsModule,
     RouterLink,
+    ConfirmationModalComponent,
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
@@ -44,26 +46,74 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./exams.component.scss']
 })
 export class ExamsComponent implements OnInit {
-  isCreatingExam = false;
-  isViewingDetails = false;
+  isCreatingExam = signal(false);
+  isEditing = signal(false);
+  isViewingDetails = signal(false);
   selectedExam: any = null;
+
+  showDeleteModal = signal(false);
+  examToDelete = signal<any>(null);
 
   basicDetailsForm!: FormGroup;
   subjectDetailsForm!: FormGroup;
   sectionDetailsForm!: FormGroup;
 
   classes = ['Class 10', 'Class 11', 'Class 12'];
-  questionTypes = ['4 option', '5 option', 'Numerical', 'Subjective'];
+  questionTypes = [
+    'TrueOrFalse',
+    '3 option',
+    '4 option',
+    '5 option',
+    '6 option',
+    '8 option',
+    '10 option',
+    'Matrix',
+    'Numerical',
+    'Subjective'
+  ];
   marksOptions = [1, 2, 3, 4, 5];
 
   exams = signal<any[]>([]);
   displayedColumns: string[] = ['id', 'name', 'className', 'date', 'mode', 'status', 'actions'];
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.initForms();
     this.fetchExams();
+    this.fetchClasses();
+    
+    // Check for preserved state!
+    const savedState = localStorage.getItem('pendingExamState');
+    if (savedState) {
+      console.log('Restoring pending exam state...');
+      const state = JSON.parse(savedState);
+      this.isCreatingExam.set(true); // Open form
+      
+      // Patch values!
+      this.basicDetailsForm.patchValue(state.basic);
+      
+      // For arrays, we need to reconstruct the controls!
+      if (state.subject && state.subject.subjects) {
+        const subjectsArray = this.fb.array(state.subject.subjects.map((s: any) => this.fb.group(s)));
+        this.subjectDetailsForm.setControl('subjects', subjectsArray);
+      }
+      
+      // Patch other non-array values in subject form!
+      this.subjectDetailsForm.patchValue({
+        rollNoDigits: state.subject.rollNoDigits,
+        examSets: state.subject.examSets,
+        subjectsCount: state.subject.subjectsCount
+      });
+
+      if (state.section && state.section.subjectSections) {
+        const sectionsArray = this.fb.array(state.section.subjectSections.map((s: any) => this.fb.group(s)));
+        this.sectionDetailsForm.setControl('subjectSections', sectionsArray);
+      }
+      
+      // Clear storage!
+      localStorage.removeItem('pendingExamState');
+    }
   }
 
   fetchExams() {
@@ -75,6 +125,17 @@ export class ExamsComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching exams:', error);
+      }
+    });
+  }
+
+  fetchClasses() {
+    this.http.get<any[]>('http://localhost:3000/classes').subscribe({
+      next: (data) => {
+        this.classes = data.map(c => c.className);
+      },
+      error: (error) => {
+        console.error('Error fetching classes:', error);
       }
     });
   }
@@ -178,25 +239,87 @@ export class ExamsComponent implements OnInit {
   }
 
   startCreateExam() {
-    this.isCreatingExam = true;
-    this.isViewingDetails = false;
+    this.isCreatingExam.set(true);
+    this.isEditing.set(false);
+    this.isViewingDetails.set(false);
     this.initForms(); // Reset forms when starting fresh
   }
 
+  editExam(exam: any) {
+    this.isCreatingExam.set(true);
+    this.isEditing.set(true);
+    this.isViewingDetails.set(false);
+    this.selectedExam = exam;
+    
+    // Pre-fill basic details
+    this.basicDetailsForm.patchValue({
+      className: exam.className,
+      examName: exam.name,
+      examDate: new Date(exam.date),
+      examMode: exam.mode || 'Offline'
+    });
+
+    // Note: To fully support editing, we would also need to populate subjects and sections
+    // if they are part of the exam data returned from the API.
+  }
+
   cancelCreate() {
-    this.isCreatingExam = false;
+    this.isCreatingExam.set(false);
+    this.isEditing.set(false);
     this.fetchExams(); // Refresh list when cancelling
   }
 
   viewDetails(exam: any) {
     this.selectedExam = exam;
-    this.isViewingDetails = true;
-    this.isCreatingExam = false;
+    this.isViewingDetails.set(true);
+    this.isCreatingExam.set(false);
   }
 
   closeDetails() {
-    this.isViewingDetails = false;
+    this.isViewingDetails.set(false);
     this.selectedExam = null;
+  }
+
+  deleteExam(exam: any) {
+    this.examToDelete.set(exam);
+    this.showDeleteModal.set(true);
+  }
+
+  onConfirmDelete() {
+    const exam = this.examToDelete();
+    if (exam) {
+      this.http.delete(`http://localhost:3000/exams/${exam.id}`).subscribe({
+        next: () => {
+          console.log('Exam deleted successfully');
+          this.showDeleteModal.set(false);
+          this.examToDelete.set(null);
+          this.fetchExams(); // Refresh list
+        },
+        error: (error) => {
+          console.error('Error deleting exam:', error);
+        }
+      });
+    }
+  }
+
+  onCancelDelete() {
+    this.showDeleteModal.set(false);
+    this.examToDelete.set(null);
+  }
+
+  onClassChange(event: any) {
+    if (event.value === 'ADD_NEW') {
+      // Save current form state to localStorage!
+      const currentState = {
+        basic: this.basicDetailsForm.value,
+        subject: this.subjectDetailsForm.value,
+        section: this.sectionDetailsForm.value
+      };
+      localStorage.setItem('pendingExamState', JSON.stringify(currentState));
+      
+      // Navigate to create class screen!
+      this.router.navigate(['/dashboard/classes'], { queryParams: { action: 'create' } });
+    }
   }
 
   submit() {
@@ -213,17 +336,32 @@ export class ExamsComponent implements OnInit {
       }
     };
 
-    console.log('Submitting Exam Data to http://localhost:3000/exams...', examData);
+    console.log('Submitting Exam Data...', examData);
 
-    this.http.post('http://localhost:3000/exams', examData).subscribe({
-      next: (response) => {
-        console.log('Exam created successfully:', response);
-        this.isCreatingExam = false;
-        this.fetchExams(); // Refresh list after creation
-      },
-      error: (error) => {
-        console.error('Error creating exam:', error);
-      }
-    });
+    if (this.isEditing()) {
+      this.http.put(`http://localhost:3000/exams/${this.selectedExam.id}`, examData).subscribe({
+        next: (response) => {
+          console.log('Exam updated successfully:', response);
+          this.isCreatingExam.set(false);
+          this.isEditing.set(false);
+          this.isViewingDetails.set(false);
+          this.fetchExams(); // Refresh list after update
+        },
+        error: (error) => {
+          console.error('Error updating exam:', error);
+        }
+      });
+    } else {
+      this.http.post('http://localhost:3000/exams', examData).subscribe({
+        next: (response) => {
+          console.log('Exam created successfully:', response);
+          this.isCreatingExam.set(false);
+          this.fetchExams(); // Refresh list after creation
+        },
+        error: (error) => {
+          console.error('Error creating exam:', error);
+        }
+      });
+    }
   }
 }

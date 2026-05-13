@@ -17,7 +17,7 @@
   </div>
 
   <!-- Empty State -->
-  <div class="empty-state" *ngIf="!isCreatingClass && classesList.length === 0">
+  <div class="empty-state" *ngIf="!isCreatingClass && classesList().length === 0">
     <div class="empty-content">
       <div class="illustration">
         <img src="/images/not-found.svg" alt="No classes">
@@ -30,12 +30,58 @@
     </div>
   </div>
 
+  <!-- Classes List View -->
+  <div class="classes-list-container" *ngIf="!isCreatingClass && classesList().length > 0" style="padding: 20px;">
+    <table mat-table [dataSource]="classesList()" class="mat-elevation-z1" style="width: 100%; border-radius: 8px;">
+      
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef style="font-weight: 600;"> ID </th>
+        <td mat-cell *matCellDef="let class"> {{class.id}} </td>
+      </ng-container>
+
+      <!-- Class Name Column -->
+      <ng-container matColumnDef="className">
+        <th mat-header-cell *matHeaderCellDef style="font-weight: 600;"> Class Name </th>
+        <td mat-cell *matCellDef="let class"> {{class.className}} </td>
+      </ng-container>
+
+      <!-- Section Column -->
+      <ng-container matColumnDef="section">
+        <th mat-header-cell *matHeaderCellDef style="font-weight: 600;"> Section </th>
+        <td mat-cell *matCellDef="let class"> {{class.section}} </td>
+      </ng-container>
+
+      <!-- Stream Column -->
+      <ng-container matColumnDef="stream">
+        <th mat-header-cell *matHeaderCellDef style="font-weight: 600;"> Stream </th>
+        <td mat-cell *matCellDef="let class"> {{class.stream}} </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef style="font-weight: 600;"> Actions </th>
+        <td mat-cell *matCellDef="let class">
+          <button mat-icon-button color="accent" matTooltip="Edit" (click)="editClass(class)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" matTooltip="Delete" (click)="deleteClass(class)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
   <div class="create-workflow" *ngIf="isCreatingClass">
     <div class="header-row">
       <div class="breadcrumb">
         <span class="link" (click)="cancelCreate()">Classes</span>
         <mat-icon>chevron_right</mat-icon>
-        <span class="active">Create Class</span>
+        <span class="active">{{ isEditing ? 'Edit Class' : 'Create Class' }}</span>
       </div>
     </div>
 
@@ -74,11 +120,20 @@
         <button type="button" mat-stroked-button (click)="cancelCreate()">
           <mat-icon>close</mat-icon> Cancel
         </button>
-        <button type="submit" mat-flat-button color="primary" [disabled]="classForm.invalid" (click)="cancelCreate()">
-          <mat-icon>check_circle</mat-icon> Save Class
+        <button type="submit" mat-flat-button color="primary" [disabled]="classForm.invalid" (click)="saveClass()">
+          <mat-icon>check_circle</mat-icon> {{ isEditing ? 'Save Changes' : 'Create Class' }}
         </button>
       </div>
     </form>
   </div>
 
+  <!-- Confirmation Modal -->
+  @if (showDeleteModal()) {
+    <app-confirmation-modal
+      [title]="'Delete Class'"
+      [message]="'Are you sure you want to delete class ' + classToDelete()?.className + '?'"
+      (confirm)="onConfirmDelete()"
+      (cancel)="onCancelDelete()">
+    </app-confirmation-modal>
+  }
 </div>
