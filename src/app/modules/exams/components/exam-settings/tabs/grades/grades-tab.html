@@ -3,50 +3,50 @@
   
   <!-- Add Grade Form -->
   <div class="inline-form">
-    <div class="form-field">
-      <label>Grade *</label>
-      <input type="text" class="custom-input">
-    </div>
-    <div class="form-field">
-      <label>Marks >= *</label>
-      <input type="text" class="custom-input">
-    </div>
-    <div class="form-field">
-      <label>Marks < *</label>
-      <input type="text" class="custom-input">
-    </div>
-    <button mat-flat-button color="primary" class="add-btn">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Grade *</mat-label>
+      <input matInput [ngModel]="newGrade()" (ngModelChange)="newGrade.set($event)">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Marks >= *</mat-label>
+      <input matInput [ngModel]="newMinMarks()" (ngModelChange)="newMinMarks.set($event)">
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Marks < *</mat-label>
+      <input matInput [ngModel]="newMaxMarks()" (ngModelChange)="newMaxMarks.set($event)">
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" class="add-btn" 
+            [disabled]="!newGrade() || !newMinMarks() || !newMaxMarks()"
+            matTooltip="Please fill all the mandatory details."
+            [matTooltipDisabled]="newGrade() !== '' && newMinMarks() !== '' && newMaxMarks() !== ''"
+            (click)="addGrade()">
       + Add
     </button>
   </div>
 
   <!-- Grades List -->
   <div class="data-list">
-    <!-- Grade A -->
-    <div class="list-item">
-      <div class="item-info">
-        <mat-icon class="icon">star_border</mat-icon>
-        <div>
-          <div class="item-title">A</div>
-          <div class="item-subtitle">(95.0 - 100.0)</div>
+    @for (item of gradesList(); track item.grade; let i = $index) {
+      <div class="list-item">
+        <div class="item-info">
+          <mat-icon class="icon">star_border</mat-icon>
+          <div>
+            <div class="item-title">{{ item.grade }}</div>
+            <div class="item-subtitle">({{ item.min }} - {{ item.max }})</div>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button mat-icon-button class="edit-btn">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button class="delete-btn" (click)="deleteGrade(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
       </div>
-      <button mat-icon-button class="delete-btn">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-    <!-- Grade B -->
-    <div class="list-item">
-      <div class="item-info">
-        <mat-icon class="icon">star_border</mat-icon>
-        <div>
-          <div class="item-title">B</div>
-          <div class="item-subtitle">(80.0 - 95.0)</div>
-        </div>
-      </div>
-      <button mat-icon-button class="delete-btn">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
+    }
   </div>
 </div>
