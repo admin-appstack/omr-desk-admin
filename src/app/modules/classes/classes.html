@@ -131,7 +131,7 @@
   @if (showDeleteModal()) {
     <app-confirmation-modal
       [title]="'Delete Class'"
-      [message]="'Are you sure you want to delete class ' + classToDelete()?.className + '?'"
+      [message]="'All the students and exams attached to the class will be deleted. Are you sure you want to delete class ' + classToDelete()?.className + '?'"
       (confirm)="onConfirmDelete()"
       (cancel)="onCancelDelete()">
     </app-confirmation-modal>
