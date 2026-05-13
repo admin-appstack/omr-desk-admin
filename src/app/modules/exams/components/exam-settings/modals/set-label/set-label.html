@@ -1,0 +1,43 @@
+<div class="modal-overlay" (click)="close.emit()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    
+    <!-- Purple Header -->
+    <div class="modal-header purple-header">
+      <div class="title-with-icon">
+        <mat-icon class="header-icon">edit</mat-icon>
+        <h3>Set {{ option()?.name }} Labels</h3>
+      </div>
+      <button class="close-circle-btn" (click)="close.emit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+      
+      @for (val of values(); track val) {
+        <div class="mapping-row">
+          <span class="mapping-label">{{ val }} :</span>
+          <mat-form-field appearance="outline" class="mapping-field" subscriptSizing="dynamic">
+            <input matInput [value]="val">
+          </mat-form-field>
+        </div>
+      }
+      
+      @if (values().length === 0) {
+        <p class="placeholder-text">No values to set for this label.</p>
+      }
+
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer styled-footer">
+      <button class="cancel-btn" (click)="close.emit()">Cancel</button>
+      <button class="save-btn" (click)="close.emit()">
+        <mat-icon>check_circle</mat-icon>
+        Save
+      </button>
+    </div>
+
+  </div>
+</div>

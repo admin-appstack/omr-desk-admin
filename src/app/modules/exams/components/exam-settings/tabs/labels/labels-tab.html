@@ -1,65 +1,21 @@
-<div class="split-layout">
-  <!-- Main Content -->
-  <div class="main-content-area">
-    <div class="settings-box">
-      <h2 class="box-title">Set Labels</h2>
-      <div class="form-row">
-        <div class="form-field">
-          <label>Select Label</label>
-          <select class="custom-select">
-            <option>Default</option>
-          </select>
-        </div>
-        <button mat-icon-button class="edit-btn">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </div>
+<div class="settings-box">
+  <h2 class="box-title">Set Labels</h2>
+  <div class="form-row">
+    <div class="form-field">
+      <label>Select Label</label>
+      <select class="custom-select" (change)="onLabelChange($event)">
+        <option>Add new</option>
+        <option selected>Label Name Options</option>
+        <option>Default</option>
+      </select>
     </div>
-  </div>
-
-  <!-- Sidebar (Add Label) -->
-  <div class="sidebar-panel">
-    <div class="sidebar-header">
-      <h3>Add Label</h3>
-      <span class="subtitle">Default</span>
-      <button mat-icon-button class="close-btn">
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
-    <div class="sidebar-body">
-      <div class="form-group">
-        <label>Label Name *</label>
-        <input type="text" placeholder="Enter label name" class="custom-input">
-      </div>
-      
-      <div class="section-label">Option Labels</div>
-      
-      <!-- List of Options -->
-      <div class="options-list">
-        <div class="option-item">
-          <div class="option-name">Roll No</div>
-          <div class="option-desc">0, 1, 2, 3, 4, 5, 6, 7, 8, 9</div>
-        </div>
-        <div class="option-item">
-          <div class="option-name">True/False</div>
-          <div class="option-desc">True, False</div>
-        </div>
-        <div class="option-item active">
-          <div class="option-name flex-between">
-            <span>3 Options</span>
-            <mat-icon>chevron_right</mat-icon>
-          </div>
-          <div class="option-desc">A, B, C</div>
-        </div>
-        <div class="option-item">
-          <div class="option-name">4 Options</div>
-          <div class="option-desc">A, B, C, D</div>
-        </div>
-        <div class="option-item">
-          <div class="option-name">5 Options</div>
-          <div class="option-desc">A, B, C, D, E</div>
-        </div>
-      </div>
-    </div>
+    <button mat-icon-button class="edit-btn">
+      <mat-icon>edit</mat-icon>
+    </button>
   </div>
 </div>
+
+<!-- Add Label Modal -->
+@if (showAddLabelModal()) {
+  <app-add-label-modal (close)="closeAddLabelModal()"></app-add-label-modal>
+}

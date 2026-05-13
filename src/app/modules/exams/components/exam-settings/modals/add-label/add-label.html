@@ -1,0 +1,59 @@
+<div class="modal-overlay" (click)="close.emit()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    
+    <!-- Purple Header -->
+    <div class="modal-header purple-header">
+      <div class="title-with-icon">
+        <mat-icon class="header-icon">label</mat-icon>
+        <h3>Add Label</h3>
+      </div>
+      <button class="close-circle-btn" (click)="close.emit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+      
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Label Name *</mat-label>
+        <input matInput placeholder="Enter label name">
+      </mat-form-field>
+
+      <div class="section-label">Option Labels</div>
+      
+      <!-- List of Options -->
+      <div class="options-list">
+        @for (option of options; track option.name) {
+          <div class="option-item" [class.active]="option.name === '3 Options'" (click)="openSetLabelModal(option)">
+            <div class="option-name flex-between">
+              <span>{{ option.name }}</span>
+              @if (option.name === '3 Options') {
+                <mat-icon>chevron_right</mat-icon>
+              }
+            </div>
+            @if (option.desc) {
+              <div class="option-desc">{{ option.desc }}</div>
+            }
+          </div>
+        }
+      </div>
+
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer styled-footer">
+      <button class="cancel-btn" (click)="close.emit()">Cancel</button>
+      <button class="save-btn" (click)="close.emit()">
+        <mat-icon>check_circle</mat-icon>
+        Save Changes
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Set Label Modal -->
+@if (showSetLabelModal()) {
+  <app-set-label-modal [option]="selectedOption()" (close)="closeSetLabelModal()"></app-set-label-modal>
+}
