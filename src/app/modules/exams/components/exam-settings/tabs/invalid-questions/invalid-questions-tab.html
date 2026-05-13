@@ -1,4 +1,44 @@
 <div class="settings-box">
-  <h2 class="box-title">Invalid questions</h2>
-  <p class="placeholder-text">This screen is under development.</p>
+  <h2 class="box-title">Set invalid questions</h2>
+  
+  <div class="form-row">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Select Set</mat-label>
+      <mat-select value="A">
+        <mat-option value="A">A</mat-option>
+        <mat-option value="B">B</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Marks</mat-label>
+      <mat-select value="Max">
+        <mat-option value="Max">Max</mat-option>
+        <mat-option value="Min">Min</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Subjects and Questions List -->
+  <div class="questions-container">
+    @for (subject of subjects(); track subject.name) {
+      <div class="subject-section">
+        <h3 class="subject-title">{{ subject.name }}</h3>
+        
+        @for (section of subject.sections; track section.name) {
+          <div class="section-block">
+            <div class="section-header">{{ section.name }}</div>
+            <div class="questions-grid">
+              @for (q of section.questions; track q.id) {
+                <div class="question-item">
+                  <span>{{ q.id }}</span>
+                  <mat-checkbox [checked]="q.checked"></mat-checkbox>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
 </div>

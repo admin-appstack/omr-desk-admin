@@ -13,4 +13,19 @@
   }
 }
 
-.placeholder-text { color: #94a3b8; font-style: italic; }
+.ranking-radio-group {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+
+  mat-radio-button {
+    font-weight: 500;
+    color: #334155;
+  }
+}
+
+.help-text {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
