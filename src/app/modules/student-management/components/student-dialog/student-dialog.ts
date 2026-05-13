@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,22 +19,45 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: './student-dialog.html',
   styleUrl: './student-dialog.scss',
 })
-export class StudentDialog {
+export class StudentDialog implements OnInit {
+  className = '';
+  rollNumber = '';
   studentName = '';
   studentEmail = '';
-  studentBatch = '';
-  studentStatus = 'Active';
+  whatsAppNumber = '';
+  classes: string[] = [];
+  tempClassName = '';
 
   constructor(
     public dialogRef: MatDialogRef<StudentDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef
   ) {
     if (data) {
+      this.tempClassName = data.className || '';
+      this.rollNumber = data.rollNumber || '';
       this.studentName = data.name || '';
       this.studentEmail = data.email || '';
-      this.studentBatch = data.batch || '';
-      this.studentStatus = data.status || 'Active';
+      this.whatsAppNumber = data.whatsAppNumber || '';
     }
+  }
+
+  ngOnInit(): void {
+    this.fetchClasses();
+  }
+
+  fetchClasses(): void {
+    this.http.get<any[]>('http://localhost:3000/classes').subscribe({
+      next: (data) => {
+        this.classes = data.map(c => c.className);
+        if (this.tempClassName) {
+          this.className = this.tempClassName;
+          this.cdr.detectChanges();
+        }
+      },
+      error: (error) => console.error('Error fetching classes:', error)
+    });
   }
 
   close(): void {
@@ -42,10 +66,11 @@ export class StudentDialog {
 
   save(): void {
     this.dialogRef.close({
+      className: this.className,
+      rollNumber: this.rollNumber,
       name: this.studentName,
       email: this.studentEmail,
-      batch: this.studentBatch,
-      status: this.studentStatus
+      whatsAppNumber: this.whatsAppNumber
     });
   }
 }

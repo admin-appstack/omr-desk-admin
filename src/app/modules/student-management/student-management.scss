@@ -413,3 +413,45 @@
   font-size: 0.8rem;
   font-weight: 600;
 }
+
+/* ─── Empty State ────────────────────────────────────────────────────────── */
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+  text-align: center;
+}
+.empty-content {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.illustration img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+.empty-state h2 {
+  margin: 0 0 0.5rem;
+  font-weight: 800;
+  color: #1e293b;
+  font-size: 1.4rem;
+}
+.empty-state p {
+  margin: 0 0 1.5rem;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+.big-create-btn {
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  height: 44px !important;
+  padding: 0 1.5rem !important;
+  background: #0d9488 !important;
+  color: white !important;
+}

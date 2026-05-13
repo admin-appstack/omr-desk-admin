@@ -13,32 +13,41 @@
     <p class="dialog-subtitle">Configure student profile and enrollment details.</p>
     
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Full Name</mat-label>
+      <mat-label>Select Class*</mat-label>
+      <mat-select [(ngModel)]="className">
+        <mat-option *ngFor="let c of classes" [value]="c">{{c}}</mat-option>
+      </mat-select>
+      <mat-icon matPrefix class="input-icon">school</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Roll Number*</mat-label>
+      <input matInput placeholder="e.g. 101" [(ngModel)]="rollNumber">
+      <mat-icon matPrefix class="input-icon">numbers</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Full Name*</mat-label>
       <input matInput placeholder="e.g. John Doe" [(ngModel)]="studentName">
       <mat-icon matPrefix class="input-icon">person</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Email Address</mat-label>
+      <mat-label>Email Id</mat-label>
       <input matInput type="email" placeholder="john.doe@example.com" [(ngModel)]="studentEmail">
       <mat-icon matPrefix class="input-icon">email</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Assign Batch</mat-label>
-      <mat-select [(ngModel)]="studentBatch">
-        <mat-option value="Batch A - 2024">Batch A - 2024</mat-option>
-        <mat-option value="Batch B - 2024">Batch B - 2024</mat-option>
-        <mat-option value="Batch C - 2024">Batch C - 2024</mat-option>
-        <mat-option value="Batch A - 2023">Batch A - 2023</mat-option>
-      </mat-select>
-      <mat-icon matPrefix class="input-icon">class</mat-icon>
+      <mat-label>WhatsApp Number</mat-label>
+      <input matInput placeholder="e.g. 9876543210" [(ngModel)]="whatsAppNumber">
+      <mat-icon matPrefix class="input-icon">chat</mat-icon>
     </mat-form-field>
   </div>
 
   <div class="dialog-footer">
     <button mat-button (click)="close()" class="cancel-btn">Cancel</button>
-    <button mat-raised-button (click)="save()" class="save-btn" [disabled]="!studentName || !studentEmail || !studentBatch">
+    <button mat-raised-button (click)="save()" class="save-btn" [disabled]="!className || !rollNumber || !studentName">
       <mat-icon>check_circle</mat-icon> {{ data ? 'Save Changes' : 'Add Student' }}
     </button>
   </div>

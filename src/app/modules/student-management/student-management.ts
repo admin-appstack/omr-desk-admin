@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,36 +18,101 @@ import { StudentDialog } from './components/student-dialog/student-dialog';
   templateUrl: './student-management.html',
   styleUrl: './student-management.scss',
 })
-export class StudentManagement {
-  displayedColumns = ['id', 'student', 'batch', 'enrollmentDate', 'status', 'actions'];
+export class StudentManagement implements OnInit {
+  displayedColumns = ['id', 'student', 'batch', 'whatsAppNumber', 'actions'];
 
   statCards = [
-    { label: 'Total Students',   value: '4,521', icon: 'school',           theme: 'total',   tag: '+45 this month', tagClass: 'up' },
-    { label: 'Active Students',  value: '4,105', icon: 'check_circle',     theme: 'active',  tag: 'Currently enrolled', tagClass: 'info' },
-    { label: 'Pending Profiles', value: '182',   icon: 'pending_actions',  theme: 'pending', tag: 'Awaiting docs', tagClass: 'warn' },
-    { label: 'Alumni',           value: '234',   icon: 'emoji_events',     theme: 'alumni',  tag: 'Graduated', tagClass: 'admin' },
+    { label: 'Total Students',   value: '0', icon: 'school',           theme: 'total',   tag: '+0 this month', tagClass: 'up' },
+    { label: 'Active Students',  value: '0', icon: 'check_circle',     theme: 'active',  tag: 'Currently enrolled', tagClass: 'info' },
+    { label: 'Pending Profiles', value: '0',   icon: 'pending_actions',  theme: 'pending', tag: 'Awaiting docs', tagClass: 'warn' },
+    { label: 'Alumni',           value: '0',   icon: 'emoji_events',     theme: 'alumni',  tag: 'Graduated', tagClass: 'admin' },
   ];
 
-  students = [
-    { id: 'STU-24001', name: 'John Doe', email: 'john.d@example.com', avatar: 'JD', batch: 'Batch A - 2024', enrollmentDate: '2024-01-15', status: 'Active' },
-    { id: 'STU-24002', name: 'Sarah Connor', email: 'sarah.c@example.com', avatar: 'SC', batch: 'Batch B - 2024', enrollmentDate: '2024-01-18', status: 'Active' },
-    { id: 'STU-24003', name: 'Michael Smith', email: 'mike.s@example.com', avatar: 'MS', batch: 'Batch A - 2024', enrollmentDate: '2024-02-05', status: 'Pending' },
-    { id: 'STU-24004', name: 'Emma Watson', email: 'emma.w@example.com', avatar: 'EW', batch: 'Batch C - 2024', enrollmentDate: '2024-02-12', status: 'Active' },
-    { id: 'STU-24005', name: 'James Brown', email: 'james.b@example.com', avatar: 'JB', batch: 'Batch A - 2023', enrollmentDate: '2023-08-20', status: 'Suspended' },
-  ];
-
-  dataSource = new MatTableDataSource(this.students);
+  students = signal<any[]>([]);
+  dataSource = new MatTableDataSource<any>([]);
   currentFilter = 'All';
   searchQuery = '';
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.fetchStudents();
+  }
+
+  fetchStudents() {
+    this.http.get<any[]>('http://localhost:3000/student-management').subscribe({
+      next: (data) => {
+        const mappedData = data.map(student => ({
+          id: student.rollNumber || student.id.toString(),
+          name: student.name,
+          email: student.email,
+          avatar: student.name.split(' ').map((n: string) => n[0]).join('').toUpperCase(),
+          batch: student.batch,
+          whatsAppNumber: student.whatsAppNumber || '',
+          status: student.status,
+          realId: student.id,
+          className: student.batch,
+          rollNumber: student.rollNumber
+        }));
+        
+        this.students.set(mappedData);
+        this.updateDataSource();
+        this.updateStats(data);
+      },
+      error: (error) => console.error('Error fetching students:', error)
+    });
+  }
+
+  updateStats(data: any[]) {
+    const total = data.length;
+    const active = data.filter(s => s.status === 'Active').length;
+    const pending = data.filter(s => s.status === 'Pending').length;
+    const suspended = data.filter(s => s.status === 'Suspended').length;
+
+    this.statCards[0].value = total.toString();
+    this.statCards[1].value = active.toString();
+    this.statCards[2].value = pending.toString();
+    this.statCards[3].value = suspended.toString();
+  }
 
   openStudentDialog(student?: any) {
-    this.dialog.open(StudentDialog, {
+    const dialogRef = this.dialog.open(StudentDialog, {
       width: '600px',
       disableClose: true,
       panelClass: 'custom-dialog-container',
       data: student
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Dialog result:', result);
+        const payload = {
+          rollNumber: result.rollNumber,
+          name: result.name,
+          email: result.email,
+          batch: result.className,
+          whatsAppNumber: result.whatsAppNumber,
+          enrollmentDate: new Date().toISOString().split('T')[0]
+        };
+
+        if (student && student.realId) {
+          this.http.put(`http://localhost:3000/student-management/${student.realId}`, payload).subscribe({
+            next: () => {
+              console.log('Student updated successfully');
+              this.fetchStudents();
+            },
+            error: (error) => console.error('Error updating student:', error)
+          });
+        } else {
+          this.http.post('http://localhost:3000/student-management', { ...payload, studentId: 'STU-' + Date.now() }).subscribe({
+            next: () => {
+              console.log('Student created successfully');
+              this.fetchStudents();
+            },
+            error: (error) => console.error('Error creating student:', error)
+          });
+        }
+      }
     });
   }
 
@@ -62,7 +128,7 @@ export class StudentManagement {
   }
 
   updateDataSource() {
-    let filtered = this.students;
+    let filtered = this.students();
     if (this.currentFilter !== 'All') {
       filtered = filtered.filter(student => student.status === this.currentFilter);
     }
@@ -77,7 +143,26 @@ export class StudentManagement {
   }
 
   updateStatus(student: any, status: string) {
-    student.status = status;
-    this.updateDataSource();
+    if (student.realId) {
+      this.http.patch(`http://localhost:3000/student-management/${student.realId}/status`, { status }).subscribe({
+        next: () => {
+          console.log('Status updated successfully');
+          this.fetchStudents();
+        },
+        error: (error) => console.error('Error updating status:', error)
+      });
+    }
+  }
+
+  deleteStudent(student: any) {
+    if (student.realId && confirm(`Are you sure you want to delete student "${student.name}"?`)) {
+      this.http.delete(`http://localhost:3000/student-management/${student.realId}`).subscribe({
+        next: () => {
+          console.log('Student deleted successfully');
+          this.fetchStudents();
+        },
+        error: (error) => console.error('Error deleting student:', error)
+      });
+    }
   }
 }
