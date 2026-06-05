@@ -13,8 +13,7 @@ export interface WebsiteConfig {
   secondaryColor: string;
   accentColor: string;
   backgroundColor: string;
-  headingFont: string;
-  bodyFont: string;
+  fontFamily: string;
   facebookUrl: string | null;
   twitterUrl: string | null;
   instagramUrl: string | null;

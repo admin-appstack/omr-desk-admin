@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -40,8 +40,7 @@ export class BrandingSettingsComponent implements OnInit {
     secondaryColor: '#a855f7',
     accentColor: '#ec4899',
     backgroundColor: '#ffffff',
-    headingFont: "'Inter', sans-serif",
-    bodyFont: "'Inter', sans-serif",
+    fontFamily: "'Inter', sans-serif",
   };
 
   themePresets = [
@@ -63,6 +62,7 @@ export class BrandingSettingsComponent implements OnInit {
   constructor(
     private websiteService: InstituteWebsiteService,
     private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -80,13 +80,14 @@ export class BrandingSettingsComponent implements OnInit {
           secondaryColor: data.secondaryColor ?? '#a855f7',
           accentColor: data.accentColor ?? '#ec4899',
           backgroundColor: data.backgroundColor ?? '#ffffff',
-          headingFont: data.headingFont ?? "'Inter', sans-serif",
-          bodyFont: data.bodyFont ?? "'Inter', sans-serif",
+          fontFamily: data.fontFamily ?? "'Inter', sans-serif",
         };
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
     });
   }
@@ -102,6 +103,7 @@ export class BrandingSettingsComponent implements OnInit {
     this.websiteService.updateConfig(this.config).subscribe({
       next: () => {
         this.isSaving = false;
+        this.cdr.detectChanges();
         this.snackBar.open('✅ Branding settings saved successfully!', 'Dismiss', {
           duration: 3500,
           horizontalPosition: 'center',
@@ -110,6 +112,7 @@ export class BrandingSettingsComponent implements OnInit {
       },
       error: () => {
         this.isSaving = false;
+        this.cdr.detectChanges();
         this.snackBar.open('❌ Failed to save branding settings.', 'Close', { duration: 4000 });
       },
     });

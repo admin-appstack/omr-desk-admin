@@ -16,14 +16,16 @@
     <div class="grid-form">
       <mat-form-field appearance="outline">
         <mat-label>Subdomain</mat-label>
-        <input matInput [(ngModel)]="config.subdomain">
-        <span matSuffix>.omrdesk.com</span>
-        <mat-icon matSuffix>language</mat-icon>
+        <input matInput [(ngModel)]="config.subdomain" disabled>
+        <div matSuffix style="display: flex; align-items: center; gap: 6px; margin-left: 2px; color: #64748b;">
+          <span style="font-weight: 500; font-size: 0.95rem; padding-bottom: 2px;">.omrdesk.com</span>
+          <mat-icon>language</mat-icon>
+        </div>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Custom Domain</mat-label>
-        <input matInput [(ngModel)]="config.customDomain" placeholder="e.g. www.myinstitute.com">
+        <input matInput [(ngModel)]="config.customDomain" placeholder="e.g. www.myinstitute.com" disabled>
         <mat-icon matSuffix>link</mat-icon>
       </mat-form-field>
     </div>
@@ -117,14 +119,14 @@
     <p class="card-subtitle">Select the font family that best matches your institute's brand personality.</p>
 
     <div class="font-selector">
-      <mat-button-toggle-group [(ngModel)]="config.headingFont" (change)="config.bodyFont = config.headingFont" aria-label="Font Family">
+      <mat-button-toggle-group [(ngModel)]="config.fontFamily" aria-label="Font Family">
         <mat-button-toggle *ngFor="let f of fontFamilies" [value]="f.value">
           <span [style.font-family]="f.value">{{f.name}}</span>
         </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
 
-    <div class="font-preview" [style.font-family]="config.headingFont">
+    <div class="font-preview" [style.font-family]="config.fontFamily">
       <div class="preview-label">Typography Preview</div>
       <h1>The Quick Brown Fox Jumps Over The Lazy Dog</h1>
       <p>Modern education is not just about learning facts, but about training the mind to think. Experience the future of learning with our premium platform.</p>
