@@ -1,4 +1,11 @@
 <div class="branding-view">
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading branding settings...</p>
+  </div>
+
+  <ng-container *ngIf="!isLoading">
   <mat-card class="settings-card">
     <div class="card-header">
       <mat-icon>language</mat-icon>
@@ -110,17 +117,28 @@
     <p class="card-subtitle">Select the font family that best matches your institute's brand personality.</p>
 
     <div class="font-selector">
-      <mat-button-toggle-group [(ngModel)]="config.fontFamily" aria-label="Font Family">
+      <mat-button-toggle-group [(ngModel)]="config.headingFont" (change)="config.bodyFont = config.headingFont" aria-label="Font Family">
         <mat-button-toggle *ngFor="let f of fontFamilies" [value]="f.value">
           <span [style.font-family]="f.value">{{f.name}}</span>
         </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
 
-    <div class="font-preview" [style.font-family]="config.fontFamily">
+    <div class="font-preview" [style.font-family]="config.headingFont">
       <div class="preview-label">Typography Preview</div>
       <h1>The Quick Brown Fox Jumps Over The Lazy Dog</h1>
       <p>Modern education is not just about learning facts, but about training the mind to think. Experience the future of learning with our premium platform.</p>
     </div>
   </mat-card>
+
+  <!-- Save Button -->
+  <div class="save-actions">
+    <button mat-raised-button color="primary" (click)="saveConfig()" [disabled]="isSaving" class="save-branding-btn">
+      <mat-spinner *ngIf="isSaving" diameter="18" style="display:inline-block; margin-right: 8px;"></mat-spinner>
+      <mat-icon *ngIf="!isSaving">save</mat-icon>
+      {{ isSaving ? 'Saving...' : 'Save Branding Settings' }}
+    </button>
+  </div>
+
+  </ng-container>
 </div>

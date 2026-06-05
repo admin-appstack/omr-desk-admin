@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService, SocialProvider } from '../auth.service';
+import { AuthService, SocialProvider } from '../service/auth.service';
 
 @Component({
   selector: 'login-page',

@@ -1,20 +1,37 @@
 <div class="page-grid">
+
+  <!-- Loading State: spans all columns, disappears once data arrives -->
+  <div *ngIf="isLoading" class="loading-state">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading pages...</p>
+  </div>
+
+  <!-- Page cards — rendered directly, *ngFor renders nothing while pages=[] -->
   <mat-card *ngFor="let page of pages" class="page-card" [class.unpublished]="!page.isPublished">
     <div class="card-header">
       <div class="page-icon" [ngClass]="{'active': page.isPublished}">
         <mat-icon>{{page.icon}}</mat-icon>
       </div>
       <div class="page-status">
-        <mat-slide-toggle [(ngModel)]="page.isPublished" color="primary"></mat-slide-toggle>
-        <span class="status-label" [class.active]="page.isPublished">
-          {{ page.isPublished ? 'Published' : 'Draft' }}
-        </span>
+        <!-- Use [(ngModel)] so the toggle reflects actual state cleanly -->
+        <mat-slide-toggle
+          [(ngModel)]="page.isPublished"
+          (ngModelChange)="onTogglePublished(page)"
+          [disabled]="isToggling(page.pageName)"
+          color="primary">
+        </mat-slide-toggle>
+        <div class="status-text-wrapper">
+          <span class="status-label" [class.active]="page.isPublished">
+            {{ page.isPublished ? 'Published' : 'Draft' }}
+          </span>
+          <mat-spinner *ngIf="isToggling(page.pageName)" diameter="14"></mat-spinner>
+        </div>
       </div>
     </div>
-    
+
     <div class="card-body">
-      <h4>{{page.name}}</h4>
-      <p class="last-updated">Last updated: 2 days ago</p>
+      <h4>{{page.displayName}}</h4>
+      <p class="last-updated">Last updated: {{ getTimeAgo(page.updatedAt) }}</p>
     </div>
 
     <div class="card-footer">
@@ -27,10 +44,4 @@
     </div>
   </mat-card>
 
-  <mat-card class="add-page-card" *ngIf="false">
-    <div class="add-icon-wrapper">
-      <mat-icon>add</mat-icon>
-    </div>
-    <span>Create New Page</span>
-  </mat-card>
 </div>

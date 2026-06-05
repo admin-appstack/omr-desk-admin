@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../auth/service/auth.service';
 
 @Component({
   selector: 'dashboard-home',

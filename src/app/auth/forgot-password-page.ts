@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from './auth.service';
+import { AuthService } from './service/auth.service';
 
 @Component({
   selector: 'forgot-password-page',

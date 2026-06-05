@@ -1,7 +1,8 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpService } from '../../common/services/http.service';
 import { firstValueFrom } from 'rxjs';
+import { ENDPOINTS } from './api.collection';
 
 export type SocialProvider = 'google' | 'facebook' | 'instagram';
 
@@ -31,7 +32,7 @@ export class AuthService {
 
   constructor(
     private readonly router: Router,
-    private readonly http: HttpClient
+    private readonly httpService: HttpService
   ) {}
 
   async login(credentials: LoginCredentials): Promise<void> {
@@ -40,7 +41,7 @@ export class AuthService {
     }
 
     const response = await firstValueFrom(
-      this.http.post<{ user: any, token: string }>('http://localhost:3000/auth/login', credentials)
+      this.httpService.post(ENDPOINTS.LOGIN, credentials)
     );
 
     this.saveSession({
@@ -56,7 +57,7 @@ export class AuthService {
     }
 
     const response = await firstValueFrom(
-      this.http.post<{ user: any, token: string }>('http://localhost:3000/auth/register', payload)
+      this.httpService.post(ENDPOINTS.REGISTER, payload)
     );
 
     this.saveSession({
