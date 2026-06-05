@@ -5,50 +5,43 @@
     <p>Choose a design that best represents your institute's brand. You can customize colors and content after selection.</p>
   </div>
 
-  <div class="template-grid">
+  <div *ngIf="isLoading" style="display: flex; justify-content: center; padding: 4rem;">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <div class="template-grid" *ngIf="!isLoading">
     <div 
       *ngFor="let tpl of templates" 
       class="template-card" 
       [class.selected]="selectedId === tpl.id"
+      [style.borderColor]="selectedId === tpl.id ? tpl.primaryColor : ''"
       (click)="selectTemplate(tpl.id)"
     >
-      <!-- Selected Badge -->
-      <div class="selected-badge" *ngIf="selectedId === tpl.id">
-        <mat-icon>check</mat-icon> Active
+      <!-- Preview Image with Swatch Badge -->
+      <div class="template-preview">
+        <img [src]="tpl.previewImage" [alt]="tpl.name">
+        
+        <!-- Hover overlay icon -->
+        <div class="preview-overlay">
+          <mat-icon>zoom_in</mat-icon>
+        </div>
+
+        <!-- Floating Color Indicator Swatch -->
+        <div class="color-swatch-badge" [style.background]="tpl.primaryColor" title="Template Theme Color"></div>
       </div>
-
-
-
-
 
       <!-- Info -->
       <div class="template-info">
         <div class="template-header">
-          <h3>{{tpl.name}}</h3>
+          <div class="title-row">
+            <h3>{{tpl.name}}</h3>
+            <span class="active-badge-pill" *ngIf="selectedId === tpl.id" [style.background]="tpl.primaryColor">
+              <mat-icon>check</mat-icon> Active
+            </span>
+          </div>
+          <p class="template-desc">{{tpl.description}}</p>
           <div class="template-tags">
-            <span *ngFor="let tag of tpl.tags" class="tag">{{tag}}</span>
-          </div>
-        </div>
-        <div class="template-skeleton website-mock">
-          <!-- Mini Website Header -->
-          <div class="mock-header">
-            <div class="mock-logo"></div>
-            <div class="mock-nav">
-              <div class="mock-nav-item"></div>
-              <div class="mock-nav-item"></div>
-              <div class="mock-nav-item"></div>
-            </div>
-          </div>
-          <!-- Mini Website Hero -->
-          <div class="mock-hero">
-            <div class="mock-hero-title"></div>
-            <div class="mock-hero-text"></div>
-          </div>
-          <!-- Mini Website Grid -->
-          <div class="mock-grid">
-            <div class="mock-card"></div>
-            <div class="mock-card"></div>
-            <div class="mock-card"></div>
+            <span *ngFor="let tag of tpl.tags" class="tag" [style.color]="tpl.primaryColor" [style.background]="tpl.primaryColor + '15'">{{tag}}</span>
           </div>
         </div>
 
@@ -56,6 +49,8 @@
           <button 
             mat-stroked-button 
             class="preview-btn"
+            [style.color]="tpl.primaryColor"
+            [style.borderColor]="tpl.primaryColor + '30'"
             (click)="$event.stopPropagation(); openPreview(tpl)"
           >
             <mat-icon>visibility</mat-icon> Preview
@@ -63,7 +58,7 @@
           <button 
             mat-raised-button 
             class="use-template-btn"
-            [style.background]="selectedId === tpl.id ? tpl.primaryColor : ''"
+            [style.background]="tpl.primaryColor"
             (click)="$event.stopPropagation(); selectTemplate(tpl.id)"
           >
             <mat-icon>{{ selectedId === tpl.id ? 'check_circle' : 'web' }}</mat-icon>

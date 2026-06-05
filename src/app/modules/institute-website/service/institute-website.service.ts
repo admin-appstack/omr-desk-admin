@@ -65,6 +65,22 @@ export class InstituteWebsiteService {
   }
 
   // ---------------------------------------------------------
+  // Templates
+  // ---------------------------------------------------------
+
+  getTemplates(): Observable<any[]> {
+    return this.httpService.get(ENDPOINTS.INSTITUTE_WEBSITE + '/templates', undefined, false, true).pipe(
+      map((res: any) => res.data)
+    );
+  }
+
+  getTemplateById(id: number): Observable<any> {
+    return this.httpService.get(ENDPOINTS.INSTITUTE_WEBSITE + `/templates/${id}`, undefined, false, true).pipe(
+      map((res: any) => res.data)
+    );
+  }
+
+  // ---------------------------------------------------------
   // Pages Meta
   // ---------------------------------------------------------
 
