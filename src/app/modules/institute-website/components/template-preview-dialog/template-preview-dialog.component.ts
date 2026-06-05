@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,9 +22,12 @@ export interface TemplatePreviewData {
   templateUrl: './template-preview-dialog.component.html',
   styleUrls: ['./template-preview-dialog.component.scss']
 })
-export class TemplatePreviewDialog implements OnInit {
+export class TemplatePreviewDialog implements OnInit, AfterViewInit {
+  @ViewChild('previewScroll') previewScrollRef!: ElementRef<HTMLDivElement>;
   isLoading = true;
   safeSrcDoc: SafeHtml | null = null;
+  iframeScale = 0.5; // will be recalculated after view init
+  iframeHeightPercent = 200; // will be recalculated after view init
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: TemplatePreviewData,
@@ -40,6 +43,8 @@ export class TemplatePreviewDialog implements OnInit {
         finalize(() => {
           this.isLoading = false;
           this.cdr.detectChanges();
+          // Compute scale after the *ngIf renders the preview-scroll div
+          setTimeout(() => this.computeScale(), 0);
         })
       )
       .subscribe({
@@ -71,6 +76,20 @@ export class TemplatePreviewDialog implements OnInit {
           this.cdr.detectChanges();
         }
       });
+  }
+
+  ngAfterViewInit(): void {
+    this.computeScale();
+  }
+
+  @HostListener('window:resize')
+  computeScale(): void {
+    if (this.previewScrollRef) {
+      const containerWidth = this.previewScrollRef.nativeElement.clientWidth;
+      this.iframeScale = containerWidth > 0 ? (containerWidth / 1280) : 0.5;
+      this.iframeHeightPercent = 100 / this.iframeScale;
+      this.cdr.detectChanges();
+    }
   }
 
   selectTemplate(): void {

@@ -189,10 +189,21 @@
   } 
 }
 
-.preview-scroll { 
-  flex: 1; 
-  overflow-y: auto; 
-  scroll-behavior: smooth;
+.preview-scroll {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+// The iframe renders at full 1280px desktop width then is scaled down
+// proportionally by the computed iframeScale bound from TypeScript.
+.preview-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: none;
+  width: 1280px;
+  transform-origin: top left;
 }
 
 .dialog-actions { 

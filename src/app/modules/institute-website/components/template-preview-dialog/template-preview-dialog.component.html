@@ -26,9 +26,11 @@
           </div>
         </div>
 
-        <div class="preview-scroll" *ngIf="!isLoading">
+        <div class="preview-scroll" #previewScroll *ngIf="!isLoading">
           <iframe [srcdoc]="safeSrcDoc" 
-                  style="width: 100%; height: 100%; border: none;"
+                  class="preview-iframe"
+                  [style.transform]="'scale(' + iframeScale + ')'"
+                  [style.height.%]="iframeHeightPercent"
                   title="Template Preview">
           </iframe>
         </div>
