@@ -3,22 +3,22 @@
   <!-- Header Hero -->
   <div class="module-hero purple">
     <div class="hero-content">
-      <div class="hero-icon"><mat-icon>settings</mat-icon></div>
+      <div class="hero-icon"><i class="fa-thin fa-gear"></i></div>
       <div>
         <h1>Settings</h1>
         <p>Configure account preferences, notifications, and institute-wide defaults.</p>
       </div>
     </div>
     <button mat-raised-button class="hero-btn" (click)="saved = true">
-      <mat-icon>save</mat-icon> Save Changes
+      <i class="fa-thin fa-floppy-disk"></i> Save Changes
     </button>
   </div>
 
   <!-- Saved Banner -->
   <div class="save-banner" *ngIf="saved">
-    <mat-icon>check_circle</mat-icon>
+    <i class="fa-thin fa-circle-check"></i>
     Your settings have been saved successfully.
-    <button mat-icon-button (click)="saved = false" class="close-btn"><mat-icon>close</mat-icon></button>
+    <button mat-icon-button (click)="saved = false" class="close-btn"><i class="fa-thin fa-xmark"></i></button>
   </div>
 
   <!-- Settings Layout: sidebar + content -->
@@ -30,13 +30,13 @@
               [class.active]="activeTab === i"
               (click)="activeTab = i">
         <div class="tab-icon-wrap" [class.active]="activeTab === i">
-          <mat-icon>{{tab.icon}}</mat-icon>
+          <i [class]="tab.icon"></i>
         </div>
         <div class="tab-labels">
           <span class="tab-name">{{tab.label}}</span>
           <span class="tab-sub">{{tab.sub}}</span>
         </div>
-        <mat-icon class="tab-arrow">chevron_right</mat-icon>
+        <i class="fa-thin fa-chevron-right" class="tab-arrow"></i>
       </button>
     </div>
 
@@ -53,7 +53,7 @@
           <div class="avatar-section">
             <div class="large-avatar">{{profile.name.charAt(0)}}</div>
             <button mat-stroked-button class="change-photo-btn">
-              <mat-icon>camera_alt</mat-icon> Change Photo
+              <i class="fa-thin fa-camera"></i> Change Photo
             </button>
             <span class="avatar-hint">JPG or PNG, max 2MB</span>
           </div>
@@ -61,28 +61,28 @@
             <div class="form-group">
               <label>Institute Name</label>
               <div class="input-wrap">
-                <mat-icon class="input-icon">school</mat-icon>
+                <i class="fa-thin fa-graduation-cap" class="input-icon"></i>
                 <input [(ngModel)]="profile.institute" placeholder="Institute Name">
               </div>
             </div>
             <div class="form-group">
               <label>Tagline</label>
               <div class="input-wrap">
-                <mat-icon class="input-icon">edit</mat-icon>
+                <i class="fa-thin fa-pen" class="input-icon"></i>
                 <input [(ngModel)]="profile.tagline" placeholder="Excellence in Education">
               </div>
             </div>
             <div class="form-group">
               <label>Phone Number</label>
               <div class="input-wrap">
-                <mat-icon class="input-icon">phone</mat-icon>
+                <i class="fa-thin fa-phone" class="input-icon"></i>
                 <input [(ngModel)]="profile.phone" placeholder="Phone Number">
               </div>
             </div>
             <div class="form-group">
               <label>Email Address</label>
               <div class="input-wrap">
-                <mat-icon class="input-icon">email</mat-icon>
+                <i class="fa-thin fa-envelope" class="input-icon"></i>
                 <input [(ngModel)]="profile.email" placeholder="Email Address">
               </div>
             </div>
@@ -99,7 +99,7 @@
         <div class="notif-list">
           <div class="notif-item" *ngFor="let n of notifItems">
             <div class="notif-icon-wrap" [style.background]="n.bg">
-              <mat-icon [style.color]="n.color">{{n.icon}}</mat-icon>
+              <i [class]="n.icon" [style.color]="n.color"></i>
             </div>
             <div class="notif-info">
               <h4>{{n.label}}</h4>
@@ -121,36 +121,36 @@
         </div>
         <div class="security-grid">
           <div class="security-section">
-            <h3 class="section-title"><mat-icon>lock</mat-icon> Change Password</h3>
+            <h3 class="section-title"><i class="fa-thin fa-lock"></i> Change Password</h3>
             <div class="form-group">
               <label>Current Password</label>
               <div class="input-wrap">
-                <mat-icon class="input-icon">lock_outline</mat-icon>
+                <i class="fa-thin fa-lock" class="input-icon"></i>
                 <input type="password" placeholder="Current password">
               </div>
             </div>
             <div class="form-group">
               <label>New Password</label>
               <div class="input-wrap">
-                <mat-icon class="input-icon">lock_reset</mat-icon>
+                <i class="fa-thin fa-lock-keyhole" class="input-icon"></i>
                 <input type="password" placeholder="New password">
               </div>
             </div>
             <div class="form-group">
               <label>Confirm Password</label>
               <div class="input-wrap">
-                <mat-icon class="input-icon">check_circle_outline</mat-icon>
+                <i class="fa-thin fa-circle-check" class="input-icon"></i>
                 <input type="password" placeholder="Confirm new password">
               </div>
             </div>
             <button mat-raised-button class="update-pass-btn">
-              <mat-icon>update</mat-icon> Update Password
+              <i class="fa-thin fa-rotate-right"></i> Update Password
             </button>
           </div>
           <div class="security-section">
-            <h3 class="section-title"><mat-icon>security</mat-icon> Active Sessions</h3>
+            <h3 class="section-title"><i class="fa-thin fa-shield-halved"></i> Active Sessions</h3>
             <div class="session-item" *ngFor="let s of sessions">
-              <div class="session-icon"><mat-icon>{{s.icon}}</mat-icon></div>
+              <div class="session-icon"><i [class]="s.icon"></i></div>
               <div class="session-info">
                 <span class="session-device">{{s.device}}</span>
                 <span class="session-loc">{{s.location}} · {{s.time}}</span>
@@ -169,7 +169,7 @@
         </div>
         <div class="appearance-grid">
           <div class="appear-section">
-            <h3 class="section-title"><mat-icon>palette</mat-icon> Theme</h3>
+            <h3 class="section-title"><i class="fa-thin fa-palette"></i> Theme</h3>
             <div class="theme-options">
               <label class="theme-option" *ngFor="let t of themes">
                 <input type="radio" name="theme" [value]="t.value" [(ngModel)]="selectedTheme">
@@ -181,11 +181,11 @@
             </div>
           </div>
           <div class="appear-section">
-            <h3 class="section-title"><mat-icon>language</mat-icon> Language &amp; Region</h3>
+            <h3 class="section-title"><i class="fa-thin fa-globe"></i> Language &amp; Region</h3>
             <div class="form-group">
               <label>Language</label>
               <div class="input-wrap select-wrap">
-                <mat-icon class="input-icon">translate</mat-icon>
+                <i class="fa-thin fa-language" class="input-icon"></i>
                 <select [(ngModel)]="language">
                   <option value="en">English</option>
                   <option value="hi">Hindi</option>
@@ -196,7 +196,7 @@
             <div class="form-group">
               <label>Timezone</label>
               <div class="input-wrap select-wrap">
-                <mat-icon class="input-icon">schedule</mat-icon>
+                <i class="fa-thin fa-clock" class="input-icon"></i>
                 <select [(ngModel)]="timezone">
                   <option value="IST">IST – India Standard Time (UTC+5:30)</option>
                   <option value="UTC">UTC – Coordinated Universal Time</option>

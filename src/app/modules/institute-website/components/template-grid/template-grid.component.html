@@ -23,7 +23,7 @@
         
         <!-- Hover overlay icon -->
         <div class="preview-overlay">
-          <mat-icon>zoom_in</mat-icon>
+          <i class="fa-thin fa-magnifying-glass-plus"></i>
         </div>
 
         <!-- Floating Color Indicator Swatch -->
@@ -36,7 +36,7 @@
           <div class="title-row">
             <h3>{{tpl.name}}</h3>
             <span class="active-badge-pill" *ngIf="selectedId === tpl.id" [style.background]="tpl.primaryColor">
-              <mat-icon>check</mat-icon> Active
+              <i class="fa-thin fa-check"></i> Active
             </span>
           </div>
           <p class="template-desc">{{tpl.description}}</p>
@@ -53,7 +53,7 @@
             [style.borderColor]="tpl.primaryColor + '30'"
             (click)="$event.stopPropagation(); openPreview(tpl)"
           >
-            <mat-icon>visibility</mat-icon> Preview
+            <i class="fa-thin fa-eye"></i> Preview
           </button>
           <button 
             mat-raised-button 
@@ -61,7 +61,7 @@
             [style.background]="tpl.primaryColor"
             (click)="$event.stopPropagation(); selectTemplate(tpl.id)"
           >
-            <mat-icon>{{ selectedId === tpl.id ? 'check_circle' : 'web' }}</mat-icon>
+            <i [class]="selectedId === tpl.id ? 'fa-thin fa-circle-check' : 'fa-thin fa-browser'"></i>
             {{ selectedId === tpl.id ? 'Active' : 'Use Template' }}
           </button>
         </div>

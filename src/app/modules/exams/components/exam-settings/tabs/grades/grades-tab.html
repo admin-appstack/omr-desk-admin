@@ -32,7 +32,7 @@
     @for (item of gradesList(); track item.grade; let i = $index) {
       <div class="list-item">
         <div class="item-info">
-          <mat-icon class="icon">star_border</mat-icon>
+          <i class="fa-thin fa-star" class="icon"></i>
           <div>
             <div class="item-title">{{ item.grade }}</div>
             <div class="item-subtitle">({{ item.min }} - {{ item.max }})</div>
@@ -40,10 +40,10 @@
         </div>
         <div class="item-actions">
           <button mat-icon-button class="edit-btn">
-            <mat-icon>edit</mat-icon>
+            <i class="fa-thin fa-pen"></i>
           </button>
           <button mat-icon-button class="delete-btn" (click)="deleteGrade(i)">
-            <mat-icon>delete</mat-icon>
+            <i class="fa-thin fa-trash"></i>
           </button>
         </div>
       </div>

@@ -21,10 +21,10 @@ export class UserManagement {
   displayedColumns = ['id', 'user', 'role', 'lastActive', 'status', 'actions'];
 
   statCards = [
-    { label: 'Total Users',     value: '1,248', icon: 'people',          theme: 'total',    tag: '+12 this week', tagClass: 'up' },
-    { label: 'Active Users',    value: '1,102', icon: 'how_to_reg',      theme: 'active',   tag: '88% of total',   tagClass: 'info' },
-    { label: 'Pending Invites', value: '45',    icon: 'mark_email_read', theme: 'pending',  tag: 'Needs action',   tagClass: 'warn' },
-    { label: 'Admins',          value: '12',    icon: 'admin_panel_settings', theme: 'admin', tag: 'System level', tagClass: 'admin' },
+    { label: 'Total Users',     value: '1,248', icon: 'fa-thin fa-users',          theme: 'total',    tag: '+12 this week', tagClass: 'up' },
+    { label: 'Active Users',    value: '1,102', icon: 'fa-thin fa-how-to-reg',      theme: 'active',   tag: '88% of total',   tagClass: 'info' },
+    { label: 'Pending Invites', value: '45',    icon: 'fa-thin fa-mark-email-read', theme: 'pending',  tag: 'Needs action',   tagClass: 'warn' },
+    { label: 'Admins',          value: '12',    icon: 'fa-thin fa-user-gear', theme: 'admin', tag: 'System level', tagClass: 'admin' },
   ];
 
   users = [

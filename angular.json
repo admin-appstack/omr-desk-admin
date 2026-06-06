@@ -27,9 +27,17 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": [
+              "src/styles.scss",
+              "src/assets/fontawesome/fontawesome_pro_6_4_2.css"
+            ]
           },
           "configurations": {
             "production": {

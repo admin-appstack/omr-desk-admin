@@ -17,10 +17,10 @@ export class ResultAnalyticsComponent {
   displayedColumns = ['examName', 'date', 'students', 'avgScore', 'actions'];
 
   summaryStats = [
-    { label: 'Total Exams',    value: '28',    icon: 'assignment',   color: '#c2410c', bg: '#fff7ed', trend: '+3 this month' },
-    { label: 'Total Students', value: '1,284', icon: 'people',       color: '#1d4ed8', bg: '#eff6ff', trend: '+84 new'       },
-    { label: 'Avg. Score',     value: '68%',   icon: 'trending_up',  color: '#059669', bg: '#f0fdf4', trend: '+4% vs last'  },
-    { label: 'Top Score',      value: '98%',   icon: 'emoji_events', color: '#d97706', bg: '#fefce8', trend: null           },
+    { label: 'Total Exams',    value: '28',    icon: 'fa-thin fa-file-lines',   color: '#c2410c', bg: '#fff7ed', trend: '+3 this month' },
+    { label: 'Total Students', value: '1,284', icon: 'fa-thin fa-users',       color: '#1d4ed8', bg: '#eff6ff', trend: '+84 new'       },
+    { label: 'Avg. Score',     value: '68%',   icon: 'fa-thin fa-arrow-trend-up',  color: '#059669', bg: '#f0fdf4', trend: '+4% vs last'  },
+    { label: 'Top Score',      value: '98%',   icon: 'fa-thin fa-trophy', color: '#d97706', bg: '#fefce8', trend: null           },
   ];
 
   chartBars = [

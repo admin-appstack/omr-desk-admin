@@ -8,7 +8,7 @@
   <ng-container *ngIf="!isLoading">
   <mat-card class="settings-card">
     <div class="card-header">
-      <mat-icon>language</mat-icon>
+      <i class="fa-thin fa-globe"></i>
       <h3>Domain Settings</h3>
     </div>
     <p class="card-subtitle">Configure your website's address. You can use a free subdomain or your own custom domain.</p>
@@ -19,14 +19,14 @@
         <input matInput [(ngModel)]="config.subdomain" disabled>
         <div matSuffix style="display: flex; align-items: center; gap: 6px; margin-left: 2px; color: #64748b;">
           <span style="font-weight: 500; font-size: 0.95rem; padding-bottom: 2px;">.omrdesk.com</span>
-          <mat-icon>language</mat-icon>
+          <i class="fa-thin fa-globe"></i>
         </div>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Custom Domain</mat-label>
         <input matInput [(ngModel)]="config.customDomain" placeholder="e.g. www.myinstitute.com" disabled>
-        <mat-icon matSuffix>link</mat-icon>
+        <i class="fa-thin fa-link" matSuffix></i>
       </mat-form-field>
     </div>
 
@@ -50,7 +50,7 @@
 
   <mat-card class="settings-card">
     <div class="card-header">
-      <mat-icon>palette</mat-icon>
+      <i class="fa-thin fa-palette"></i>
       <h3>Theme Color Palette</h3>
     </div>
     <p class="card-subtitle">Choose from professionally curated presets or define your own brand colors.</p>
@@ -113,7 +113,7 @@
 
   <mat-card class="settings-card">
     <div class="card-header">
-      <mat-icon>text_format</mat-icon>
+      <i class="fa-thin fa-font"></i>
       <h3>Website Typography</h3>
     </div>
     <p class="card-subtitle">Select the font family that best matches your institute's brand personality.</p>
@@ -137,7 +137,7 @@
   <div class="save-actions">
     <button mat-raised-button color="primary" (click)="saveConfig()" [disabled]="isSaving" class="save-branding-btn">
       <mat-spinner *ngIf="isSaving" diameter="18" style="display:inline-block; margin-right: 8px;"></mat-spinner>
-      <mat-icon *ngIf="!isSaving">save</mat-icon>
+      <i class="fa-thin fa-floppy-disk" *ngIf="!isSaving"></i>
       {{ isSaving ? 'Saving...' : 'Save Branding Settings' }}
     </button>
   </div>

@@ -40,7 +40,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Full Name</mat-label>
           <input matInput type="text" formControlName="name" placeholder="John Doe" />
-          <mat-icon matSuffix *ngIf="form.get('name')?.valid">person</mat-icon>
+          <i class="fa-thin fa-user" matSuffix *ngIf="form.get('name')?.valid"></i>
           <mat-error *ngIf="form.get('name')?.hasError('minlength')">
             Name must be at least 2 characters.
           </mat-error>
@@ -49,7 +49,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Email Address</mat-label>
           <input matInput type="email" formControlName="email" placeholder="you@example.com" />
-          <mat-icon matSuffix *ngIf="form.get('email')?.valid">alternate_email</mat-icon>
+          <i class="fa-thin fa-at" matSuffix *ngIf="form.get('email')?.valid"></i>
           <mat-error *ngIf="form.get('email')?.hasError('email')">
             Please enter a valid email.
           </mat-error>
@@ -59,7 +59,7 @@
           <mat-label>Password</mat-label>
           <input matInput [type]="showPassword() ? 'text' : 'password'" formControlName="password" placeholder="••••••••" />
           <button mat-icon-button matSuffix (click)="togglePassword()" type="button">
-            <mat-icon>{{ showPassword() ? 'visibility' : 'visibility_off' }}</mat-icon>
+            <i class="fa-thin" [class]="showPassword() ? 'fa-thin fa-eye' : 'fa-thin fa-eye-slash'"></i>
           </button>
           <mat-error *ngIf="form.get('password')?.hasError('minlength')">
             Password must be at least 6 characters.

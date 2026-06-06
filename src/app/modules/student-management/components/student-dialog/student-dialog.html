@@ -1,11 +1,11 @@
 <div class="dialog-container">
   <div class="dialog-header teal">
     <div class="header-content">
-      <mat-icon>{{ data ? 'person' : 'person_add' }}</mat-icon>
+      <i class="fa-thin" [class]="data ? 'fa-thin fa-user' : 'fa-thin fa-user-plus'"></i>
       <h2>{{ data ? 'Student Profile' : 'Add New Student' }}</h2>
     </div>
     <button mat-icon-button (click)="close()" class="close-btn">
-      <mat-icon>close</mat-icon>
+      <i class="fa-thin fa-xmark"></i>
     </button>
   </div>
 
@@ -17,38 +17,38 @@
       <mat-select [(ngModel)]="className">
         <mat-option *ngFor="let c of classes" [value]="c">{{c}}</mat-option>
       </mat-select>
-      <mat-icon matPrefix class="input-icon">school</mat-icon>
+      <i class="fa-thin fa-graduation-cap" matPrefix class="input-icon"></i>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Roll Number*</mat-label>
       <input matInput placeholder="e.g. 101" [(ngModel)]="rollNumber">
-      <mat-icon matPrefix class="input-icon">numbers</mat-icon>
+      <i class="fa-thin fa-hashtag" matPrefix class="input-icon"></i>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Full Name*</mat-label>
       <input matInput placeholder="e.g. John Doe" [(ngModel)]="studentName">
-      <mat-icon matPrefix class="input-icon">person</mat-icon>
+      <i class="fa-thin fa-user" matPrefix class="input-icon"></i>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Email Id</mat-label>
       <input matInput type="email" placeholder="john.doe@example.com" [(ngModel)]="studentEmail">
-      <mat-icon matPrefix class="input-icon">email</mat-icon>
+      <i class="fa-thin fa-envelope" matPrefix class="input-icon"></i>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>WhatsApp Number</mat-label>
       <input matInput placeholder="e.g. 9876543210" [(ngModel)]="whatsAppNumber">
-      <mat-icon matPrefix class="input-icon">chat</mat-icon>
+      <i class="fa-thin fa-messages" matPrefix class="input-icon"></i>
     </mat-form-field>
   </div>
 
   <div class="dialog-footer">
     <button mat-button (click)="close()" class="cancel-btn">Cancel</button>
     <button mat-raised-button (click)="save()" class="save-btn" [disabled]="!className || !rollNumber || !studentName">
-      <mat-icon>check_circle</mat-icon> {{ data ? 'Save Changes' : 'Add Student' }}
+      <i class="fa-thin fa-circle-check"></i> {{ data ? 'Save Changes' : 'Add Student' }}
     </button>
   </div>
 </div>

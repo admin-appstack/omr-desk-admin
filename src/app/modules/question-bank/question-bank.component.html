@@ -3,14 +3,14 @@
   <!-- ── Hero Banner ──────────────────────────────────────────────────────── -->
   <div class="module-hero green">
     <div class="hero-content">
-      <div class="hero-icon"><mat-icon>library_books</mat-icon></div>
+      <div class="hero-icon"><i class="fa-thin fa-book-open-reader"></i></div>
       <div>
         <h1>Question Bank</h1>
         <p>Create and organize your repository of questions — MCQs, Numerical, Subjective &amp; more.</p>
       </div>
     </div>
     <button mat-raised-button class="hero-btn" (click)="toggleAddForm()">
-      <mat-icon>{{ showAddForm ? 'format_list_bulleted' : 'add_circle_outline' }}</mat-icon>
+      <i class="fa-thin" [class]="showAddForm ? 'fa-thin fa-list-ul' : 'fa-thin fa-circle-plus'"></i>
       {{ showAddForm ? 'View All Questions' : 'Add New Question' }}
     </button>
   </div>
@@ -23,7 +23,7 @@
     <!-- Filter Bar -->
     <mat-card class="filter-card">
       <div class="search-bar">
-        <mat-icon>search</mat-icon>
+        <i class="fa-thin fa-magnifying-glass"></i>
         <input type="text" placeholder="Search questions by text, tag or topic…" />
       </div>
       <div class="quick-tags">
@@ -41,11 +41,11 @@
     <mat-card class="questions-list-card">
       <div class="card-header-row">
         <div class="card-title-group">
-          <mat-icon class="card-icon">quiz</mat-icon>
+          <i class="fa-thin fa-circle-question" class="card-icon"></i>
           <h3 class="card-title">All Questions <span class="count-badge">{{ questions.length }}</span></h3>
         </div>
         <button mat-stroked-button color="primary" class="export-btn">
-          <mat-icon>download</mat-icon> Export CSV
+          <i class="fa-thin fa-download"></i> Export CSV
         </button>
       </div>
 
@@ -79,7 +79,7 @@
           <th mat-header-cell *matHeaderCellDef>Difficulty</th>
           <td mat-cell *matCellDef="let row">
             <span class="diff-level" [class]="row.difficulty.toLowerCase()">
-              <mat-icon>{{ row.difficulty === 'Easy' ? 'sentiment_satisfied' : row.difficulty === 'Medium' ? 'sentiment_neutral' : 'sentiment_very_dissatisfied' }}</mat-icon>
+              <i class="fa-thin" [class]="row.difficulty === 'fa-thin Easy' ? 'fa-thin fa-face-smile' : row.difficulty === 'fa-thin Medium' ? 'fa-thin fa-face-meh' : 'fa-thin fa-face-frown'"></i>
               {{row.difficulty}}
             </span>
           </td>
@@ -88,8 +88,8 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let row">
-            <button mat-icon-button color="primary" matTooltip="Edit"><mat-icon>edit</mat-icon></button>
-            <button mat-icon-button color="warn" matTooltip="Delete"><mat-icon>delete</mat-icon></button>
+            <button mat-icon-button color="primary" matTooltip="Edit"><i class="fa-thin fa-pen"></i></button>
+            <button mat-icon-button color="warn" matTooltip="Delete"><i class="fa-thin fa-trash"></i></button>
           </td>
         </ng-container>
 
@@ -107,9 +107,9 @@
     <!-- Breadcrumb -->
     <div class="breadcrumb-row">
       <span class="breadcrumb-link" (click)="toggleAddForm()">
-        <mat-icon>library_books</mat-icon> Question Bank
+        <i class="fa-thin fa-book-open-reader"></i> Question Bank
       </span>
-      <mat-icon class="breadcrumb-sep">chevron_right</mat-icon>
+      <i class="fa-thin fa-chevron-right" class="breadcrumb-sep"></i>
       <span class="breadcrumb-active">Add New Question</span>
     </div>
 
@@ -118,7 +118,7 @@
       <!-- Form Card Header -->
       <div class="form-card-header">
         <div class="form-header-icon-wrap">
-          <mat-icon>add_circle</mat-icon>
+          <i class="fa-thin fa-circle-plus"></i>
         </div>
         <div>
           <h2 class="form-card-title">Add New Question</h2>
@@ -129,7 +129,7 @@
       <!-- ── SECTION 1: Classification ───────────────────────────────────── -->
       <div class="form-section">
         <div class="section-header">
-          <div class="section-header-icon"><mat-icon>category</mat-icon></div>
+          <div class="section-header-icon"><i class="fa-thin fa-layer-group"></i></div>
           <div>
             <span class="section-title">Classification</span>
             <span class="section-desc">Organise the question by subject, topic, category and type</span>
@@ -139,7 +139,7 @@
         <div class="form-grid-5">
           <mat-form-field appearance="outline">
             <mat-label>Subject</mat-label>
-            <mat-icon matPrefix>school</mat-icon>
+            <i class="fa-thin fa-graduation-cap" matPrefix></i>
             <mat-select [(ngModel)]="newQuestion.subject" (ngModelChange)="onSubjectChange()">
               <mat-option *ngFor="let sub of subjects" [value]="sub">{{sub}}</mat-option>
             </mat-select>
@@ -147,7 +147,7 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Topic</mat-label>
-            <mat-icon matPrefix>topic</mat-icon>
+            <i class="fa-thin fa-book" matPrefix></i>
             <mat-select [(ngModel)]="newQuestion.topic" (ngModelChange)="onTopicChange()" [disabled]="!newQuestion.subject">
               <mat-option *ngFor="let t of availableTopics" [value]="t">{{t}}</mat-option>
             </mat-select>
@@ -155,7 +155,7 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Sub-Topic</mat-label>
-            <mat-icon matPrefix>subdirectory_arrow_right</mat-icon>
+            <i class="fa-thin fa-arrow-turn-down-right" matPrefix></i>
             <mat-select [(ngModel)]="newQuestion.subTopic" [disabled]="!newQuestion.topic">
               <mat-option *ngFor="let st of availableSubTopics" [value]="st">{{st}}</mat-option>
             </mat-select>
@@ -163,7 +163,7 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Category</mat-label>
-            <mat-icon matPrefix>label</mat-icon>
+            <i class="fa-thin fa-tag" matPrefix></i>
             <mat-select [(ngModel)]="newQuestion.category">
               <mat-option *ngFor="let cat of categories" [value]="cat">{{cat}}</mat-option>
             </mat-select>
@@ -171,7 +171,7 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Question Type</mat-label>
-            <mat-icon matPrefix>help_outline</mat-icon>
+            <i class="fa-thin fa-circle-question" matPrefix></i>
             <mat-select [(ngModel)]="newQuestion.questionType">
               <mat-option *ngFor="let type of questionTypes" [value]="type">
                 {{ type }}
@@ -184,7 +184,7 @@
       <!-- ── SECTION 2: Question Type & Text ────────────────────────────── -->
       <div class="form-section">
         <div class="section-header">
-          <div class="section-header-icon green"><mat-icon>quiz</mat-icon></div>
+          <div class="section-header-icon green"><i class="fa-thin fa-circle-question"></i></div>
           <div>
             <span class="section-title">Question Details</span>
             <span class="section-desc">Enter the question text and content</span>
@@ -207,11 +207,11 @@
       <!-- ── SECTION 3a: Options Grid (TrueOrFalse / N-option) ──────────── -->
       <div class="form-section" *ngIf="isOptionType()">
         <div class="section-header">
-          <div class="section-header-icon purple"><mat-icon>checklist</mat-icon></div>
+          <div class="section-header-icon purple"><i class="fa-thin fa-list-check"></i></div>
           <div>
             <span class="section-title">Answer Options</span>
             <span class="section-desc">
-              Click <mat-icon style="font-size:14px;vertical-align:middle;">radio_button_checked</mat-icon> to mark the correct answer
+              Click <i class="fa-thin fa-circle-dot" style="font-size:14px;vertical-align:middle;"></i> to mark the correct answer
             </span>
           </div>
         </div>
@@ -234,8 +234,8 @@
                      [placeholder]="newQuestion.questionType === 'TrueOrFalse'
                        ? (i === 0 ? 'True' : 'False')
                        : 'Enter option ' + getOptionLabel(i) + '…'" />
-              <mat-icon matSuffix *ngIf="newQuestion.correctAnswer === i"
-                style="color: #059669;">check_circle</mat-icon>
+              <i class="fa-thin fa-circle-check" matSuffix *ngIf="newQuestion.correctAnswer === i"
+                style="color: #059669;"></i>
             </mat-form-field>
           </div>
         </div>
@@ -244,7 +244,7 @@
       <!-- ── SECTION 3b: Numerical Answer ──────────────────────────────── -->
       <div class="form-section" *ngIf="newQuestion.questionType === 'Numerical'">
         <div class="section-header">
-          <div class="section-header-icon orange"><mat-icon>calculate</mat-icon></div>
+          <div class="section-header-icon orange"><i class="fa-thin fa-calculator"></i></div>
           <div>
             <span class="section-title">Numerical Answer</span>
             <span class="section-desc">Enter the expected numerical answer and acceptable range</span>
@@ -254,7 +254,7 @@
         <div class="form-grid-2">
           <mat-form-field appearance="outline">
             <mat-label>Correct Answer</mat-label>
-            <mat-icon matPrefix>tag</mat-icon>
+            <i class="fa-thin fa-tag" matPrefix></i>
             <input matInput type="number"
                    [(ngModel)]="newQuestion.numericalAnswer"
                    placeholder="e.g. 9.8" />
@@ -263,7 +263,7 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Acceptable Range (±)</mat-label>
-            <mat-icon matPrefix>compare_arrows</mat-icon>
+            <i class="fa-thin fa-arrows-left-right" matPrefix></i>
             <input matInput type="number"
                    [(ngModel)]="newQuestion.numericalRange"
                    placeholder="e.g. 0.5" />
@@ -275,7 +275,7 @@
       <!-- ── SECTION 3c: Subjective / Matrix note ───────────────────────── -->
       <div class="form-section" *ngIf="newQuestion.questionType === 'Subjective' || newQuestion.questionType === 'Matrix'">
         <div class="section-header">
-          <div class="section-header-icon teal"><mat-icon>edit_note</mat-icon></div>
+          <div class="section-header-icon teal"><i class="fa-thin fa-pen-to-square"></i></div>
           <div>
             <span class="section-title">Model Answer</span>
             <span class="section-desc">Provide a model/expected answer for reference</span>
@@ -295,7 +295,7 @@
       <!-- ── SECTION 4: Metadata & Reference ───────────────────────────── -->
       <div class="form-section">
         <div class="section-header">
-          <div class="section-header-icon blue"><mat-icon>bookmarks</mat-icon></div>
+          <div class="section-header-icon blue"><i class="fa-thin fa-bookmark"></i></div>
           <div>
             <span class="section-title">Metadata &amp; Reference</span>
             <span class="section-desc">Add tags, difficulty and source for this question</span>
@@ -305,7 +305,7 @@
         <div class="form-grid-1">
           <div class="difficulty-group">
             <label class="field-label">
-              <mat-icon>signal_cellular_alt</mat-icon> Difficulty Level
+              <i class="fa-thin fa-signal"></i> Difficulty Level
             </label>
             <div class="diff-chip-row">
               <button *ngFor="let d of difficulties"
@@ -316,7 +316,7 @@
                 [class.hard]="d === 'Hard'"
                 [class.selected]="newQuestion.difficulty === d"
                 (click)="newQuestion.difficulty = d">
-                <mat-icon>{{ d === 'Easy' ? 'sentiment_satisfied' : d === 'Medium' ? 'sentiment_neutral' : 'sentiment_very_dissatisfied' }}</mat-icon>
+                <i class="fa-thin" [class]="d === 'fa-thin Easy' ? 'fa-thin fa-face-smile' : d === 'fa-thin Medium' ? 'fa-thin fa-face-meh' : 'fa-thin fa-face-frown'"></i>
                 {{ d }}
               </button>
             </div>
@@ -331,7 +331,7 @@
               (removed)="removeTag(tag)">
               {{tag}}
               <button matChipRemove [attr.aria-label]="'remove ' + tag">
-                <mat-icon>cancel</mat-icon>
+                <i class="fa-thin fa-circle-xmark"></i>
               </button>
             </mat-chip-row>
             <input placeholder="New tag..."
@@ -346,7 +346,7 @@
         <!-- Reference -->
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Reference / Source</mat-label>
-          <mat-icon matPrefix>link</mat-icon>
+          <i class="fa-thin fa-link" matPrefix></i>
           <input matInput
             [(ngModel)]="newQuestion.reference"
             placeholder="e.g. NCERT Class 12 Ch.3, JEE Advanced 2022 Paper 1 Q.15, Coaching Module…" />
@@ -355,7 +355,7 @@
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Description / Explanation (Optional)</mat-label>
-          <mat-icon matPrefix>description</mat-icon>
+          <i class="fa-thin fa-file-lines" matPrefix></i>
           <textarea matInput
             [(ngModel)]="newQuestion.description"
             placeholder="Add context, formula, or explanation for this question…"
@@ -367,14 +367,14 @@
       <!-- ── Form Actions ────────────────────────────────────────────────── -->
       <div class="form-actions-row">
         <button mat-stroked-button class="cancel-btn" (click)="toggleAddForm()">
-          <mat-icon>close</mat-icon> Cancel
+          <i class="fa-thin fa-xmark"></i> Cancel
         </button>
         <div class="action-right">
           <button mat-stroked-button class="draft-btn">
-            <mat-icon>save_alt</mat-icon> Save as Draft
+            <i class="fa-thin fa-floppy-disk"></i> Save as Draft
           </button>
           <button mat-raised-button class="submit-btn" (click)="saveQuestion()">
-            <mat-icon>add_task</mat-icon> Add to Question Bank
+            <i class="fa-thin fa-clipboard-check"></i> Add to Question Bank
           </button>
         </div>
       </div>

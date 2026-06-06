@@ -11,15 +11,15 @@
             </div>
             <div class="right-actions">
               <div class="status-item positive">
-                <mat-icon>check_circle</mat-icon>
+                <i class="fa-thin fa-circle-check"></i>
                 <span>{{ section.correct }}</span>
               </div>
               <div class="status-item negative">
-                <mat-icon>cancel</mat-icon>
+                <i class="fa-thin fa-circle-xmark"></i>
                 <span>{{ section.incorrect }}</span>
               </div>
               <button mat-icon-button class="action-btn" (click)="openSectionModal(section)">
-                <mat-icon>settings</mat-icon>
+                <i class="fa-thin fa-gear"></i>
               </button>
             </div>
           </div>

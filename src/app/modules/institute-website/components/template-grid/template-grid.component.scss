@@ -75,7 +75,7 @@
   opacity: 0;
   transition: opacity 0.25s ease;
 
-  mat-icon {
+  i {
     color: white;
     font-size: 28px;
     width: 28px;
@@ -136,7 +136,7 @@
   gap: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  mat-icon {
+  i {
     font-size: 12px;
     width: 12px;
     height: 12px;
@@ -184,7 +184,7 @@
   background: transparent;
   transition: all 0.2s;
   
-  mat-icon {
+  i {
     vertical-align: middle;
     margin-right: 4px;
     font-size: 16px;
@@ -205,7 +205,7 @@
   color: white !important;
   transition: all 0.2s;
 
-  mat-icon {
+  i {
     vertical-align: middle;
     margin-right: 4px;
     font-size: 16px;

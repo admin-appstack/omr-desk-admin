@@ -2,12 +2,12 @@
   <div class="dialog-content">
     <!-- Floating Close Button -->
     <button mat-icon-button mat-dialog-close class="floating-close-btn" aria-label="Close preview">
-      <mat-icon>close</mat-icon>
+      <i class="fa-thin fa-xmark"></i>
     </button>
 
     <!-- Floating Selection Button -->
     <button mat-raised-button color="primary" class="floating-select-btn" (click)="selectTemplate()">
-      <mat-icon>check_circle</mat-icon> Use This Template
+      <i class="fa-thin fa-circle-check"></i> Use This Template
     </button>
     <div class="preview-main">
       <!-- Image-based Monitor Mockup -->
@@ -21,7 +21,7 @@
             <div class="browser-header">
           <div class="dots"><span></span><span></span><span></span></div>
           <div class="address-bar">
-            <mat-icon>lock</mat-icon>
+            <i class="fa-thin fa-lock"></i>
             https://{{getSlug()}}.omrdesk.com
           </div>
         </div>

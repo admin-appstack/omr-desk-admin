@@ -1,10 +1,10 @@
 <div class="dialog-container">
   <div class="dialog-header blue-theme">
     <div class="header-content">
-      <mat-icon>edit_document</mat-icon>
+      <i class="fa-thin fa-file-pen"></i>
       <h2>Edit Content: {{ pageName }}</h2>
     </div>
-    <button mat-icon-button (click)="close()" class="close-btn"><mat-icon>close</mat-icon></button>
+    <button mat-icon-button (click)="close()" class="close-btn"><i class="fa-thin fa-xmark"></i></button>
   </div>
   <div class="dialog-body">
     <!-- Loading State -->
@@ -42,7 +42,7 @@
 
         <div class="upload-field">
           <div class="upload-info">
-            <mat-icon>image</mat-icon>
+            <i class="fa-thin fa-image"></i>
             <div>
               <strong>Hero Background Image</strong>
               <span>Recommended size: 1920x1080px</span>
@@ -61,7 +61,7 @@
         
         <div class="upload-field">
           <div class="upload-info">
-            <mat-icon>photo_camera</mat-icon>
+            <i class="fa-thin fa-camera"></i>
             <div>
               <strong>About Us Photo</strong>
               <span>Recommended size: 800x600px</span>
@@ -96,10 +96,10 @@
             <mat-label>Label (e.g. Successful Alumni)</mat-label>
             <input matInput [(ngModel)]="stat.label">
           </mat-form-field>
-          <button mat-icon-button color="warn" (click)="removeStat(i)" style="margin-top: -15px;"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="removeStat(i)" style="margin-top: -15px;"><i class="fa-thin fa-trash"></i></button>
         </div>
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addStat()">
-          <mat-icon>add</mat-icon> Add Statistic
+          <i class="fa-thin fa-plus"></i> Add Statistic
         </button>
       </div>
 
@@ -109,7 +109,7 @@
           <div class="repeater-header">
             <h4>Feature #{{ i + 1 }}</h4>
             <button mat-icon-button color="warn" (click)="removeFeature(i)">
-              <mat-icon>delete</mat-icon>
+              <i class="fa-thin fa-trash"></i>
             </button>
           </div>
           <div class="row-fields">
@@ -128,7 +128,7 @@
           </mat-form-field>
         </div>
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addFeature()">
-          <mat-icon>add</mat-icon> Add Feature
+          <i class="fa-thin fa-plus"></i> Add Feature
         </button>
       </div>
 
@@ -137,7 +137,7 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>YouTube / Vimeo Link</mat-label>
           <input matInput [(ngModel)]="videoTourUrl" placeholder="e.g. https://youtube.com/...">
-          <mat-icon matPrefix class="input-icon">smart_display</mat-icon>
+          <i class="fa-thin fa-circle-play" matPrefix class="input-icon"></i>
         </mat-form-field>
       </div>
 
@@ -147,7 +147,7 @@
           <div class="repeater-header">
             <h4>Testimonial #{{ i + 1 }}</h4>
             <button mat-icon-button color="warn" (click)="removeTestimonial(i)">
-              <mat-icon>delete</mat-icon>
+              <i class="fa-thin fa-trash"></i>
             </button>
           </div>
           <div class="row-fields">
@@ -166,7 +166,7 @@
           </mat-form-field>
           <div class="upload-field compact">
             <div class="upload-info">
-              <mat-icon>face</mat-icon>
+              <i class="fa-thin fa-face-smile"></i>
               <div>
                 <strong>Student Photo</strong>
                 <span>Recommended size: 200x200px</span>
@@ -176,7 +176,7 @@
           </div>
         </div>
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addTestimonial()">
-          <mat-icon>add</mat-icon> Add Testimonial
+          <i class="fa-thin fa-plus"></i> Add Testimonial
         </button>
       </div>
 
@@ -186,7 +186,7 @@
           <div class="repeater-header">
             <h4>FAQ #{{ i + 1 }}</h4>
             <button mat-icon-button color="warn" (click)="removeFaq(i)">
-              <mat-icon>delete</mat-icon>
+              <i class="fa-thin fa-trash"></i>
             </button>
           </div>
           <mat-form-field appearance="outline" class="full-width">
@@ -199,7 +199,7 @@
           </mat-form-field>
         </div>
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addFaq()">
-          <mat-icon>add</mat-icon> Add FAQ
+          <i class="fa-thin fa-plus"></i> Add FAQ
         </button>
       </div>
 
@@ -222,7 +222,7 @@
         
         <div class="upload-field">
           <div class="upload-info">
-            <mat-icon>business</mat-icon>
+            <i class="fa-thin fa-building"></i>
             <div>
               <strong>Institution Photo / Campus</strong>
               <span>Recommended size: 1200x800px</span>
@@ -260,7 +260,7 @@
         </mat-form-field>
         <div class="upload-field">
           <div class="upload-info">
-            <mat-icon>person</mat-icon>
+            <i class="fa-thin fa-user"></i>
             <div>
               <strong>Director's Photo</strong>
               <span>Recommended size: 400x400px</span>
@@ -277,7 +277,7 @@
           <div class="repeater-header">
             <h4>Member #{{ i + 1 }}</h4>
             <button mat-icon-button color="warn" (click)="removeTeamMember(i)">
-              <mat-icon>delete</mat-icon>
+              <i class="fa-thin fa-trash"></i>
             </button>
           </div>
           
@@ -300,7 +300,7 @@
 
           <div class="upload-field compact">
             <div class="upload-info">
-              <mat-icon>account_circle</mat-icon>
+              <i class="fa-thin fa-circle-user"></i>
               <div>
                 <strong>Profile Picture</strong>
                 <span>Recommended size: 400x400px</span>
@@ -311,7 +311,7 @@
         </div>
 
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addTeamMember()">
-          <mat-icon>add</mat-icon> Add Team Member
+          <i class="fa-thin fa-plus"></i> Add Team Member
         </button>
       </div>
 
@@ -321,7 +321,7 @@
           <div class="repeater-header">
             <h4>Affiliation #{{ i + 1 }}</h4>
             <button mat-icon-button color="warn" (click)="removeAffiliation(i)">
-              <mat-icon>delete</mat-icon>
+              <i class="fa-thin fa-trash"></i>
             </button>
           </div>
           <mat-form-field appearance="outline" class="full-width">
@@ -330,7 +330,7 @@
           </mat-form-field>
           <div class="upload-field compact">
             <div class="upload-info">
-              <mat-icon>verified</mat-icon>
+              <i class="fa-thin fa-badge-check"></i>
               <div>
                 <strong>Organization Logo</strong>
                 <span>Recommended size: 200x200px</span>
@@ -340,7 +340,7 @@
           </div>
         </div>
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addAffiliation()">
-          <mat-icon>add</mat-icon> Add Affiliation
+          <i class="fa-thin fa-plus"></i> Add Affiliation
         </button>
       </div>
 
@@ -350,7 +350,7 @@
           <div class="repeater-header">
             <h4>Milestone #{{ i + 1 }}</h4>
             <button mat-icon-button color="warn" (click)="removeMilestone(i)">
-              <mat-icon>delete</mat-icon>
+              <i class="fa-thin fa-trash"></i>
             </button>
           </div>
           <div class="row-fields">
@@ -369,7 +369,7 @@
           </mat-form-field>
         </div>
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addMilestone()">
-          <mat-icon>add</mat-icon> Add Milestone
+          <i class="fa-thin fa-plus"></i> Add Milestone
         </button>
       </div>
 
@@ -389,7 +389,7 @@
         </mat-form-field>
         <div class="upload-field">
           <div class="upload-info">
-            <mat-icon>view_carousel</mat-icon>
+            <i class="fa-thin fa-images"></i>
             <div>
               <strong>Banner Image</strong>
               <span>Recommended size: 1920x400px</span>
@@ -411,7 +411,7 @@
         </mat-form-field>
         <div class="upload-field">
           <div class="upload-info">
-            <mat-icon>picture_as_pdf</mat-icon>
+            <i class="fa-thin fa-file-pdf"></i>
             <div>
               <strong>Institute Prospectus / Catalog</strong>
               <span>PDF Document</span>
@@ -428,7 +428,7 @@
           <div class="repeater-header">
             <h4>Course #{{ i + 1 }}</h4>
             <button mat-icon-button color="warn" (click)="removeCourse(i)">
-              <mat-icon>delete</mat-icon>
+              <i class="fa-thin fa-trash"></i>
             </button>
           </div>
           
@@ -472,7 +472,7 @@
 
           <div class="upload-field compact">
             <div class="upload-info">
-              <mat-icon>image</mat-icon>
+              <i class="fa-thin fa-image"></i>
               <div>
                 <strong>Course Thumbnail</strong>
                 <span>Recommended size: 600x400px</span>
@@ -483,7 +483,7 @@
         </div>
 
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addCourse()">
-          <mat-icon>add</mat-icon> Add New Course
+          <i class="fa-thin fa-plus"></i> Add New Course
         </button>
       </div>
     </ng-container>
@@ -501,25 +501,25 @@
           <mat-form-field appearance="outline" class="half-width">
             <mat-label>Phone Number</mat-label>
             <input matInput [(ngModel)]="contactPhone" placeholder="+1 (555) 000-0000">
-            <mat-icon matPrefix class="input-icon">phone</mat-icon>
+            <i class="fa-thin fa-phone" matPrefix class="input-icon"></i>
           </mat-form-field>
           <mat-form-field appearance="outline" class="half-width">
             <mat-label>Email Address</mat-label>
             <input matInput [(ngModel)]="contactEmail" placeholder="info@institute.edu">
-            <mat-icon matPrefix class="input-icon">email</mat-icon>
+            <i class="fa-thin fa-envelope" matPrefix class="input-icon"></i>
           </mat-form-field>
         </div>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Google Maps Embed Link</mat-label>
           <input matInput [(ngModel)]="contactMapLink" placeholder="https://maps.google.com/...">
-          <mat-icon matPrefix class="input-icon">map</mat-icon>
+          <i class="fa-thin fa-map-location-dot" matPrefix class="input-icon"></i>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Working Hours / Timings</mat-label>
           <input matInput [(ngModel)]="workingHours" placeholder="e.g. Mon-Fri: 9 AM - 5 PM">
-          <mat-icon matPrefix class="input-icon">schedule</mat-icon>
+          <i class="fa-thin fa-clock" matPrefix class="input-icon"></i>
         </mat-form-field>
       </div>
 
@@ -531,7 +531,7 @@
           <mat-form-field appearance="outline" class="half-width">
             <mat-label>Facebook URL</mat-label>
             <input matInput [(ngModel)]="socialFacebook" placeholder="https://facebook.com/...">
-            <mat-icon matPrefix class="input-icon">facebook</mat-icon>
+            <i class="fa-brands fa-facebook" matPrefix class="input-icon"></i>
           </mat-form-field>
           <mat-form-field appearance="outline" class="half-width">
             <mat-label>Instagram URL</mat-label>
@@ -553,7 +553,7 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>YouTube Channel URL</mat-label>
           <input matInput [(ngModel)]="socialYoutube" placeholder="https://youtube.com/...">
-          <mat-icon matPrefix class="input-icon">smart_display</mat-icon>
+          <i class="fa-thin fa-circle-play" matPrefix class="input-icon"></i>
         </mat-form-field>
       </div>
 
@@ -565,7 +565,7 @@
         <mat-form-field appearance="outline" class="full-width" *ngIf="enableContactForm">
           <mat-label>Form Recipient Email</mat-label>
           <input matInput [(ngModel)]="contactFormEmail" placeholder="Where should user messages be sent? (e.g. support@institute.com)">
-          <mat-icon matPrefix class="input-icon">mail</mat-icon>
+          <i class="fa-thin fa-envelope" matPrefix class="input-icon"></i>
         </mat-form-field>
       </div>
     </ng-container>
@@ -590,7 +590,7 @@
           <div class="repeater-header">
             <h4>Package #{{ i + 1 }}</h4>
             <button mat-icon-button color="warn" (click)="removeTestSeries(i)">
-              <mat-icon>delete</mat-icon>
+              <i class="fa-thin fa-trash"></i>
             </button>
           </div>
           
@@ -623,7 +623,7 @@
 
           <div class="upload-field compact">
             <div class="upload-info">
-              <mat-icon>image</mat-icon>
+              <i class="fa-thin fa-image"></i>
               <div>
                 <strong>Thumbnail Image</strong>
                 <span>Recommended size: 600x400px</span>
@@ -634,7 +634,7 @@
         </div>
 
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addTestSeries()">
-          <mat-icon>add</mat-icon> Add Test Series
+          <i class="fa-thin fa-plus"></i> Add Test Series
         </button>
       </div>
     </ng-container>
@@ -664,10 +664,10 @@
             <mat-label>Label (e.g. Total Selections)</mat-label>
             <input matInput [(ngModel)]="stat.label">
           </mat-form-field>
-          <button mat-icon-button color="warn" (click)="removeResultStat(i)" style="margin-top: -15px;"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="removeResultStat(i)" style="margin-top: -15px;"><i class="fa-thin fa-trash"></i></button>
         </div>
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addResultStat()">
-          <mat-icon>add</mat-icon> Add Highlight Statistic
+          <i class="fa-thin fa-plus"></i> Add Highlight Statistic
         </button>
       </div>
 
@@ -676,11 +676,11 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Topper Interview / Celebration Video (YouTube Link)</mat-label>
           <input matInput [(ngModel)]="resultVideoUrl" placeholder="e.g. https://youtube.com/...">
-          <mat-icon matPrefix class="input-icon">smart_display</mat-icon>
+          <i class="fa-thin fa-circle-play" matPrefix class="input-icon"></i>
         </mat-form-field>
         <div class="upload-field">
           <div class="upload-info">
-            <mat-icon>picture_as_pdf</mat-icon>
+            <i class="fa-thin fa-file-pdf"></i>
             <div>
               <strong>Detailed Results Booklet</strong>
               <span>PDF Document</span>
@@ -696,7 +696,7 @@
           <div class="repeater-header">
             <h4>Achiever #{{ i + 1 }}</h4>
             <button mat-icon-button color="warn" (click)="removeResult(i)">
-              <mat-icon>delete</mat-icon>
+              <i class="fa-thin fa-trash"></i>
             </button>
           </div>
           
@@ -725,7 +725,7 @@
 
           <div class="upload-field compact">
             <div class="upload-info">
-              <mat-icon>emoji_events</mat-icon>
+              <i class="fa-thin fa-trophy"></i>
               <div>
                 <strong>Student Photo</strong>
                 <span>Recommended size: 300x300px</span>
@@ -736,7 +736,7 @@
         </div>
 
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addResult()">
-          <mat-icon>add</mat-icon> Add Result
+          <i class="fa-thin fa-plus"></i> Add Result
         </button>
       </div>
     </ng-container>
@@ -768,7 +768,7 @@
         <div class="section-header-flex">
           <h3>Quick Links</h3>
           <button mat-stroked-button color="primary" (click)="addFooterQuickLink()">
-            <mat-icon>add</mat-icon> Add Link
+            <i class="fa-thin fa-plus"></i> Add Link
           </button>
         </div>
         <div class="dynamic-list">
@@ -784,7 +784,7 @@
               </mat-form-field>
             </div>
             <button mat-icon-button color="warn" (click)="removeFooterQuickLink(i)" class="remove-btn">
-              <mat-icon>delete</mat-icon>
+              <i class="fa-thin fa-trash"></i>
             </button>
           </div>
         </div>
@@ -794,7 +794,7 @@
         <div class="section-header-flex">
           <h3>Social Media Links</h3>
           <button mat-stroked-button color="primary" (click)="addFooterSocial()">
-            <mat-icon>add</mat-icon> Add Social
+            <i class="fa-thin fa-plus"></i> Add Social
           </button>
         </div>
         <div class="dynamic-list">
@@ -810,7 +810,7 @@
               </mat-form-field>
             </div>
             <button mat-icon-button color="warn" (click)="removeFooterSocial(i)" class="remove-btn">
-              <mat-icon>delete</mat-icon>
+              <i class="fa-thin fa-trash"></i>
             </button>
           </div>
         </div>
@@ -830,15 +830,15 @@
 
     <ng-container *ngIf="!['Home', 'About', 'Courses', 'Contact', 'Test Series', 'Results', 'Footer'].includes(pageName)">
       <div class="editor-toolbar">
-        <button mat-icon-button><mat-icon>format_bold</mat-icon></button>
-        <button mat-icon-button><mat-icon>format_italic</mat-icon></button>
-        <button mat-icon-button><mat-icon>format_underlined</mat-icon></button>
+        <button mat-icon-button><i class="fa-thin fa-bold"></i></button>
+        <button mat-icon-button><i class="fa-thin fa-italic"></i></button>
+        <button mat-icon-button><i class="fa-thin fa-underline"></i></button>
         <div class="divider"></div>
-        <button mat-icon-button><mat-icon>format_list_bulleted</mat-icon></button>
-        <button mat-icon-button><mat-icon>format_list_numbered</mat-icon></button>
+        <button mat-icon-button><i class="fa-thin fa-list-ul"></i></button>
+        <button mat-icon-button><i class="fa-thin fa-list-ol"></i></button>
         <div class="divider"></div>
-        <button mat-icon-button><mat-icon>image</mat-icon></button>
-        <button mat-icon-button><mat-icon>link</mat-icon></button>
+        <button mat-icon-button><i class="fa-thin fa-image"></i></button>
+        <button mat-icon-button><i class="fa-thin fa-link"></i></button>
       </div>
       <textarea class="editor-textarea" [(ngModel)]="pageContent"></textarea>
     </ng-container>
@@ -850,7 +850,7 @@
     <button mat-button (click)="close()" class="cancel-btn" [disabled]="isSaving">Discard</button>
     <button mat-raised-button (click)="save()" class="save-btn" [disabled]="isLoading || isSaving">
       <mat-spinner *ngIf="isSaving" diameter="18" style="display:inline-block; margin-right:6px;"></mat-spinner>
-      <mat-icon *ngIf="!isSaving">save</mat-icon>
+      <i class="fa-thin fa-floppy-disk" *ngIf="!isSaving"></i>
       {{ isSaving ? 'Saving...' : 'Save Draft' }}
     </button>
   </div>

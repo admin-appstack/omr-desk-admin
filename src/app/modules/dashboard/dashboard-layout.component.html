@@ -17,7 +17,7 @@
         [matTooltip]="isSidebarCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
         matTooltipPosition="right"
       >
-        <mat-icon>{{ isSidebarCollapsed() ? 'menu' : 'menu_open' }}</mat-icon>
+        <i [class]="isSidebarCollapsed() ? 'fa-thin fa-bars' : 'fa-thin fa-bars-staggered'"></i>
       </button>
     </div>
 
@@ -37,7 +37,7 @@
         >
           <div class="nav-item-inner">
             <div class="nav-icon-wrap">
-              <mat-icon>{{ item.icon }}</mat-icon>
+              <i [class]="item.icon"></i>
             </div>
             <span class="nav-label" *ngIf="!isSidebarCollapsed()">{{ item.label }}</span>
             <span class="nav-badge" *ngIf="item.badge && !isSidebarCollapsed()">{{ item.badge }}</span>
@@ -60,7 +60,7 @@
         >
           <div class="nav-item-inner">
             <div class="nav-icon-wrap">
-              <mat-icon>{{ item.icon }}</mat-icon>
+              <i [class]="item.icon"></i>
             </div>
             <span class="nav-label" *ngIf="!isSidebarCollapsed()">{{ item.label }}</span>
             <span class="nav-badge" *ngIf="item.badge && !isSidebarCollapsed()">{{ item.badge }}</span>
@@ -78,13 +78,13 @@
           <span class="sidebar-user-role">Institute Admin</span>
         </div>
         <button mat-icon-button class="sidebar-logout-btn" (click)="signOut()" matTooltip="Sign Out">
-          <mat-icon>logout</mat-icon>
+          <i class="fa-thin fa-right-from-bracket"></i>
         </button>
       </div>
       <div class="sidebar-user-collapsed" *ngIf="isSidebarCollapsed()">
         <div class="sidebar-avatar">{{ (user?.name || 'A').charAt(0) }}</div>
         <button mat-icon-button class="sidebar-logout-btn" (click)="signOut()" matTooltip="Sign Out" matTooltipPosition="right">
-          <mat-icon>logout</mat-icon>
+          <i class="fa-thin fa-right-from-bracket"></i>
         </button>
       </div>
     </div>
@@ -95,24 +95,24 @@
     <mat-toolbar class="top-bar">
       <div class="toolbar-left">
         <div class="page-breadcrumb">
-          <mat-icon class="breadcrumb-icon">apps</mat-icon>
+          <i class="fa-thin fa-grid-2 breadcrumb-icon"></i>
           <span class="page-title">Dashboard</span>
         </div>
       </div>
       <div class="toolbar-right">
         <div class="search-wrap">
-          <mat-icon>search</mat-icon>
+          <i class="fa-thin fa-magnifying-glass"></i>
           <input type="text" placeholder="Search anything..." />
           <span class="search-shortcut">⌘K</span>
         </div>
         <button mat-icon-button class="toolbar-icon-btn" matTooltip="Notifications">
           <div class="notif-wrapper">
-            <mat-icon>notifications</mat-icon>
+            <i class="fa-thin fa-bell"></i>
             <span class="badge">3</span>
           </div>
         </button>
         <button mat-icon-button class="toolbar-icon-btn" matTooltip="Help & Docs">
-          <mat-icon>help_outline</mat-icon>
+          <i class="fa-thin fa-circle-question"></i>
         </button>
         <div class="divider-v"></div>
         <div class="user-profile">
@@ -127,16 +127,16 @@
           </button>
           <mat-menu #profileMenu="matMenu" class="profile-menu">
             <button mat-menu-item>
-              <mat-icon>manage_accounts</mat-icon>
+              <i class="fa-thin fa-user-pen"></i>
               <span>My Profile</span>
             </button>
             <button mat-menu-item [routerLink]="['/dashboard/settings']">
-              <mat-icon>settings</mat-icon>
+              <i class="fa-thin fa-gear"></i>
               <span>Settings</span>
             </button>
             <mat-divider></mat-divider>
             <button mat-menu-item (click)="signOut()" class="sign-out-item">
-              <mat-icon>logout</mat-icon>
+              <i class="fa-thin fa-right-from-bracket"></i>
               <span>Sign Out</span>
             </button>
           </mat-menu>

@@ -4,11 +4,11 @@
     <!-- Purple Header -->
     <div class="modal-header purple-header">
       <div class="title-with-icon">
-        <mat-icon class="header-icon">settings</mat-icon>
+        <i class="fa-thin fa-gear" class="header-icon"></i>
         <h3>{{ section()?.name }} Settings</h3>
       </div>
       <button class="close-circle-btn" (click)="close.emit()">
-        <mat-icon>close</mat-icon>
+        <i class="fa-thin fa-xmark"></i>
       </button>
     </div>
 
@@ -17,7 +17,7 @@
 
       <!-- Input with Icon -->
       <div class="form-group-with-icon">
-        <mat-icon class="input-icon">edit</mat-icon>
+        <i class="fa-thin fa-pen" class="input-icon"></i>
         <div class="input-wrapper">
           <label>Section Name</label>
           <input type="text" [value]="section()?.name" class="custom-input">
@@ -25,7 +25,7 @@
       </div>
 
       <div class="form-group-with-icon">
-        <mat-icon class="input-icon">list</mat-icon>
+        <i class="fa-thin fa-list" class="input-icon"></i>
         <div class="input-wrapper">
           <label>Question Type</label>
           <select class="custom-select">
@@ -38,14 +38,14 @@
 
       <div class="form-row">
         <div class="form-group-with-icon">
-          <mat-icon class="input-icon">grade</mat-icon>
+          <i class="fa-thin fa-star" class="input-icon"></i>
           <div class="input-wrapper">
             <label>Marks for correct</label>
             <input type="number" [value]="section()?.correct" class="custom-input">
           </div>
         </div>
         <div class="form-group-with-icon">
-          <mat-icon class="input-icon">error_outline</mat-icon>
+          <i class="fa-thin fa-circle-exclamation" class="input-icon"></i>
           <div class="input-wrapper">
             <label>Marks for incorrect</label>
             <input type="number" [value]="section()?.incorrect" class="custom-input">
@@ -74,7 +74,7 @@
     <div class="modal-footer styled-footer">
       <button class="cancel-btn" (click)="close.emit()">Cancel</button>
       <button class="save-btn" (click)="close.emit()">
-        <mat-icon>check_circle</mat-icon>
+        <i class="fa-thin fa-circle-check"></i>
         Save Changes
       </button>
     </div>

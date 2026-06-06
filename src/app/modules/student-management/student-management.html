@@ -3,7 +3,7 @@
   <!-- Header Hero -->
   <div class="module-hero teal">
     <div class="hero-content">
-      <div class="hero-icon"><mat-icon>school</mat-icon></div>
+      <div class="hero-icon"><i class="fa-thin fa-graduation-cap"></i></div>
       <div>
         <h1>Student Management</h1>
         <p>Manage student profiles, enrollments, and academic records.</p>
@@ -11,10 +11,10 @@
     </div>
     <div class="hero-actions">
       <button mat-raised-button class="hero-btn-outline">
-        <mat-icon>group_add</mat-icon> Import Students
+        <i class="fa-thin fa-user-plus"></i> Import Students
       </button>
       <button mat-raised-button class="hero-btn" (click)="openStudentDialog()">
-        <mat-icon>person_add</mat-icon> Add Student
+        <i class="fa-thin fa-user-plus"></i> Add Student
       </button>
     </div>
   </div>
@@ -23,7 +23,7 @@
   <div class="pay-stats">
     <div class="pay-stat-card" *ngFor="let s of statCards">
       <div class="pay-stat-icon" [class]="s.theme">
-        <mat-icon>{{s.icon}}</mat-icon>
+        <i [class]="s.icon"></i>
       </div>
       <div class="pay-stat-body">
         <span class="pay-stat-label">{{s.label}}</span>
@@ -42,32 +42,32 @@
       </div>
       <div class="header-actions">
         <div class="search-box">
-          <mat-icon>search</mat-icon>
+          <i class="fa-thin fa-magnifying-glass"></i>
           <input type="text" placeholder="Search students..." (keyup)="applySearch($event)">
         </div>
         <button mat-stroked-button class="export-btn" [matMenuTriggerFor]="filterMenu">
-          <mat-icon>filter_list</mat-icon> Filter {{ currentFilter !== 'All' ? '(' + currentFilter + ')' : '' }}
+          <i class="fa-thin fa-filter"></i> Filter {{ currentFilter !== 'All' ? '(' + currentFilter + ')' : '' }}
         </button>
         <mat-menu #filterMenu="matMenu">
           <button mat-menu-item (click)="applyFilter('All')">
-            <mat-icon *ngIf="currentFilter === 'All'">check</mat-icon>
+            <i class="fa-thin fa-check" *ngIf="currentFilter === 'All'"></i>
             <span [style.padding-left.px]="currentFilter !== 'All' ? 24 : 0">All Students</span>
           </button>
           <button mat-menu-item (click)="applyFilter('Active')">
-            <mat-icon *ngIf="currentFilter === 'Active'">check</mat-icon>
+            <i class="fa-thin fa-check" *ngIf="currentFilter === 'Active'"></i>
             <span [style.padding-left.px]="currentFilter !== 'Active' ? 24 : 0">Active Students</span>
           </button>
           <button mat-menu-item (click)="applyFilter('Pending')">
-            <mat-icon *ngIf="currentFilter === 'Pending'">check</mat-icon>
+            <i class="fa-thin fa-check" *ngIf="currentFilter === 'Pending'"></i>
             <span [style.padding-left.px]="currentFilter !== 'Pending' ? 24 : 0">Pending Profiles</span>
           </button>
           <button mat-menu-item (click)="applyFilter('Suspended')">
-            <mat-icon *ngIf="currentFilter === 'Suspended'">check</mat-icon>
+            <i class="fa-thin fa-check" *ngIf="currentFilter === 'Suspended'"></i>
             <span [style.padding-left.px]="currentFilter !== 'Suspended' ? 24 : 0">Suspended</span>
           </button>
         </mat-menu>
         <button mat-stroked-button class="export-btn">
-          <mat-icon>download</mat-icon> Export
+          <i class="fa-thin fa-download"></i> Export
         </button>
       </div>
     </div>
@@ -104,41 +104,41 @@
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row">
           <button mat-icon-button matTooltip="View Profile" class="action-btn" (click)="openStudentDialog(row)">
-            <mat-icon>visibility</mat-icon>
+            <i class="fa-thin fa-eye"></i>
           </button>
           <button mat-icon-button matTooltip="More Options" class="action-btn" [matMenuTriggerFor]="studentMenu">
-            <mat-icon>more_vert</mat-icon>
+            <i class="fa-thin fa-ellipsis-vertical"></i>
           </button>
           <mat-menu #studentMenu="matMenu" xPosition="before">
             <button mat-menu-item (click)="openStudentDialog(row)">
-              <mat-icon>edit</mat-icon>
+              <i class="fa-thin fa-pen"></i>
               <span>Edit Profile</span>
             </button>
             <button mat-menu-item [matMenuTriggerFor]="statusSubMenu">
-              <mat-icon>swap_horiz</mat-icon>
+              <i class="fa-thin fa-right-left"></i>
               <span>Change Status</span>
             </button>
             <mat-menu #statusSubMenu="matMenu">
               <button mat-menu-item *ngIf="row.status !== 'Active'" (click)="updateStatus(row, 'Active')">
-                <mat-icon>check_circle</mat-icon>
+                <i class="fa-thin fa-circle-check"></i>
                 <span>Make Active</span>
               </button>
               <button mat-menu-item *ngIf="row.status !== 'Pending'" (click)="updateStatus(row, 'Pending')">
-                <mat-icon>hourglass_empty</mat-icon>
+                <i class="fa-thin fa-hourglass-half"></i>
                 <span>Make Pending</span>
               </button>
               <button mat-menu-item *ngIf="row.status !== 'Suspended'" (click)="updateStatus(row, 'Suspended')">
-                <mat-icon>block</mat-icon>
+                <i class="fa-thin fa-ban"></i>
                 <span>Suspend</span>
               </button>
               <button mat-menu-item *ngIf="row.status !== 'Alumni'" (click)="updateStatus(row, 'Alumni')">
-                <mat-icon>school</mat-icon>
+                <i class="fa-thin fa-graduation-cap"></i>
                 <span>Mark as Alumni</span>
               </button>
             </mat-menu>
             <mat-divider></mat-divider>
             <button mat-menu-item class="danger-text" (click)="deleteStudent(row)">
-              <mat-icon color="warn">delete</mat-icon>
+              <i class="fa-thin fa-trash" color="warn"></i>
               <span style="color: #ef4444;">Delete Student</span>
             </button>
           </mat-menu>

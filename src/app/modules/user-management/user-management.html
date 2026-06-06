@@ -3,7 +3,7 @@
   <!-- Header Hero -->
   <div class="module-hero indigo">
     <div class="hero-content">
-      <div class="hero-icon"><mat-icon>people_alt</mat-icon></div>
+      <div class="hero-icon"><i class="fa-thin fa-users"></i></div>
       <div>
         <h1>User Management</h1>
         <p>Manage system access, view user details, and invite new members.</p>
@@ -11,10 +11,10 @@
     </div>
     <div class="hero-actions">
       <button mat-raised-button class="hero-btn-outline">
-        <mat-icon>group_add</mat-icon> Bulk Import
+        <i class="fa-thin fa-user-plus"></i> Bulk Import
       </button>
       <button mat-raised-button class="hero-btn" (click)="openUserDialog()">
-        <mat-icon>person_add</mat-icon> Add User
+        <i class="fa-thin fa-user-plus"></i> Add User
       </button>
     </div>
   </div>
@@ -23,7 +23,7 @@
   <div class="pay-stats">
     <div class="pay-stat-card" *ngFor="let s of statCards">
       <div class="pay-stat-icon" [class]="s.theme">
-        <mat-icon>{{s.icon}}</mat-icon>
+        <i [class]="s.icon"></i>
       </div>
       <div class="pay-stat-body">
         <span class="pay-stat-label">{{s.label}}</span>
@@ -42,32 +42,32 @@
       </div>
       <div class="header-actions">
         <div class="search-box">
-          <mat-icon>search</mat-icon>
+          <i class="fa-thin fa-magnifying-glass"></i>
           <input type="text" placeholder="Search users..." (keyup)="applySearch($event)">
         </div>
         <button mat-stroked-button class="export-btn" [matMenuTriggerFor]="filterMenu">
-          <mat-icon>filter_list</mat-icon> Filter {{ currentFilter !== 'All' ? '(' + currentFilter + ')' : '' }}
+          <i class="fa-thin fa-filter"></i> Filter {{ currentFilter !== 'All' ? '(' + currentFilter + ')' : '' }}
         </button>
         <mat-menu #filterMenu="matMenu">
           <button mat-menu-item (click)="applyFilter('All')">
-            <mat-icon *ngIf="currentFilter === 'All'">check</mat-icon>
+            <i class="fa-thin fa-check" *ngIf="currentFilter === 'All'"></i>
             <span [style.padding-left.px]="currentFilter !== 'All' ? 24 : 0">All Users</span>
           </button>
           <button mat-menu-item (click)="applyFilter('Active')">
-            <mat-icon *ngIf="currentFilter === 'Active'">check</mat-icon>
+            <i class="fa-thin fa-check" *ngIf="currentFilter === 'Active'"></i>
             <span [style.padding-left.px]="currentFilter !== 'Active' ? 24 : 0">Active Users</span>
           </button>
           <button mat-menu-item (click)="applyFilter('Pending')">
-            <mat-icon *ngIf="currentFilter === 'Pending'">check</mat-icon>
+            <i class="fa-thin fa-check" *ngIf="currentFilter === 'Pending'"></i>
             <span [style.padding-left.px]="currentFilter !== 'Pending' ? 24 : 0">Pending Invites</span>
           </button>
           <button mat-menu-item (click)="applyFilter('Suspended')">
-            <mat-icon *ngIf="currentFilter === 'Suspended'">check</mat-icon>
+            <i class="fa-thin fa-check" *ngIf="currentFilter === 'Suspended'"></i>
             <span [style.padding-left.px]="currentFilter !== 'Suspended' ? 24 : 0">Suspended</span>
           </button>
         </mat-menu>
         <button mat-stroked-button class="export-btn">
-          <mat-icon>download</mat-icon> Export
+          <i class="fa-thin fa-download"></i> Export
         </button>
       </div>
     </div>
@@ -110,31 +110,31 @@
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row">
           <button mat-icon-button matTooltip="Edit User" class="action-btn" (click)="openUserDialog(row)">
-            <mat-icon>edit</mat-icon>
+            <i class="fa-thin fa-pen"></i>
           </button>
           <button mat-icon-button matTooltip="More Options" class="action-btn" [matMenuTriggerFor]="userMenu">
-            <mat-icon>more_vert</mat-icon>
+            <i class="fa-thin fa-ellipsis-vertical"></i>
           </button>
           <mat-menu #userMenu="matMenu" xPosition="before">
             <button mat-menu-item>
-              <mat-icon>account_circle</mat-icon>
+              <i class="fa-thin fa-circle-user"></i>
               <span>View Profile</span>
             </button>
             <button mat-menu-item>
-              <mat-icon>lock_reset</mat-icon>
+              <i class="fa-thin fa-lock-keyhole"></i>
               <span>Reset Password</span>
             </button>
             <button mat-menu-item *ngIf="row.status !== 'Suspended'">
-              <mat-icon>block</mat-icon>
+              <i class="fa-thin fa-ban"></i>
               <span>Suspend User</span>
             </button>
             <button mat-menu-item *ngIf="row.status === 'Suspended'">
-              <mat-icon>check_circle</mat-icon>
+              <i class="fa-thin fa-circle-check"></i>
               <span>Activate User</span>
             </button>
             <mat-divider></mat-divider>
             <button mat-menu-item class="danger-text">
-              <mat-icon color="warn">delete</mat-icon>
+              <i class="fa-thin fa-trash" color="warn"></i>
               <span style="color: #ef4444;">Delete User</span>
             </button>
           </mat-menu>

@@ -14,10 +14,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class TestBuilderComponent {
   testStats = [
-    { label: 'Total Tests', value: '24', icon: 'assignment', color: '#7c3aed' },
-    { label: 'OMR Tests', value: '14', icon: 'qr_code_2', color: '#133e87' },
-    { label: 'Online Tests', value: '10', icon: 'computer', color: '#059669' },
-    { label: 'Avg Duration', value: '90 min', icon: 'schedule', color: '#d97706' },
+    { label: 'Total Tests', value: '24', icon: 'fa-thin fa-file-lines', color: '#7c3aed' },
+    { label: 'OMR Tests', value: '14', icon: 'fa-thin fa-qrcode', color: '#133e87' },
+    { label: 'Online Tests', value: '10', icon: 'fa-thin fa-desktop', color: '#059669' },
+    { label: 'Avg Duration', value: '90 min', icon: 'fa-thin fa-clock', color: '#d97706' },
   ];
 
   tests = [

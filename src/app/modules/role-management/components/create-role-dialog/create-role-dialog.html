@@ -1,11 +1,11 @@
 <div class="dialog-container">
   <div class="dialog-header purple">
     <div class="header-content">
-      <mat-icon>{{ data ? 'edit' : 'add_moderator' }}</mat-icon>
+      <i class="fa-thin" [class]="data ? 'fa-thin fa-pen' : 'fa-thin fa-user-shield'"></i>
       <h2>{{ data ? 'Edit Role' : 'Create New Role' }}</h2>
     </div>
     <button mat-icon-button (click)="close()" class="close-btn">
-      <mat-icon>close</mat-icon>
+      <i class="fa-thin fa-xmark"></i>
     </button>
   </div>
 
@@ -20,7 +20,7 @@
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Role Name</mat-label>
             <input matInput placeholder="e.g. Content Editor" [(ngModel)]="roleName">
-            <mat-icon matPrefix class="input-icon">badge</mat-icon>
+            <i class="fa-thin fa-id-badge" matPrefix class="input-icon"></i>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="full-width">
@@ -83,7 +83,7 @@
   <div class="dialog-footer">
     <button mat-button (click)="close()" class="cancel-btn">Cancel</button>
     <button mat-raised-button (click)="save()" class="save-btn" [disabled]="!roleName.trim()">
-      <mat-icon>check_circle</mat-icon> {{ data ? 'Save Changes' : 'Create Role' }}
+      <i class="fa-thin fa-circle-check"></i> {{ data ? 'Save Changes' : 'Create Role' }}
     </button>
   </div>
 </div>

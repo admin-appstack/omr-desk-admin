@@ -1,7 +1,7 @@
 <div class="module-container">
   <div class="module-hero purple">
     <div class="hero-content">
-      <div class="hero-icon"><mat-icon>assignment</mat-icon></div>
+      <div class="hero-icon"><i class="fa-thin fa-file-lines"></i></div>
       <div>
         <h1>Test Builder</h1>
         <p>Configure exam parameters, marking schemes, and generate OMR/Online tests.</p>
@@ -9,10 +9,10 @@
     </div>
     <div class="hero-actions">
       <button mat-stroked-button class="hero-btn-outline">
-        <mat-icon>file_download</mat-icon> Templates
+        <i class="fa-thin fa-file-arrow-down"></i> Templates
       </button>
       <button mat-raised-button class="hero-btn">
-        <mat-icon>add</mat-icon> Create New Test
+        <i class="fa-thin fa-plus"></i> Create New Test
       </button>
     </div>
   </div>
@@ -20,7 +20,7 @@
   <!-- Stats Strip -->
   <div class="stats-strip">
     <div class="strip-stat" *ngFor="let s of testStats">
-      <mat-icon [style.color]="s.color">{{s.icon}}</mat-icon>
+      <i [class]="s.icon" [style.color]="s.color"></i>
       <div>
         <span class="strip-value">{{s.value}}</span>
         <span class="strip-label">{{s.label}}</span>
@@ -32,40 +32,40 @@
   <div class="test-grid">
     <mat-card *ngFor="let test of tests" class="test-card">
       <div class="test-type-badge" [class]="test.type.toLowerCase()">
-        <mat-icon>{{ test.type === 'OMR' ? 'qr_code_2' : 'computer' }}</mat-icon>
+        <i class="fa-thin" [class]="test.type === 'fa-thin OMR' ? 'fa-thin fa-qrcode' : 'fa-thin fa-desktop'"></i>
         {{test.type}}
       </div>
       <h3 class="test-name">{{test.name}}</h3>
       <div class="test-meta">
         <div class="meta-item">
-          <mat-icon>schedule</mat-icon>
+          <i class="fa-thin fa-clock"></i>
           <span>{{test.duration}} mins</span>
         </div>
         <div class="meta-item">
-          <mat-icon>quiz</mat-icon>
+          <i class="fa-thin fa-circle-question"></i>
           <span>{{test.questions}} Questions</span>
         </div>
         <div class="meta-item">
-          <mat-icon>group</mat-icon>
+          <i class="fa-thin fa-users"></i>
           <span>{{test.students}} Students</span>
         </div>
       </div>
       <div class="test-footer">
         <button mat-button color="primary" class="edit-btn">
-          <mat-icon>edit</mat-icon> Edit
+          <i class="fa-thin fa-pen"></i> Edit
         </button>
         <button mat-icon-button color="accent" matTooltip="Generate OMR Sheet">
-          <mat-icon>description</mat-icon>
+          <i class="fa-thin fa-file-lines"></i>
         </button>
         <button mat-icon-button matTooltip="More options">
-          <mat-icon>more_vert</mat-icon>
+          <i class="fa-thin fa-ellipsis-vertical"></i>
         </button>
       </div>
     </mat-card>
 
     <!-- Add New Card -->
     <div class="add-test-card" (click)="createTest()">
-      <mat-icon>add_circle_outline</mat-icon>
+      <i class="fa-thin fa-circle-plus"></i>
       <span>Create New Test</span>
     </div>
   </div>

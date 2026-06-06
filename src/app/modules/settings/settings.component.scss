@@ -49,7 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  mat-icon { font-size: 28px; width: 28px; height: 28px; color: white; }
+  i { font-size: 28px; width: 28px; height: 28px; color: white; }
 }
 
 .module-hero h1 { margin: 0; font-size: 1.6rem; font-weight: 900; color: white; }
@@ -64,7 +64,7 @@
   padding: 0 1.5rem !important;
   box-shadow: 0 6px 12px rgba(0,0,0,0.12) !important;
   z-index: 1;
-  mat-icon { vertical-align: middle; margin-right: 6px; }
+  i { vertical-align: middle; margin-right: 6px; }
 }
 
 /* ─── Save Banner ─────────────────────────────────────────────────────────── */
@@ -81,7 +81,7 @@
   font-size: 0.9rem;
   animation: slideIn 0.3s ease;
 
-  mat-icon { color: #16a34a; }
+  i { color: #16a34a; }
 
   .close-btn {
     margin-left: auto;
@@ -89,7 +89,7 @@
     width: 32px !important;
     height: 32px !important;
     line-height: 32px !important;
-    mat-icon { font-size: 18px; width: 18px; height: 18px; }
+    i { font-size: 18px; width: 18px; height: 18px; }
   }
 }
 
@@ -153,11 +153,11 @@
   justify-content: center;
   flex-shrink: 0;
   transition: background 0.15s;
-  mat-icon { font-size: 20px; width: 20px; height: 20px; color: #64748b; }
+  i { font-size: 20px; width: 20px; height: 20px; color: #64748b; }
 
   &.active {
     background: #7c3aed;
-    mat-icon { color: white; }
+    i { color: white; }
   }
 }
 
@@ -231,7 +231,7 @@
   width: 100%;
   color: #6d28d9 !important;
   border-color: #ddd6fe !important;
-  mat-icon { font-size: 16px; width: 16px; height: 16px; vertical-align: middle; margin-right: 4px; }
+  i { font-size: 16px; width: 16px; height: 16px; vertical-align: middle; margin-right: 4px; }
 }
 
 .avatar-hint { font-size: 0.72rem; color: #94a3b8; }
@@ -316,7 +316,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  mat-icon { font-size: 22px; width: 22px; height: 22px; }
+  i { font-size: 22px; width: 22px; height: 22px; }
 }
 
 .notif-info {
@@ -384,7 +384,7 @@
   color: #1e293b;
   margin: 0 0 0.5rem;
 
-  mat-icon { font-size: 18px; width: 18px; height: 18px; color: #6d28d9; }
+  i { font-size: 18px; width: 18px; height: 18px; color: #6d28d9; }
 }
 
 .update-pass-btn {
@@ -394,7 +394,7 @@
   font-weight: 700 !important;
   height: 46px !important;
   margin-top: 0.5rem;
-  mat-icon { vertical-align: middle; margin-right: 6px; }
+  i { vertical-align: middle; margin-right: 6px; }
 }
 
 .session-item {
@@ -415,7 +415,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  mat-icon { font-size: 20px; width: 20px; height: 20px; color: #6d28d9; }
+  i { font-size: 20px; width: 20px; height: 20px; color: #6d28d9; }
 }
 
 .session-info {

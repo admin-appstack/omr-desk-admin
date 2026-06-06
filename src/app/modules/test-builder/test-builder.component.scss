@@ -43,7 +43,7 @@
   border-radius: 16px;
   display: flex; align-items: center; justify-content: center;
 }
-.hero-icon mat-icon { font-size: 28px; width: 28px; height: 28px; color: white; }
+.hero-icon i { font-size: 28px; width: 28px; height: 28px; color: white; }
 
 .module-hero h1 { margin: 0; font-size: 1.6rem; font-weight: 900; color: white; }
 .module-hero p { margin: 0.25rem 0 0; font-size: 0.9rem; color: rgba(255,255,255,0.7); }
@@ -56,14 +56,14 @@
   height: 46px !important; padding: 0 1.5rem !important;
   box-shadow: 0 6px 12px rgba(0,0,0,0.12) !important;
 }
-.hero-btn mat-icon { vertical-align: middle; margin-right: 6px; }
+.hero-btn i { vertical-align: middle; margin-right: 6px; }
 
 .hero-btn-outline {
   color: white !important; border-color: rgba(255,255,255,0.4) !important;
   border-radius: 12px !important; height: 46px !important;
   padding: 0 1.5rem !important; font-weight: 600 !important;
 }
-.hero-btn-outline mat-icon { vertical-align: middle; margin-right: 6px; }
+.hero-btn-outline i { vertical-align: middle; margin-right: 6px; }
 
 /* ─── Stats Strip ──────────────────────────────────────────────────────────── */
 .stats-strip {
@@ -82,7 +82,7 @@
   gap: 1rem;
   transition: all 0.2s;
 
-  mat-icon { font-size: 28px; width: 28px; height: 28px; }
+  i { font-size: 28px; width: 28px; height: 28px; }
 
   .strip-value { display: block; font-size: 1.4rem; font-weight: 900; color: #1e293b; }
   .strip-label { display: block; font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; margin-top: 2px; }
@@ -119,12 +119,12 @@
   font-size: 0.7rem;
   font-weight: 800;
   text-transform: uppercase;
-  padding: 4px 12px;
+  padding: 6px 12px;
   border-radius: 8px;
   width: fit-content;
   margin-bottom: 1rem;
 
-  mat-icon { font-size: 14px; width: 14px; height: 14px; }
+  i { font-size: 14px; width: 14px; height: 14px; }
 
   &.omr { background: #fef2f2; color: #b91c1c; }
   &.online { background: #f0fdf4; color: #15803d; }
@@ -147,7 +147,7 @@
   color: #64748b;
   font-weight: 500;
 
-  mat-icon { font-size: 17px; width: 17px; height: 17px; color: #94a3b8; }
+  i { font-size: 17px; width: 17px; height: 17px; color: #94a3b8; }
 }
 
 .test-footer {
@@ -173,7 +173,7 @@
   cursor: pointer;
   transition: all 0.2s;
 
-  mat-icon { font-size: 36px; width: 36px; height: 36px; }
+  i { font-size: 36px; width: 36px; height: 36px; }
   span { font-weight: 700; font-size: 0.9rem; }
 
   &:hover { border-color: #7c3aed; color: #7c3aed; background: #faf5ff; }

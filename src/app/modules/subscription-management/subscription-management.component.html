@@ -5,7 +5,7 @@
     <div class="hero-glow"></div>
     <div class="hero-left">
       <div class="hero-icon-wrap">
-        <mat-icon>card_membership</mat-icon>
+        <i class="fa-thin fa-id-card"></i>
       </div>
       <div>
         <h1>Subscription Management</h1>
@@ -14,10 +14,10 @@
     </div>
     <div class="hero-right">
       <button mat-stroked-button class="hero-btn-ghost">
-        <mat-icon>compare</mat-icon> Compare Plans
+        <i class="fa-thin fa-code-compare"></i> Compare Plans
       </button>
       <button mat-raised-button class="hero-btn-primary">
-        <mat-icon>rocket_launch</mat-icon> Upgrade Plan
+        <i class="fa-thin fa-rocket"></i> Upgrade Plan
       </button>
     </div>
   </div>
@@ -26,7 +26,7 @@
   <div class="quick-stats-row">
     <div class="quick-stat" *ngFor="let s of quickStats">
       <div class="qs-icon" [style.background]="s.bg" [style.color]="s.color">
-        <mat-icon>{{ s.icon }}</mat-icon>
+        <i [class]="s.icon"></i>
       </div>
       <div class="qs-body">
         <span class="qs-label">{{ s.label }}</span>
@@ -56,14 +56,14 @@
       </div>
 
       <div class="usage-title">
-        <mat-icon>bar_chart</mat-icon> Resource Usage
+        <i class="fa-thin fa-chart-bar"></i> Resource Usage
       </div>
 
       <div class="usage-bars">
         <div class="usage-row" *ngFor="let u of currentPlan.usage">
           <div class="usage-meta">
             <div class="usage-icon-label">
-              <mat-icon>{{ u.icon }}</mat-icon>
+              <i [class]="u.icon"></i>
               <span>{{ u.label }}</span>
             </div>
             <span class="usage-nums">{{ u.current | number }} / {{ u.limit | number }}</span>
@@ -76,7 +76,7 @@
       </div>
 
       <div class="billing-row">
-        <mat-icon>schedule</mat-icon>
+        <i class="fa-thin fa-clock"></i>
         <span>Next billing: <strong>{{ currentPlan.nextBilling }}</strong></span>
         <span class="days-left">{{ currentPlan.daysRemaining }} days left</span>
       </div>
@@ -84,7 +84,7 @@
       <div class="plan-actions">
         <button mat-stroked-button class="btn-cancel-sub">Cancel Subscription</button>
         <button mat-raised-button class="btn-upgrade">
-          <mat-icon>arrow_upward</mat-icon> Upgrade
+          <i class="fa-thin fa-arrow-up"></i> Upgrade
         </button>
       </div>
     </div>
@@ -93,13 +93,13 @@
     <div class="glass-card payment-card">
       <div class="pc-header">
         <h3>Payment Details</h3>
-        <button mat-icon-button matTooltip="Edit payment method"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button matTooltip="Edit payment method"><i class="fa-thin fa-pen"></i></button>
       </div>
 
       <div class="card-visual">
         <div class="card-shine"></div>
         <div class="card-top">
-          <mat-icon class="card-chip">credit_card</mat-icon>
+          <i class="fa-thin fa-credit-card" class="card-chip"></i>
           <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Visa_2021.svg" alt="Visa" class="card-brand" />
         </div>
         <div class="card-number-display">•••• •••• •••• 4242</div>
@@ -117,14 +117,14 @@
 
       <div class="billing-address-box">
         <div class="bab-header">
-          <mat-icon>location_on</mat-icon>
+          <i class="fa-thin fa-location-dot"></i>
           <span>Billing Address</span>
         </div>
         <p>123 Education Way, Academic District,<br>New Delhi, India 110001</p>
       </div>
 
       <button mat-stroked-button class="btn-change-payment">
-        <mat-icon>add_card</mat-icon> Change Payment Method
+        <i class="fa-thin fa-credit-card"></i> Change Payment Method
       </button>
     </div>
 
@@ -159,7 +159,7 @@
         <!-- Plan icon & name -->
         <div class="tile-header">
           <div class="tile-icon" [style.background]="plan.color + '18'" [style.color]="plan.color">
-            <mat-icon>{{ plan.icon }}</mat-icon>
+            <i [class]="plan.icon"></i>
           </div>
           <div>
             <h3 class="tile-name">{{ plan.name }}</h3>
@@ -179,7 +179,7 @@
         <!-- Features -->
         <ul class="tile-features">
           <li *ngFor="let f of plan.features" [class.unavailable]="!f.available">
-            <mat-icon>{{ f.available ? 'check_circle' : 'cancel' }}</mat-icon>
+            <i class="fa-thin" [class]="f.available ? 'fa-thin fa-circle-check' : 'fa-thin fa-circle-xmark'"></i>
             <span>{{ f.text }}</span>
           </li>
         </ul>
@@ -204,7 +204,7 @@
       </div>
       <div class="header-actions">
         <button mat-stroked-button class="export-btn">
-          <mat-icon>download</mat-icon> Export CSV
+          <i class="fa-thin fa-download"></i> Export CSV
         </button>
       </div>
     </div>
@@ -230,7 +230,7 @@
         <th mat-header-cell *matHeaderCellDef>Payment Method</th>
         <td mat-cell *matCellDef="let row">
           <div class="method-chip">
-            <mat-icon class="method-icon">credit_card</mat-icon>
+            <i class="fa-thin fa-credit-card" class="method-icon"></i>
             {{ row.method }}
           </div>
         </td>
@@ -245,7 +245,7 @@
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row">
           <button mat-icon-button matTooltip="Download PDF" class="dl-btn">
-            <mat-icon>picture_as_pdf</mat-icon>
+            <i class="fa-thin fa-file-pdf"></i>
           </button>
         </td>
       </ng-container>

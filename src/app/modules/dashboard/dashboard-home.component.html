@@ -9,7 +9,7 @@
     </div>
     <div class="banner-actions">
       <button mat-raised-button class="btn-primary-gradient" [routerLink]="['/dashboard/scanning']">
-        <mat-icon>add_circle</mat-icon> Start New Batch
+        <i class="fa-thin fa-circle-plus"></i> Start New Batch
       </button>
     </div>
   </div>
@@ -19,34 +19,34 @@
     <div class="stat-card stat-blue">
       <div class="stat-meta">
         <span class="stat-label">Total Students</span>
-        <span class="stat-change positive"><mat-icon>trending_up</mat-icon> +12%</span>
+        <span class="stat-change positive"><i class="fa-thin fa-arrow-trend-up"></i> +12%</span>
       </div>
       <h2 class="stat-value">1,284</h2>
-      <div class="stat-icon-bg"><mat-icon>people</mat-icon></div>
+      <div class="stat-icon-bg"><i class="fa-thin fa-users"></i></div>
     </div>
     <div class="stat-card stat-orange">
       <div class="stat-meta">
         <span class="stat-label">Active Tests</span>
-        <span class="stat-change positive"><mat-icon>trending_up</mat-icon> +3</span>
+        <span class="stat-change positive"><i class="fa-thin fa-arrow-trend-up"></i> +3</span>
       </div>
       <h2 class="stat-value">12</h2>
-      <div class="stat-icon-bg"><mat-icon>assignment</mat-icon></div>
+      <div class="stat-icon-bg"><i class="fa-thin fa-file-lines"></i></div>
     </div>
     <div class="stat-card stat-green">
       <div class="stat-meta">
         <span class="stat-label">OMR Scanned</span>
-        <span class="stat-change positive"><mat-icon>trending_up</mat-icon> +8%</span>
+        <span class="stat-change positive"><i class="fa-thin fa-arrow-trend-up"></i> +8%</span>
       </div>
       <h2 class="stat-value">45,820</h2>
-      <div class="stat-icon-bg"><mat-icon>qr_code_scanner</mat-icon></div>
+      <div class="stat-icon-bg"><i class="fa-thin fa-qrcode"></i></div>
     </div>
     <div class="stat-card stat-purple">
       <div class="stat-meta">
         <span class="stat-label">Total Revenue</span>
-        <span class="stat-change positive"><mat-icon>trending_up</mat-icon> +18%</span>
+        <span class="stat-change positive"><i class="fa-thin fa-arrow-trend-up"></i> +18%</span>
       </div>
       <h2 class="stat-value">₹84,200</h2>
-      <div class="stat-icon-bg"><mat-icon>payments</mat-icon></div>
+      <div class="stat-icon-bg"><i class="fa-thin fa-money-bill-wave"></i></div>
     </div>
   </div>
 
@@ -62,43 +62,43 @@
         <div class="actions-grid">
           <a class="action-tile" [routerLink]="['/dashboard/tests']">
             <div class="action-icon-wrap blue">
-              <mat-icon>add_circle_outline</mat-icon>
+              <i class="fa-thin fa-circle-plus"></i>
             </div>
             <div class="action-content">
               <span class="action-label">Create New Test</span>
               <span class="action-desc">Setup a new online or OMR based exam</span>
             </div>
-            <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
+            <i class="fa-thin fa-chevron-right" class="action-arrow"></i>
           </a>
           <a class="action-tile" [routerLink]="['/dashboard/scanning']">
             <div class="action-icon-wrap orange">
-              <mat-icon>camera_alt</mat-icon>
+              <i class="fa-thin fa-camera"></i>
             </div>
             <div class="action-content">
               <span class="action-label">Scan OMR Sheets</span>
               <span class="action-desc">Upload images or use camera to scan</span>
             </div>
-            <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
+            <i class="fa-thin fa-chevron-right" class="action-arrow"></i>
           </a>
           <a class="action-tile" [routerLink]="['/dashboard/results']">
             <div class="action-icon-wrap green">
-              <mat-icon>analytics</mat-icon>
+              <i class="fa-thin fa-chart-column"></i>
             </div>
             <div class="action-content">
               <span class="action-label">Generate Results</span>
               <span class="action-desc">Calculate ranks and publish analytics</span>
             </div>
-            <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
+            <i class="fa-thin fa-chevron-right" class="action-arrow"></i>
           </a>
           <a class="action-tile" [routerLink]="['/dashboard/website']">
             <div class="action-icon-wrap purple">
-              <mat-icon>web</mat-icon>
+              <i class="fa-thin fa-browser"></i>
             </div>
             <div class="action-content">
               <span class="action-label">Website Builder</span>
               <span class="action-desc">Manage your institute public portal</span>
             </div>
-            <mat-icon class="action-arrow">arrow_forward_ios</mat-icon>
+            <i class="fa-thin fa-chevron-right" class="action-arrow"></i>
           </a>
         </div>
       </section>
@@ -143,7 +143,7 @@
             <h4>Recent Results</h4>
             <div class="list-items">
               <div class="list-item" *ngFor="let r of results">
-                <div class="item-icon"><mat-icon>assignment</mat-icon></div>
+                <div class="item-icon"><i class="fa-thin fa-file-lines"></i></div>
                 <div class="item-info">
                   <span class="item-title">{{r.examName}}</span>
                   <span class="item-sub">{{r.date}} • {{r.students}} students</span>

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import './assets/fontawesome/fontawesome_pro_6_4_2.css';
 
 :root {
   --color-primary: 19, 62, 135;
@@ -174,4 +175,14 @@ select {
     border-radius: 16px !important;
     overflow: hidden !important;
   }
+}
+
+// FontAwesome default sizing to match Angular Material mat-icon
+:where(i[class^="fa-"], i[class*=" fa-"]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
 }

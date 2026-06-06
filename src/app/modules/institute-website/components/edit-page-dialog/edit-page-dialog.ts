@@ -54,8 +54,8 @@ export class EditPageDialog implements OnInit {
   ];
 
   featuresList: any[] = [
-    { title: 'Modern Campus', description: 'State of the art facilities and smart classrooms.', icon: 'business' },
-    { title: 'Expert Faculty', description: 'Learn from industry professionals.', icon: 'school' },
+    { title: 'Modern Campus', description: 'State of the art facilities and smart classrooms.', icon: 'fa-thin fa-business' },
+    { title: 'Expert Faculty', description: 'Learn from industry professionals.', icon: 'fa-thin fa-graduation-cap' },
   ];
 
   videoTourUrl = '';

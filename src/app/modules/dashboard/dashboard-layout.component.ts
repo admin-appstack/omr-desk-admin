@@ -33,22 +33,22 @@ export class DashboardLayoutComponent {
   isSidebarCollapsed = signal(false);
 
   mainNav = [
-    { icon: 'dashboard',       label: 'Dashboard',         route: '/dashboard/home',      badge: null  },
-    { icon: 'language',        label: 'Institute Website',  route: '/dashboard/website',   badge: null },
-    { icon: 'class',           label: 'Classes',           route: '/dashboard/classes',   badge: null },
-    { icon: 'school',          label: 'Students',          route: '/dashboard/students',  badge: null },
-    { icon: 'assignment_turned_in', label: 'Exams',        route: '/dashboard/exams',     badge: null },
-    { icon: 'library_books',   label: 'Question Bank',      route: '/dashboard/questions', badge: null  },
-    { icon: 'assignment',      label: 'Test Builder',       route: '/dashboard/tests',     badge: null  },
-    { icon: 'qr_code_scanner', label: 'OMR Scanning',       route: '/dashboard/scanning',  badge: null  },
+    { icon: 'fa-thin fa-table-columns',       label: 'Dashboard',         route: '/dashboard/home',      badge: null  },
+    { icon: 'fa-thin fa-globe',        label: 'Institute Website',  route: '/dashboard/website',   badge: null },
+    { icon: 'fa-thin fa-chalkboard-user',           label: 'Classes',           route: '/dashboard/classes',   badge: null },
+    { icon: 'fa-thin fa-graduation-cap',          label: 'Students',          route: '/dashboard/students',  badge: null },
+    { icon: 'fa-thin fa-clipboard-check', label: 'Exams',        route: '/dashboard/exams',     badge: null },
+    { icon: 'fa-thin fa-book-open-reader',   label: 'Question Bank',      route: '/dashboard/questions', badge: null  },
+    { icon: 'fa-thin fa-file-signature',      label: 'Test Builder',       route: '/dashboard/tests',     badge: null  },
+    { icon: 'fa-thin fa-qrcode', label: 'OMR Scanning',       route: '/dashboard/scanning',  badge: null  },
   ];
 
   managementNav = [
-    { icon: 'analytics',       label: 'Result & Analytics', route: '/dashboard/results',  badge: null },
-    { icon: 'admin_panel_settings', label: 'Role Management', route: '/dashboard/roles', badge: null },
-    { icon: 'people',          label: 'User Management',    route: '/dashboard/users',    badge: null },
-    { icon: 'card_membership', label: 'Subscription',       route: '/dashboard/subscriptions', badge: null },
-    { icon: 'settings',        label: 'Settings',           route: '/dashboard/settings', badge: null },
+    { icon: 'fa-thin fa-chart-column',       label: 'Result & Analytics', route: '/dashboard/results',  badge: null },
+    { icon: 'fa-thin fa-user-shield', label: 'Role Management', route: '/dashboard/roles', badge: null },
+    { icon: 'fa-thin fa-users',          label: 'User Management',    route: '/dashboard/users',    badge: null },
+    { icon: 'fa-thin fa-id-card', label: 'Subscription',       route: '/dashboard/subscriptions', badge: null },
+    { icon: 'fa-thin fa-gear',        label: 'Settings',           route: '/dashboard/settings', badge: null },
   ];
 
   /** Keep old navItems for backward compat if needed */

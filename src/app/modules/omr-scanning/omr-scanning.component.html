@@ -3,14 +3,14 @@
   <!-- Header Banner -->
   <div class="module-hero blue">
     <div class="hero-content">
-      <div class="hero-icon"><mat-icon>qr_code_scanner</mat-icon></div>
+      <div class="hero-icon"><i class="fa-thin fa-qrcode"></i></div>
       <div>
         <h1>OMR Scanning</h1>
         <p>Process your OMR sheets using AI-powered scanning technology.</p>
       </div>
     </div>
     <button mat-raised-button class="hero-btn">
-      <mat-icon>cloud_upload</mat-icon> Upload New Batch
+      <i class="fa-thin fa-cloud-arrow-up"></i> Upload New Batch
     </button>
   </div>
 
@@ -19,12 +19,12 @@
     <mat-card class="upload-zone">
       <div class="drop-area">
         <div class="upload-icon-wrap">
-          <mat-icon>camera_alt</mat-icon>
+          <i class="fa-thin fa-camera"></i>
         </div>
         <h3>Drag &amp; Drop OMR Sheets</h3>
         <p>Supports JPG, PNG, and PDF files up to 50MB</p>
         <button mat-raised-button color="primary" class="select-btn">
-          <mat-icon>upload_file</mat-icon> Select Files
+          <i class="fa-thin fa-file-arrow-up"></i> Select Files
         </button>
       </div>
     </mat-card>
@@ -34,7 +34,7 @@
       <h3 class="card-title">Active Processing</h3>
       <div class="process-item" *ngFor="let batch of activeBatches">
         <div class="process-info">
-          <mat-icon>folder_zip</mat-icon>
+          <i class="fa-thin fa-file-zipper"></i>
           <span class="batch-name">{{ batch.name }}</span>
           <span class="batch-pct">{{ batch.progress }}%</span>
         </div>

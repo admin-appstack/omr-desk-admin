@@ -10,7 +10,7 @@
   <mat-card *ngFor="let page of pages" class="page-card" [class.unpublished]="!page.isPublished">
     <div class="card-header">
       <div class="page-icon" [ngClass]="{'active': page.isPublished}">
-        <mat-icon>{{page.icon}}</mat-icon>
+        <i [class]="page.icon"></i>
       </div>
       <div class="page-status">
         <!-- Use [(ngModel)] so the toggle reflects actual state cleanly -->
@@ -36,10 +36,10 @@
 
     <div class="card-footer">
       <button mat-flat-button class="edit-btn" (click)="openEditDialog(page)">
-        <mat-icon>edit_square</mat-icon> Edit Content
+        <i class="fa-thin fa-pen-to-square"></i> Edit Content
       </button>
       <button mat-icon-button class="settings-btn" title="Page Settings" (click)="openSettingsDialog(page)">
-        <mat-icon>settings</mat-icon>
+        <i class="fa-thin fa-gear"></i>
       </button>
     </div>
   </mat-card>

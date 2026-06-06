@@ -64,7 +64,7 @@ $font: 'Inter', sans-serif;
       display: flex; align-items: center; justify-content: center;
       backdrop-filter: blur(8px);
 
-      mat-icon {
+      i {
         font-size: 34px; width: 34px; height: 34px;
         color: #93c5fd;
       }
@@ -97,7 +97,7 @@ $font: 'Inter', sans-serif;
     border-color: rgba(255,255,255,0.2) !important;
     font-weight: 600 !important;
     padding: 0 1.5rem !important;
-    mat-icon { vertical-align: middle; margin-right: 6px; font-size: 18px; }
+    i { vertical-align: middle; margin-right: 6px; font-size: 18px; }
   }
 
   .hero-btn-primary {
@@ -108,7 +108,7 @@ $font: 'Inter', sans-serif;
     font-weight: 700 !important;
     padding: 0 1.75rem !important;
     box-shadow: 0 8px 20px rgba(99,102,241,0.4) !important;
-    mat-icon { vertical-align: middle; margin-right: 6px; font-size: 18px; }
+    i { vertical-align: middle; margin-right: 6px; font-size: 18px; }
   }
 }
 
@@ -139,7 +139,7 @@ $font: 'Inter', sans-serif;
     border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
-    mat-icon { font-size: 24px; width: 24px; height: 24px; }
+    i { font-size: 24px; width: 24px; height: 24px; }
   }
 
   .qs-body {
@@ -261,7 +261,7 @@ $font: 'Inter', sans-serif;
     color: #475569;
     margin-bottom: 1.25rem;
 
-    mat-icon { font-size: 18px; width: 18px; height: 18px; color: #6366f1; }
+    i { font-size: 18px; width: 18px; height: 18px; color: #6366f1; }
   }
 
   .usage-bars {
@@ -285,7 +285,7 @@ $font: 'Inter', sans-serif;
         font-size: 0.9rem;
         font-weight: 600;
         color: #334155;
-        mat-icon { font-size: 17px; width: 17px; height: 17px; color: #94a3b8; }
+        i { font-size: 17px; width: 17px; height: 17px; color: #94a3b8; }
       }
       .usage-nums { font-size: 0.78rem; color: #94a3b8; margin-top: 3px; display: block; }
     }
@@ -324,7 +324,7 @@ $font: 'Inter', sans-serif;
     color: #64748b;
     margin-bottom: 1.75rem;
 
-    mat-icon { font-size: 18px; width: 18px; height: 18px; color: #94a3b8; }
+    i { font-size: 18px; width: 18px; height: 18px; color: #94a3b8; }
     strong { color: #0f172a; font-weight: 700; }
 
     .days-left {
@@ -359,7 +359,7 @@ $font: 'Inter', sans-serif;
       color: white !important;
       height: 44px !important;
       box-shadow: 0 6px 16px rgba(99,102,241,0.3) !important;
-      mat-icon { font-size: 18px; width: 18px; height: 18px; vertical-align: middle; margin-right: 4px; }
+      i { font-size: 18px; width: 18px; height: 18px; vertical-align: middle; margin-right: 4px; }
     }
   }
 }
@@ -460,7 +460,7 @@ $font: 'Inter', sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       margin-bottom: 0.5rem;
-      mat-icon { font-size: 15px; width: 15px; height: 15px; }
+      i { font-size: 15px; width: 15px; height: 15px; }
     }
 
     p {
@@ -478,7 +478,7 @@ $font: 'Inter', sans-serif;
     border-radius: $radius-sm !important;
     font-weight: 700 !important;
     margin-top: auto;
-    mat-icon { vertical-align: middle; margin-right: 6px; font-size: 18px; }
+    i { vertical-align: middle; margin-right: 6px; font-size: 18px; }
   }
 }
 
@@ -619,7 +619,7 @@ $font: 'Inter', sans-serif;
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      mat-icon { font-size: 22px; width: 22px; height: 22px; }
+      i { font-size: 22px; width: 22px; height: 22px; }
     }
 
     .tile-name {
@@ -666,7 +666,7 @@ $font: 'Inter', sans-serif;
       font-weight: 500;
       color: #475569;
 
-      mat-icon {
+      i {
         font-size: 18px; width: 18px; height: 18px;
         color: #10b981;
         flex-shrink: 0;
@@ -674,7 +674,7 @@ $font: 'Inter', sans-serif;
 
       &.unavailable {
         color: #cbd5e1;
-        mat-icon { color: #e2e8f0; }
+        i { color: #e2e8f0; }
       }
     }
   }
@@ -733,7 +733,7 @@ $font: 'Inter', sans-serif;
   color: #64748b !important;
   border-color: #e2e8f0 !important;
   height: 42px !important;
-  mat-icon { font-size: 17px; width: 17px; height: 17px; vertical-align: middle; margin-right: 5px; }
+  i { font-size: 17px; width: 17px; height: 17px; vertical-align: middle; margin-right: 5px; }
 }
 
 .full-width-table { width: 100%; }

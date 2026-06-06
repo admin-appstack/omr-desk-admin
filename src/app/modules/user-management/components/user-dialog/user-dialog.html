@@ -1,11 +1,11 @@
 <div class="dialog-container">
   <div class="dialog-header indigo">
     <div class="header-content">
-      <mat-icon>{{ data ? 'edit' : 'person_add' }}</mat-icon>
+      <i class="fa-thin" [class]="data ? 'fa-thin fa-pen' : 'fa-thin fa-user-plus'"></i>
       <h2>{{ data ? 'Edit User' : 'Add New User' }}</h2>
     </div>
     <button mat-icon-button (click)="close()" class="close-btn">
-      <mat-icon>close</mat-icon>
+      <i class="fa-thin fa-xmark"></i>
     </button>
   </div>
 
@@ -15,13 +15,13 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Full Name</mat-label>
       <input matInput placeholder="e.g. John Doe" [(ngModel)]="userName">
-      <mat-icon matPrefix class="input-icon">person</mat-icon>
+      <i class="fa-thin fa-user" matPrefix class="input-icon"></i>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Email Address</mat-label>
       <input matInput type="email" placeholder="john.doe@example.com" [(ngModel)]="userEmail">
-      <mat-icon matPrefix class="input-icon">email</mat-icon>
+      <i class="fa-thin fa-envelope" matPrefix class="input-icon"></i>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
@@ -32,14 +32,14 @@
         <mat-option value="Editor">Editor</mat-option>
         <mat-option value="Viewer">Viewer</mat-option>
       </mat-select>
-      <mat-icon matPrefix class="input-icon">security</mat-icon>
+      <i class="fa-thin fa-shield-halved" matPrefix class="input-icon"></i>
     </mat-form-field>
   </div>
 
   <div class="dialog-footer">
     <button mat-button (click)="close()" class="cancel-btn">Cancel</button>
     <button mat-raised-button (click)="save()" class="save-btn" [disabled]="!userName || !userEmail || !userRole">
-      <mat-icon>check_circle</mat-icon> {{ data ? 'Save Changes' : 'Add User' }}
+      <i class="fa-thin fa-circle-check"></i> {{ data ? 'Save Changes' : 'Add User' }}
     </button>
   </div>
 </div>

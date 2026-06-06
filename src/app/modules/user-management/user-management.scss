@@ -49,7 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  mat-icon { font-size: 28px; width: 28px; height: 28px; color: white; }
+  i { font-size: 28px; width: 28px; height: 28px; color: white; }
 }
 
 .module-hero h1 { margin: 0; font-size: 1.6rem; font-weight: 900; color: white; }
@@ -65,7 +65,7 @@
   height: 46px !important;
   padding: 0 1.5rem !important;
   box-shadow: 0 6px 12px rgba(0,0,0,0.12) !important;
-  mat-icon { vertical-align: middle; margin-right: 6px; }
+  i { vertical-align: middle; margin-right: 6px; }
 }
 
 .hero-btn-outline {
@@ -76,7 +76,7 @@
   height: 46px !important;
   padding: 0 1.5rem !important;
   border: 1px solid rgba(255,255,255,0.3) !important;
-  mat-icon { vertical-align: middle; margin-right: 6px; }
+  i { vertical-align: middle; margin-right: 6px; }
 }
 
 /* ─── Pay Stats ───────────────────────────────────────────────────────────── */
@@ -110,7 +110,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  mat-icon { font-size: 26px; width: 26px; height: 26px; }
+  i { font-size: 26px; width: 26px; height: 26px; }
 
   &.total   { background: #e0e7ff; color: #4338ca; }
   &.active  { background: #dcfce7; color: #15803d; }
@@ -172,7 +172,7 @@
   font-weight: 800;
   letter-spacing: 0.5px;
 
-  mat-icon { font-size: 16px; width: 16px; height: 16px; }
+  i { font-size: 16px; width: 16px; height: 16px; }
 }
 
 .plan-renew { font-size: 0.8rem; color: #64748b; font-weight: 600; }
@@ -202,7 +202,7 @@
   font-weight: 700 !important;
   color: #059669 !important;
   border-color: #059669 !important;
-  mat-icon { font-size: 16px; width: 16px; height: 16px; vertical-align: middle; margin-right: 4px; }
+  i { font-size: 16px; width: 16px; height: 16px; vertical-align: middle; margin-right: 4px; }
 }
 
 .cancel-btn {
@@ -265,7 +265,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  mat-icon { font-size: 20px; width: 20px; height: 20px; }
+  i { font-size: 20px; width: 20px; height: 20px; }
 }
 
 /* ─── Transactions ────────────────────────────────────────────────────────── */
@@ -301,7 +301,7 @@
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
   }
 
-  mat-icon {
+  i {
     font-size: 18px;
     width: 18px;
     height: 18px;
@@ -326,7 +326,7 @@
   font-weight: 600 !important;
   color: #64748b !important;
   border-color: #e2e8f0 !important;
-  mat-icon { font-size: 16px; width: 16px; height: 16px; vertical-align: middle; margin-right: 4px; }
+  i { font-size: 16px; width: 16px; height: 16px; vertical-align: middle; margin-right: 4px; }
 }
 
 .view-all-btn { border-radius: 10px !important; font-weight: 600 !important; }

@@ -1,10 +1,10 @@
 <div class="dialog-container">
   <div class="dialog-header blue-theme">
     <div class="header-content">
-      <mat-icon>settings</mat-icon>
+      <i class="fa-thin fa-gear"></i>
       <h2>Page Settings: {{ pageName }}</h2>
     </div>
-    <button mat-icon-button (click)="close()" class="close-btn"><mat-icon>close</mat-icon></button>
+    <button mat-icon-button (click)="close()" class="close-btn"><i class="fa-thin fa-xmark"></i></button>
   </div>
   <div class="dialog-body">
     
@@ -46,7 +46,7 @@
   <div class="dialog-footer">
     <button mat-button (click)="close()" class="cancel-btn">Cancel</button>
     <button mat-raised-button (click)="save()" class="save-btn">
-      <mat-icon>check</mat-icon> Save Settings
+      <i class="fa-thin fa-check"></i> Save Settings
     </button>
   </div>
 </div>

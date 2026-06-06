@@ -36,10 +36,10 @@ export class DashboardHomeComponent {
   ];
 
   summaryStats = [
-    { label: 'Total Exams', value: '28', icon: 'assignment', class: 'stat-orange', trend: '+3 this month' },
-    { label: 'Total Students', value: '1,284', icon: 'people', class: 'stat-blue', trend: '+84 new' },
-    { label: 'Avg. Score', value: '68%', icon: 'trending_up', class: 'stat-green', trend: '+4% vs last' },
-    { label: 'Top Score', value: '98%', icon: 'emoji_events', class: 'stat-purple', trend: null },
+    { label: 'Total Exams', value: '28', icon: 'fa-thin fa-file-lines', class: 'stat-orange', trend: '+3 this month' },
+    { label: 'Total Students', value: '1,284', icon: 'fa-thin fa-users', class: 'stat-blue', trend: '+84 new' },
+    { label: 'Avg. Score', value: '68%', icon: 'fa-thin fa-arrow-trend-up', class: 'stat-green', trend: '+4% vs last' },
+    { label: 'Top Score', value: '98%', icon: 'fa-thin fa-trophy', class: 'stat-purple', trend: null },
   ];
 
   chartBars = [

@@ -16,7 +16,7 @@
     align-items: center;
     gap: 12px;
 
-    mat-icon { font-size: 28px; width: 28px; height: 28px; }
+    i { font-size: 28px; width: 28px; height: 28px; }
     h2 { margin: 0; font-size: 1.4rem; font-weight: 800; }
   }
 
@@ -61,5 +61,5 @@
   padding: 0 1.5rem !important;
 
   &:disabled { background: #cbd5e1 !important; color: #f1f5f9 !important; }
-  mat-icon { vertical-align: middle; margin-right: 6px; }
+  i { vertical-align: middle; margin-right: 6px; }
 }

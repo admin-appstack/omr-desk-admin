@@ -22,10 +22,10 @@ export class StudentManagement implements OnInit {
   displayedColumns = ['id', 'student', 'batch', 'whatsAppNumber', 'actions'];
 
   statCards = [
-    { label: 'Total Students',   value: '0', icon: 'school',           theme: 'total',   tag: '+0 this month', tagClass: 'up' },
-    { label: 'Active Students',  value: '0', icon: 'check_circle',     theme: 'active',  tag: 'Currently enrolled', tagClass: 'info' },
-    { label: 'Pending Profiles', value: '0',   icon: 'pending_actions',  theme: 'pending', tag: 'Awaiting docs', tagClass: 'warn' },
-    { label: 'Alumni',           value: '0',   icon: 'emoji_events',     theme: 'alumni',  tag: 'Graduated', tagClass: 'admin' },
+    { label: 'Total Students',   value: '0', icon: 'fa-thin fa-graduation-cap',           theme: 'total',   tag: '+0 this month', tagClass: 'up' },
+    { label: 'Active Students',  value: '0', icon: 'fa-thin fa-circle-check',     theme: 'active',  tag: 'Currently enrolled', tagClass: 'info' },
+    { label: 'Pending Profiles', value: '0',   icon: 'fa-thin fa-pending-actions',  theme: 'pending', tag: 'Awaiting docs', tagClass: 'warn' },
+    { label: 'Alumni',           value: '0',   icon: 'fa-thin fa-trophy',     theme: 'alumni',  tag: 'Graduated', tagClass: 'admin' },
   ];
 
   students = signal<any[]>([]);

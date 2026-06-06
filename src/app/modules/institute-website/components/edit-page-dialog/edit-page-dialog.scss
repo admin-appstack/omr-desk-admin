@@ -2,7 +2,7 @@
 .dialog-header {
   padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; color: white;
   &.blue-theme { background: linear-gradient(135deg, #0f2d6b 0%, #133e87 55%, #1d4ed8 100%); }
-  .header-content { display: flex; align-items: center; gap: 12px; mat-icon { font-size: 28px; width: 28px; height: 28px; } h2 { margin: 0; font-size: 1.4rem; font-weight: 800; } }
+  .header-content { display: flex; align-items: center; gap: 12px; i { font-size: 28px; width: 28px; height: 28px; } h2 { margin: 0; font-size: 1.4rem; font-weight: 800; } }
   .close-btn { color: white; }
 }
 .dialog-body { padding: 2rem; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 1.5rem; background: white; }
@@ -21,7 +21,7 @@
   &.compact { padding: 0.5rem 1rem; margin-bottom: 0; background: white; }
   .upload-info {
     display: flex; align-items: center; gap: 12px;
-    mat-icon { color: #64748b; }
+    i { color: #64748b; }
     div { display: flex; flex-direction: column; strong { font-size: 0.9rem; color: #1e293b; } span { font-size: 0.8rem; color: #94a3b8; } }
   }
 }
@@ -63,7 +63,7 @@
 .save-btn {
   display: flex !important; align-items: center !important; gap: 6px !important;
   background: #133e87 !important; color: white !important; font-weight: 700 !important; border-radius: 8px !important; padding: 0 1.5rem !important;
-  mat-icon { vertical-align: middle; }
+  i { vertical-align: middle; }
 }
 .dialog-loading {
   display: flex; flex-direction: column; align-items: center; justify-content: center;

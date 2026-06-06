@@ -74,10 +74,10 @@
     border-color: rgba(255, 255, 255, 0.2);
   }
 
-  mat-icon {
-    font-size: 18px;
-    width: 18px;
-    height: 18px;
+  i {
+    font-size: 14px !important;
+    width: 14px !important;
+    height: 14px !important;
   }
 }
 
@@ -170,14 +170,14 @@
       background: rgba(255, 255, 255, 0.08) !important;
       .nav-icon-wrap { background: rgba(255, 255, 255, 0.12); }
       .nav-label     { color: white; }
-      mat-icon       { color: white; }
+      i       { color: white; }
     }
 
     &.active-link {
       background: rgba(255, 255, 255, 0.12) !important;
       .nav-icon-wrap {
         background: rgba(255, 255, 255, 0.15);
-        mat-icon { color: #fb923c; }
+        i { color: #fb923c; }
       }
       .nav-label {
         color: white;
@@ -221,10 +221,10 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
-  mat-icon {
-    font-size: 18px;
-    width: 18px;
-    height: 18px;
+  i {
+    font-size: 14px !important;
+    width: 14px !important;
+    height: 14px !important;
     color: rgba(255, 255, 255, 0.5);
     transition: color 0.18s;
   }
@@ -318,7 +318,7 @@
   height: 32px !important;
   flex-shrink: 0;
   &:hover { color: #f87171 !important; background: rgba(248, 113, 113, 0.1) !important; }
-  mat-icon { font-size: 18px; width: 18px; height: 18px; }
+  i { font-size: 14px !important; width: 14px !important; height: 14px !important; }
 }
 
 .sidebar-user-collapsed {
@@ -394,7 +394,7 @@
     box-shadow: 0 0 0 3px rgba(19, 62, 135, 0.08);
     width: 300px;
   }
-  mat-icon { color: #94a3b8; font-size: 18px; flex-shrink: 0; }
+  i { color: #94a3b8; font-size: 18px; flex-shrink: 0; }
   input {
     border: none;
     outline: none;
@@ -488,7 +488,7 @@
 
 .avatar-btn { padding: 0 !important; width: auto !important; height: auto !important; background: transparent !important; }
 
-.sign-out-item { color: #dc2626 !important; mat-icon { color: #dc2626 !important; } }
+.sign-out-item { color: #dc2626 !important; i { color: #dc2626 !important; } }
 
 // ─── Main Viewport ────────────────────────────────────────────────────────────
 .main-viewport {

@@ -76,7 +76,7 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
       transition: all 0.2s;
 
-      mat-icon { vertical-align: middle; margin-right: 6px; }
+      i { vertical-align: middle; margin-right: 6px; }
 
       &:hover {
         transform: translateY(-2px);
@@ -130,7 +130,7 @@
       padding: 3px 8px;
       border-radius: 999px;
 
-      mat-icon { font-size: 14px; width: 14px; height: 14px; }
+      i { font-size: 14px; width: 14px; height: 14px; }
     }
   }
 
@@ -148,7 +148,7 @@
     bottom: -16px;
     opacity: 0.12;
 
-    mat-icon {
+    i {
       font-size: 96px;
       width: 96px;
       height: 96px;
@@ -249,7 +249,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    mat-icon { font-size: 22px; width: 22px; height: 22px; color: white; }
+    i { font-size: 22px; width: 22px; height: 22px; color: white; }
 
     &.blue   { background: linear-gradient(135deg, #133e87, #3b82f6); }
     &.orange { background: linear-gradient(135deg, #c2410c, #fb923c); }
@@ -409,7 +409,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    mat-icon { font-size: 18px; width: 18px; height: 18px; }
+    i { font-size: 18px; width: 18px; height: 18px; }
   }
 
   .item-info {

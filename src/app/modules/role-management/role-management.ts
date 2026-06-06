@@ -23,10 +23,10 @@ export class RoleManagement {
   displayedColumns = ['id', 'roleName', 'usersCount', 'permissions', 'status', 'actions'];
 
   statCards = [
-    { label: 'Total Roles',        value: '8',      icon: 'admin_panel_settings', theme: 'total',   tag: '2 system defaults', tagClass: 'info' },
-    { label: 'Custom Roles',       value: '6',      icon: 'tune',                 theme: 'custom',  tag: '+1 this month',     tagClass: 'up' },
-    { label: 'Active Permissions', value: '45',     icon: 'key',                  theme: 'perms',   tag: 'Across 12 modules', tagClass: 'info' },
-    { label: 'Unassigned Roles',   value: '1',      icon: 'warning',              theme: 'warning', tag: 'Review needed',     tagClass: 'warn' },
+    { label: 'Total Roles',        value: '8',      icon: 'fa-thin fa-user-gear', theme: 'total',   tag: '2 system defaults', tagClass: 'info' },
+    { label: 'Custom Roles',       value: '6',      icon: 'fa-thin fa-tune',                 theme: 'custom',  tag: '+1 this month',     tagClass: 'up' },
+    { label: 'Active Permissions', value: '45',     icon: 'fa-thin fa-key',                  theme: 'perms',   tag: 'Across 12 modules', tagClass: 'info' },
+    { label: 'Unassigned Roles',   value: '1',      icon: 'fa-thin fa-warning',              theme: 'warning', tag: 'Review needed',     tagClass: 'warn' },
   ];
 
   roles = [

@@ -25,10 +25,10 @@ export class SettingsComponent {
   saved = false;
 
   tabs = [
-    { label: 'Account Profile', sub: 'Name, email & photo',       icon: 'manage_accounts' },
-    { label: 'Notifications',   sub: 'Alerts & auto-publish',      icon: 'notifications'   },
-    { label: 'Security',        sub: 'Password & sessions',        icon: 'security'        },
-    { label: 'Appearance',      sub: 'Theme & language',           icon: 'palette'         },
+    { label: 'Account Profile', sub: 'Name, email & photo',       icon: 'fa-thin fa-manage-accounts' },
+    { label: 'Notifications',   sub: 'Alerts & auto-publish',      icon: 'fa-thin fa-notifications'   },
+    { label: 'Security',        sub: 'Password & sessions',        icon: 'fa-thin fa-shield-halved'        },
+    { label: 'Appearance',      sub: 'Theme & language',           icon: 'fa-thin fa-palette'         },
   ];
 
   profile = {
@@ -43,7 +43,7 @@ export class SettingsComponent {
     {
       label:   'Email Alerts',
       desc:    'Receive weekly performance reports via email.',
-      icon:    'email',
+      icon: 'fa-thin fa-envelope',
       bg:      '#eff6ff',
       color:   '#1d4ed8',
       enabled: true,
@@ -51,7 +51,7 @@ export class SettingsComponent {
     {
       label:   'SMS Alerts',
       desc:    'Notify students via SMS when results are published.',
-      icon:    'sms',
+      icon: 'fa-thin fa-sms',
       bg:      '#f0fdf4',
       color:   '#15803d',
       enabled: false,
@@ -59,7 +59,7 @@ export class SettingsComponent {
     {
       label:   'Auto-Publish Results',
       desc:    'Automatically publish results after OMR scan completion.',
-      icon:    'publish',
+      icon: 'fa-thin fa-upload',
       bg:      '#fff7ed',
       color:   '#c2410c',
       enabled: true,
@@ -67,7 +67,7 @@ export class SettingsComponent {
     {
       label:   'Low Credit Warning',
       desc:    'Alert me when available scan credits fall below 500.',
-      icon:    'warning_amber',
+      icon: 'fa-thin fa-warning-amber',
       bg:      '#fefce8',
       color:   '#a16207',
       enabled: true,
@@ -75,9 +75,9 @@ export class SettingsComponent {
   ];
 
   sessions = [
-    { device: 'Chrome on Windows 11', location: 'Mumbai, IN', time: 'Now',        icon: 'computer',  current: true  },
-    { device: 'Safari on iPhone 15',  location: 'Pune, IN',   time: '2h ago',     icon: 'phone_iphone', current: false },
-    { device: 'Firefox on Mac',       location: 'Delhi, IN',  time: 'Yesterday',  icon: 'laptop_mac',   current: false },
+    { device: 'Chrome on Windows 11', location: 'Mumbai, IN', time: 'Now',        icon: 'fa-thin fa-desktop',  current: true  },
+    { device: 'Safari on iPhone 15',  location: 'Pune, IN',   time: '2h ago',     icon: 'fa-thin fa-phone-iphone', current: false },
+    { device: 'Firefox on Mac',       location: 'Delhi, IN',  time: 'Yesterday',  icon: 'fa-thin fa-laptop-mac',   current: false },
   ];
 
   themes = [

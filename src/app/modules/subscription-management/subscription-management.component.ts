@@ -39,16 +39,16 @@ export class SubscriptionManagementComponent {
     status: 'Active',
     daysRemaining: 31,
     usage: [
-      { label: 'OMR Scans', icon: 'qr_code_scanner', current: 750, limit: 1000, color: '#6366f1', percent: 75 },
-      { label: 'Question Bank', icon: 'library_books', current: 2400, limit: 5000, color: '#10b981', percent: 48 },
-      { label: 'Test Builder', icon: 'assignment', current: 45, limit: 100, color: '#f59e0b', percent: 45 }
+      { label: 'OMR Scans', icon: 'fa-thin fa-qrcode', current: 750, limit: 1000, color: '#6366f1', percent: 75 },
+      { label: 'Question Bank', icon: 'fa-thin fa-book-open-reader', current: 2400, limit: 5000, color: '#10b981', percent: 48 },
+      { label: 'Test Builder', icon: 'fa-thin fa-file-lines', current: 45, limit: 100, color: '#f59e0b', percent: 45 }
     ]
   };
 
   plans = [
     {
       name: 'Free',
-      icon: 'free_breakfast',
+      icon: 'fa-thin fa-free-breakfast',
       price: '0',
       period: 'forever',
       description: 'Perfect for getting started',
@@ -65,7 +65,7 @@ export class SubscriptionManagementComponent {
     },
     {
       name: 'Pro',
-      icon: 'bolt',
+      icon: 'fa-thin fa-bolt',
       price: '80',
       period: 'per month',
       description: 'Great for growing institutes',
@@ -82,7 +82,7 @@ export class SubscriptionManagementComponent {
     },
     {
       name: 'Premium',
-      icon: 'workspace_premium',
+      icon: 'fa-thin fa-workspace-premium',
       price: '150',
       period: 'per month',
       description: 'Best for established institutions',
@@ -99,7 +99,7 @@ export class SubscriptionManagementComponent {
     },
     {
       name: 'Platinum',
-      icon: 'diamond',
+      icon: 'fa-thin fa-diamond',
       price: '450',
       period: 'per month',
       description: 'For enterprise-scale operations',
@@ -124,8 +124,8 @@ export class SubscriptionManagementComponent {
   ];
 
   quickStats = [
-    { label: 'Total Spent', value: '$600.00', icon: 'account_balance_wallet', sub: 'This year', color: '#6366f1', bg: '#f5f3ff' },
-    { label: 'Invoices', value: '4', icon: 'receipt_long', sub: '0 outstanding', color: '#10b981', bg: '#f0fdf4' },
-    { label: 'Days Left', value: '31', icon: 'event', sub: 'Until renewal', color: '#f59e0b', bg: '#fffbeb' },
+    { label: 'Total Spent', value: '$600.00', icon: 'fa-thin fa-account-balance-wallet', sub: 'This year', color: '#6366f1', bg: '#f5f3ff' },
+    { label: 'Invoices', value: '4', icon: 'fa-thin fa-receipt-long', sub: '0 outstanding', color: '#10b981', bg: '#f0fdf4' },
+    { label: 'Days Left', value: '31', icon: 'fa-thin fa-calendar-day', sub: 'Until renewal', color: '#f59e0b', bg: '#fffbeb' },
   ];
 }

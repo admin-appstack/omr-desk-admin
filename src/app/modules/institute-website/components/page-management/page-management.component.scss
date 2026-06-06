@@ -40,7 +40,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.2s;
-      mat-icon { font-size: 24px; width: 24px; height: 24px; }
+      i { font-size: 18px; width: 18px; height: 18px; }
       &.active { background: #eff6ff; color: #133e87; }
     }
 
@@ -104,7 +104,7 @@
       font-weight: 600;
       border-radius: 8px;
       padding: 0 1rem;
-      mat-icon { color: #133e87; margin-right: 6px; font-size: 20px; width: 20px; height: 20px; }
+      i { color: #133e87; margin-right: 6px; font-size: 18px; width: 18px; height: 18px; }
       &:hover { background: #eff6ff !important; color: #133e87 !important; }
     }
     
@@ -118,7 +118,7 @@
       align-items: center;
       justify-content: center;
       &:hover { color: #1e293b; background: #e2e8f0; }
-      mat-icon { font-size: 20px; width: 20px; height: 20px; }
+      i { font-size: 18px; width: 18px; height: 18px; }
     }
   }
 }
@@ -155,7 +155,7 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s;
-    mat-icon { font-size: 24px; width: 24px; height: 24px; }
+    i { font-size: 24px; width: 24px; height: 24px; }
   }
 
   span { font-weight: 600; font-size: 0.95rem; }
