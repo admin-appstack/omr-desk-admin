@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { SnackBarService } from '../../common/services/snackbar.service';
 
 @Component({
   selector: 'register-page',
@@ -32,11 +33,14 @@ export class RegisterComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  error = signal('');
   loading = signal(false);
   showPassword = signal(false);
 
-  constructor(private readonly authService: AuthService, private readonly router: Router) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router,
+    private readonly snackBarService: SnackBarService
+  ) {}
 
   togglePassword(): void {
     this.showPassword.update(v => !v);
@@ -44,16 +48,21 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.form.invalid) {
-      this.error.set('All fields are required and password must be at least 6 characters.');
+      this.snackBarService.showWarning('All fields are required and password must be at least 6 characters.');
       return;
     }
 
-    this.error.set('');
     this.loading.set(true);
 
     this.authService.register(this.form.value as { name: string; email: string; password: string })
-      .then(() => this.router.navigate(['/dashboard']))
-      .catch((err) => this.error.set(err.message))
+      .then(() => {
+        this.snackBarService.showSuccess('Registered successfully!');
+        this.router.navigate(['/dashboard']);
+      })
+      .catch((err) => {
+        this.snackBarService.showError(err.message || 'Registration failed.');
+      })
       .finally(() => this.loading.set(false));
   }
 }
+

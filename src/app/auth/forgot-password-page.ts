@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from './service/auth.service';
+import { SnackBarService } from '../common/services/snackbar.service';
 
 @Component({
   selector: 'forgot-password-page',
@@ -19,9 +20,6 @@ import { AuthService } from './service/auth.service';
         </label>
 
         <button type="submit" [disabled]="form.invalid || loading()">Send reset link</button>
-
-        <p class="success" *ngIf="success()">{{ success() }}</p>
-        <p class="error" *ngIf="error()">{{ error() }}</p>
       </form>
     </section>
   `,
@@ -32,27 +30,30 @@ export class ForgotPasswordPage {
     email: new FormControl('', [Validators.required, Validators.email])
   });
 
-  error = signal('');
-  success = signal('');
   loading = signal(false);
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly snackBarService: SnackBarService
+  ) {}
 
   onSubmit(): void {
     if (this.form.invalid) {
-      this.error.set('A valid email is required.');
-      this.success.set('');
+      this.snackBarService.showWarning('A valid email is required.');
       return;
     }
 
-    this.error.set('');
-    this.success.set('');
     this.loading.set(true);
 
     const email = this.form.value.email ?? '';
     this.authService.forgotPassword(email)
-      .then(() => this.success.set('If that email exists, reset instructions have been sent.'))
-      .catch((err) => this.error.set(err.message))
+      .then(() => {
+        this.snackBarService.showSuccess('If that email exists, reset instructions have been sent.');
+      })
+      .catch((err) => {
+        this.snackBarService.showError(err.message || 'Failed to send reset link.');
+      })
       .finally(() => this.loading.set(false));
   }
 }
+

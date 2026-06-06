@@ -62,6 +62,87 @@ select {
   font-weight: 700 !important;
 }
 
+/* Custom premium snackbars to match SuperAdmin style exactly */
+.success-snackbar.mat-mdc-snack-bar-container,
+.snackbar-success.mat-mdc-snack-bar-container,
+.success.mat-mdc-snack-bar-container {
+  .mdc-snackbar__surface {
+    background-color: #065f46 !important; /* Rich Green */
+    border: 1px solid #10b981 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.25) !important;
+  }
+  .mdc-snackbar__label {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+  }
+  .mat-mdc-snack-bar-action {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+}
+
+.error-snackbar.mat-mdc-snack-bar-container,
+.snackbar-error.mat-mdc-snack-bar-container,
+.error.mat-mdc-snack-bar-container {
+  .mdc-snackbar__surface {
+    background-color: #991b1b !important; /* Rich Red */
+    border: 1px solid #ef4444 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.25) !important;
+  }
+  .mdc-snackbar__label {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+  }
+  .mat-mdc-snack-bar-action {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+}
+
+.warning-snackbar.mat-mdc-snack-bar-container,
+.snackbar-warning.mat-mdc-snack-bar-container,
+.warning.mat-mdc-snack-bar-container {
+  .mdc-snackbar__surface {
+    background-color: #92400e !important; /* Rich Amber */
+    border: 1px solid #f59e0b !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.25) !important;
+  }
+  .mdc-snackbar__label {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+  }
+  .mat-mdc-snack-bar-action {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+}
+
+.info-snackbar.mat-mdc-snack-bar-container,
+.snackbar-info.mat-mdc-snack-bar-container,
+.info.mat-mdc-snack-bar-container {
+  .mdc-snackbar__surface {
+    background-color: #1e3a8a !important; /* Rich Indigo */
+    border: 1px solid #3b82f6 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.25) !important;
+  }
+  .mdc-snackbar__label {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+  }
+  .mat-mdc-snack-bar-action {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+}
+
 
 
 /* ─── Dialogs ───────────────────────────────────────────────────────────────── */

@@ -8,10 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { EditPageDialog } from '../edit-page-dialog/edit-page-dialog';
 import { PageSettingsDialog } from '../page-settings-dialog/page-settings-dialog';
 import { InstituteWebsiteService, PageMeta } from '../../service/institute-website.service';
+import { SnackBarService } from '../../../../common/services/snackbar.service';
 
 @Component({
   selector: 'app-page-management',
@@ -25,7 +25,6 @@ import { InstituteWebsiteService, PageMeta } from '../../service/institute-websi
     MatDialogModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule,
   ],
   templateUrl: './page-management.component.html',
   styleUrls: ['./page-management.component.scss'],
@@ -37,7 +36,7 @@ export class PageManagementComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
+    private snackBarService: SnackBarService,
     private websiteService: InstituteWebsiteService,
     private cdr: ChangeDetectorRef,
   ) {}
@@ -57,7 +56,7 @@ export class PageManagementComponent implements OnInit {
       error: () => {
         this.isLoading = false;
         this.cdr.detectChanges();
-        this.snackBar.open('⚠️ Failed to load pages.', 'Close', { duration: 3000 });
+        this.snackBarService.showError('Failed to load pages.');
       },
     });
   }
@@ -81,7 +80,7 @@ export class PageManagementComponent implements OnInit {
         error: () => {
           // Revert toggle on error
           page.isPublished = !newValue;
-          this.snackBar.open(`❌ Failed to update "${page.displayName}" status.`, 'Close', { duration: 3000 });
+          this.snackBarService.showError(`Failed to update "${page.displayName}" status.`);
         },
       });
   }
@@ -103,7 +102,7 @@ export class PageManagementComponent implements OnInit {
     ref.afterClosed().subscribe((saved) => {
       if (saved) {
         this.loadPages();
-        this.snackBar.open('✅ Page content saved successfully!', 'Dismiss', { duration: 3000 });
+        this.snackBarService.showSuccess('Page content saved successfully!');
       }
     });
   }
@@ -129,3 +128,4 @@ export class PageManagementComponent implements OnInit {
     return `${days}d ago`;
   }
 }
+

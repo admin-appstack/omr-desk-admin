@@ -65,10 +65,6 @@
         >
           {{ loading() ? 'Signing in...' : 'Sign in' }}
         </button>
-
-        <div *ngIf="error()" class="error-message">
-          {{ error() }}
-        </div>
       </form>
 
       <div class="divider-box">

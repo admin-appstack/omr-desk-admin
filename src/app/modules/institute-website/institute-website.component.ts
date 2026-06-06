@@ -4,12 +4,12 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TemplateGridComponent } from './components/template-grid/template-grid.component';
 import { PageManagementComponent } from './components/page-management/page-management.component';
 import { BrandingSettingsComponent } from './components/branding-settings/branding-settings.component';
 import { InstituteWebsiteService, WebsiteConfig } from './service/institute-website.service';
+import { SnackBarService } from '../../common/services/snackbar.service';
 
 @Component({
   selector: 'app-institute-website',
@@ -20,7 +20,6 @@ import { InstituteWebsiteService, WebsiteConfig } from './service/institute-webs
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatSnackBarModule,
     MatProgressSpinnerModule,
     TemplateGridComponent,
     PageManagementComponent,
@@ -41,7 +40,7 @@ export class InstituteWebsiteComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
+    private snackBarService: SnackBarService,
     private websiteService: InstituteWebsiteService,
   ) {}
 
@@ -60,7 +59,7 @@ export class InstituteWebsiteComponent implements OnInit {
       },
       error: () => {
         this.isLoading = false;
-        this.snackBar.open('⚠️ Could not load website configuration.', 'Close', { duration: 4000 });
+        this.snackBarService.showError('Could not load website configuration.');
       },
     });
   }
@@ -81,19 +80,20 @@ export class InstituteWebsiteComponent implements OnInit {
         }
         this.isTogglingLive = false;
         const message = this.isLive
-          ? '🟢 Website is now LIVE and publicly accessible.'
-          : '🔴 Website has been taken OFFLINE.';
-        this.snackBar.open(message, 'Dismiss', {
-          duration: 4000,
-          panelClass: this.isLive ? 'snack-live' : 'snack-offline',
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-        });
+          ? 'Website is now LIVE and publicly accessible.'
+          : 'Website has been taken OFFLINE.';
+        
+        if (this.isLive) {
+          this.snackBarService.showSuccess(message);
+        } else {
+          this.snackBarService.showWarning(message);
+        }
       },
       error: () => {
         this.isTogglingLive = false;
-        this.snackBar.open('❌ Failed to toggle website status.', 'Close', { duration: 4000 });
+        this.snackBarService.showError('Failed to toggle website status.');
       },
     });
   }
 }
+

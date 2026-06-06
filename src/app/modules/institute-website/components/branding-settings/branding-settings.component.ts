@@ -8,8 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { InstituteWebsiteService, WebsiteConfig } from '../../service/institute-website.service';
+import { SnackBarService } from '../../../../common/services/snackbar.service';
 
 @Component({
   selector: 'app-branding-settings',
@@ -24,7 +24,6 @@ import { InstituteWebsiteService, WebsiteConfig } from '../../service/institute-
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule,
   ],
   templateUrl: './branding-settings.component.html',
   styleUrls: ['./branding-settings.component.scss'],
@@ -61,7 +60,7 @@ export class BrandingSettingsComponent implements OnInit {
 
   constructor(
     private websiteService: InstituteWebsiteService,
-    private snackBar: MatSnackBar,
+    private snackBarService: SnackBarService,
     private cdr: ChangeDetectorRef,
   ) {}
 
@@ -88,6 +87,7 @@ export class BrandingSettingsComponent implements OnInit {
       error: () => {
         this.isLoading = false;
         this.cdr.detectChanges();
+        this.snackBarService.showError('Failed to load branding configuration.');
       },
     });
   }
@@ -104,17 +104,14 @@ export class BrandingSettingsComponent implements OnInit {
       next: () => {
         this.isSaving = false;
         this.cdr.detectChanges();
-        this.snackBar.open('✅ Branding settings saved successfully!', 'Dismiss', {
-          duration: 3500,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-        });
+        this.snackBarService.showSuccess('Branding settings saved successfully!');
       },
       error: () => {
         this.isSaving = false;
         this.cdr.detectChanges();
-        this.snackBar.open('❌ Failed to save branding settings.', 'Close', { duration: 4000 });
+        this.snackBarService.showError('Failed to save branding settings.');
       },
     });
   }
 }
+

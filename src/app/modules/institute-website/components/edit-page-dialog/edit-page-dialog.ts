@@ -9,8 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { InstituteWebsiteService } from '../../service/institute-website.service';
+import { SnackBarService } from '../../../../common/services/snackbar.service';
 
 @Component({
   selector: 'app-edit-page-dialog',
@@ -25,7 +25,6 @@ import { InstituteWebsiteService } from '../../service/institute-website.service
     MatSelectModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule,
   ],
   templateUrl: './edit-page-dialog.html',
   styleUrl: './edit-page-dialog.scss',
@@ -140,7 +139,7 @@ export class EditPageDialog implements OnInit {
     public dialogRef: MatDialogRef<EditPageDialog>,
     @Inject(MAT_DIALOG_DATA) public data: { name: string; pageName: string },
     private websiteService: InstituteWebsiteService,
-    private snackBar: MatSnackBar,
+    private snackBarService: SnackBarService,
     private cdr: ChangeDetectorRef,
   ) {
     this.pageName = data?.name ?? '';
@@ -343,8 +342,9 @@ export class EditPageDialog implements OnInit {
       },
       error: () => {
         this.isSaving = false;
-        this.snackBar.open('❌ Failed to save page content. Please try again.', 'Close', { duration: 4000 });
+        this.snackBarService.showError('Failed to save page content. Please try again.');
       },
     });
   }
 }
+

@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService, SocialProvider } from '../service/auth.service';
+import { SnackBarService } from '../../common/services/snackbar.service';
 
 @Component({
   selector: 'login-page',
@@ -31,11 +32,14 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  error = signal('');
   loading = signal(false);
   showPassword = signal(false);
 
-  constructor(private readonly authService: AuthService, private readonly router: Router) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router,
+    private readonly snackBarService: SnackBarService
+  ) {}
 
   togglePassword(): void {
     this.showPassword.update(v => !v);
@@ -43,29 +47,35 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.form.invalid) {
-      this.error.set('Please fill in valid credentials.');
+      this.snackBarService.showWarning('Please fill in valid credentials.');
       return;
     }
 
-    this.error.set('');
     this.loading.set(true);
 
     this.authService.login(this.form.value as { email: string; password: string })
       .then(() => {
+        this.snackBarService.showSuccess('Logged in successfully!');
         this.router.navigate(['/dashboard/home']);
       })
       .catch((err) => {
-        this.error.set(err.message);
+        this.snackBarService.showError(err.message || 'Login failed.');
       })
       .finally(() => this.loading.set(false));
   }
 
   loginWith(provider: SocialProvider): void {
-    this.error.set('');
     this.loading.set(true);
 
     this.authService.loginWithProvider(provider)
-      .then(() => this.router.navigate(['/dashboard/home']))
+      .then(() => {
+        this.snackBarService.showSuccess('Logged in successfully!');
+        this.router.navigate(['/dashboard/home']);
+      })
+      .catch((err) => {
+        this.snackBarService.showError(err.message || 'Login failed.');
+      })
       .finally(() => this.loading.set(false));
   }
 }
+
