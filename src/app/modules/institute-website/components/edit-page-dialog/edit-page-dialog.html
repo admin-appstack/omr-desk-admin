@@ -741,9 +741,94 @@
       </div>
     </ng-container>
 
+
+    <!-- Footer Configuration -->
+    <ng-container *ngIf="pageName === 'Footer'">
+      
+      <div class="form-section">
+        <h3>Contact Information</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address</mat-label>
+          <textarea matInput [(ngModel)]="footerAddress" rows="2" placeholder="e.g. 123 Education Lane"></textarea>
+        </mat-form-field>
+
+        <div style="display: flex; gap: 1rem;">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Phone</mat-label>
+            <input matInput [(ngModel)]="footerPhone" placeholder="e.g. +1 234 567 8900">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="footerEmail" placeholder="e.g. info@institute.com">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-header-flex">
+          <h3>Quick Links</h3>
+          <button mat-stroked-button color="primary" (click)="addFooterQuickLink()">
+            <mat-icon>add</mat-icon> Add Link
+          </button>
+        </div>
+        <div class="dynamic-list">
+          <div class="list-item" *ngFor="let link of footerQuickLinks; let i = index">
+            <div class="item-content">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Link Label</mat-label>
+                <input matInput [(ngModel)]="link.label" placeholder="e.g. Privacy Policy">
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>URL</mat-label>
+                <input matInput [(ngModel)]="link.url" placeholder="e.g. /privacy">
+              </mat-form-field>
+            </div>
+            <button mat-icon-button color="warn" (click)="removeFooterQuickLink(i)" class="remove-btn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-header-flex">
+          <h3>Social Media Links</h3>
+          <button mat-stroked-button color="primary" (click)="addFooterSocial()">
+            <mat-icon>add</mat-icon> Add Social
+          </button>
+        </div>
+        <div class="dynamic-list">
+          <div class="list-item" *ngFor="let social of footerSocialLinks; let i = index">
+            <div class="item-content">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Platform</mat-label>
+                <input matInput [(ngModel)]="social.platform" placeholder="e.g. Facebook">
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>URL</mat-label>
+                <input matInput [(ngModel)]="social.url" placeholder="e.g. https://facebook.com/...">
+              </mat-form-field>
+            </div>
+            <button mat-icon-button color="warn" (click)="removeFooterSocial(i)" class="remove-btn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Copyright</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Copyright Text</mat-label>
+          <input matInput [(ngModel)]="footerCopyrightText" placeholder="e.g. © 2026 My Institute">
+        </mat-form-field>
+      </div>
+
+    </ng-container>
+
     <!-- Generic Page Editor (Fallback) -->
 
-    <ng-container *ngIf="!['Home', 'About', 'Courses', 'Contact', 'Test Series', 'Results'].includes(pageName)">
+    <ng-container *ngIf="!['Home', 'About', 'Courses', 'Contact', 'Test Series', 'Results', 'Footer'].includes(pageName)">
       <div class="editor-toolbar">
         <button mat-icon-button><mat-icon>format_bold</mat-icon></button>
         <button mat-icon-button><mat-icon>format_italic</mat-icon></button>

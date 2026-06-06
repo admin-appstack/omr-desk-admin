@@ -60,29 +60,9 @@ export class EditPageDialog implements OnInit {
 
   videoTourUrl = '';
 
-  testimonialsList: any[] = [
-    // { studentName: 'Sarah Jenkins', course: 'Computer Science', quote: 'This institute changed my life! The mentors are fantastic and the structured OMR feedback was a game-changer.', image: null, initials: 'SJ' },
-    // { studentName: 'Aarav Mehta', course: 'JEE Advanced Prep', quote: 'The study methodology and the mock exams helped me build speed and accuracy under pressure.', image: null, initials: 'AM' },
-    // { studentName: 'Priya Sharma', course: 'NEET Foundation', quote: 'The detailed concept-wise results pinpointed exactly which sections of Biology I needed to focus on.', image: null, initials: 'PS' },
-    // { studentName: 'Rahul Verma', course: 'Class 10 Boards', quote: 'Highly qualified educators who make learning extremely fun and concept-focused.', image: null, initials: 'RV' },
-    // { studentName: 'Neha Deshmukh', course: 'KVPY Batch', quote: 'The hybrid classroom model made it super convenient to clear doubts online and offline.', image: null, initials: 'ND' },
-    // { studentName: 'Vikram Malhotra', course: 'JEE Mains Sprint', quote: 'Weekly test series with instantaneous OMR grading completely eliminated my exam anxiety.', image: null, initials: 'VM' }
-  ];
+  testimonialsList: any[] = [];
 
-  faqsList: any[] = [
-    // { question: 'What is the process for admission?', answer: 'You can register online through our website application form, select your course, and pay the registration fee.' },
-    // { question: 'Do you offer hybrid or online classes?', answer: 'Yes! We offer online lectures, offline classroom batches, and hybrid modes with physical doubt-solving sessions.' },
-    // { question: 'How does the OMR test grading system work?', answer: 'Students take physical exams on OMR sheets. These sheets are scanned instantly, and performance scorecards are uploaded to the portal within minutes.' },
-    // { question: 'What are the timings for weekend batches?', answer: 'Weekend batches run on Saturdays and Sundays. Typical sessions start at 9:00 AM and end at 2:00 PM.' },
-    // { question: 'Are there scholarship opportunities available?', answer: 'Yes, we conduct scholarship tests (SATs) periodically. Based on performance, students can secure up to 100% tuition fee waivers.' },
-    // { question: 'How are doubts handled outside of class hours?', answer: 'We have dedicated online doubt groups active 24/7, plus physical doubt desks open from 8:00 AM to 7:00 PM daily.' },
-    // { question: 'What is the refund policy for course cancellation?', answer: 'We offer a full refund if requested within 7 days of course commencement, minus standard administrative fees.' },
-    // { question: 'Can I switch batches or streams mid-session?', answer: 'Yes, batch switching is permitted within the first month, subject to coordinator approval and seat availability.' },
-    // { question: 'Is comprehensive study material provided?', answer: 'Yes, we provide printed workbooks, syllabus booklets, formula cheat-sheets, and online question banks.' },
-    // { question: 'How can parents track their child\'s progress?', answer: 'Parents receive automated SMS alerts for exam marks and attendance, along with detailed monthly progress reports on our portal.' },
-    // { question: 'Are there courses for Class 9 and 10 foundation?', answer: 'Yes, our foundation batches build core science/math logic to prepare junior students for NTSE, Olympiads, and school boards.' },
-    // { question: 'What are the qualifications of the teaching staff?', answer: 'Our educators consist of IIT/NIT alumni, experienced board examiners, and top subject experts with years of experience.' }
-  ];
+  faqsList: any[] = [];
 
   // ---------------------------------------------------------------- About Us Data
   aboutHeading = 'Our Story';
@@ -147,6 +127,15 @@ export class EditPageDialog implements OnInit {
     { value: '150+', label: 'Total Selections in 2023' },
     { value: '10', label: 'Top 100 All India Ranks' },
   ];
+
+  // ---------------------------------------------------------------- Footer Data
+  footerCopyrightText = '© 2026 My Institute. All Rights Reserved.';
+  footerAddress = '';
+  footerPhone = '';
+  footerEmail = '';
+  footerSocialLinks: any[] = [];
+  footerQuickLinks: any[] = [];
+
 
   // Generic Page Content (Fallback)
   pageContent = '';
@@ -243,6 +232,14 @@ export class EditPageDialog implements OnInit {
         this.resultStatsList = content.resultStatsList?.length ? content.resultStatsList : this.resultStatsList;
         this.resultsList = content.resultsList?.length ? content.resultsList : this.resultsList;
         break;
+      case 'footer':
+        this.footerCopyrightText = content.copyrightText ?? this.footerCopyrightText;
+        this.footerAddress = content.address ?? this.footerAddress;
+        this.footerPhone = content.phone ?? this.footerPhone;
+        this.footerEmail = content.email ?? this.footerEmail;
+        this.footerSocialLinks = content.socialLinks?.length ? content.socialLinks : this.footerSocialLinks;
+        this.footerQuickLinks = content.quickLinks?.length ? content.quickLinks : this.footerQuickLinks;
+        break;
     }
   }
 
@@ -315,6 +312,15 @@ export class EditPageDialog implements OnInit {
           resultStatsList: this.resultStatsList,
           resultsList: this.resultsList,
         };
+      case 'footer':
+        return {
+          copyrightText: this.footerCopyrightText,
+          address: this.footerAddress,
+          phone: this.footerPhone,
+          email: this.footerEmail,
+          socialLinks: this.footerSocialLinks,
+          quickLinks: this.footerQuickLinks,
+        };
       default:
         return { pageContent: this.pageContent };
     }
@@ -344,6 +350,10 @@ export class EditPageDialog implements OnInit {
   removeResult(i: number) { this.resultsList.splice(i, 1); }
   addResultStat() { this.resultStatsList.push({ value: '', label: '' }); }
   removeResultStat(i: number) { this.resultStatsList.splice(i, 1); }
+  addFooterSocial() { this.footerSocialLinks.push({ platform: '', url: '' }); }
+  removeFooterSocial(i: number) { this.footerSocialLinks.splice(i, 1); }
+  addFooterQuickLink() { this.footerQuickLinks.push({ label: '', url: '' }); }
+  removeFooterQuickLink(i: number) { this.footerQuickLinks.splice(i, 1); }
 
   close(): void { this.dialogRef.close(false); }
 
