@@ -15,7 +15,7 @@
 
     <ng-container *ngIf="!isLoading">
 
-    <ng-container *ngIf="pageName === 'Home Page'">
+    <ng-container *ngIf="pageName === 'Home'">
       
       <div class="form-section">
         <h3>Announcement Banner</h3>
@@ -206,7 +206,7 @@
     </ng-container>
 
     <!-- About Us Specific Form -->
-    <ng-container *ngIf="pageName === 'About Us'">
+    <ng-container *ngIf="pageName === 'About'">
       <div class="form-section">
         <h3>Story & Branding</h3>
         <div class="row-fields">
@@ -489,7 +489,7 @@
     </ng-container>
 
     <!-- Contact Us Specific Form -->
-    <ng-container *ngIf="pageName === 'Contact Us'">
+    <ng-container *ngIf="pageName === 'Contact'">
       <div class="form-section">
         <h3>Contact Information</h3>
         <mat-form-field appearance="outline" class="full-width">
@@ -640,7 +640,7 @@
     </ng-container>
 
     <!-- Recent Results Specific Form -->
-    <ng-container *ngIf="pageName === 'Recent Results'">
+    <ng-container *ngIf="pageName === 'Results'">
       <div class="form-section">
         <h3>Page Header</h3>
         <mat-form-field appearance="outline" class="full-width">
@@ -743,7 +743,7 @@
 
     <!-- Generic Page Editor (Fallback) -->
 
-    <ng-container *ngIf="!['Home Page', 'About Us', 'Courses', 'Contact Us', 'Test Series', 'Recent Results'].includes(pageName)">
+    <ng-container *ngIf="!['Home', 'About', 'Courses', 'Contact', 'Test Series', 'Results'].includes(pageName)">
       <div class="editor-toolbar">
         <button mat-icon-button><mat-icon>format_bold</mat-icon></button>
         <button mat-icon-button><mat-icon>format_italic</mat-icon></button>
