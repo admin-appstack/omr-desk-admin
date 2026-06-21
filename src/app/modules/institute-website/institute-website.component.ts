@@ -10,6 +10,7 @@ import { PageManagementComponent } from './components/page-management/page-manag
 import { BrandingSettingsComponent } from './components/branding-settings/branding-settings.component';
 import { InstituteWebsiteService, WebsiteConfig } from './service/institute-website.service';
 import { SnackBarService } from '../../common/services/snackbar.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-institute-website',
@@ -96,6 +97,16 @@ export class InstituteWebsiteComponent implements OnInit {
         this.snackBarService.showError('Failed to toggle website status.');
       }
     });
+  }
+
+  /** Returns the public URL for this institute's site. */
+  get siteUrl(): string {
+    const slug = this.config?.institute?.slug ?? 'my-institute';
+    return `${environment.siteBaseUrl}/${slug}`;
+  }
+
+  visitSite(): void {
+    window.open(this.siteUrl, '_blank', 'noopener,noreferrer');
   }
 }
 

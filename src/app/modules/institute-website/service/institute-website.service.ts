@@ -26,6 +26,8 @@ export interface WebsiteConfig {
   isPublished: boolean;
   createdAt: string;
   updatedAt: string;
+  /** Joined from institutes table */
+  institute?: { id: number; name: string; slug: string } | null;
 }
 
 export interface PageMeta {
