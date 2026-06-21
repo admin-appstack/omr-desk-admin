@@ -37,6 +37,7 @@ export class InstituteWebsiteComponent implements OnInit {
   config: WebsiteConfig | null = null;
   isLive = signal(false);
   isTogglingLive = signal(false);
+  isPublishing = signal(false);
   isLoading = signal(true);
 
   constructor(
@@ -107,6 +108,25 @@ export class InstituteWebsiteComponent implements OnInit {
 
   visitSite(): void {
     window.open(this.siteUrl, '_blank', 'noopener,noreferrer');
+  }
+
+  saveAndPublish(): void {
+    if (this.isPublishing()) return;
+    this.isPublishing.set(true);
+    this.websiteService.updateConfig({ isPublished: true }).subscribe({
+      next: (updated) => {
+        this.isLive.set(updated.isPublished);
+        if (this.config) {
+          this.config.isPublished = updated.isPublished;
+        }
+        this.isPublishing.set(false);
+        this.snackBarService.showSuccess('Website saved and published successfully!');
+      },
+      error: (err) => {
+        this.isPublishing.set(false);
+        this.snackBarService.showError('Failed to publish website.');
+      }
+    });
   }
 }
 

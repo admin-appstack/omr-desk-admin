@@ -49,8 +49,10 @@
       <button mat-stroked-button class="btn-outline-white" [disabled]="!isLive()" (click)="visitSite()">
         <i class="fa-thin fa-arrow-up-right-from-square"></i> Visit Site
       </button>
-      <button mat-raised-button class="btn-save">
-        <i class="fa-thin fa-floppy-disk"></i> Save &amp; Publish
+      <button mat-raised-button class="btn-save" [disabled]="isPublishing()" (click)="saveAndPublish()">
+        <i class="fa-thin fa-floppy-disk" *ngIf="!isPublishing()"></i>
+        <i class="fa-thin fa-spinner-third fa-spin" *ngIf="isPublishing()"></i>
+        Save &amp; Publish
       </button>
     </div>
   </div>
@@ -102,8 +104,10 @@
     <button mat-raised-button color="primary" *ngIf="activeStep < 2" (click)="activeStep = activeStep + 1">
       Next Step <i class="fa-thin fa-arrow-right"></i>
     </button>
-    <button mat-raised-button class="btn-publish" *ngIf="activeStep === 2">
-      <i class="fa-thin fa-rocket"></i> Publish Website
+    <button mat-raised-button class="btn-publish" *ngIf="activeStep === 2" [disabled]="isPublishing()" (click)="saveAndPublish()">
+      <i class="fa-thin fa-rocket" *ngIf="!isPublishing()"></i>
+      <i class="fa-thin fa-spinner-third fa-spin" *ngIf="isPublishing()"></i>
+      Publish Website
     </button>
   </div>
 
