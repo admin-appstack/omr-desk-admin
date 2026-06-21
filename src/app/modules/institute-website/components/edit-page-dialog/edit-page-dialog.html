@@ -102,6 +102,12 @@
 
       <div class="form-section">
         <h3>Why Choose Us (Features)</h3>
+
+        <mat-form-field appearance="outline" class="full-width" style="margin-bottom: 1rem;">
+          <mat-label>Features Section Title</mat-label>
+          <input matInput [(ngModel)]="featuresTitle" placeholder="e.g. Core Features">
+        </mat-form-field>
+
         <div class="repeater-card" *ngFor="let feature of featuresList; let i = index">
           <div class="repeater-header">
             <h4>Feature #{{ i + 1 }}</h4>
@@ -140,6 +146,12 @@
 
       <div class="form-section">
         <h3>Student Testimonials</h3>
+
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Testimonials Section Title</mat-label>
+          <input matInput [(ngModel)]="testimonialsTitle" placeholder="e.g. What Our Students Say">
+        </mat-form-field>
+
         <div class="repeater-card" *ngFor="let testimonial of testimonialsList; let i = index">
           <div class="repeater-header">
             <h4>Testimonial #{{ i + 1 }}</h4>
