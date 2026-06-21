@@ -85,16 +85,19 @@ export class EditPageDialog implements OnInit {
   aboutMission = '';
   aboutVision = '';
   coreValues = '';
+  coreValuesTitle = 'Core Values';
   principalName = '';
   principalMessage = '';
+  principalMessageTitle = "From the Director's Desk";
+  teamTitle = 'Our Team / Faculty';
   teamList: any[] = [
     { name: 'John Smith', role: 'Head of Mathematics', description: 'With over 20 years of experience.', image: null },
   ];
-
+  affiliationsTitle = 'Accreditations & Affiliations';
   affiliationsList: any[] = [
-    { name: 'National Education Board', logo: null },
+    { name: 'National Education Board', logo: null }
   ];
-
+  milestonesTitle = 'History & Milestones';
   milestonesList: any[] = [
     { year: '1995', title: 'Foundation', description: 'The institute was founded with a vision to provide quality education.' },
   ];
@@ -226,11 +229,16 @@ export class EditPageDialog implements OnInit {
         this.aboutMission = content.aboutMission ?? this.aboutMission;
         this.aboutVision = content.aboutVision ?? this.aboutVision;
         this.coreValues = content.coreValues ?? this.coreValues;
+        this.coreValuesTitle = content.coreValuesTitle ?? this.coreValuesTitle;
         this.principalName = content.principalName ?? this.principalName;
         this.principalPhoto = content.principalPhoto ?? this.principalPhoto;
         this.principalMessage = content.principalMessage ?? this.principalMessage;
+        this.principalMessageTitle = content.principalMessageTitle ?? this.principalMessageTitle;
+        this.teamTitle = content.teamTitle ?? this.teamTitle;
         this.teamList = content.teamList?.length ? content.teamList : this.teamList;
+        this.affiliationsTitle = content.affiliationsTitle ?? this.affiliationsTitle;
         this.affiliationsList = content.affiliationsList?.length ? content.affiliationsList : this.affiliationsList;
+        this.milestonesTitle = content.milestonesTitle ?? this.milestonesTitle;
         this.milestonesList = content.milestonesList?.length ? content.milestonesList : this.milestonesList;
         break;
       case 'courses':
@@ -319,11 +327,16 @@ export class EditPageDialog implements OnInit {
           aboutMission: this.aboutMission,
           aboutVision: this.aboutVision,
           coreValues: this.coreValues,
+          coreValuesTitle: this.coreValuesTitle,
           principalName: this.principalName,
           principalPhoto: this.principalPhoto,
           principalMessage: this.principalMessage,
+          principalMessageTitle: this.principalMessageTitle,
+          teamTitle: this.teamTitle,
           teamList: this.teamList,
+          affiliationsTitle: this.affiliationsTitle,
           affiliationsList: this.affiliationsList,
+          milestonesTitle: this.milestonesTitle,
           milestonesList: this.milestonesList,
         };
       case 'courses':

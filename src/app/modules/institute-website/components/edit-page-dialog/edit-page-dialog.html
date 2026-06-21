@@ -302,8 +302,11 @@
           <mat-label>Vision Statement</mat-label>
           <textarea matInput rows="2" [(ngModel)]="aboutVision" placeholder="Where do you see the institution in the future?"></textarea>
         </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width mb-3">
+          <mat-label>Core Values Section Title</mat-label>
+          <input matInput [(ngModel)]="coreValuesTitle" placeholder="e.g. Core Values">
+        </mat-form-field>
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Core Values</mat-label>
           <input matInput [(ngModel)]="coreValues" placeholder="e.g. Integrity, Excellence, Innovation (comma separated)">
         </mat-form-field>
       </div>
@@ -313,6 +316,10 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Director/Principal's Name</mat-label>
           <input matInput [(ngModel)]="principalName" placeholder="e.g. Dr. Jane Doe">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width mb-3">
+          <mat-label>Director Message Section Title</mat-label>
+          <input matInput [(ngModel)]="principalMessageTitle" placeholder="e.g. From the Director's Desk">
         </mat-form-field>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Director's Message</mat-label>
@@ -340,6 +347,10 @@
 
       <div class="form-section">
         <h3>Our Team / Faculty</h3>
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Team Section Title</mat-label>
+          <input matInput [(ngModel)]="teamTitle" placeholder="e.g. Our Team / Faculty">
+        </mat-form-field>
         
         <div class="repeater-card" *ngFor="let member of teamList; let i = index">
           <div class="repeater-header">
@@ -393,6 +404,10 @@
 
       <div class="form-section">
         <h3>Accreditations & Affiliations</h3>
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Affiliations Section Title</mat-label>
+          <input matInput [(ngModel)]="affiliationsTitle" placeholder="e.g. Accreditations & Affiliations">
+        </mat-form-field>
         <div class="repeater-card" *ngFor="let affiliation of affiliationsList; let i = index">
           <div class="repeater-header">
             <h4>Affiliation #{{ i + 1 }}</h4>
@@ -430,6 +445,10 @@
 
       <div class="form-section">
         <h3>History & Milestones</h3>
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Milestones Section Title</mat-label>
+          <input matInput [(ngModel)]="milestonesTitle" placeholder="e.g. History & Milestones">
+        </mat-form-field>
         <div class="repeater-card" *ngFor="let milestone of milestonesList; let i = index">
           <div class="repeater-header">
             <h4>Milestone #{{ i + 1 }}</h4>
