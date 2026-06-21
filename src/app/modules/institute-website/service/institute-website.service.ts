@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
+import { HttpResponse } from '@angular/common/http';
 import { HttpService } from '../../../common/services/http.service';
 import { ENDPOINTS } from './api.collection';
 
@@ -59,8 +60,8 @@ export class InstituteWebsiteService {
   }
 
   toggleLive(): Observable<{ isPublished: boolean }> {
-    return this.httpService.post(ENDPOINTS.INSTITUTE_WEBSITE + '/toggle-live', {}, false, true).pipe(
-      map((res: any) => res.data)
+    return this.httpService.post(ENDPOINTS.INSTITUTE_WEBSITE + '/toggle-live', {}, false, false).pipe(
+      map((res: any) => res?.data ?? res)
     );
   }
 

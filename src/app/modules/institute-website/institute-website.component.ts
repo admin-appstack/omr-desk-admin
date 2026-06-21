@@ -34,9 +34,9 @@ export class InstituteWebsiteComponent implements OnInit {
 
   // Loaded from API
   config: WebsiteConfig | null = null;
-  isLive = false;
-  isTogglingLive = false;
-  isLoading = true;
+  isLive = signal(false);
+  isTogglingLive = signal(false);
+  isLoading = signal(true);
 
   constructor(
     private dialog: MatDialog,
@@ -49,16 +49,16 @@ export class InstituteWebsiteComponent implements OnInit {
   }
 
   loadConfig(): void {
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.websiteService.getConfig().subscribe({
       next: (config) => {
         this.config = config;
-        this.isLive = config.isPublished;
+        this.isLive.set(config.isPublished);
         this.selectedTemplate.set(config.templateId ?? 1);
-        this.isLoading = false;
+        this.isLoading.set(false);
       },
       error: () => {
-        this.isLoading = false;
+        this.isLoading.set(false);
         this.snackBarService.showError('Could not load website configuration.');
       },
     });
@@ -71,28 +71,30 @@ export class InstituteWebsiteComponent implements OnInit {
   }
 
   toggleLive(): void {
-    this.isTogglingLive = true;
+    if (this.isTogglingLive()) return; // Prevent double-click while request is in-flight
+    this.isTogglingLive.set(true);
     this.websiteService.toggleLive().subscribe({
       next: (updated) => {
-        this.isLive = updated.isPublished;
+        const newState = updated.isPublished; // Read truth directly from API response
+        this.isLive.set(newState);
         if (this.config) {
-          this.config.isPublished = updated.isPublished;
+          this.config.isPublished = newState;
         }
-        this.isTogglingLive = false;
-        const message = this.isLive
+        this.isTogglingLive.set(false);
+        const message = newState
           ? 'Website is now LIVE and publicly accessible.'
           : 'Website has been taken OFFLINE.';
-        
-        if (this.isLive) {
+
+        if (newState) {
           this.snackBarService.showSuccess(message);
         } else {
           this.snackBarService.showWarning(message);
         }
       },
-      error: () => {
-        this.isTogglingLive = false;
+      error: (err) => {
+        this.isTogglingLive.set(false);
         this.snackBarService.showError('Failed to toggle website status.');
-      },
+      }
     });
   }
 }
