@@ -30,6 +30,9 @@
 
       <div class="form-section">
         <h3>Hero Section (Top of page)</h3>
+        <div class="visibility-toggle" style="margin-bottom: 1rem;">
+          <mat-slide-toggle [(ngModel)]="showHeroImage" color="primary">Show Hero Background Image</mat-slide-toggle>
+        </div>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Main Headline</mat-label>
           <input matInput [(ngModel)]="heroTitle" placeholder="e.g. Welcome to Our Institute">
@@ -199,6 +202,28 @@
 
     <!-- About Us Specific Form -->
     <ng-container *ngIf="pageName === 'About'">
+      <div class="form-section">
+        <h3>Page Banner</h3>
+        <div class="visibility-toggle" style="margin-bottom: 1rem;">
+          <mat-slide-toggle [(ngModel)]="showBannerImage" color="primary">Show Page Banner</mat-slide-toggle>
+        </div>
+        <div class="upload-field" *ngIf="showBannerImage">
+          <div class="upload-info">
+            <i class="fa-thin fa-image"></i>
+            <div>
+              <strong>Banner Image</strong>
+              <span>Recommended size: 1920x400px</span>
+            </div>
+            <img *ngIf="bannerImage" [src]="bannerImage" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+          </div>
+          <button mat-stroked-button
+            (click)="pickImage('bannerImage', url => bannerImage = url)"
+            [disabled]="isUploading('bannerImage')">
+            {{ isUploading('bannerImage') ? 'Uploading...' : 'Browse Files' }}
+          </button>
+        </div>
+      </div>
+
       <div class="form-section">
         <h3>Story & Branding</h3>
         <div class="row-fields">
@@ -406,15 +431,24 @@
           <mat-label>Description / Subtitle</mat-label>
           <textarea matInput rows="2" [(ngModel)]="coursesDescription"></textarea>
         </mat-form-field>
-        <div class="upload-field">
+
+        <div class="visibility-toggle" style="margin-bottom: 1rem;">
+          <mat-slide-toggle [(ngModel)]="showBannerImageCourses" color="primary">Show Page Banner</mat-slide-toggle>
+        </div>
+        <div class="upload-field" *ngIf="showBannerImageCourses">
           <div class="upload-info">
             <i class="fa-thin fa-images"></i>
             <div>
               <strong>Banner Image</strong>
               <span>Recommended size: 1920x400px</span>
             </div>
+            <img *ngIf="bannerImageCourses" [src]="bannerImageCourses" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
           </div>
-          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
+          <button mat-stroked-button
+            (click)="pickImage('bannerImageCourses', url => bannerImageCourses = url)"
+            [disabled]="isUploading('bannerImageCourses')">
+            {{ isUploading('bannerImageCourses') ? 'Uploading...' : 'Browse Files' }}
+          </button>
         </div>
       </div>
 
@@ -515,6 +549,28 @@
     <!-- Contact Us Specific Form -->
     <ng-container *ngIf="pageName === 'Contact'">
       <div class="form-section">
+        <h3>Page Banner</h3>
+        <div class="visibility-toggle" style="margin-bottom: 1rem;">
+          <mat-slide-toggle [(ngModel)]="showBannerImageContact" color="primary">Show Page Banner</mat-slide-toggle>
+        </div>
+        <div class="upload-field" *ngIf="showBannerImageContact">
+          <div class="upload-info">
+            <i class="fa-thin fa-image"></i>
+            <div>
+              <strong>Banner Image</strong>
+              <span>Recommended size: 1920x400px</span>
+            </div>
+            <img *ngIf="bannerImageContact" [src]="bannerImageContact" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+          </div>
+          <button mat-stroked-button
+            (click)="pickImage('bannerImageContact', url => bannerImageContact = url)"
+            [disabled]="isUploading('bannerImageContact')">
+            {{ isUploading('bannerImageContact') ? 'Uploading...' : 'Browse Files' }}
+          </button>
+        </div>
+      </div>
+
+      <div class="form-section">
         <h3>Contact Information</h3>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Physical Address</mat-label>
@@ -606,6 +662,25 @@
           <mat-label>Description / Subtitle</mat-label>
           <textarea matInput rows="2" [(ngModel)]="testSeriesDescription"></textarea>
         </mat-form-field>
+        
+        <div class="visibility-toggle" style="margin-bottom: 1rem;">
+          <mat-slide-toggle [(ngModel)]="showBannerImageTestSeries" color="primary">Show Page Banner</mat-slide-toggle>
+        </div>
+        <div class="upload-field" *ngIf="showBannerImageTestSeries">
+          <div class="upload-info">
+            <i class="fa-thin fa-image"></i>
+            <div>
+              <strong>Banner Image</strong>
+              <span>Recommended size: 1920x400px</span>
+            </div>
+            <img *ngIf="bannerImageTestSeries" [src]="bannerImageTestSeries" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+          </div>
+          <button mat-stroked-button
+            (click)="pickImage('bannerImageTestSeries', url => bannerImageTestSeries = url)"
+            [disabled]="isUploading('bannerImageTestSeries')">
+            {{ isUploading('bannerImageTestSeries') ? 'Uploading...' : 'Browse Files' }}
+          </button>
+        </div>
       </div>
 
       <div class="form-section">
@@ -680,6 +755,25 @@
           <mat-label>Description / Subtitle</mat-label>
           <textarea matInput rows="2" [(ngModel)]="resultsDescription"></textarea>
         </mat-form-field>
+
+        <div class="visibility-toggle" style="margin-bottom: 1rem;">
+          <mat-slide-toggle [(ngModel)]="showBannerImageResults" color="primary">Show Page Banner</mat-slide-toggle>
+        </div>
+        <div class="upload-field" *ngIf="showBannerImageResults">
+          <div class="upload-info">
+            <i class="fa-thin fa-image"></i>
+            <div>
+              <strong>Banner Image</strong>
+              <span>Recommended size: 1920x400px</span>
+            </div>
+            <img *ngIf="bannerImageResults" [src]="bannerImageResults" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+          </div>
+          <button mat-stroked-button
+            (click)="pickImage('bannerImageResults', url => bannerImageResults = url)"
+            [disabled]="isUploading('bannerImageResults')">
+            {{ isUploading('bannerImageResults') ? 'Uploading...' : 'Browse Files' }}
+          </button>
+        </div>
       </div>
 
       <div class="form-section">

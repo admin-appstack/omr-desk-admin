@@ -41,6 +41,7 @@ export class EditPageDialog implements OnInit {
   heroTitle = 'Welcome to Our Institute';
   heroSubtitle = 'Empowering students to achieve their dreams with world-class education.';
   heroImage = '';
+  showHeroImage = true;
   aboutParagraph = '';
   primaryButtonText = 'Apply Now';
   primaryButtonLink = '/apply';
@@ -69,6 +70,8 @@ export class EditPageDialog implements OnInit {
   aboutHeading = 'Our Story';
   institutionPhoto = '';
   principalPhoto = '';
+  bannerImage = '';
+  showBannerImage = true;
   isUploadingFile = false;
   uploadingFieldKey = ''; // tracks which field is currently uploading
   establishedYear = '';
@@ -92,6 +95,8 @@ export class EditPageDialog implements OnInit {
   // ---------------------------------------------------------------- Courses Data
   coursesHeading = 'Explore Our Programs';
   coursesDescription = '';
+  bannerImageCourses = '';
+  showBannerImageCourses = true;
   admissionProcess = '';
   learningBenefits = '';
   coursesList: any[] = [
@@ -102,6 +107,8 @@ export class EditPageDialog implements OnInit {
   contactAddress = '';
   contactPhone = '';
   contactEmail = '';
+  bannerImageContact = '';
+  showBannerImageContact = true;
   contactMapLink = '';
   workingHours = 'Mon-Fri: 9:00 AM - 5:00 PM';
 
@@ -117,6 +124,8 @@ export class EditPageDialog implements OnInit {
   // ---------------------------------------------------------------- Test Series Data
   testSeriesHeading = 'Mock Exams & Practice Tests';
   testSeriesDescription = 'Prepare for your exams with our comprehensive test series.';
+  bannerImageTestSeries = '';
+  showBannerImageTestSeries = true;
   testSeriesList: any[] = [
     { name: 'JEE Mains Mock Test 2024', category: 'Engineering', description: 'Full-length mock tests.', numberOfTests: '15 Tests', price: '₹999', image: null },
   ];
@@ -124,6 +133,8 @@ export class EditPageDialog implements OnInit {
   // ---------------------------------------------------------------- Recent Results Data
   resultsHeading = 'Our Hall of Fame';
   resultsDescription = 'Celebrating the outstanding achievements of our students.';
+  bannerImageResults = '';
+  showBannerImageResults = true;
   resultsList: any[] = [
     { studentName: 'Rahul Kumar', examName: 'JEE Advanced 2023', score: 'AIR 45', description: 'Outstanding performance.', image: null },
   ];
@@ -182,6 +193,7 @@ export class EditPageDialog implements OnInit {
         this.heroTitle = content.heroTitle ?? this.heroTitle;
         this.heroSubtitle = content.heroSubtitle ?? this.heroSubtitle;
         this.heroImage = content.heroImage ?? this.heroImage;
+        this.showHeroImage = content.showHeroImage ?? this.showHeroImage;
         this.aboutParagraph = content.aboutParagraph ?? this.aboutParagraph;
         this.primaryButtonText = content.primaryButtonText ?? this.primaryButtonText;
         this.primaryButtonLink = content.primaryButtonLink ?? this.primaryButtonLink;
@@ -196,6 +208,8 @@ export class EditPageDialog implements OnInit {
       case 'about':
         this.aboutHeading = content.aboutHeading ?? this.aboutHeading;
         this.institutionPhoto = content.institutionPhoto ?? this.institutionPhoto;
+        this.bannerImage = content.bannerImage ?? this.bannerImage;
+        this.showBannerImage = content.showBannerImage ?? this.showBannerImage;
         this.establishedYear = content.establishedYear ?? this.establishedYear;
         this.aboutParagraph = content.aboutParagraph ?? this.aboutParagraph;
         this.aboutMission = content.aboutMission ?? this.aboutMission;
@@ -211,6 +225,8 @@ export class EditPageDialog implements OnInit {
       case 'courses':
         this.coursesHeading = content.coursesHeading ?? this.coursesHeading;
         this.coursesDescription = content.coursesDescription ?? this.coursesDescription;
+        this.bannerImageCourses = content.bannerImage ?? this.bannerImageCourses;
+        this.showBannerImageCourses = content.showBannerImage ?? this.showBannerImageCourses;
         this.admissionProcess = content.admissionProcess ?? this.admissionProcess;
         this.learningBenefits = content.learningBenefits ?? this.learningBenefits;
         this.coursesList = content.coursesList?.length ? content.coursesList : this.coursesList;
@@ -219,6 +235,8 @@ export class EditPageDialog implements OnInit {
         this.contactAddress = content.contactAddress ?? this.contactAddress;
         this.contactPhone = content.contactPhone ?? this.contactPhone;
         this.contactEmail = content.contactEmail ?? this.contactEmail;
+        this.bannerImageContact = content.bannerImage ?? this.bannerImageContact;
+        this.showBannerImageContact = content.showBannerImage ?? this.showBannerImageContact;
         this.contactMapLink = content.contactMapLink ?? this.contactMapLink;
         this.workingHours = content.workingHours ?? this.workingHours;
         this.enableContactForm = content.enableContactForm ?? this.enableContactForm;
@@ -232,11 +250,15 @@ export class EditPageDialog implements OnInit {
       case 'test-series':
         this.testSeriesHeading = content.testSeriesHeading ?? this.testSeriesHeading;
         this.testSeriesDescription = content.testSeriesDescription ?? this.testSeriesDescription;
+        this.bannerImageTestSeries = content.bannerImage ?? this.bannerImageTestSeries;
+        this.showBannerImageTestSeries = content.showBannerImage ?? this.showBannerImageTestSeries;
         this.testSeriesList = content.testSeriesList?.length ? content.testSeriesList : this.testSeriesList;
         break;
       case 'results':
         this.resultsHeading = content.resultsHeading ?? this.resultsHeading;
         this.resultsDescription = content.resultsDescription ?? this.resultsDescription;
+        this.bannerImageResults = content.bannerImage ?? this.bannerImageResults;
+        this.showBannerImageResults = content.showBannerImage ?? this.showBannerImageResults;
         this.resultVideoUrl = content.resultVideoUrl ?? this.resultVideoUrl;
         this.resultStatsList = content.resultStatsList?.length ? content.resultStatsList : this.resultStatsList;
         this.resultsList = content.resultsList?.length ? content.resultsList : this.resultsList;
@@ -259,6 +281,7 @@ export class EditPageDialog implements OnInit {
           heroTitle: this.heroTitle,
           heroSubtitle: this.heroSubtitle,
           heroImage: this.heroImage,
+          showHeroImage: this.showHeroImage,
           aboutParagraph: this.aboutParagraph,
           primaryButtonText: this.primaryButtonText,
           primaryButtonLink: this.primaryButtonLink,
@@ -274,6 +297,8 @@ export class EditPageDialog implements OnInit {
         return {
           aboutHeading: this.aboutHeading,
           institutionPhoto: this.institutionPhoto,
+          bannerImage: this.bannerImage,
+          showBannerImage: this.showBannerImage,
           aboutParagraph: this.aboutParagraph,
           establishedYear: this.establishedYear,
           aboutMission: this.aboutMission,
@@ -290,6 +315,8 @@ export class EditPageDialog implements OnInit {
         return {
           coursesHeading: this.coursesHeading,
           coursesDescription: this.coursesDescription,
+          bannerImage: this.bannerImageCourses,
+          showBannerImage: this.showBannerImageCourses,
           admissionProcess: this.admissionProcess,
           learningBenefits: this.learningBenefits,
           coursesList: this.coursesList,
@@ -299,6 +326,8 @@ export class EditPageDialog implements OnInit {
           contactAddress: this.contactAddress,
           contactPhone: this.contactPhone,
           contactEmail: this.contactEmail,
+          bannerImage: this.bannerImageContact,
+          showBannerImage: this.showBannerImageContact,
           contactMapLink: this.contactMapLink,
           workingHours: this.workingHours,
           enableContactForm: this.enableContactForm,
@@ -315,12 +344,16 @@ export class EditPageDialog implements OnInit {
         return {
           testSeriesHeading: this.testSeriesHeading,
           testSeriesDescription: this.testSeriesDescription,
+          bannerImage: this.bannerImageTestSeries,
+          showBannerImage: this.showBannerImageTestSeries,
           testSeriesList: this.testSeriesList,
         };
       case 'results':
         return {
           resultsHeading: this.resultsHeading,
           resultsDescription: this.resultsDescription,
+          bannerImage: this.bannerImageResults,
+          showBannerImage: this.showBannerImageResults,
           resultVideoUrl: this.resultVideoUrl,
           resultStatsList: this.resultStatsList,
           resultsList: this.resultsList,
