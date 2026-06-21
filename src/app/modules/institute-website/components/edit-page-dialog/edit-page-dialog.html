@@ -33,6 +33,25 @@
         <div class="visibility-toggle" style="margin-bottom: 1rem;">
           <mat-slide-toggle [(ngModel)]="showHeroImage" color="primary">Show Hero Background Image</mat-slide-toggle>
         </div>
+        <div class="upload-field" *ngIf="showHeroImage">
+          <div class="upload-info">
+            <i class="fa-thin fa-image"></i>
+            <div>
+              <strong>Hero Background Image</strong>
+              <span>Recommended size: 1920x1080px</span>
+            </div>
+            <img *ngIf="heroImage" [src]="heroImage" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+            <button *ngIf="heroImage" mat-icon-button color="warn" (click)="promptDeleteFlatImage('heroImage')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
+          </div>
+          <button mat-stroked-button
+            (click)="pickImage('heroImage', url => heroImage = url)"
+            [disabled]="isUploading('heroImage')">
+            {{ isUploading('heroImage') ? 'Uploading...' : 'Browse Files' }}
+          </button>
+        </div>
+
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Hero Badge Text</mat-label>
           <input matInput [(ngModel)]="heroBadgeText" placeholder="e.g. Admissions Open 2026-27">
@@ -46,22 +65,6 @@
           <mat-label>Sub-headline / Tagline</mat-label>
           <textarea matInput rows="2" [(ngModel)]="heroSubtitle"></textarea>
         </mat-form-field>
-
-        <div class="upload-field">
-          <div class="upload-info">
-            <i class="fa-thin fa-image"></i>
-            <div>
-              <strong>Hero Background Image</strong>
-              <span>Recommended size: 1920x1080px</span>
-            </div>
-            <img *ngIf="heroImage" [src]="heroImage" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
-          </div>
-          <button mat-stroked-button
-            (click)="pickImage('heroImage', url => heroImage = url)"
-            [disabled]="isUploading('heroImage')">
-            {{ isUploading('heroImage') ? 'Uploading...' : 'Browse Files' }}
-          </button>
-        </div>
       </div>
 
 
@@ -219,6 +222,9 @@
               <span>Recommended size: 1920x400px</span>
             </div>
             <img *ngIf="bannerImage" [src]="bannerImage" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+            <button *ngIf="bannerImage" mat-icon-button color="warn" (click)="promptDeleteFlatImage('bannerImage')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
           </div>
           <button mat-stroked-button
             (click)="pickImage('bannerImage', url => bannerImage = url)"
@@ -249,6 +255,9 @@
               <span>Recommended size: 1200x800px</span>
             </div>
             <img *ngIf="institutionPhoto" [src]="institutionPhoto" style="height: 40px; margin-left: 10px; border-radius: 4px; object-fit: cover;" />
+            <button *ngIf="institutionPhoto" mat-icon-button color="warn" (click)="promptDeleteFlatImage('institutionPhoto')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
           </div>
           <button mat-stroked-button (click)="fileInput.click()" [disabled]="isUploadingFile">
             {{ isUploadingFile ? 'Uploading...' : 'Browse Files' }}
@@ -299,6 +308,9 @@
               <span>Recommended size: 400x400px</span>
             </div>
             <img *ngIf="principalPhoto" [src]="principalPhoto" style="height:40px;width:40px;border-radius:50%;object-fit:cover;margin-left:8px;" />
+            <button *ngIf="principalPhoto" mat-icon-button color="warn" (click)="promptDeleteFlatImage('principalPhoto')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
           </div>
           <button mat-stroked-button
             (click)="pickImage('principalPhoto', url => principalPhoto = url)"
@@ -344,6 +356,9 @@
                 <span>Recommended size: 400x400px</span>
               </div>
               <img *ngIf="member.image" [src]="member.image" style="height:36px;width:36px;border-radius:50%;object-fit:cover;margin-left:8px;" />
+            <button *ngIf="member.image" mat-icon-button color="warn" (click)="promptDeleteArrayImage(teamList, i, 'image')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
             </div>
             <button mat-stroked-button
               (click)="pickImage('team-' + i, url => member.image = url)"
@@ -379,6 +394,9 @@
                 <span>Recommended size: 200x200px</span>
               </div>
               <img *ngIf="affiliation.logo" [src]="affiliation.logo" style="height:36px;width:36px;border-radius:4px;object-fit:contain;margin-left:8px;background:#f1f5f9;padding:2px;" />
+            <button *ngIf="affiliation.logo" mat-icon-button color="warn" (click)="promptDeleteArrayImage(affiliationsList, i, 'logo')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
             </div>
             <button mat-stroked-button
               (click)="pickImage('affiliation-' + i, url => affiliation.logo = url)"
@@ -447,6 +465,9 @@
               <span>Recommended size: 1920x400px</span>
             </div>
             <img *ngIf="bannerImageCourses" [src]="bannerImageCourses" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+            <button *ngIf="bannerImageCourses" mat-icon-button color="warn" (click)="promptDeleteFlatImage('bannerImageCourses')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
           </div>
           <button mat-stroked-button
             (click)="pickImage('bannerImageCourses', url => bannerImageCourses = url)"
@@ -535,6 +556,9 @@
                 <span>Recommended size: 600x400px</span>
               </div>
               <img *ngIf="course.image" [src]="course.image" style="height:36px;width:54px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+            <button *ngIf="course.image" mat-icon-button color="warn" (click)="promptDeleteArrayImage(coursesList, i, 'image')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
             </div>
             <button mat-stroked-button
               (click)="pickImage('course-' + i, url => course.image = url)"
@@ -565,6 +589,9 @@
               <span>Recommended size: 1920x400px</span>
             </div>
             <img *ngIf="bannerImageContact" [src]="bannerImageContact" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+            <button *ngIf="bannerImageContact" mat-icon-button color="warn" (click)="promptDeleteFlatImage('bannerImageContact')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
           </div>
           <button mat-stroked-button
             (click)="pickImage('bannerImageContact', url => bannerImageContact = url)"
@@ -678,6 +705,9 @@
               <span>Recommended size: 1920x400px</span>
             </div>
             <img *ngIf="bannerImageTestSeries" [src]="bannerImageTestSeries" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+            <button *ngIf="bannerImageTestSeries" mat-icon-button color="warn" (click)="promptDeleteFlatImage('bannerImageTestSeries')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
           </div>
           <button mat-stroked-button
             (click)="pickImage('bannerImageTestSeries', url => bannerImageTestSeries = url)"
@@ -732,6 +762,9 @@
                 <span>Recommended size: 600x400px</span>
               </div>
               <img *ngIf="series.image" [src]="series.image" style="height:36px;width:54px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+            <button *ngIf="series.image" mat-icon-button color="warn" (click)="promptDeleteArrayImage(testSeriesList, i, 'image')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
             </div>
             <button mat-stroked-button
               (click)="pickImage('series-' + i, url => series.image = url)"
@@ -771,6 +804,9 @@
               <span>Recommended size: 1920x400px</span>
             </div>
             <img *ngIf="bannerImageResults" [src]="bannerImageResults" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
+            <button *ngIf="bannerImageResults" mat-icon-button color="warn" (click)="promptDeleteFlatImage('bannerImageResults')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
           </div>
           <button mat-stroked-button
             (click)="pickImage('bannerImageResults', url => bannerImageResults = url)"
@@ -858,6 +894,9 @@
                 <span>Recommended size: 300x300px</span>
               </div>
               <img *ngIf="result.image" [src]="result.image" style="height:36px;width:36px;border-radius:50%;object-fit:cover;margin-left:8px;" />
+            <button *ngIf="result.image" mat-icon-button color="warn" (click)="promptDeleteArrayImage(resultsList, i, 'image')" matTooltip="Delete Image" style="margin-left: 8px;">
+              <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+            </button>
             </div>
             <button mat-stroked-button
               (click)="pickImage('result-' + i, url => result.image = url)"
@@ -988,3 +1027,11 @@
   </div>
 
 </div>
+
+<app-confirmation-modal
+  *ngIf="showDeleteConfirm"
+  title="Delete Image"
+  message="Are you sure you want to remove this image? It will be deleted from the page."
+  (confirm)="confirmDeleteImage()"
+  (cancel)="cancelDeleteImage()">
+</app-confirmation-modal>

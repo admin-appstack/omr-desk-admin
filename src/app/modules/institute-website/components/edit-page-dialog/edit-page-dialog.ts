@@ -11,6 +11,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InstituteWebsiteService } from '../../service/institute-website.service';
 import { SnackBarService } from '../../../../common/services/snackbar.service';
+import { ConfirmationModalComponent } from '../../../../common/modals/confirmation-modal/confirmation-modal';
 
 @Component({
   selector: 'app-edit-page-dialog',
@@ -25,6 +26,7 @@ import { SnackBarService } from '../../../../common/services/snackbar.service';
     MatSelectModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
+    ConfirmationModalComponent,
   ],
   templateUrl: './edit-page-dialog.html',
   styleUrl: './edit-page-dialog.scss',
@@ -55,6 +57,8 @@ export class EditPageDialog implements OnInit {
     { value: '5000+', label: 'Successful Alumni' },
     { value: '50+', label: 'Expert Faculties' },
   ];
+
+  featuresTitle = 'Core Features';
 
   featuresList: any[] = [
     { title: 'Modern Campus', description: 'State of the art facilities and smart classrooms.', icon: 'fa-thin fa-business' },
@@ -202,6 +206,7 @@ export class EditPageDialog implements OnInit {
         this.showAnnouncement = content.showAnnouncement ?? this.showAnnouncement;
         this.announcementText = content.announcementText ?? this.announcementText;
         this.statsList = content.statsList?.length ? content.statsList : this.statsList;
+        this.featuresTitle = content.featuresTitle ?? this.featuresTitle;
         this.featuresList = content.featuresList?.length ? content.featuresList : this.featuresList;
         this.videoTourUrl = content.videoTourUrl ?? this.videoTourUrl;
         this.testimonialsList = content.testimonialsList?.length ? content.testimonialsList : this.testimonialsList;
@@ -291,6 +296,7 @@ export class EditPageDialog implements OnInit {
           showAnnouncement: this.showAnnouncement,
           announcementText: this.announcementText,
           statsList: this.statsList,
+          featuresTitle: this.featuresTitle,
           featuresList: this.featuresList,
           videoTourUrl: this.videoTourUrl,
           testimonialsList: this.testimonialsList,
@@ -458,6 +464,42 @@ export class EditPageDialog implements OnInit {
   removeFooterSocial(i: number) { this.footerSocialLinks.splice(i, 1); }
   addFooterQuickLink() { this.footerQuickLinks.push({ label: '', url: '' }); }
   removeFooterQuickLink(i: number) { this.footerQuickLinks.splice(i, 1); }
+
+  
+  // Image Deletion
+  showDeleteConfirm = false;
+  deleteTargetArr: any[] | null = null;
+  deleteIndex: number = -1;
+  deletePropName: string = '';
+
+  promptDeleteFlatImage(prop: string) {
+    this.deletePropName = prop;
+    this.deleteTargetArr = null;
+    this.showDeleteConfirm = true;
+  }
+
+  promptDeleteArrayImage(arr: any[], index: number, prop: string) {
+    this.deleteTargetArr = arr;
+    this.deleteIndex = index;
+    this.deletePropName = prop;
+    this.showDeleteConfirm = true;
+  }
+
+  confirmDeleteImage() {
+    if (this.deleteTargetArr && this.deleteIndex >= 0) {
+      this.deleteTargetArr[this.deleteIndex][this.deletePropName] = '';
+    } else if (this.deletePropName) {
+      (this as any)[this.deletePropName] = '';
+    }
+    this.cancelDeleteImage();
+  }
+
+  cancelDeleteImage() {
+    this.showDeleteConfirm = false;
+    this.deleteTargetArr = null;
+    this.deleteIndex = -1;
+    this.deletePropName = '';
+  }
 
   close(): void { this.dialogRef.close(false); }
 
