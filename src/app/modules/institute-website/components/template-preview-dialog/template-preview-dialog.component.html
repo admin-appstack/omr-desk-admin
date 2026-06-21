@@ -27,7 +27,7 @@
         </div>
 
         <div class="preview-scroll" #previewScroll *ngIf="!isLoading">
-          <iframe [srcdoc]="safeSrcDoc" 
+          <iframe [src]="iframeSrc"
                   class="preview-iframe"
                   [style.transform]="'scale(' + iframeScale + ')'"
                   [style.height.%]="iframeHeightPercent"
