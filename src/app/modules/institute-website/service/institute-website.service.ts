@@ -124,4 +124,15 @@ export class InstituteWebsiteService {
       map((res: any) => res.data?.content || {})
     );
   }
+
+  // ---------------------------------------------------------
+  // Assets
+  // ---------------------------------------------------------
+  uploadAsset(file: File): Observable<string> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.httpService.uploadFile(ENDPOINTS.INSTITUTE_WEBSITE + '/assets/upload', formData).pipe(
+      map((res: any) => res.data?.url || res.url)
+    );
+  }
 }

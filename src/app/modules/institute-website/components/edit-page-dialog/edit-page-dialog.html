@@ -209,8 +209,12 @@
               <strong>Institution Photo / Campus</strong>
               <span>Recommended size: 1200x800px</span>
             </div>
+            <img *ngIf="institutionPhoto" [src]="institutionPhoto" style="height: 40px; margin-left: 10px; border-radius: 4px; object-fit: cover;" />
           </div>
-          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
+          <button mat-stroked-button (click)="fileInput.click()" [disabled]="isUploadingFile">
+            {{ isUploadingFile ? 'Uploading...' : 'Browse Files' }}
+          </button>
+          <input type="file" #fileInput style="display: none" accept="image/*" (change)="onFileSelected($event)">
         </div>
       </div>
 

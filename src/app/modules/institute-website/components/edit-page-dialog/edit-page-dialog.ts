@@ -66,6 +66,8 @@ export class EditPageDialog implements OnInit {
 
   // ---------------------------------------------------------------- About Us Data
   aboutHeading = 'Our Story';
+  institutionPhoto = '';
+  isUploadingFile = false;
   establishedYear = '';
   aboutMission = '';
   aboutVision = '';
@@ -189,6 +191,7 @@ export class EditPageDialog implements OnInit {
         break;
       case 'about':
         this.aboutHeading = content.aboutHeading ?? this.aboutHeading;
+        this.institutionPhoto = content.institutionPhoto ?? this.institutionPhoto;
         this.establishedYear = content.establishedYear ?? this.establishedYear;
         this.aboutMission = content.aboutMission ?? this.aboutMission;
         this.aboutVision = content.aboutVision ?? this.aboutVision;
@@ -262,6 +265,7 @@ export class EditPageDialog implements OnInit {
       case 'about':
         return {
           aboutHeading: this.aboutHeading,
+          institutionPhoto: this.institutionPhoto,
           aboutParagraph: this.aboutParagraph,
           establishedYear: this.establishedYear,
           aboutMission: this.aboutMission,
@@ -327,7 +331,27 @@ export class EditPageDialog implements OnInit {
   }
 
   // ---------------------------------------------------------------- List manipulation
-  triggerUpload() { alert('File upload dialog would open here.'); }
+  triggerUpload() { /* old implementation, can be removed or kept */ }
+  
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.isUploadingFile = true;
+      this.websiteService.uploadAsset(file).subscribe({
+        next: (url: string) => {
+          this.institutionPhoto = url;
+          this.isUploadingFile = false;
+          this.cdr.detectChanges();
+        },
+        error: () => {
+          this.isUploadingFile = false;
+          this.snackBarService.showError('Failed to upload image');
+          this.cdr.detectChanges();
+        }
+      });
+    }
+  }
+
   addCourse() { this.coursesList.push({ name: '', description: '', duration: '', mode: 'Offline', fees: '', eligibility: '', image: null }); }
   removeCourse(i: number) { this.coursesList.splice(i, 1); }
   addTeamMember() { this.teamList.push({ name: '', role: '', description: '', image: null }); }
