@@ -38,6 +38,7 @@ export class EditPageDialog implements OnInit {
   isSaving = false;
 
   // ---------------------------------------------------------------- Home Page Data
+  heroBadgeText = 'Admissions Open 2026-27';
   heroTitle = 'Welcome to Our Institute';
   heroSubtitle = 'Empowering students to achieve their dreams with world-class education.';
   heroImage = '';
@@ -190,6 +191,7 @@ export class EditPageDialog implements OnInit {
     if (!content) return;
     switch (this.pageSlug) {
       case 'home':
+        this.heroBadgeText = content.heroBadgeText ?? this.heroBadgeText;
         this.heroTitle = content.heroTitle ?? this.heroTitle;
         this.heroSubtitle = content.heroSubtitle ?? this.heroSubtitle;
         this.heroImage = content.heroImage ?? this.heroImage;
@@ -278,6 +280,7 @@ export class EditPageDialog implements OnInit {
     switch (this.pageSlug) {
       case 'home':
         return {
+          heroBadgeText: this.heroBadgeText,
           heroTitle: this.heroTitle,
           heroSubtitle: this.heroSubtitle,
           heroImage: this.heroImage,

@@ -34,6 +34,10 @@
           <mat-slide-toggle [(ngModel)]="showHeroImage" color="primary">Show Hero Background Image</mat-slide-toggle>
         </div>
         <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Hero Badge Text</mat-label>
+          <input matInput [(ngModel)]="heroBadgeText" placeholder="e.g. Admissions Open 2026-27">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
           <mat-label>Main Headline</mat-label>
           <input matInput [(ngModel)]="heroTitle" placeholder="e.g. Welcome to Our Institute">
         </mat-form-field>
