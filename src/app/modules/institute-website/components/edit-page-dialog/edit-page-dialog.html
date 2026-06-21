@@ -195,7 +195,13 @@
       </div>
 
       <div class="form-section">
-        <h3>Frequently Asked Questions (FAQ)</h3>
+        <h3>Frequently Asked Questions</h3>
+
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>FAQs Section Title</mat-label>
+          <input matInput [(ngModel)]="faqsTitle" placeholder="e.g. Frequently Asked Questions">
+        </mat-form-field>
+
         <div class="repeater-card" *ngFor="let faq of faqsList; let i = index">
           <div class="repeater-header">
             <h4>FAQ #{{ i + 1 }}</h4>

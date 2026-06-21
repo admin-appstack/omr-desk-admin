@@ -60,6 +60,7 @@ export class EditPageDialog implements OnInit {
 
   featuresTitle = 'Core Features';
   testimonialsTitle = 'What Our Students Say';
+  faqsTitle = 'Frequently Asked Questions';
 
   featuresList: any[] = [
     { title: 'Modern Campus', description: 'State of the art facilities and smart classrooms.', icon: 'fa-thin fa-business' },
@@ -212,6 +213,7 @@ export class EditPageDialog implements OnInit {
         this.videoTourUrl = content.videoTourUrl ?? this.videoTourUrl;
         this.testimonialsTitle = content.testimonialsTitle ?? this.testimonialsTitle;
         this.testimonialsList = content.testimonialsList?.length ? content.testimonialsList : this.testimonialsList;
+        this.faqsTitle = content.faqsTitle ?? this.faqsTitle;
         this.faqsList = content.faqsList?.length ? content.faqsList : this.faqsList;
         break;
       case 'about':
@@ -303,6 +305,7 @@ export class EditPageDialog implements OnInit {
           videoTourUrl: this.videoTourUrl,
           testimonialsTitle: this.testimonialsTitle,
           testimonialsList: this.testimonialsList,
+          faqsTitle: this.faqsTitle,
           faqsList: this.faqsList,
         };
       case 'about':
