@@ -105,7 +105,17 @@ export class InstituteWebsiteService {
 
   getPageContent(slug: string): Observable<any> {
     return this.httpService.get(`${ENDPOINTS.PAGES}/${slug}`, undefined, false, true).pipe(
-      map((res: any) => res.data?.content || {})
+      map((res: any) => {
+        let content = res.data?.content;
+        if (typeof content === 'string') {
+          try {
+            content = JSON.parse(content);
+          } catch (e) {
+            content = {};
+          }
+        }
+        return content || {};
+      })
     );
   }
 
