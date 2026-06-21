@@ -40,6 +40,7 @@ export class EditPageDialog implements OnInit {
   // ---------------------------------------------------------------- Home Page Data
   heroTitle = 'Welcome to Our Institute';
   heroSubtitle = 'Empowering students to achieve their dreams with world-class education.';
+  heroImage = '';
   aboutParagraph = '';
   primaryButtonText = 'Apply Now';
   primaryButtonLink = '/apply';
@@ -67,7 +68,9 @@ export class EditPageDialog implements OnInit {
   // ---------------------------------------------------------------- About Us Data
   aboutHeading = 'Our Story';
   institutionPhoto = '';
+  principalPhoto = '';
   isUploadingFile = false;
+  uploadingFieldKey = ''; // tracks which field is currently uploading
   establishedYear = '';
   aboutMission = '';
   aboutVision = '';
@@ -178,6 +181,7 @@ export class EditPageDialog implements OnInit {
       case 'home':
         this.heroTitle = content.heroTitle ?? this.heroTitle;
         this.heroSubtitle = content.heroSubtitle ?? this.heroSubtitle;
+        this.heroImage = content.heroImage ?? this.heroImage;
         this.aboutParagraph = content.aboutParagraph ?? this.aboutParagraph;
         this.primaryButtonText = content.primaryButtonText ?? this.primaryButtonText;
         this.primaryButtonLink = content.primaryButtonLink ?? this.primaryButtonLink;
@@ -193,10 +197,12 @@ export class EditPageDialog implements OnInit {
         this.aboutHeading = content.aboutHeading ?? this.aboutHeading;
         this.institutionPhoto = content.institutionPhoto ?? this.institutionPhoto;
         this.establishedYear = content.establishedYear ?? this.establishedYear;
+        this.aboutParagraph = content.aboutParagraph ?? this.aboutParagraph;
         this.aboutMission = content.aboutMission ?? this.aboutMission;
         this.aboutVision = content.aboutVision ?? this.aboutVision;
         this.coreValues = content.coreValues ?? this.coreValues;
         this.principalName = content.principalName ?? this.principalName;
+        this.principalPhoto = content.principalPhoto ?? this.principalPhoto;
         this.principalMessage = content.principalMessage ?? this.principalMessage;
         this.teamList = content.teamList?.length ? content.teamList : this.teamList;
         this.affiliationsList = content.affiliationsList?.length ? content.affiliationsList : this.affiliationsList;
@@ -252,6 +258,8 @@ export class EditPageDialog implements OnInit {
         return {
           heroTitle: this.heroTitle,
           heroSubtitle: this.heroSubtitle,
+          heroImage: this.heroImage,
+          aboutParagraph: this.aboutParagraph,
           primaryButtonText: this.primaryButtonText,
           primaryButtonLink: this.primaryButtonLink,
           showAnnouncement: this.showAnnouncement,
@@ -272,6 +280,7 @@ export class EditPageDialog implements OnInit {
           aboutVision: this.aboutVision,
           coreValues: this.coreValues,
           principalName: this.principalName,
+          principalPhoto: this.principalPhoto,
           principalMessage: this.principalMessage,
           teamList: this.teamList,
           affiliationsList: this.affiliationsList,
@@ -331,25 +340,60 @@ export class EditPageDialog implements OnInit {
   }
 
   // ---------------------------------------------------------------- List manipulation
-  triggerUpload() { /* old implementation, can be removed or kept */ }
-  
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
+  triggerUpload() { /* replaced by pickImage() */ }
+
+  /**
+   * Universal image upload handler.
+   * Creates a hidden file input, opens it, then uploads the chosen file
+   * and calls `setter(url)` with the resulting R2 URL.
+   * @param fieldKey  A unique string to track which upload is in progress (for UI feedback)
+   * @param setter    A callback that stores the returned URL
+   */
+  pickImage(fieldKey: string, setter: (url: string) => void): void {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.style.display = 'none';
+    document.body.appendChild(input);
+
+    input.onchange = (event: any) => {
+      const file: File | undefined = event.target.files?.[0];
+      document.body.removeChild(input);
+      if (!file) return;
+
+      this.uploadingFieldKey = fieldKey;
       this.isUploadingFile = true;
+      this.cdr.detectChanges();
+
       this.websiteService.uploadAsset(file).subscribe({
         next: (url: string) => {
-          this.institutionPhoto = url;
+          setter(url);
+          this.uploadingFieldKey = '';
           this.isUploadingFile = false;
           this.cdr.detectChanges();
         },
         error: () => {
+          this.uploadingFieldKey = '';
           this.isUploadingFile = false;
-          this.snackBarService.showError('Failed to upload image');
+          this.snackBarService.showError('Failed to upload image. Please try again.');
           this.cdr.detectChanges();
-        }
+        },
       });
+    };
+
+    input.click();
+  }
+
+  /** Legacy single-file handler kept for the About page institution photo input */
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.pickImage('institutionPhoto', (url) => this.institutionPhoto = url);
     }
+  }
+
+  isUploading(fieldKey: string): boolean {
+    return this.isUploadingFile && this.uploadingFieldKey === fieldKey;
   }
 
   addCourse() { this.coursesList.push({ name: '', description: '', duration: '', mode: 'Offline', fees: '', eligibility: '', image: null }); }

@@ -47,8 +47,13 @@
               <strong>Hero Background Image</strong>
               <span>Recommended size: 1920x1080px</span>
             </div>
+            <img *ngIf="heroImage" [src]="heroImage" style="height:36px;width:64px;border-radius:4px;object-fit:cover;margin-left:8px;" />
           </div>
-          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
+          <button mat-stroked-button
+            (click)="pickImage('heroImage', url => heroImage = url)"
+            [disabled]="isUploading('heroImage')">
+            {{ isUploading('heroImage') ? 'Uploading...' : 'Browse Files' }}
+          </button>
         </div>
       </div>
 
@@ -153,8 +158,13 @@
                 <strong>Student Photo</strong>
                 <span>Recommended size: 200x200px</span>
               </div>
+              <img *ngIf="testimonial.image" [src]="testimonial.image" style="height:36px;width:36px;border-radius:50%;object-fit:cover;margin-left:8px;" />
             </div>
-            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+            <button mat-stroked-button
+              (click)="pickImage('testimonial-' + i, url => testimonial.image = url)"
+              [disabled]="isUploading('testimonial-' + i)">
+              {{ isUploading('testimonial-' + i) ? 'Uploading...' : 'Browse' }}
+            </button>
           </div>
         </div>
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addTestimonial()">
@@ -259,8 +269,13 @@
               <strong>Director's Photo</strong>
               <span>Recommended size: 400x400px</span>
             </div>
+            <img *ngIf="principalPhoto" [src]="principalPhoto" style="height:40px;width:40px;border-radius:50%;object-fit:cover;margin-left:8px;" />
           </div>
-          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
+          <button mat-stroked-button
+            (click)="pickImage('principalPhoto', url => principalPhoto = url)"
+            [disabled]="isUploading('principalPhoto')">
+            {{ isUploading('principalPhoto') ? 'Uploading...' : 'Browse Files' }}
+          </button>
         </div>
       </div>
 
@@ -299,8 +314,13 @@
                 <strong>Profile Picture</strong>
                 <span>Recommended size: 400x400px</span>
               </div>
+              <img *ngIf="member.image" [src]="member.image" style="height:36px;width:36px;border-radius:50%;object-fit:cover;margin-left:8px;" />
             </div>
-            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+            <button mat-stroked-button
+              (click)="pickImage('team-' + i, url => member.image = url)"
+              [disabled]="isUploading('team-' + i)">
+              {{ isUploading('team-' + i) ? 'Uploading...' : 'Browse' }}
+            </button>
           </div>
         </div>
 
@@ -329,8 +349,13 @@
                 <strong>Organization Logo</strong>
                 <span>Recommended size: 200x200px</span>
               </div>
+              <img *ngIf="affiliation.logo" [src]="affiliation.logo" style="height:36px;width:36px;border-radius:4px;object-fit:contain;margin-left:8px;background:#f1f5f9;padding:2px;" />
             </div>
-            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+            <button mat-stroked-button
+              (click)="pickImage('affiliation-' + i, url => affiliation.logo = url)"
+              [disabled]="isUploading('affiliation-' + i)">
+              {{ isUploading('affiliation-' + i) ? 'Uploading...' : 'Browse' }}
+            </button>
           </div>
         </div>
         <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addAffiliation()">
@@ -471,8 +496,13 @@
                 <strong>Course Thumbnail</strong>
                 <span>Recommended size: 600x400px</span>
               </div>
+              <img *ngIf="course.image" [src]="course.image" style="height:36px;width:54px;border-radius:4px;object-fit:cover;margin-left:8px;" />
             </div>
-            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+            <button mat-stroked-button
+              (click)="pickImage('course-' + i, url => course.image = url)"
+              [disabled]="isUploading('course-' + i)">
+              {{ isUploading('course-' + i) ? 'Uploading...' : 'Browse' }}
+            </button>
           </div>
         </div>
 
@@ -622,8 +652,13 @@
                 <strong>Thumbnail Image</strong>
                 <span>Recommended size: 600x400px</span>
               </div>
+              <img *ngIf="series.image" [src]="series.image" style="height:36px;width:54px;border-radius:4px;object-fit:cover;margin-left:8px;" />
             </div>
-            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+            <button mat-stroked-button
+              (click)="pickImage('series-' + i, url => series.image = url)"
+              [disabled]="isUploading('series-' + i)">
+              {{ isUploading('series-' + i) ? 'Uploading...' : 'Browse' }}
+            </button>
           </div>
         </div>
 
@@ -724,8 +759,13 @@
                 <strong>Student Photo</strong>
                 <span>Recommended size: 300x300px</span>
               </div>
+              <img *ngIf="result.image" [src]="result.image" style="height:36px;width:36px;border-radius:50%;object-fit:cover;margin-left:8px;" />
             </div>
-            <button mat-stroked-button (click)="triggerUpload()">Browse</button>
+            <button mat-stroked-button
+              (click)="pickImage('result-' + i, url => result.image = url)"
+              [disabled]="isUploading('result-' + i)">
+              {{ isUploading('result-' + i) ? 'Uploading...' : 'Browse' }}
+            </button>
           </div>
         </div>
 

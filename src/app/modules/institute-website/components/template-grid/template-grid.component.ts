@@ -53,7 +53,15 @@ export class TemplateGridComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          this.templates = res || [];
+          this.templates = (res || []).map((t: any) => {
+            let parsedTags = [];
+            try {
+              parsedTags = typeof t.tags === 'string' ? JSON.parse(t.tags) : t.tags;
+            } catch (e) {
+              parsedTags = [];
+            }
+            return { ...t, tags: parsedTags };
+          });
           this.cdr.detectChanges();
         },
         error: (err) => {
