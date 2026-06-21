@@ -52,24 +52,6 @@
         </div>
       </div>
 
-      <div class="form-section">
-        <h3>About Institute Paragraph</h3>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Institute Description</mat-label>
-          <textarea matInput rows="4" [(ngModel)]="aboutParagraph" placeholder="Write a short paragraph about the institute..."></textarea>
-        </mat-form-field>
-        
-        <div class="upload-field">
-          <div class="upload-info">
-            <i class="fa-thin fa-camera"></i>
-            <div>
-              <strong>About Us Photo</strong>
-              <span>Recommended size: 800x600px</span>
-            </div>
-          </div>
-          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
-        </div>
-      </div>
 
       <div class="form-section">
         <h3>Call to Action (Button)</h3>
@@ -230,6 +212,14 @@
           </div>
           <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
         </div>
+      </div>
+
+      <div class="form-section">
+        <h3>About Institute Paragraph</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Institute Description</mat-label>
+          <textarea matInput rows="4" [(ngModel)]="aboutParagraph" placeholder="Write a short paragraph about the institute..."></textarea>
+        </mat-form-field>
       </div>
 
       <div class="form-section">

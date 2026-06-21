@@ -249,7 +249,6 @@ export class EditPageDialog implements OnInit {
         return {
           heroTitle: this.heroTitle,
           heroSubtitle: this.heroSubtitle,
-          aboutParagraph: this.aboutParagraph,
           primaryButtonText: this.primaryButtonText,
           primaryButtonLink: this.primaryButtonLink,
           showAnnouncement: this.showAnnouncement,
@@ -263,6 +262,7 @@ export class EditPageDialog implements OnInit {
       case 'about':
         return {
           aboutHeading: this.aboutHeading,
+          aboutParagraph: this.aboutParagraph,
           establishedYear: this.establishedYear,
           aboutMission: this.aboutMission,
           aboutVision: this.aboutVision,
