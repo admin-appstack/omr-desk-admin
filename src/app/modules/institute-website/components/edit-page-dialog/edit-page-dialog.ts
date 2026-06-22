@@ -107,11 +107,37 @@ export class EditPageDialog implements OnInit {
   coursesDescription = '';
   bannerImageCourses = '';
   showBannerImageCourses = true;
-  admissionProcess = '';
-  learningBenefits = '';
+
+  // Course list
+  coursesListTitle = 'Our Courses';
   coursesList: any[] = [
     { name: 'Mathematics 101', description: 'Fundamental principles of mathematics.', duration: '6 Months', mode: 'Offline', fees: '₹5000', eligibility: 'High School Diploma', image: null },
   ];
+
+  // Highlights
+  coursesHighlightsTitle = 'Why Choose Our Courses';
+  coursesHighlightsList: any[] = [
+    { title: 'Expert Faculty', description: 'Learn from industry-experienced teachers.' },
+    { title: 'Proven Results', description: 'Thousands of successful alumni.' },
+  ];
+
+  // Admission & Benefits
+  admissionProcess = '';
+  learningBenefits = '';
+
+  // FAQs
+  coursesFaqsTitle = 'Frequently Asked Questions';
+  coursesFaqsList: any[] = [];
+
+  // Testimonials
+  coursesTestimonialsTitle = 'What Our Students Say';
+  coursesTestimonialsList: any[] = [];
+
+  // CTA
+  coursesCtaTitle = 'Ready to Enroll?';
+  coursesCtaSubtitle = 'Take the next step towards your dream career.';
+  coursesCtaButtonText = 'Apply Now';
+  coursesCtaButtonLink = '/apply';
 
   // ---------------------------------------------------------------- Contact Us Data
   contactAddress = '';
@@ -246,9 +272,20 @@ export class EditPageDialog implements OnInit {
         this.coursesDescription = content.coursesDescription ?? this.coursesDescription;
         this.bannerImageCourses = content.bannerImage ?? this.bannerImageCourses;
         this.showBannerImageCourses = content.showBannerImage ?? this.showBannerImageCourses;
+        this.coursesListTitle = content.coursesListTitle ?? this.coursesListTitle;
+        this.coursesList = content.coursesList?.length ? content.coursesList : this.coursesList;
+        this.coursesHighlightsTitle = content.highlightsTitle ?? this.coursesHighlightsTitle;
+        this.coursesHighlightsList = content.highlightsList?.length ? content.highlightsList : this.coursesHighlightsList;
         this.admissionProcess = content.admissionProcess ?? this.admissionProcess;
         this.learningBenefits = content.learningBenefits ?? this.learningBenefits;
-        this.coursesList = content.coursesList?.length ? content.coursesList : this.coursesList;
+        this.coursesFaqsTitle = content.faqsTitle ?? this.coursesFaqsTitle;
+        this.coursesFaqsList = content.faqsList?.length ? content.faqsList : this.coursesFaqsList;
+        this.coursesTestimonialsTitle = content.testimonialsTitle ?? this.coursesTestimonialsTitle;
+        this.coursesTestimonialsList = content.testimonialsList?.length ? content.testimonialsList : this.coursesTestimonialsList;
+        this.coursesCtaTitle = content.ctaTitle ?? this.coursesCtaTitle;
+        this.coursesCtaSubtitle = content.ctaSubtitle ?? this.coursesCtaSubtitle;
+        this.coursesCtaButtonText = content.ctaButtonText ?? this.coursesCtaButtonText;
+        this.coursesCtaButtonLink = content.ctaButtonLink ?? this.coursesCtaButtonLink;
         break;
       case 'contact':
         this.contactAddress = content.contactAddress ?? this.contactAddress;
@@ -345,9 +382,20 @@ export class EditPageDialog implements OnInit {
           coursesDescription: this.coursesDescription,
           bannerImage: this.bannerImageCourses,
           showBannerImage: this.showBannerImageCourses,
+          coursesListTitle: this.coursesListTitle,
+          coursesList: this.coursesList,
+          highlightsTitle: this.coursesHighlightsTitle,
+          highlightsList: this.coursesHighlightsList,
           admissionProcess: this.admissionProcess,
           learningBenefits: this.learningBenefits,
-          coursesList: this.coursesList,
+          faqsTitle: this.coursesFaqsTitle,
+          faqsList: this.coursesFaqsList,
+          testimonialsTitle: this.coursesTestimonialsTitle,
+          testimonialsList: this.coursesTestimonialsList,
+          ctaTitle: this.coursesCtaTitle,
+          ctaSubtitle: this.coursesCtaSubtitle,
+          ctaButtonText: this.coursesCtaButtonText,
+          ctaButtonLink: this.coursesCtaButtonLink,
         };
       case 'contact':
         return {
@@ -459,6 +507,12 @@ export class EditPageDialog implements OnInit {
 
   addCourse() { this.coursesList.push({ name: '', description: '', duration: '', mode: 'Offline', fees: '', eligibility: '', image: null }); }
   removeCourse(i: number) { this.coursesList.splice(i, 1); }
+  addCoursesHighlight() { this.coursesHighlightsList.push({ title: '', description: '' }); }
+  removeCoursesHighlight(i: number) { this.coursesHighlightsList.splice(i, 1); }
+  addCoursesFaq() { this.coursesFaqsList.push({ question: '', answer: '' }); }
+  removeCoursesFaq(i: number) { this.coursesFaqsList.splice(i, 1); }
+  addCoursesTestimonial() { this.coursesTestimonialsList.push({ studentName: '', course: '', quote: '', image: null }); }
+  removeCoursesTestimonial(i: number) { this.coursesTestimonialsList.splice(i, 1); }
   addTeamMember() { this.teamList.push({ name: '', role: '', description: '', image: null }); }
   removeTeamMember(i: number) { this.teamList.splice(i, 1); }
   addAffiliation() { this.affiliationsList.push({ name: '', logo: null }); }

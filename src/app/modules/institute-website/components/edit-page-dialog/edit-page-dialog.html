@@ -514,30 +514,14 @@
         </div>
       </div>
 
-      <div class="form-section">
-        <h3>Additional Page Information</h3>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Admission / Enrollment Process</mat-label>
-          <textarea matInput rows="3" [(ngModel)]="admissionProcess" placeholder="Briefly explain how a student can enroll in these courses..."></textarea>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Learning Benefits</mat-label>
-          <textarea matInput rows="3" [(ngModel)]="learningBenefits" placeholder="Why should students choose your programs?"></textarea>
-        </mat-form-field>
-        <div class="upload-field">
-          <div class="upload-info">
-            <i class="fa-thin fa-file-pdf"></i>
-            <div>
-              <strong>Institute Prospectus / Catalog</strong>
-              <span>PDF Document</span>
-            </div>
-          </div>
-          <button mat-stroked-button (click)="triggerUpload()">Browse Files</button>
-        </div>
-      </div>
+
 
       <div class="form-section">
         <h3>Course List</h3>
+        <mat-form-field appearance="outline" class="full-width" style="margin-bottom: 1rem;">
+          <mat-label>Section Heading</mat-label>
+          <input matInput [(ngModel)]="coursesListTitle" placeholder="e.g. Our Courses">
+        </mat-form-field>
         
         <div class="repeater-card" *ngFor="let course of coursesList; let i = index">
           <div class="repeater-header">
@@ -609,6 +593,151 @@
           <i class="fa-thin fa-plus"></i> Add New Course
         </button>
       </div>
+
+      <!-- Why Choose Us Highlights -->
+      <div class="form-section">
+        <h3>Why Choose Our Courses</h3>
+        <mat-form-field appearance="outline" class="full-width" style="margin-bottom: 1rem;">
+          <mat-label>Section Heading</mat-label>
+          <input matInput [(ngModel)]="coursesHighlightsTitle" placeholder="e.g. Why Choose Our Courses">
+        </mat-form-field>
+        <div class="repeater-card" *ngFor="let highlight of coursesHighlightsList; let i = index">
+          <div class="repeater-header">
+            <h4>Highlight #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeCoursesHighlight(i)">
+              <i class="fa-thin fa-trash"></i>
+            </button>
+          </div>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Title</mat-label>
+            <input matInput [(ngModel)]="highlight.title" placeholder="e.g. Expert Faculty">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput rows="2" [(ngModel)]="highlight.description" placeholder="Brief description..."></textarea>
+          </mat-form-field>
+        </div>
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addCoursesHighlight()">
+          <i class="fa-thin fa-plus"></i> Add Highlight
+        </button>
+      </div>
+
+      <!-- Admission & Benefits -->
+      <div class="form-section">
+        <h3>Admission &amp; Benefits</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Admission / Enrollment Process</mat-label>
+          <textarea matInput rows="3" [(ngModel)]="admissionProcess" placeholder="Briefly explain how a student can enroll in these courses..."></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Learning Benefits</mat-label>
+          <textarea matInput rows="3" [(ngModel)]="learningBenefits" placeholder="Why should students choose your programs?"></textarea>
+        </mat-form-field>
+      </div>
+
+      <!-- FAQs -->
+      <div class="form-section">
+        <h3>Frequently Asked Questions</h3>
+        <mat-form-field appearance="outline" class="full-width" style="margin-bottom: 1rem;">
+          <mat-label>Section Heading</mat-label>
+          <input matInput [(ngModel)]="coursesFaqsTitle" placeholder="e.g. Frequently Asked Questions">
+        </mat-form-field>
+        <div class="repeater-card" *ngFor="let faq of coursesFaqsList; let i = index">
+          <div class="repeater-header">
+            <h4>FAQ #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeCoursesFaq(i)">
+              <i class="fa-thin fa-trash"></i>
+            </button>
+          </div>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Question</mat-label>
+            <input matInput [(ngModel)]="faq.question" placeholder="e.g. What is the duration of the course?">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Answer</mat-label>
+            <textarea matInput rows="3" [(ngModel)]="faq.answer"></textarea>
+          </mat-form-field>
+        </div>
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addCoursesFaq()">
+          <i class="fa-thin fa-plus"></i> Add FAQ
+        </button>
+      </div>
+
+      <!-- Student Testimonials -->
+      <div class="form-section">
+        <h3>Student Testimonials</h3>
+        <mat-form-field appearance="outline" class="full-width" style="margin-bottom: 1rem;">
+          <mat-label>Section Heading</mat-label>
+          <input matInput [(ngModel)]="coursesTestimonialsTitle" placeholder="e.g. What Our Students Say">
+        </mat-form-field>
+        <div class="repeater-card" *ngFor="let testimonial of coursesTestimonialsList; let i = index">
+          <div class="repeater-header">
+            <h4>Testimonial #{{ i + 1 }}</h4>
+            <button mat-icon-button color="warn" (click)="removeCoursesTestimonial(i)">
+              <i class="fa-thin fa-trash"></i>
+            </button>
+          </div>
+          <div class="row-fields">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Student Name</mat-label>
+              <input matInput [(ngModel)]="testimonial.studentName" placeholder="e.g. Priya Sharma">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Course Enrolled</mat-label>
+              <input matInput [(ngModel)]="testimonial.course" placeholder="e.g. JEE Preparation">
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Testimonial / Quote</mat-label>
+            <textarea matInput rows="3" [(ngModel)]="testimonial.quote" placeholder="What did the student say about the course?"></textarea>
+          </mat-form-field>
+          <div class="upload-field compact">
+            <div class="upload-info">
+              <i class="fa-thin fa-user-circle"></i>
+              <div>
+                <strong>Student Photo</strong>
+                <span>Recommended size: 150x150px</span>
+              </div>
+              <img *ngIf="testimonial.image" [src]="testimonial.image" style="height:36px;width:36px;border-radius:50%;object-fit:cover;margin-left:8px;" />
+              <button *ngIf="testimonial.image" mat-icon-button color="warn" (click)="promptDeleteArrayImage(coursesTestimonialsList, i, 'image')" matTooltip="Delete Image" style="margin-left: 8px;">
+                <mat-icon style="font-size: 20px; width: 20px; height: 20px;">delete</mat-icon>
+              </button>
+            </div>
+            <button mat-stroked-button
+              (click)="pickImage('courses-testimonial-' + i, url => testimonial.image = url)"
+              [disabled]="isUploading('courses-testimonial-' + i)">
+              {{ isUploading('courses-testimonial-' + i) ? 'Uploading...' : 'Browse' }}
+            </button>
+          </div>
+        </div>
+        <button mat-stroked-button class="add-repeater-btn" color="primary" (click)="addCoursesTestimonial()">
+          <i class="fa-thin fa-plus"></i> Add Testimonial
+        </button>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="form-section">
+        <h3>Call to Action (Bottom Banner)</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>CTA Title</mat-label>
+          <input matInput [(ngModel)]="coursesCtaTitle" placeholder="e.g. Ready to Enroll?">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>CTA Subtitle</mat-label>
+          <input matInput [(ngModel)]="coursesCtaSubtitle" placeholder="e.g. Take the next step towards your dream career.">
+        </mat-form-field>
+        <div class="row-fields">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Button Text</mat-label>
+            <input matInput [(ngModel)]="coursesCtaButtonText" placeholder="e.g. Apply Now">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Button Link / URL</mat-label>
+            <input matInput [(ngModel)]="coursesCtaButtonLink" placeholder="e.g. /apply or https://...">
+          </mat-form-field>
+        </div>
+      </div>
+
     </ng-container>
 
     <!-- Contact Us Specific Form -->
