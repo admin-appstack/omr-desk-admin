@@ -67,7 +67,7 @@ export class ClassesComponent implements OnInit {
   }
 
   fetchClasses() {
-    this.http.get<any[]>('http://localhost:3000/classes').subscribe({
+    this.http.get<any[]>('http://localhost:3000/api/classes').subscribe({
       next: (data) => {
         this.classesList.set(data);
       },
@@ -109,7 +109,7 @@ export class ClassesComponent implements OnInit {
   onConfirmDelete() {
     const classData = this.classToDelete();
     if (classData) {
-      this.http.delete(`http://localhost:3000/classes/${classData.id}`).subscribe({
+      this.http.delete(`http://localhost:3000/api/classes/${classData.id}`).subscribe({
         next: () => {
           console.log('Class deleted successfully');
           this.showDeleteModal.set(false);
@@ -133,8 +133,8 @@ export class ClassesComponent implements OnInit {
       const data = this.classForm.value;
       
       const request = this.isEditing && this.selectedClass
-        ? this.http.put(`http://localhost:3000/classes/${this.selectedClass.id}`, data)
-        : this.http.post('http://localhost:3000/classes', data);
+        ? this.http.put(`http://localhost:3000/api/classes/${this.selectedClass.id}`, data)
+        : this.http.post('http://localhost:3000/api/classes', data);
 
       request.subscribe({
         next: (response) => {

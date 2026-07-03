@@ -44,8 +44,16 @@ export class AuthService {
       this.httpService.post(ENDPOINTS.LOGIN, credentials)
     );
 
+    if (response?.user?.role === 'SUPER_ADMIN') {
+      throw new Error('Access denied. Super Admin cannot login to this portal.');
+    }
+
+    const firstName = response?.user?.firstName || '';
+    const lastName = response?.user?.lastName || '';
+    const name = `${firstName} ${lastName}`.trim() || response?.user?.name || 'Admin User';
+
     this.saveSession({
-      name: response.user.name,
+      name: name,
       email: response.user.email,
       provider: 'password'
     });

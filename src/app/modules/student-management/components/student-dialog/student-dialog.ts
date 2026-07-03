@@ -48,7 +48,7 @@ export class StudentDialog implements OnInit {
   }
 
   fetchClasses(): void {
-    this.http.get<any[]>('http://localhost:3000/classes').subscribe({
+    this.http.get<any[]>('http://localhost:3000/api/classes').subscribe({
       next: (data) => {
         this.classes = data.map(c => c.className);
         if (this.tempClassName) {

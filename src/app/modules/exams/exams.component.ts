@@ -117,8 +117,8 @@ export class ExamsComponent implements OnInit {
   }
 
   fetchExams() {
-    console.log('Fetching exams from http://localhost:3000/exams...');
-    this.http.get<any[]>('http://localhost:3000/exams').subscribe({
+    console.log('Fetching exams from http://localhost:3000/api/exams...');
+    this.http.get<any[]>('http://localhost:3000/api/exams').subscribe({
       next: (data) => {
         console.log('Fetched exams data:', data);
         this.exams.set(data);
@@ -130,7 +130,7 @@ export class ExamsComponent implements OnInit {
   }
 
   fetchClasses() {
-    this.http.get<any[]>('http://localhost:3000/classes').subscribe({
+    this.http.get<any[]>('http://localhost:3000/api/classes').subscribe({
       next: (data) => {
         this.classes = data.map(c => c.className);
       },
@@ -288,7 +288,7 @@ export class ExamsComponent implements OnInit {
   onConfirmDelete() {
     const exam = this.examToDelete();
     if (exam) {
-      this.http.delete(`http://localhost:3000/exams/${exam.id}`).subscribe({
+      this.http.delete(`http://localhost:3000/api/exams/${exam.id}`).subscribe({
         next: () => {
           console.log('Exam deleted successfully');
           this.showDeleteModal.set(false);
@@ -339,7 +339,7 @@ export class ExamsComponent implements OnInit {
     console.log('Submitting Exam Data...', examData);
 
     if (this.isEditing()) {
-      this.http.put(`http://localhost:3000/exams/${this.selectedExam.id}`, examData).subscribe({
+      this.http.put(`http://localhost:3000/api/exams/${this.selectedExam.id}`, examData).subscribe({
         next: (response) => {
           console.log('Exam updated successfully:', response);
           this.isCreatingExam.set(false);
@@ -352,7 +352,7 @@ export class ExamsComponent implements OnInit {
         }
       });
     } else {
-      this.http.post('http://localhost:3000/exams', examData).subscribe({
+      this.http.post('http://localhost:3000/api/exams', examData).subscribe({
         next: (response) => {
           console.log('Exam created successfully:', response);
           this.isCreatingExam.set(false);

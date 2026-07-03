@@ -40,7 +40,7 @@ export class StudentManagement implements OnInit {
   }
 
   fetchStudents() {
-    this.http.get<any[]>('http://localhost:3000/student-management').subscribe({
+    this.http.get<any[]>('http://localhost:3000/api/student-management').subscribe({
       next: (data) => {
         const mappedData = data.map(student => ({
           id: student.rollNumber || student.id.toString(),
@@ -96,7 +96,7 @@ export class StudentManagement implements OnInit {
         };
 
         if (student && student.realId) {
-          this.http.put(`http://localhost:3000/student-management/${student.realId}`, payload).subscribe({
+          this.http.put(`http://localhost:3000/api/student-management/${student.realId}`, payload).subscribe({
             next: () => {
               console.log('Student updated successfully');
               this.fetchStudents();
@@ -104,7 +104,7 @@ export class StudentManagement implements OnInit {
             error: (error) => console.error('Error updating student:', error)
           });
         } else {
-          this.http.post('http://localhost:3000/student-management', { ...payload, studentId: 'STU-' + Date.now() }).subscribe({
+          this.http.post('http://localhost:3000/api/student-management', { ...payload, studentId: 'STU-' + Date.now() }).subscribe({
             next: () => {
               console.log('Student created successfully');
               this.fetchStudents();
@@ -144,7 +144,7 @@ export class StudentManagement implements OnInit {
 
   updateStatus(student: any, status: string) {
     if (student.realId) {
-      this.http.patch(`http://localhost:3000/student-management/${student.realId}/status`, { status }).subscribe({
+      this.http.patch(`http://localhost:3000/api/student-management/${student.realId}/status`, { status }).subscribe({
         next: () => {
           console.log('Status updated successfully');
           this.fetchStudents();
@@ -156,7 +156,7 @@ export class StudentManagement implements OnInit {
 
   deleteStudent(student: any) {
     if (student.realId && confirm(`Are you sure you want to delete student "${student.name}"?`)) {
-      this.http.delete(`http://localhost:3000/student-management/${student.realId}`).subscribe({
+      this.http.delete(`http://localhost:3000/api/student-management/${student.realId}`).subscribe({
         next: () => {
           console.log('Student deleted successfully');
           this.fetchStudents();
