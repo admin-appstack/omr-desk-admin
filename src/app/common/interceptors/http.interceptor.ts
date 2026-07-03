@@ -10,12 +10,35 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { SnackBarService } from '../services/snackbar.service';
 
+function getInstituteIdFromToken(token: string): string | null {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.instituteId ?? null;
+  } catch {
+    return null;
+  }
+}
+
 export function httpResponseInterceptor(request: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   const snackBarService = inject(SnackBarService);
-  // Here we can attach tokens if needed in the future:
-  // const requestWithToken = request.clone({ setHeaders: { Authorization: `Bearer ...` } });
+  const token = localStorage.getItem('omr-admin-auth-token');
+  const headers: Record<string, string> = {};
 
-  return next(request).pipe(
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+
+    const instituteId =
+      localStorage.getItem('omr-admin-institute-id') ?? getInstituteIdFromToken(token);
+    if (instituteId) {
+      headers['x-institute-id'] = instituteId;
+    }
+  }
+
+  const authReq = Object.keys(headers).length
+    ? request.clone({ setHeaders: headers })
+    : request;
+
+  return next(authReq).pipe(
     map((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
         // If the backend wraps responses in `{ success: boolean, data: any }`

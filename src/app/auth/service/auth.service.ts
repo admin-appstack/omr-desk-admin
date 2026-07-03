@@ -19,6 +19,7 @@ export interface AuthUser {
   name: string;
   email: string;
   provider: SocialProvider | 'password';
+  instituteId?: string;
 }
 
 @Injectable({
@@ -27,7 +28,8 @@ export interface AuthUser {
 export class AuthService {
   private readonly authTokenKey = 'omr-admin-auth-token';
   private readonly authUserKey = 'omr-admin-user';
-  private readonly _isAuthenticated = signal(this.hasToken());
+  private readonly instituteIdKey = 'omr-admin-institute-id';
+  private readonly _isAuthenticated = signal(this.isValidSession());
   readonly isAuthenticated = computed(() => this._isAuthenticated());
 
   constructor(
@@ -55,8 +57,9 @@ export class AuthService {
     this.saveSession({
       name: name,
       email: response.user.email,
-      provider: 'password'
-    });
+      provider: 'password',
+      instituteId: response.user.instituteId,
+    }, response.accessToken);
   }
 
   async register(payload: RegisterPayload): Promise<void> {
@@ -71,8 +74,9 @@ export class AuthService {
     this.saveSession({
       name: response.user.name,
       email: response.user.email,
-      provider: 'password'
-    });
+      provider: 'password',
+      instituteId: response.user.instituteId,
+    }, response.accessToken);
   }
 
   loginWithProvider(provider: SocialProvider): Promise<void> {
@@ -82,7 +86,7 @@ export class AuthService {
           name: provider === 'instagram' ? 'Instagram User' : `${provider[0].toUpperCase()}${provider.slice(1)} User`,
           email: `${provider}@example.com`,
           provider
-        });
+        }, `${provider}-token-${Date.now()}`);
         resolve();
       }, 800);
     });
@@ -101,10 +105,36 @@ export class AuthService {
   }
 
   signOut(): void {
+    this.clearSession();
+    this.router.navigate(['/login']);
+  }
+
+  clearSession(): void {
     localStorage.removeItem(this.authTokenKey);
     localStorage.removeItem(this.authUserKey);
+    localStorage.removeItem(this.instituteIdKey);
     this._isAuthenticated.set(false);
-    this.router.navigate(['/login']);
+  }
+
+  isValidSession(): boolean {
+    const token = localStorage.getItem(this.authTokenKey);
+    if (!token || token.split('.').length !== 3) {
+      return false;
+    }
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      if (payload.exp && payload.exp * 1000 < Date.now()) {
+        return false;
+      }
+      return !!payload.instituteId;
+    } catch {
+      return false;
+    }
+  }
+
+  get instituteId(): string | null {
+    return localStorage.getItem(this.instituteIdKey);
   }
 
   get currentUser(): AuthUser | null {
@@ -112,10 +142,27 @@ export class AuthService {
     return stored ? JSON.parse(stored) as AuthUser : null;
   }
 
-  private saveSession(user: AuthUser): void {
-    localStorage.setItem(this.authTokenKey, `${user.provider}-token-${Date.now()}`);
+  private saveSession(user: AuthUser, token: string): void {
+    localStorage.setItem(this.authTokenKey, token);
     localStorage.setItem(this.authUserKey, JSON.stringify(user));
-    this._isAuthenticated.set(true);
+
+    const instituteId = user.instituteId ?? this.readInstituteIdFromToken(token);
+    if (instituteId) {
+      localStorage.setItem(this.instituteIdKey, instituteId);
+    } else {
+      localStorage.removeItem(this.instituteIdKey);
+    }
+
+    this._isAuthenticated.set(this.isValidSession());
+  }
+
+  private readInstituteIdFromToken(token: string): string | null {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.instituteId ?? null;
+    } catch {
+      return null;
+    }
   }
 
   private hasToken(): boolean {

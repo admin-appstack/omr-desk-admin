@@ -3,15 +3,17 @@ import { ForgotPasswordPage } from './auth/forgot-password-page';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { DashboardLayoutComponent } from './modules/dashboard/dashboard-layout.component';
+import { authGuard, guestGuard } from './auth/guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'forgot-password', component: ForgotPasswordPage },
+  { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [guestGuard] },
+  { path: 'forgot-password', component: ForgotPasswordPage, canActivate: [guestGuard] },
   { 
     path: 'dashboard', 
     component: DashboardLayoutComponent,
+    canActivate: [authGuard],
     children: [
       { path: '', redirectTo: '/dashboard/home', pathMatch: 'full' },
       { path: 'home', loadComponent: () => import('./modules/dashboard/dashboard-home.component').then(m => m.DashboardHomeComponent) },
